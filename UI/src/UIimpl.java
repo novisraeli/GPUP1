@@ -51,7 +51,7 @@ public class UIimpl implements UI {
             if(s.equals("0")){
                 return false;
             }
-            File f=new File(input);
+            File f = new File(input);
             if(f.exists()){
                 //load file to engine(can send file as argument
                 //add check valid file in engine
