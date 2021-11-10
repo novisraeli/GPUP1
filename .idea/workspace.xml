@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="30f48137-87a5-4e03-962e-6e8bd68df68d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/runConfigurations.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/Information.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/target/Target.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Information1/Information1.iml" afterDir="false" />
+    <list default="true" id="30f48137-87a5-4e03-962e-6e8bd68df68d" name="Changes" comment="bar sela">
+      <change afterPath="$PROJECT_DIR$/Exception/src/target/DependsOnConflict.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exception/src/target/RequiredForConflict.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exception/src/target/TargetException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exception/src/target/TargetIsExists.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exception/src/target/UniqueTarget.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exception/src/xml/XmlCorrupt.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exception/src/xml/XmlException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exception/src/xml/XmlIsExists.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/UI.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/UI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/Information.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/Exception.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,13 +39,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="ChangesTree.GroupingKeys" value="directory" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="project.structure.last.edited" value="Modules" />
-    <property name="project.structure.proportion" value="0.0" />
-    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -53,8 +58,27 @@
       <updated>1636534060126</updated>
       <workItem from="1636534062741" duration="27000" />
       <workItem from="1636534134964" duration="484000" />
-      <workItem from="1636534671547" duration="1558000" />
+      <workItem from="1636534671547" duration="5111000" />
     </task>
+    <task id="LOCAL‎00001" summary="zxc">
+      <created>1636536346510</created>
+      <option name="number" value="LOCAL‎00001" />
+      <option name="presentableId" value="LOCAL‎00001" />
+      <updated>1636536346510</updated>
+    </task>
+    <task id="LOCAL‎00002" summary="zxc">
+      <created>1636536370594</created>
+      <option name="number" value="LOCAL‎00002" />
+      <option name="presentableId" value="LOCAL‎00002" />
+      <updated>1636536370594</updated>
+    </task>
+    <task id="LOCAL‎00003" summary="bar sela">
+      <created>1636536377644</created>
+      <option name="number" value="LOCAL‎00003" />
+      <option name="presentableId" value="LOCAL‎00003" />
+      <updated>1636536377644</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -104,5 +128,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="zxc" />
+    <MESSAGE value="bar sela" />
+    <option name="LAST_COMMIT_MESSAGE" value="bar sela" />
   </component>
 </project>
