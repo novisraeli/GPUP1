@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="30f48137-87a5-4e03-962e-6e8bd68df68d" name="Changes" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;UI/src/UI.java">
-      <change afterPath="$PROJECT_DIR$/Engine/src/xml/Xml.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java" afterDir="false" />
+    <list default="true" id="30f48137-87a5-4e03-962e-6e8bd68df68d" name="Changes" comment="Merge remote-tracking branch 'origin/master'">
+      <change afterPath="$PROJECT_DIR$/Engine/src/information/GraphInformation.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Engine/src/information/InformationToUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Engine/src/information/TargetInformation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Exception/src/target/DependsOnConflict.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/target/DependsOnConflict.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Exception/src/target/RequiredForConflict.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/target/RequiredForConflict.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Exception/src/target/TargetException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/target/TargetException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Exception/src/target/TargetIsExists.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/target/TargetIsExists.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Exception/src/target/UniqueTarget.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/target/UniqueTarget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exception/src/task/TaskException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/task/TaskException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Exception/src/xml/XmlCorrupt.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/xml/XmlCorrupt.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Exception/src/xml/XmlException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/xml/XmlException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Exception/src/xml/XmlIsExists.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/xml/XmlIsExists.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Information1/Information1.iml" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +26,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -74,7 +76,7 @@
       <updated>1636534060126</updated>
       <workItem from="1636534062741" duration="27000" />
       <workItem from="1636534134964" duration="484000" />
-      <workItem from="1636534671547" duration="9706000" />
+      <workItem from="1636534671547" duration="11618000" />
     </task>
     <task id="LOCAL‎00001" summary="zxc">
       <created>1636536346510</created>
@@ -112,7 +114,13 @@
       <option name="presentableId" value="LOCAL‎00006" />
       <updated>1636543508863</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL‎00007" summary="Merge remote-tracking branch 'origin/master'">
+      <created>1636545043696</created>
+      <option name="number" value="LOCAL‎00007" />
+      <option name="presentableId" value="LOCAL‎00007" />
+      <updated>1636545043696</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -164,8 +172,8 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="zxc" />
     <MESSAGE value="bar sela" />
-    <MESSAGE value="Merge remote-tracking branch 'origin/master'" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;UI/src/UI.java" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;UI/src/UI.java" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/master'" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'" />
   </component>
 </project>

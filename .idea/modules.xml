@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/Engine/Engine.iml" filepath="$PROJECT_DIR$/Engine/Engine.iml" />
       <module fileurl="file://$PROJECT_DIR$/Exception/Exception.iml" filepath="$PROJECT_DIR$/Exception/Exception.iml" />
       <module fileurl="file://$PROJECT_DIR$/GPUP1.iml" filepath="$PROJECT_DIR$/GPUP1.iml" />
-      <module fileurl="file://$PROJECT_DIR$/Information1/Information1.iml" filepath="$PROJECT_DIR$/Information1/Information1.iml" />
       <module fileurl="file://$PROJECT_DIR$/UI/UI.iml" filepath="$PROJECT_DIR$/UI/UI.iml" />
     </modules>
   </component>

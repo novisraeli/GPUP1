@@ -11,9 +11,7 @@ public class XmlCorrupt extends XmlException { // the xml file is corrupt -
 
     @Override
     public String toString() {
-        System.out.println (super.toString());
-        System.out.println(message + "\n\r");
-        return null;
+        return  super.toString() + message + "\n\r";
     }
 
 }

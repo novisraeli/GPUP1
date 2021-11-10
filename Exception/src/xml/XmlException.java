@@ -10,7 +10,7 @@ public class XmlException extends Exception{
 
     @Override
     public String toString() {
-        System.out.println("Exception with XML file:" + xmlName + "\n\r");
-        return null;
+        return "Exception with XML file:" + xmlName + "\n\r";
+
     }
 }

@@ -8,9 +8,7 @@ public class RequiredForConflict extends TargetException {
 
     @Override
     public String toString(){
-        System.out.println (super.toString());
-        System.out.println(super.targetOne + "requiredFor  " + super.targetTwo +
-                " then " + super.targetTwo + "can’t be requiredFor  " + super.targetOne +"\n\r");
-        return null;
+        return super.toString() + super.targetOne + "requiredFor  " + super.targetTwo +
+                " then " + super.targetTwo + "can’t be requiredFor  " + super.targetOne +"\n\r";
     }
 }

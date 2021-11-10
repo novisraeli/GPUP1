@@ -8,9 +8,6 @@ public class TargetIsExists extends TargetException{
 
     @Override
     public String toString(){
-        System.out.println (super.toString());
-        System.out.println(super.targetOne);
-        System.out.println(" - The target is not exists \n\r");
-        return null;
+        return super.toString() + super.targetOne + " - The target is not exists \n\r";
     }
 }

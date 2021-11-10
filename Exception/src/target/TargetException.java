@@ -14,7 +14,6 @@ public class TargetException extends Exception {
     }
 
     public String toString(){
-        System.out.println("Target Exception:");
-        return null;
+        return  "Target Exception: ";
     }
 }
