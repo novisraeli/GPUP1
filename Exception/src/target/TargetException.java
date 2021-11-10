@@ -1,6 +1,6 @@
 package target;
 
-public class TargetException {
+public class TargetException extends Exception {
     protected String targetOne;
     protected String targetTwo;
 
