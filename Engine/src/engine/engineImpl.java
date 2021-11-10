@@ -1,17 +1,6 @@
 package engine;
 
-import org.w3c.dom.Document;
-import target.TargetException;
-import task.TaskException;
-import xml.Xml;
-import xml.XmlException;
 import xml.Xmlimpl;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 
 public class engineImpl implements engine{
 
@@ -47,6 +36,6 @@ public class engineImpl implements engine{
 
     @Override
     public void exit() {
-
+        System.exit(0);
     }
 }

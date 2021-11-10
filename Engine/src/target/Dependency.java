@@ -17,4 +17,9 @@ public class Dependency {
     public void setType(String value) {
         this.type = value;
     }
+
+    @Override
+    public String toString() {
+        return type + " " + value;
+    }
 }

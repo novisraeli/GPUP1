@@ -5,25 +5,25 @@ import java.util.List;
 
 public class Target
 {
-        private String UserData;
-        private TargetDependencies TargetDependencies;
+        private String userData;
+        private TargetDependencies targetDependencies;
         private String name;
 
 
         public String getGPUPUserData() {
-            return UserData;
+            return userData;
         }
 
         public void setGPUPUserData(String value) {
-            this.UserData = value;
+            this.userData = value;
         }
 
         public TargetDependencies getGPUPTargetDependencies() {
-            return TargetDependencies;
+            return targetDependencies;
         }
 
         public void setGPUPTargetDependencies(TargetDependencies value) {
-            this.TargetDependencies = value;
+            this.targetDependencies = value;
         }
 
         public String getName() {
@@ -33,6 +33,13 @@ public class Target
         public void setName(String value) {
             this.name = value;
         }
+
+    @Override
+    public String toString() {
+        return "Target: "+ name + "\n\r"
+                + "Target Dependencies:" + targetDependencies + "\n\r"
+                + "Target Data: "+ userData + "\n\r" ;
     }
+}
 
 

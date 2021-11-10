@@ -4,13 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TargetDependencies {
-    private List<Dependency> Dependency;
+    private List<Dependency> listDependency;
 
     public List<Dependency> getListOfDependency() {
-        if (Dependency == null) {
-            Dependency = new ArrayList<>();
+        if (listDependency == null) {
+            listDependency = new ArrayList<>();
         }
-        return this.Dependency;
+        return this.listDependency;
     }
 
+    @Override
+    public String toString() {
+        return listDependency.toString();
+    }
 }

@@ -16,4 +16,13 @@ public class GraphInformation  extends InformationToUI{
         this.independents = independents;
     }
 
+    @Override
+    public String toString() {
+        return "Graph Information: \n\r" +
+                "amount Of Targets: " + amountOfTargets +
+                "amount Of levies: " + levies +
+                "amount Of middles: " + middles +
+                "amount Of roots: " + roots +
+                "amount Of independents: " + independents + "\n\r";
+    }
 }

@@ -8,12 +8,13 @@ public class TargetInformation extends InformationToUI{
 
     private Target target;
 
-    public TargetInformation()
+    public TargetInformation(Target target)
     {
-
+        this.target = target;
     }
 
-
-
-
+    @Override
+    public String toString() {
+        return target.toString();
+    }
 }
