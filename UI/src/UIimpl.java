@@ -7,7 +7,7 @@ import java.io.*;
 
 
 public class UIimpl implements UI {
-    engine e =new engineImpl();
+    engine engine =new engineImpl();
     private boolean fileLoaded=false;
     private boolean firstTask=true;
     Scanner s =new Scanner(System.in);
@@ -44,7 +44,7 @@ public class UIimpl implements UI {
                         break;
                     case 5:
                         if(fileLoadedCheck(fileLoaded)){
-
+                            runTask();
                         }
                         break;
                     case 6:
@@ -74,7 +74,7 @@ public class UIimpl implements UI {
         }
         else {
            try{
-               e.loadFile(input);
+               engine.loadFile(input);
            }
            catch (Exception e){
                System.out.println(e);
@@ -86,13 +86,24 @@ public class UIimpl implements UI {
     }
     @Override
     public void showGraphInfo(){//option 2
-        //add engine.showGraphInfo
+        try {
+            engine.targetsInformation();
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
         //print what came back
     }
     @Override
     public void showTargetInfo(){//option 3
         System.out.println("Enter Target Name");
         String input=s.nextLine();
+        try{
+            engine.specificTargetInformation(input);
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
         //check Target exist in engine.checkTargetExist(input)
         //if not print something about it and return
 
@@ -104,6 +115,12 @@ public class UIimpl implements UI {
         System.out.println("Enter Targets Names IN TWO SEPERATE LINES");
         String input1=s.nextLine();
         String input2=s.nextLine();
+        try{
+            engine.FindAPathBetweenTwoTargets(input1,input2);
+        }
+        catch (Exception e){
+            System.out.println(e);
+        }
         //check Targets exist in engine.checkTargetExist(input) can check for each target seperatlly
         //if not print something about it and return
 
@@ -114,11 +131,17 @@ public class UIimpl implements UI {
     @Override
     public void runTask() {//option 5
         System.out.println("Enter task details as follows(EACH PARAMETER IS SEPERATED BY SPACE NOT BY ,)) : ");
-        System.out.println("simTime for each target(time in ms) ,random or set(1 for random, 2 for set)");
+        System.out.println("simTime for each target(time in ms) ,random or set(1 for random, 0 for set)");
         System.out.println("chance of task succeeding(a number between 1 and 0)");
         System.out.println("if Succeed chance of warning(a number between 1 and 0)");
+        float time,success,warning;
+        boolean random;
+        time=s.nextFloat();
+        random=s.nextBoolean();
+        success=s.nextFloat();
+        warning=s.nextFloat();
         try{
-            e.runTask();//need to add params
+            engine.runTask(time,random,success,warning);//need to add params
         }
         catch(Exception e){
             System.out.println(e);
