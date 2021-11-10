@@ -5,13 +5,12 @@ import java.util.List;
 
 public class Targets{
 
-    private List<Target> gpupTarget;
+    private List<Target> Targets;
 
     public List<Target> getGPUPTarget() {
-        if (gpupTarget == null) {
-            gpupTarget = new ArrayList<Target>();
+        if (Targets == null) {
+            Targets = new ArrayList<Target>();
         }
-        return this.gpupTarget;
+        return this.Targets;
     }
-
 }

@@ -1,12 +1,13 @@
 package information;
 
-public class GraphInformation  extends InformationToUI{
+public class GraphInformation implements Information{ // 2
 
     private int amountOfTargets;
     private int levies;
     private int middles;
     private int roots;
     private int independents;
+
     public GraphInformation(int amountOfTargets , int levies, int middles, int roots,int independents)
     {
         this.amountOfTargets = amountOfTargets;
