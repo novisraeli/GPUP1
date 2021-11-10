@@ -90,7 +90,7 @@ public class UIimpl implements UI {
         //print what came back
     }
     @Override
-    public void showTargetInfo(){
+    public void showTargetInfo(){//option 3
         System.out.println("Enter Target Name");
         String input=s.nextLine();
         //check Target exist in engine.checkTargetExist(input)
@@ -100,7 +100,7 @@ public class UIimpl implements UI {
         //print what came back
     }
     @Override
-    public void showPathBetweenTwoTargets(){
+    public void showPathBetweenTwoTargets(){//option 4
         System.out.println("Enter Targets Names IN TWO SEPERATE LINES");
         String input1=s.nextLine();
         String input2=s.nextLine();
@@ -112,13 +112,13 @@ public class UIimpl implements UI {
     }
 
     @Override
-    public void runTask() {
+    public void runTask() {//option 5
         System.out.println("Enter task details as follows(EACH PARAMETER IS SEPERATED BY SPACE NOT BY ,)) : ");
         System.out.println("simTime for each target(time in ms) ,random or set(1 for random, 2 for set)");
         System.out.println("chance of task succeeding(a number between 1 and 0)");
         System.out.println("if Succeed chance of warning(a number between 1 and 0)");
         try{
-            e.runTask();
+            e.runTask();//need to add params
         }
         catch(Exception e){
             System.out.println(e);
