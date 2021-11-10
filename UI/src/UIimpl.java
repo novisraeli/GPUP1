@@ -1,65 +1,80 @@
+import engine.*;
+import xml.XmlException;
+
 import java.util.*;
 import java.io.*;
 
 
+
 public class UIimpl implements UI {
+    engine e =new engineImpl();
     private boolean fileLoaded=false;
     private boolean firstTask=true;
     Scanner s =new Scanner(System.in);
     //add engine impl instance
     public void mainMenu(){
+
         int input;
         boolean run =true;
         System.out.println("Hello,please choose an option:");
         while(run){
             printMainMenu();
-            input =s.nextInt();
-            switch (input){//main menu switch
-                case 1:
-                    if(loadFile()) {
-                        fileLoaded = true;
-                    }
-                    break;
-                case 2:
-                    if(fileLoadedCheck(fileLoaded)){
-                        showGraphInfo();
-                    }
-                    break;
-                case 3:
-                    if(fileLoadedCheck(fileLoaded)){
-                        showTargetInfo();
-                    }
-                    break;
-                case 4:
-                    break;
-                case 5:
-                    break;
-                case 6:
-                    run=false;
-                    break;
-                default:
-                    break;
+            if(s.hasNextInt()){
+                input =s.nextInt();
+                switch (input){//main menu switch
+                    case 1:
+                        if(loadFile()) {
+                            fileLoaded = true;
+                        }
+                        break;
+                    case 2:
+                        if(fileLoadedCheck(fileLoaded)){
+                            showGraphInfo();
+                        }
+                        break;
+                    case 3:
+                        if(fileLoadedCheck(fileLoaded)){
+                            showTargetInfo();
+                        }
+                        break;
+                    case 4:
+
+                        break;
+                    case 5:
+                        break;
+                    case 6:
+                        run=false;
+                        break;
+                    default:
+                        break;
+                }
             }
+            else{
+                System.out.println("not a number!!");
+            }
+
         }
 
     }
     public boolean loadFile(){//option 1
         String input;
-        while(true){
+
             System.out.println("Enter file full path or, 0 to return to main menu");
             input=s.nextLine();
             if(s.equals("0")){
                 return false;
             }
-            File f = new File(input);
-            if(f.exists()){
-                //load file to engine(can send file as argument
-                //add check valid file in engine
-            }
             else {
-                System.out.println("Flie doesn't exist :(");
+               try{
+                   e.loadFile(input);
+               }
+               catch (Exception e){
+                   System.out.println(e);
+                   return false;
+               }
             }
-        }
+        return false;
+
     }
     public void showGraphInfo(){//option 2
         //add engine.showGraphInfo
