@@ -87,7 +87,7 @@ public class UIimpl implements UI {
     @Override
     public void showGraphInfo(){//option 2
         try {
-            engine.targetsInformation();
+            System.out.println(engine.targetsInformation());
         }
         catch (Exception e){
             System.out.println(e);
@@ -99,7 +99,7 @@ public class UIimpl implements UI {
         System.out.println("Enter Target Name");
         String input=s.nextLine();
         try{
-            engine.specificTargetInformation(input);
+            System.out.println(engine.specificTargetInformation(input));
         }
         catch (Exception e){
             System.out.println(e);
@@ -116,7 +116,7 @@ public class UIimpl implements UI {
         String input1=s.nextLine();
         String input2=s.nextLine();
         try{
-            engine.FindAPathBetweenTwoTargets(input1,input2);
+            System.out.println(engine.FindAPathBetweenTwoTargets(input1,input2));
         }
         catch (Exception e){
             System.out.println(e);
@@ -141,7 +141,7 @@ public class UIimpl implements UI {
         success=s.nextFloat();
         warning=s.nextFloat();
         try{
-            engine.runTask(time,random,success,warning);//need to add params
+            System.out.println(engine.runTask(time,random,success,warning));//need to add params
         }
         catch(Exception e){
             System.out.println(e);
