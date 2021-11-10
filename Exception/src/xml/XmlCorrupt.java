@@ -10,8 +10,10 @@ public class XmlCorrupt extends XmlException { // the xml file is corrupt -
     }
 
     @Override
-    public void printXmlNameException(){
-        super.printXmlNameException();
+    public String toString() {
+        System.out.println (super.toString());
         System.out.println(message + "\n\r");
+        return null;
     }
+
 }

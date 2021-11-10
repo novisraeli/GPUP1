@@ -13,7 +13,8 @@ public class TargetException extends Exception {
         targetTwo = targetTwoName;
     }
 
-    public void printTargetException(){
+    public String toString(){
         System.out.println("Target Exception:");
+        return null;
     }
 }

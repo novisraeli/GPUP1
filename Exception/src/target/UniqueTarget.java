@@ -7,9 +7,10 @@ public class UniqueTarget extends TargetException{
     }
 
     @Override
-    public void printTargetException(){
-        super.printTargetException();
+    public String toString(){
+        System.out.println (super.toString());
         System.out.println(super.targetOne);
         System.out.println(" - The name is not unique \n\r");
+        return null;
     }
 }

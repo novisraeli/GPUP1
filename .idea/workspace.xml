@@ -1,9 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="30f48137-87a5-4e03-962e-6e8bd68df68d" name="Changes" comment="Merge remote-tracking branch 'origin/master'">
-      <change beforePath="$PROJECT_DIR$/Engine/src/enging/enging.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/enging/enging.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/enging/engingImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/enging/engingImpl.java" afterDir="false" />
+    <list default="true" id="30f48137-87a5-4e03-962e-6e8bd68df68d" name="Changes" comment="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;UI/src/UI.java">
+      <change afterPath="$PROJECT_DIR$/Engine/src/xml/Xml.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exception/src/target/DependsOnConflict.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/target/DependsOnConflict.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exception/src/target/RequiredForConflict.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/target/RequiredForConflict.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exception/src/target/TargetException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/target/TargetException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exception/src/target/TargetIsExists.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/target/TargetIsExists.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exception/src/target/UniqueTarget.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/target/UniqueTarget.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exception/src/xml/XmlCorrupt.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/xml/XmlCorrupt.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exception/src/xml/XmlException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/xml/XmlException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exception/src/xml/XmlIsExists.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/xml/XmlIsExists.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -13,12 +24,17 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Interface" />
         <option value="Class" />
+        <option value="Interface" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="PREVIOUS_COMMIT_AUTHORS">
+      <list>
+        <option value="nov israeli &lt;nov.israeli888@gmail.com&gt;" />
+      </list>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="GitSEFilterConfiguration">
@@ -58,7 +74,7 @@
       <updated>1636534060126</updated>
       <workItem from="1636534062741" duration="27000" />
       <workItem from="1636534134964" duration="484000" />
-      <workItem from="1636534671547" duration="7977000" />
+      <workItem from="1636534671547" duration="9706000" />
     </task>
     <task id="LOCAL‎00001" summary="zxc">
       <created>1636536346510</created>
@@ -90,7 +106,13 @@
       <option name="presentableId" value="LOCAL‎00005" />
       <updated>1636542968700</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL‎00006" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;UI/src/UI.java">
+      <created>1636543508863</created>
+      <option name="number" value="LOCAL‎00006" />
+      <option name="presentableId" value="LOCAL‎00006" />
+      <updated>1636543508863</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -143,6 +165,7 @@
     <MESSAGE value="zxc" />
     <MESSAGE value="bar sela" />
     <MESSAGE value="Merge remote-tracking branch 'origin/master'" />
-    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'" />
+    <MESSAGE value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;UI/src/UI.java" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;UI/src/UI.java" />
   </component>
 </project>

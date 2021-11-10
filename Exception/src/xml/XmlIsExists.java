@@ -7,8 +7,9 @@ public class XmlIsExists extends XmlException {
     }
 
     @Override
-    public void printXmlNameException(){
-        super.printXmlNameException();
+    public String toString(){
+        System.out.println (super.toString());
         System.out.println("The XML file not exists \n\r");
+        return null;
     }
 }
