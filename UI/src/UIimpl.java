@@ -67,7 +67,7 @@ public class UIimpl implements UI {
 
     public boolean loadFile(){//option 1
         String input;
-        System.out.println("Enter file full path or, 0 to return to main menu");
+        System.out.println("Enter file full path ,or 0 to return to main menu");
         input=s.nextLine();
         if(s.equals("0")){
             return false;

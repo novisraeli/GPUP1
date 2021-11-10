@@ -44,6 +44,12 @@
       <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
     </file-type-list>
   </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="390" />
+    <option name="y" value="30" />
+    <option name="width" value="2100" />
+    <option name="height" value="1500" />
+  </component>
   <component name="ProjectId" id="20iixnmBC5nOpmacU5bSVUJFsGH" />
   <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
