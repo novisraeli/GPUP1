@@ -38,14 +38,21 @@ public class UIimpl implements UI {
                         }
                         break;
                     case 4:
-
+                        if(fileLoadedCheck(fileLoaded)){
+                            showPathBetweenTwoTargets();
+                        }
                         break;
                     case 5:
+                        if(fileLoadedCheck(fileLoaded)){
+
+                        }
                         break;
                     case 6:
                         run=false;
+                        System.out.println("Salamat");
                         break;
                     default:
+                        System.out.println("Invalid option");
                         break;
                 }
             }
@@ -56,30 +63,33 @@ public class UIimpl implements UI {
         }
 
     }
+    @Override
+
     public boolean loadFile(){//option 1
         String input;
-
-            System.out.println("Enter file full path or, 0 to return to main menu");
-            input=s.nextLine();
-            if(s.equals("0")){
-                return false;
-            }
-            else {
-               try{
-                   e.loadFile(input);
-               }
-               catch (Exception e){
-                   System.out.println(e);
-                   return false;
-               }
-            }
+        System.out.println("Enter file full path or, 0 to return to main menu");
+        input=s.nextLine();
+        if(s.equals("0")){
+            return false;
+        }
+        else {
+           try{
+               e.loadFile(input);
+           }
+           catch (Exception e){
+               System.out.println(e);
+               return false;
+           }
+        }
         return false;
 
     }
+    @Override
     public void showGraphInfo(){//option 2
         //add engine.showGraphInfo
         //print what came back
     }
+    @Override
     public void showTargetInfo(){
         System.out.println("Enter Target Name");
         String input=s.nextLine();
@@ -89,6 +99,7 @@ public class UIimpl implements UI {
         //run engine,showTargetInfo
         //print what came back
     }
+    @Override
     public void showPathBetweenTwoTargets(){
         System.out.println("Enter Targets Names IN TWO SEPERATE LINES");
         String input1=s.nextLine();
@@ -99,6 +110,21 @@ public class UIimpl implements UI {
         //run engine.showPathBetweenTwoTargets(input1,input2)
         //print what came back
     }
+
+    @Override
+    public void runTask() {
+        System.out.println("Enter task details as follows(EACH PARAMETER IS SEPERATED BY SPACE NOT BY ,)) : ");
+        System.out.println("simTime for each target(time in ms) ,random or set(1 for random, 2 for set)");
+        System.out.println("chance of task succeeding(a number between 1 and 0)");
+        System.out.println("if Succeed chance of warning(a number between 1 and 0)");
+        try{
+            e.runTask();
+        }
+        catch(Exception e){
+            System.out.println(e);
+        }
+    }
+
     private void printMainMenu(){
         System.out.println("1.Load file");
         System.out.println("2.Show info about the targets");

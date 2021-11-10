@@ -6,6 +6,7 @@ public interface UI {
     void showGraphInfo();
     void showTargetInfo();
     void showPathBetweenTwoTargets();
+    void runTask();
 
 
 
