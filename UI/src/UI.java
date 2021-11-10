@@ -2,7 +2,11 @@
 
 public interface UI {
     void mainMenu();
-    void openFile(String path);
+    boolean loadFile();
+    void showGraphInfo();
+    void showTargetInfo();
+    void showPathBetweenTwoTargets();
+
 
 
 }
