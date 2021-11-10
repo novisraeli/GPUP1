@@ -4,14 +4,13 @@ import xml.XmlException;
 import java.util.*;
 import java.io.*;
 
-
-
 public class UIimpl implements UI {
-    engine engine =new engineImpl();
+    engine engine = new engineImpl();
     private boolean fileLoaded=false;
     private boolean firstTask=true;
-    Scanner s =new Scanner(System.in);
+    Scanner s = new Scanner(System.in);
     //add engine impl instance
+
     public void mainMenu(){
 
         int input;
@@ -21,6 +20,7 @@ public class UIimpl implements UI {
             printMainMenu();
             if(s.hasNextInt()){
                 input =s.nextInt();
+                s.nextLine();
                 switch (input){//main menu switch
                     case 1:
                         if(loadFile()) {
@@ -63,8 +63,8 @@ public class UIimpl implements UI {
         }
 
     }
-    @Override
 
+    @Override
     public boolean loadFile(){//option 1
         String input;
         System.out.println("Enter file full path ,or 0 to return to main menu");

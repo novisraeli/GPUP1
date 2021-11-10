@@ -9,6 +9,14 @@ public class Target
         private TargetDependencies targetDependencies;
         private String name;
 
+        public  Target(String name ,String userData)
+        {
+            this.name = name;
+            this.userData = userData;
+           // this.targetDependencies = targetDependencies;
+        }
+
+
 
         public String getGPUPUserData() {
             return userData;
