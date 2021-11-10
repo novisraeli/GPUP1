@@ -1,15 +1,18 @@
 package engine;
 
 import information.Information;
+import target.Targets;
 import xml.Xmlimpl;
 
 public class engineImpl implements engine{
 
+    private Targets t;
     @Override
     public void loadFile(String path) throws Exception {
         try {
             Xmlimpl file = new Xmlimpl(path);
             file.checkXmlFile();
+
         }
         catch (Exception ex)
         {throw  ex;}

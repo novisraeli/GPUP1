@@ -1,8 +1,9 @@
 package xml;
 
+import org.w3c.dom.Document;
+
 public interface Xml {
 
-    public void checkXmlFile() throws Exception;
 
 
 }

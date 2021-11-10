@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="30f48137-87a5-4e03-962e-6e8bd68df68d" name="Changes" comment="bar tsukerberg">
-      <change afterPath="$PROJECT_DIR$/Engine/src/information/LoadFileInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/target/Targets.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/target/Targets.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/xml/Xml.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/xml/Xml.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/UIimpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/UIimpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,7 +35,6 @@
       </GitPushTagMode>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="GitSEFilterConfiguration">
     <file-type-list>
@@ -162,7 +165,13 @@
       <option name="presentableId" value="LOCAL‎00015" />
       <updated>1636558070597</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL‎00016" summary="bar tsukerberg">
+      <created>1636558504677</created>
+      <option name="number" value="LOCAL‎00016" />
+      <option name="presentableId" value="LOCAL‎00016" />
+      <updated>1636558504677</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
