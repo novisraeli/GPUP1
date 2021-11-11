@@ -22,7 +22,7 @@ public class engineImpl implements engine{
 
     public void printXml(){
             Map<String, Target> bar = file.makeAMap();
-            System.out.println(bar);
+            System.out.println(bar.get("A"));
     }
 
     @Override

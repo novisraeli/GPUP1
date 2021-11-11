@@ -15,8 +15,9 @@ public class UIimpl implements UI {
 
         int input;
         boolean run =true;
-        System.out.println("Hello,please choose an option:");
+        System.out.println("Hello To Nov & Bar G.P.U.P\n\r");
         while(run){
+            System.out.println("Please choose an option: (number between 1 - 6)");
             printMainMenu();
             if(s.hasNextInt()){
                 input =s.nextInt();
@@ -51,13 +52,17 @@ public class UIimpl implements UI {
                         run=false;
                         System.out.println("Salamat");
                         break;
+                    case 7:///////////////////////////////
+                        printXml();
+                        break;
                     default:
-                        System.out.println("Invalid option");
+                        System.out.println("Invalid option \n\rplease enter a number between 1 - 6\n\r");
                         break;
                 }
             }
             else{
-                System.out.println("not a number!!");
+                System.out.println("Not a number!! \n\rplease enter a number between 1 - 6\n\r");
+                s.nextLine();
             }
 
         }
@@ -146,6 +151,13 @@ public class UIimpl implements UI {
         catch(Exception e){
             System.out.println(e);
         }
+    }
+
+    public void printXml() {//option 7
+        System.out.println("\n" +
+                "\nThe XML File: \n\r\n" +
+                "\n");
+        engine.printXml();
     }
 
     private void printMainMenu(){
