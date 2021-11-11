@@ -9,11 +9,11 @@ public class Target
         private TargetDependencies targetDependencies;
         private String name;
 
-        public  Target(String name ,String userData)
+        public  Target(String name ,TargetDependencies targetDependencies , String userData)
         {
             this.name = name;
             this.userData = userData;
-           // this.targetDependencies = targetDependencies;
+            this.targetDependencies = targetDependencies;
         }
 
 

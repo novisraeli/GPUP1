@@ -1,34 +1,28 @@
 package engine;
 
 import generated.GPUPTarget;
-import generated.GPUPTargets;
 import information.Information;
 import target.Target;
-import target.Targets;
 import xml.Xmlimpl;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class engineImpl implements engine{
-
-    private Targets t;
+    private Xmlimpl file;
     @Override
     public void loadFile(String path) throws Exception {
         try {
-            Xmlimpl file = new Xmlimpl(path);
+            file = new Xmlimpl(path);
             file.checkXmlFile();
-            Map <String , Target > bar = new HashMap<>();
-            for (GPUPTarget t:file.Targets111.getGPUPTargets().getGPUPTarget())
-            {
-                Target Tnew = new Target(t.getName() , t.getGPUPUserData());
-                bar.put(Tnew.getName() , Tnew);
-            }
-
-            System.out.println(bar);
         }
         catch (Exception ex)
         {throw  ex;}
+    }
+
+    public void printXml(){
+            Map<String, Target> bar = file.makeAMap();
+            System.out.println(bar);
     }
 
     @Override

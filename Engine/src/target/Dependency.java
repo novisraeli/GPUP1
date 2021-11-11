@@ -5,6 +5,10 @@ public class Dependency {
     private String value;
     private String type;
 
+    public Dependency(String value ,String type){
+        this.value = value;
+        this.type = type;
+    }
     public String getValue() {
         return value;
     }
