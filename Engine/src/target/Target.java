@@ -1,24 +1,25 @@
 package target;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class Target
 {
         private String userData;
         private String name;
         private Type type;
-        private List<String> listDependsOn;
-        private List<String> listRequiredFor;
+        private Set setDependsOn;
+        private Set setRequiredFor;
 
 
-        public  Target(String name , String userData , List<String> listDependsOn , List<String> listRequiredFor , Type type)
+        public  Target(String name , String userData , Set setDependsOn , Set setRequiredFor)
         {
             this.name = name;
             this.userData = userData;
-            this.listDependsOn = listDependsOn;
-            this.listRequiredFor = listRequiredFor;
-            this.type = type;
+            this.setDependsOn = setDependsOn;
+            this.setRequiredFor = setRequiredFor;
         }
 
         public String getName() {
@@ -27,14 +28,22 @@ public class Target
         public String getUserData() {
             return userData;
         }
-        public List<String> getListDependsOn() {
-        return listDependsOn;
+        public Set<String> getSetDependsOn() {
+        return setDependsOn;
     }
-        public List<String> getListRequiredFor() {
-        return listRequiredFor;
+        public Set<String> getSetRequiredFor() {
+        return setRequiredFor;
     }
-        public Type getType() {
+
+    public void addToSetDependsOn(String st) {setDependsOn.add(st);}
+
+    public void addToSetRequiredFor(String st) {setRequiredFor.add(st);}
+
+    public Type getType() {
         return type;
+    }
+    public void SetType(Type t) {
+        this.type = t;
     }
 
 
@@ -47,8 +56,8 @@ public class Target
     @Override
     public String toString() {
         return "Target: "+ name + "\n\r"
-                + "Target DependsOn:" + listDependsOn + "\n\r"
-                + "Target RequiredFor:" + listRequiredFor + "\n\r"
+                + "Target DependsOn:" + setDependsOn + "\n\r"
+                + "Target RequiredFor:" + setRequiredFor + "\n\r"
                 + "Target type:" + type + "\n\r"
                 + "Target Data: "+ userData + "\n\r" ;
     }

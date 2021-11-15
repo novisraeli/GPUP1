@@ -10,23 +10,26 @@ import java.util.Map;
 
 public class engineImpl implements engine{
     private Xmlimpl file;
+    private Map<String, Target> targetMap;
+
     @Override
     public void loadFile(String path) throws Exception {
         try {
             file = new Xmlimpl(path);
             file.checkXmlFile();
+            targetMap = file.makeAMap();
         }
         catch (Exception ex)
         {throw  ex;}
     }
 
     public void printXml(){
-            Map<String, Target> bar = file.makeAMap();
-            System.out.println(bar.get("A"));
+        System.out.println(targetMap);
     }
 
     @Override
     public Information targetsInformation() throws Exception {
+
         return null;
     }
 

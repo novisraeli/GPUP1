@@ -4,7 +4,9 @@ import generated.GPUPDescriptor;
 import generated.GPUPTarget;
 import generated.GPUPTargetDependencies;
 import target.Target;
+import target.TargetIsExists;
 import target.Type;
+import target.UniqueTarget;
 
 
 import java.io.FileInputStream;
@@ -14,13 +16,10 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
-public class Xmlimpl implements Xml{
+public class Xmlimpl implements Xml {
 
     private GPUPDescriptor GPUPDescriptor;
     private final static String JAXB_XML_PACKAGE_NAME = "generated";
@@ -33,13 +32,10 @@ public class Xmlimpl implements Xml{
 
         } catch (JAXBException | FileNotFoundException e) {
             e.printStackTrace();
-        }
-
-        catch (Exception ex) {
+        } catch (Exception ex) {
             throw new XmlIsExists(path);
         }
     }
-
 
     public void checkXmlFile() throws Exception {
         /// check if the file is contsin legal content
@@ -52,42 +48,82 @@ public class Xmlimpl implements Xml{
         return (GPUPDescriptor) u.unmarshal(in);
     }
 
-    public Map<String, Target> makeAMap()  {
-
+    public Map<String, Target> makeAMap() throws Exception {
         Target newTarget;
-        Map<String,Target> targetsMap= new HashMap<>();
+        Map<String, Target> targetsMap = new HashMap<>();
 
         for (GPUPTarget p : GPUPDescriptor.getGPUPTargets().getGPUPTarget()) {
 
-            if (p.getGPUPTargetDependencies() == null)
-                newTarget = new Target(p.getName(), p.getGPUPUserData() , null , null , Type.INDEPENDENTS);
+            if (targetsMap.containsKey(p.getName())) {
+                throw new UniqueTarget(p.getName());
+            } else {
+                Set<String> newSetDependency = new HashSet<>();
+                Set<String> newSetRequiredFor = new HashSet<>();
 
-            else
-            {
-            List<String> newListDependency = new ArrayList<>();
-            List<String> newListRequiredFor = new ArrayList<>();
+                if (p.getGPUPTargetDependencies() == null)
+                    newTarget = new Target(p.getName(), p.getGPUPUserData(), newSetDependency, newSetRequiredFor);
 
-            for (GPUPTargetDependencies.GPUGDependency p2 : p.getGPUPTargetDependencies().getGPUGDependency()) {
-                if (p2.getType().equals("dependsOn"))
-                    newListDependency.add(p2.getValue());
-                else if (p2.getType().equals("requiredFor"))
-                    newListRequiredFor.add(p2.getValue());
+                else {
+                    for (GPUPTargetDependencies.GPUGDependency p2 : p.getGPUPTargetDependencies().getGPUGDependency()) {
+                        if (p2.getType().equals("dependsOn"))
+                            newSetDependency.add(p2.getValue());
+                        else if (p2.getType().equals("requiredFor"))
+                            newSetRequiredFor.add(p2.getValue());
+                    }
+                    newTarget = new Target(p.getName(), p.getGPUPUserData(), newSetDependency, newSetRequiredFor);
+                }
+
+                targetsMap.put(newTarget.getName(), newTarget);
             }
-
-            if (newListDependency == null)
-                newTarget = new Target(p.getName(), p.getGPUPUserData() , newListDependency , null , Type.ROOT);
-            else if(newListRequiredFor == null)
-                newTarget = new Target(p.getName(), p.getGPUPUserData() , null , newListRequiredFor , Type.LEAF);
-            else
-                newTarget = new Target(p.getName(), p.getGPUPUserData() , newListDependency , newListRequiredFor , Type.MIDDLE);
-
+            try {
+                organizeTheDependencies(targetsMap);
+                makeTypeForTargets(targetsMap);
+            }
+            catch (Exception e) {
+            throw e;
+            }
+            finally {
 
             }
-            targetsMap.put(newTarget.getName(),newTarget);
         }
-        return targetsMap;
+            return targetsMap;
+
     }
 
+    public void organizeTheDependencies(Map<String, Target> targetMap) throws Exception {
+        Set setOfKey = targetMap.keySet();
+        targetMap.forEach((k,t) ->
+                {
+                    for (String st : t.getSetDependsOn()) {
+                        if (setOfKey.contains(st))
+                            targetMap.get(st).addToSetRequiredFor(k);
+                        //else
+                            //throw new UniqueTarget("bar");
 
+                    }
 
+                    for (String st : t.getSetRequiredFor())
+                    {
+                        if (setOfKey.contains(st))
+                            targetMap.get(st).addToSetDependsOn(k);
+                        //else
+                          //  throw new TargetIsExists(st);
+                    }
+                }
+        );
+    }
+    public void makeTypeForTargets(Map<String, Target> targetMap) {
+        targetMap.forEach((k,t) ->
+                {
+                    if (t.getSetRequiredFor().size() == 0 && t.getSetDependsOn().size() == 0)
+                        t.SetType(Type.INDEPENDENTS);
+                    else if (t.getSetDependsOn().size() == 0)
+                        t.SetType(Type.LEAF);
+                    else if (t.getSetRequiredFor().size() == 0)
+                        t.SetType(Type.ROOT);
+                    else
+                        t.SetType(Type.MIDDLE);
+                }
+        );
+    }
 }
