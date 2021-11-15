@@ -20,10 +20,10 @@ public class GraphInformation implements Information{ // 2
     @Override
     public String toString() {
         return "Graph Information: \n\r" +
-                "amount Of Targets: " + amountOfTargets +
-                "amount Of levies: " + levies +
-                "amount Of middles: " + middles +
-                "amount Of roots: " + roots +
+                "amount Of Targets: " + amountOfTargets + "\n\r" +
+                "amount Of levies: " + levies + "\n\r" +
+                "amount Of middles: " + middles + "\n\r" +
+                "amount Of roots: " + roots + "\n\r" +
                 "amount Of independents: " + independents + "\n\r";
     }
 }

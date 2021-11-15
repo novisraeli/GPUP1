@@ -1,5 +1,6 @@
 import engine.*;
 import xml.XmlException;
+import engine.engine.*;
 
 import java.util.*;
 import java.io.*;
@@ -26,6 +27,7 @@ public class UIimpl implements UI {
                     case 1:
                         if(loadFile()) {
                             fileLoaded = true;
+
                         }
                         break;
                     case 2:
@@ -66,7 +68,7 @@ public class UIimpl implements UI {
             }
 
         }
-
+    engine.exit();
     }
 
     @Override
@@ -80,24 +82,17 @@ public class UIimpl implements UI {
         else {
            try{
                engine.loadFile(input);
+               return true;
            }
            catch (Exception e){
                System.out.println(e);
                return false;
            }
         }
-        return false;
-
     }
     @Override
     public void showGraphInfo(){//option 2
-        try {
             System.out.println(engine.targetsInformation());
-        }
-        catch (Exception e){
-            System.out.println(e);
-        }
-        //print what came back
     }
     @Override
     public void showTargetInfo(){//option 3
@@ -121,7 +116,7 @@ public class UIimpl implements UI {
         String input1=s.nextLine();
         String input2=s.nextLine();
         try{
-            System.out.println(engine.FindAPathBetweenTwoTargets(input1,input2));
+            System.out.println(engine.FindAPathBetweenTwoTargets(input1,input2 , 1));
         }
         catch (Exception e){
             System.out.println(e);
