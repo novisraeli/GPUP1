@@ -3,9 +3,9 @@ package xml;
 import generated.GPUPDescriptor;
 import generated.GPUPTarget;
 import generated.GPUPTargetDependencies;
-import target.Dependency;
 import target.Target;
-import target.TargetDependencies;
+import target.Type;
+
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -60,14 +60,28 @@ public class Xmlimpl implements Xml{
         for (GPUPTarget p : GPUPDescriptor.getGPUPTargets().getGPUPTarget()) {
 
             if (p.getGPUPTargetDependencies() == null)
-                newTarget = new Target(p.getName(), null, p.getGPUPUserData());
+                newTarget = new Target(p.getName(), p.getGPUPUserData() , null , null , Type.INDEPENDENTS);
 
-            else{
-            List<Dependency> newListDependency = new ArrayList<>();
-                for (GPUPTargetDependencies.GPUGDependency p2 : p.getGPUPTargetDependencies().getGPUGDependency()) {
-                    newListDependency.add(new Dependency(p2.getValue(), p2.getType()));
-                }
-            newTarget = new Target(p.getName(), new TargetDependencies(newListDependency), p.getGPUPUserData());
+            else
+            {
+            List<String> newListDependency = new ArrayList<>();
+            List<String> newListRequiredFor = new ArrayList<>();
+
+            for (GPUPTargetDependencies.GPUGDependency p2 : p.getGPUPTargetDependencies().getGPUGDependency()) {
+                if (p2.getType().equals("dependsOn"))
+                    newListDependency.add(p2.getValue());
+                else if (p2.getType().equals("requiredFor"))
+                    newListRequiredFor.add(p2.getValue());
+            }
+
+            if (newListDependency == null)
+                newTarget = new Target(p.getName(), p.getGPUPUserData() , newListDependency , null , Type.ROOT);
+            else if(newListRequiredFor == null)
+                newTarget = new Target(p.getName(), p.getGPUPUserData() , null , newListRequiredFor , Type.LEAF);
+            else
+                newTarget = new Target(p.getName(), p.getGPUPUserData() , newListDependency , newListRequiredFor , Type.MIDDLE);
+
+
             }
             targetsMap.put(newTarget.getName(),newTarget);
         }
