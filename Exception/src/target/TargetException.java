@@ -1,5 +1,5 @@
 package target;
-
+/// send error message about one or two target
 public class TargetException extends Exception {
     protected String targetOne;
     protected String targetTwo;

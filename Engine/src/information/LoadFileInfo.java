@@ -1,4 +1,6 @@
 package information;
+/// contain all the information about load File status:
+/// - The file open successfully or not
 
 public class LoadFileInfo implements Information{
     private boolean status;

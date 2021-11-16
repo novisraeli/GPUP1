@@ -1,3 +1,4 @@
+import com.sun.deploy.security.SelectableSecurityManager;
 import engine.*;
 import xml.XmlException;
 import engine.engine.*;
@@ -18,7 +19,7 @@ public class UIimpl implements UI {
         boolean run =true;
         System.out.println("Hello To Nov & Bar G.P.U.P\n\r");
         while(run){
-            System.out.println("Please choose an option: (number between 1 - 6)");
+            System.out.println("Please choose an option: (number between 1 - 8)");
             printMainMenu();
             if(s.hasNextInt()){
                 input =s.nextInt();
@@ -56,6 +57,13 @@ public class UIimpl implements UI {
                         break;
                     case 7:///////////////////////////////
                         printXml();
+                        break;
+                    case 8:///////////////////////////////
+                        String input1=s.nextLine();
+                        try {
+                            System.out.println(engine.circuitDetection(input1));
+                        }
+                        catch (Exception e){}
                         break;
                     default:
                         System.out.println("Invalid option \n\rplease enter a number between 1 - 6\n\r");
@@ -112,11 +120,27 @@ public class UIimpl implements UI {
     }
     @Override
     public void showPathBetweenTwoTargets(){//option 4
-        System.out.println("Enter Targets Names IN TWO SEPERATE LINES");
+        int x = 0;
+        Depend d = engineImpl.Depend.DEPENDS_ON;
+
+        System.out.println("Enter Targets Names IN TWO SEPERATE LINES");                    // get the names of targets
         String input1=s.nextLine();
         String input2=s.nextLine();
+
+        System.out.println("Enter the attitude between the targets\n");                          // get the attitude between targets
+        System.out.println("1 - DEPENDS_ON\n" + "2 - REQUIRED_FOR\n");
+        while (x != 1 || x!= 2) {
+            x = s.nextInt();
+            if (x == 1)
+                d = engineImpl.Depend.DEPENDS_ON;
+            else if (x == 2)
+                d = engineImpl.Depend.REQUIRED_FOR;
+            else
+                System.out.println("Invalid option \n" + "1 - DEPENDS_ON\n" + "2 - REQUIRED_FOR\n");
+        }
+
         try{
-            System.out.println(engine.FindAPathBetweenTwoTargets(input1,input2 , 1));
+            System.out.println(engine.FindAPathBetweenTwoTargets(input1,input2 , d));
         }
         catch (Exception e){
             System.out.println(e);

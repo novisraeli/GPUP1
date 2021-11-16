@@ -1,5 +1,5 @@
 package xml;
-
+/// send error message if there is an error with the xml file
 public class XmlException extends Exception{
 
     private String xmlName;

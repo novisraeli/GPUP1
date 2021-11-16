@@ -1,5 +1,5 @@
 package target;
-
+/// send error message if the target name isn't unique
 public class UniqueTarget extends TargetException{
 
     public UniqueTarget(String nameOne) {

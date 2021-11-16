@@ -1,10 +1,10 @@
 package information;
-
-import target.Target;
-
 import java.text.SimpleDateFormat;
-import java.util.List;
-import java.util.SimpleTimeZone;
+
+/// Sum up target:
+/// - target name
+/// - the target result
+/// - date
 
 public class SumUpTarget implements Information{
 

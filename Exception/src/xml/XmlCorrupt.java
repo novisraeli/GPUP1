@@ -1,5 +1,5 @@
 package xml;
-
+/// send error message if the xml file is corrupt
 public class XmlCorrupt extends XmlException { // the xml file is corrupt -
 
     private String message;

@@ -1,4 +1,10 @@
 package information;
+/// contain all the information about targets graph:
+/// - amount of targets
+/// - amount of levies
+/// - amount of middles
+/// - amount of independents
+/// - amount of roots
 
 public class GraphInformation implements Information{ // 2
 

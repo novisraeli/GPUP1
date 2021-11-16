@@ -1,5 +1,5 @@
 package target;
-
+/// send error message if target no exists in the structure
 public class TargetIsExists extends TargetException{
 
     public TargetIsExists(String nameOne){

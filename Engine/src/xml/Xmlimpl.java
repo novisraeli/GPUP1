@@ -4,8 +4,6 @@ import generated.GPUPDescriptor;
 import generated.GPUPTarget;
 import generated.GPUPTargetDependencies;
 import target.Target;
-import target.TargetIsExists;
-import target.Type;
 import target.UniqueTarget;
 
 
@@ -116,13 +114,13 @@ public class Xmlimpl implements Xml {
         targetMap.forEach((k,t) ->
                 {
                     if (t.getSetRequiredFor().size() == 0 && t.getSetDependsOn().size() == 0)
-                        t.SetType(Type.INDEPENDENTS);
+                        t.SetType(Target.Type.INDEPENDENTS);
                     else if (t.getSetDependsOn().size() == 0)
-                        t.SetType(Type.LEAF);
+                        t.SetType(Target.Type.LEAF);
                     else if (t.getSetRequiredFor().size() == 0)
-                        t.SetType(Type.ROOT);
+                        t.SetType(Target.Type.ROOT);
                     else
-                        t.SetType(Type.MIDDLE);
+                        t.SetType(Target.Type.MIDDLE);
                 }
         );
     }

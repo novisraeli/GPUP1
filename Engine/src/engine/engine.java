@@ -1,19 +1,21 @@
 package engine;
 
 import information.Information;
-import target.TargetException;
-import task.TaskException;
-import xml.XmlException;
+
+import java.util.List;
 
 public interface engine{
+    enum Depend{DEPENDS_ON , REQUIRED_FOR}
+    void loadFile(String path) throws Exception;
+    void printXml();
+    Information targetsInformation();
+    Information specificTargetInformation(String name) throws Exception;
+    Information FindAPathBetweenTwoTargets(String t1,String t2 , Depend d) throws Exception;
+    Information runTask(float time,boolean random,float success,float warning) throws Exception;
+    List<String> circuitDetection(String name)throws Exception;
 
-    public void loadFile(String path) throws Exception;
-    public void printXml();
-    public Information targetsInformation();
-    public Information specificTargetInformation(String name) throws Exception;
-    public Information FindAPathBetweenTwoTargets(String t1,String t2 , int d) throws Exception;
-    public Information runTask(float time,boolean random,float success,float warning) throws Exception;
-    public void exit();
+    void exit();
+
 
 
 

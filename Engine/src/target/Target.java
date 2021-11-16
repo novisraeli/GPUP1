@@ -7,51 +7,43 @@ import java.util.Set;
 
 public class Target
 {
-        private String userData;
-        private String name;
-        private Type type;
-        private Set setDependsOn;
-        private Set setRequiredFor;
+    public enum Type {INDEPENDENTS, LEAF, MIDDLE, ROOT}
+    private String userData;
+    private String name;
+    private Type type;
+    private Set setDependsOn;
+    private Set setRequiredFor;
 
-
-        public  Target(String name , String userData , Set setDependsOn , Set setRequiredFor)
-        {
+    // Ctor
+    public  Target(String name , String userData , Set setDependsOn , Set setRequiredFor) {
             this.name = name;
             this.userData = userData;
             this.setDependsOn = setDependsOn;
             this.setRequiredFor = setRequiredFor;
         }
-
-        public String getName() {
+    // Get function
+    public String getName() {
         return name;
     }
-        public String getUserData() {
+    public String getUserData() {
             return userData;
         }
-        public Set<String> getSetDependsOn() {
+    public Set<String> getSetDependsOn() {
         return setDependsOn;
     }
-        public Set<String> getSetRequiredFor() {
+    public Set<String> getSetRequiredFor() {
         return setRequiredFor;
     }
-
-    public void addToSetDependsOn(String st) {setDependsOn.add(st);}
-
-    public void addToSetRequiredFor(String st) {setRequiredFor.add(st);}
-
     public Type getType() {
         return type;
     }
+    // Add to set function
+    public void addToSetDependsOn(String st) {setDependsOn.add(st);}
+    public void addToSetRequiredFor(String st) {setRequiredFor.add(st);}
+    // Set function
     public void SetType(Type t) {
         this.type = t;
     }
-
-
-
-
-
-
-
 
     @Override
     public String toString() {

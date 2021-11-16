@@ -1,8 +1,11 @@
 package information;
-
-import target.Target;
-
 import java.util.List;
+
+/// contain all the information about the path between two targets:
+/// - source target
+/// - destination target
+/// - attitude (dependsOn / requiredFor)
+/// - the path between the targets
 
 public class PathBetweenTwoTargetsInfo implements Information{
 

@@ -1,5 +1,5 @@
 package xml;
-
+/// send error message if the xml file not exists
 public class XmlIsExists extends XmlException {
 
     public XmlIsExists(String name){
