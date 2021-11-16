@@ -16,11 +16,11 @@ public class Target
 
     // Ctor
     public  Target(String name , String userData , Set setDependsOn , Set setRequiredFor) {
-            this.name = name;
-            this.userData = userData;
-            this.setDependsOn = setDependsOn;
-            this.setRequiredFor = setRequiredFor;
-        }
+        this.name = name;
+        this.userData = userData;
+        this.setDependsOn = setDependsOn;
+        this.setRequiredFor = setRequiredFor;
+    }
     // Get function
     public String getName() {
         return name;

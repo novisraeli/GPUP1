@@ -3,8 +3,7 @@ package xml;
 import generated.GPUPDescriptor;
 import generated.GPUPTarget;
 import generated.GPUPTargetDependencies;
-import target.Target;
-import target.UniqueTarget;
+import target.*;
 
 
 import java.io.FileInputStream;
@@ -19,7 +18,7 @@ import java.util.*;
 
 public class Xmlimpl implements Xml {
 
-    private GPUPDescriptor GPUPDescriptor;
+    private final GPUPDescriptor GPUPDescriptor;
     private final static String JAXB_XML_PACKAGE_NAME = "generated";
 
     public Xmlimpl(String path) throws Exception {
@@ -27,17 +26,9 @@ public class Xmlimpl implements Xml {
         try {
             InputStream inputStream = new FileInputStream(new File(path));
             GPUPDescriptor = deserializeFrom(inputStream);
-
-        } catch (JAXBException | FileNotFoundException e) {
-            e.printStackTrace();
         } catch (Exception ex) {
             throw new XmlIsExists(path);
         }
-    }
-
-    public void checkXmlFile() throws Exception {
-        /// check if the file is contsin legal content
-
     }
 
     private static GPUPDescriptor deserializeFrom(InputStream in) throws JAXBException {
@@ -73,42 +64,39 @@ public class Xmlimpl implements Xml {
 
                 targetsMap.put(newTarget.getName(), newTarget);
             }
-            try {
-                organizeTheDependencies(targetsMap);
-                makeTypeForTargets(targetsMap);
-            }
-            catch (Exception e) {
-            throw e;
-            }
-            finally {
-
-            }
         }
+        organizeTheDependencies(targetsMap);
+        makeTypeForTargets(targetsMap);
             return targetsMap;
 
     }
 
     public void organizeTheDependencies(Map<String, Target> targetMap) throws Exception {
-        Set setOfKey = targetMap.keySet();
-        targetMap.forEach((k,t) ->
-                {
-                    for (String st : t.getSetDependsOn()) {
-                        if (setOfKey.contains(st))
-                            targetMap.get(st).addToSetRequiredFor(k);
-                        //else
-                            //throw new UniqueTarget("bar");
+        Set<String> setOfKey = targetMap.keySet();
 
-                    }
-
-                    for (String st : t.getSetRequiredFor())
-                    {
-                        if (setOfKey.contains(st))
-                            targetMap.get(st).addToSetDependsOn(k);
-                        //else
-                          //  throw new TargetIsExists(st);
-                    }
+        for (String targetKey: setOfKey) // organize all the map
+        {
+            // organize the RequiredFor of all target
+            for (String st2 : targetMap.get(targetKey).getSetDependsOn()) {
+                if (setOfKey.contains(st2)) { // check if the target is exists in the xml file
+                    if (!targetMap.get(st2).getSetDependsOn().contains(targetKey)) // check if there is a conflict
+                        targetMap.get(st2).addToSetRequiredFor(targetKey);
+                    else throw new DependsOnConflict(targetKey,st2);
                 }
-        );
+                else
+                    throw new TargetIsExists(st2);
+            }
+            // organize the DependsOn of all target
+            for (String st2 : targetMap.get(targetKey).getSetRequiredFor()) {
+                if (setOfKey.contains(st2)) { // check if the target is exists in the xml file
+                    if (!targetMap.get(st2).getSetRequiredFor().contains(targetKey)) // check if there is a conflict
+                        targetMap.get(st2).addToSetDependsOn(targetKey);
+                    else throw new RequiredForConflict(targetKey,st2);
+                }
+                else
+                    throw new TargetIsExists(st2);
+            }
+        }
     }
     public void makeTypeForTargets(Map<String, Target> targetMap) {
         targetMap.forEach((k,t) ->

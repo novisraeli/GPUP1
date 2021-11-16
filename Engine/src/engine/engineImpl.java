@@ -1,11 +1,9 @@
 package engine;
 
-import information.GraphInformation;
-import information.Information;
-import information.PathBetweenTwoTargetsInfo;
-import information.TargetInformation;
+import information.*;
 import target.Target;
 import target.TargetIsExists;
+import target.Targets;
 import xml.Xmlimpl;
 
 import java.util.ArrayList;
@@ -14,16 +12,26 @@ import java.util.Map;
 import java.util.Set;
 
 
+
 public class engineImpl implements engine {
+    //// member
     private Xmlimpl file;
+    private boolean loadFile;
     private Map<String, Target> targetMap;
 
+
+    /// methods
     @Override
-    public void loadFile(String path) throws Exception {    /// option 2 in the menu
+    public boolean ifLoadFile(){return loadFile;}
+
+    @Override
+    public void loadFile(String path) throws Exception {/// option 2 in the menu
+        Map<String, Target> targetMapTemp;
         try {
             file = new Xmlimpl(path);                       // load XML file
-            file.checkXmlFile();                            // check if the XML file is proper
-            targetMap = file.makeAMap();                    // crate map (key - target name, val - target) from file
+            targetMapTemp = file.makeAMap();// check if the XML file is proper and crate map (key - target name, val - target) from file
+            loadFile = true;
+            targetMap = targetMapTemp;
         } catch (Exception ex) {
             throw ex;
         }
@@ -76,46 +84,66 @@ public class engineImpl implements engine {
     }
 
     @Override
-    public Information FindAPathBetweenTwoTargets(String t1, String t2, Depend d) throws Exception {
+    public PathBetweenTwoTargetsInfo findAPathBetweenTwoTargets(String t1, String t2, Dependence d) throws Exception {
         Target target1 = targetMap.get(t1);
         Target target2 = targetMap.get(t2);
-        List<String> list = new ArrayList<>();
 
-                                                            // check if the two targets are in the map
+        List<Targets> list = new ArrayList<>();
+        list.add(new Targets());
+
+       // check if the two targets are in the map
         if (null == target1)
             throw new TargetIsExists(t1);
         if (null == target2)
             throw new TargetIsExists(t2);
+        if (d == Dependence.REQUIRED_FOR && target1.getSetRequiredFor().size() != 0)
+            findRequiredForPathBetweenTwoTargetsHelper(target1,target2,list,0);
+        else if (d == Dependence.DEPENDS_ON && target1.getSetDependsOn().size() != 0)
+            findDependsOnPathBetweenTwoTargetsHelper(target1,target2,list,0);
 
-        //Depend d = Depend.DEPENDS_ON;
-
-        if (FindAPathBetweenTwoTargetsHelper(target1,target2,d,list))
-            return new PathBetweenTwoTargetsInfo(t1 , t2 , d.name() , list);
-        else
-            return null;                                    // not found a path
+        return  new PathBetweenTwoTargetsInfo(t1 , t2 , d.name() , list);
     }
-    public boolean FindAPathBetweenTwoTargetsHelper(Target t1, Target t2, Depend d, List<String> listSt) throws Exception {
-        if (d == Depend.DEPENDS_ON) {
-            if (t1.getSetDependsOn().size() == 0)
-                return false;
-            if (t1.getSetDependsOn().contains(t2.getName()))
-                return true;
-        }
+    public void findRequiredForPathBetweenTwoTargetsHelper(Target t1, Target t2, List<Targets> listSt , int index) throws Exception {
+        if (t1.getSetRequiredFor().size() == 0)
+            listSt.get(index).targetsList.remove(listSt.get(index).targetsList.size()-1);
+        if (listSt.get(index).targetsList.contains(t1.getName())) // handle cycle
+            return;
+        else {
+            if (t1.getSetRequiredFor().contains(t2.getName())) {
+                Targets t = new Targets();
+                t.targetsList.addAll(listSt.get(index).targetsList);
+                listSt.add(new Targets());
+                listSt.get(index).find = true;
+                index++;
+                return;
+            }
 
-        if (d == Depend.REQUIRED_FOR) {
-            if (t1.getSetRequiredFor().size() == 0)
-                return false;
-            if (t1.getSetRequiredFor().contains(t2.getName()))
-                return true;
-        }
-
-        for (String st : t1.getSetDependsOn()) {
-            if (FindAPathBetweenTwoTargetsHelper(targetMap.get(st), t2, d, listSt)) {
-                listSt.add(st);
-                return true;
+            for (String st : t1.getSetRequiredFor()) {
+                listSt.get(index).targetsList.add(st);
+                findRequiredForPathBetweenTwoTargetsHelper(targetMap.get(st), t2, listSt, index);
             }
         }
-        return false;
+    }
+    public void findDependsOnPathBetweenTwoTargetsHelper(Target t1, Target t2, List<Targets> listSt , int index) throws Exception {
+        if (t1.getSetDependsOn().size() == 0)
+            listSt.get(index).targetsList.remove(listSt.get(index).targetsList.size()-1);
+        if (listSt.get(index).targetsList.contains(t1.getName()))  // handle cycle
+            return;
+        else {
+            if (t1.getSetDependsOn().contains(t2.getName())) {
+                Targets t = new Targets();
+                t.targetsList.addAll(listSt.get(index).targetsList);
+                listSt.add(new Targets());
+                listSt.get(index).find = true;
+                index++;
+                return;
+            }
+
+            for (String st : t1.getSetDependsOn()) {
+                listSt.get(index).targetsList.add(st);
+                findDependsOnPathBetweenTwoTargetsHelper(targetMap.get(st), t2, listSt, index);
+            }
+        }
     }
 
     @Override
@@ -128,19 +156,9 @@ public class engineImpl implements engine {
         System.exit(0);
     }
     @Override
-    public List<String> circuitDetection(String name)throws Exception
-    {
-        Target target = targetMap.get(name);
-        List<String> list = new ArrayList<>();
-
-        if (null == target)
-            throw new TargetIsExists(name);
-
-        FindAPathBetweenTwoTargetsHelper(target,target,Depend.DEPENDS_ON,list);
-        return list;
-
-
-
+    public CircuitDetectionInfo circuitDetection(String name)throws Exception {
+        PathBetweenTwoTargetsInfo info = findAPathBetweenTwoTargets(name,name,Dependence.DEPENDS_ON);
+        return new CircuitDetectionInfo(name , info.getPaths());
     }
 
 }
