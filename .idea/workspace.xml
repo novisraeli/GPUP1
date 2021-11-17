@@ -3,18 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/target/Target.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/target/Target.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/CircuitDetectionInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/information/CircuitDetectionInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/GraphInformation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/information/GraphInformation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/LoadFileInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/information/LoadFileInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/PathBetweenTwoTargetsInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/information/PathBetweenTwoTargetsInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/SumUpTarget.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/information/SumUpTarget.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/TargetInformation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/information/TargetInformation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/target/Target.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/target/Target.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/target/Targets.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/target/Targets.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/UIimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/UIimpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/UI/UIimpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/UIimpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -42,7 +31,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Engine/src/target/Target.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="119">
@@ -105,11 +94,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/UI/src/UIimpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="228" column="27" lean-forward="true" selection-start-line="228" selection-start-column="27" selection-end-line="228" selection-end-column="27" />
+            <state relative-caret-position="119">
+              <caret line="278" column="54" lean-forward="true" selection-start-line="278" selection-start-column="54" selection-end-line="278" selection-end-column="54" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2817#2818#0" expanded="true" />
@@ -176,6 +165,7 @@
       <list>
         <option value="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" />
         <option value="$PROJECT_DIR$/Engine/src/target/Target.java" />
+        <option value="$PROJECT_DIR$/UI/src/UIimpl.java" />
       </list>
     </option>
   </component>
@@ -511,7 +501,14 @@
       <option name="presentableId" value="LOCAL‎00031" />
       <updated>1637151938855</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="with wright to file">
+      <created>1637159788221</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1637159788221</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -620,7 +617,8 @@
     <MESSAGE value="Merge remote-tracking branch 'origin/master'" />
     <MESSAGE value="bar tsukerberg" />
     <MESSAGE value="Bar Sela" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bar Sela" />
+    <MESSAGE value="with wright to file" />
+    <option name="LAST_COMMIT_MESSAGE" value="with wright to file" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -636,30 +634,6 @@
           <line>113</line>
           <properties />
           <option name="timeStamp" value="56" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
-          <line>143</line>
-          <properties />
-          <option name="timeStamp" value="65" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
-          <line>144</line>
-          <properties />
-          <option name="timeStamp" value="66" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
-          <line>176</line>
-          <properties />
-          <option name="timeStamp" value="67" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
-          <line>216</line>
-          <properties />
-          <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Engine/src/information/TargetInformation.java</url>
@@ -762,18 +736,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UI/src/UIimpl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="228" column="27" lean-forward="true" selection-start-line="228" selection-start-column="27" selection-end-line="228" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2817#2818#0" expanded="true" />
-            <element signature="e#2894#2895#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
@@ -796,6 +758,18 @@
             <element signature="e#1503#1504#0" expanded="true" />
             <element signature="e#1792#1793#0" expanded="true" />
             <element signature="e#1823#1824#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UI/src/UIimpl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="278" column="54" lean-forward="true" selection-start-line="278" selection-start-column="54" selection-end-line="278" selection-end-column="54" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2817#2818#0" expanded="true" />
+            <element signature="e#2894#2895#0" expanded="true" />
           </folding>
         </state>
       </provider>
