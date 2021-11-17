@@ -2,6 +2,7 @@ package engine;
 
 import information.Information;
 import target.Targets;
+import java.util.*;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ public interface engine{
     Information targetsInformation();
     Information specificTargetInformation(String name) throws Exception;
     Information findAPathBetweenTwoTargets(String t1,String t2 , Dependence d) throws Exception;
-    Information runTask(float time,boolean random,float success,float warning) throws Exception;
+    List<Information> runTask(float time,boolean random,float success,float warning,boolean keepLastRun) throws Exception;
     Information circuitDetection(String name)throws Exception;
 
     void exit();

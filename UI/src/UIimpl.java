@@ -7,6 +7,7 @@ public class UIimpl implements UI {
     private engine engine = new engineImpl();
     private Scanner s = new Scanner(System.in);
     private Information info;
+    private boolean firstRun=true;
 
     public void mainMenu(){
 
@@ -192,18 +193,34 @@ public class UIimpl implements UI {
 
     @Override
     public void runTask() {//option 5
+        List<Information>res;
         System.out.println("Enter task details as follows(EACH PARAMETER IS SEPERATED BY SPACE NOT BY ,)) : ");
         System.out.println("simTime for each target(time in ms) ,random or set(1 for random, 0 for set)");
         System.out.println("chance of task succeeding(a number between 1 and 0)");
         System.out.println("if Succeed chance of warning(a number between 1 and 0)");
-        float time,success,warning;
-        boolean random;
-        time=s.nextFloat();
+        System.out.println("lastly if to keep going from previous task(1=yes,0=no)");
+        float success,warning;
+        int time;
+        boolean random, fromScratch;
+
+        time=s.nextInt();
         random=s.nextBoolean();
         success=s.nextFloat();
         warning=s.nextFloat();
+        fromScratch=s.nextBoolean();
+        //need to check valid input
         try{
-            System.out.println(engine.runTask(time,random,success,warning));//need to add params
+            if((fromScratch&&firstRun)||!fromScratch){
+                System.out.println("no previous run,starting from scratch");
+                res=engine.runTask(time,random,success,warning,false);
+            }
+            else{
+                res=engine.runTask(time,random,success,warning,true);
+            }
+            firstRun=false;
+            for(Information i:res){
+                System.out.println(i);
+            }
         }
         catch(Exception e){
             System.out.println(e);

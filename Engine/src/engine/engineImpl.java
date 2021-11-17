@@ -6,12 +6,18 @@ import target.TargetIsExists;
 import target.Targets;
 import xml.Xmlimpl;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class engineImpl implements engine {
     //// member
@@ -147,10 +153,41 @@ public class engineImpl implements engine {
     }
 
     @Override
-    public Information runTask(float time, boolean random, float success, float warning) throws Exception {
-        return null;
-    }
+    public List<Information> runTask(int time, boolean random, float success, float warning,boolean keepLastRun) throws Exception {
+        boolean done=false;
+        List<Information>res=new ArrayList<Information>();
+        openDir();
+        if(!keepLastRun){
+            for(Map.Entry<String, Target> e : targetMap.entrySet()){
+                e.getValue().SetStatus(Target.Status.Waiting);
+            }
 
+        }
+        while(!done) {
+            for (Map.Entry<String, Target> e : targetMap.entrySet()) {
+                e.getValue().run(time,random,success,warning,res);
+            }
+            done=taskDoneCheck();
+        }
+        return res;
+    }
+    private void openDir() throws IOException {//doesnt have path yet,this func create directory for simulation task
+        Path path=Paths.get("test");
+        Files.createDirectories(path);
+        File dir=new File("test");
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.mm.yyyy HH.MM.SS");
+        LocalDateTime now = LocalDateTime.now();
+        String s ="Simulation "+dtf.format(now);
+        dir.renameTo(s);
+    }
+    private boolean taskDoneCheck(){
+        for(Map.Entry<String, Target> e : targetMap.entrySet()){
+            if(e.getValue().getStatus().equals(Target.Status.Waiting));
+            return false;
+        }
+        return true;
+    }
     @Override
     public void exit() {
         System.exit(0);
