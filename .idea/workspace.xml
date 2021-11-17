@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="30f48137-87a5-4e03-962e-6e8bd68df68d" name="Changes" comment="Bar Sela">
-      <change afterPath="$PROJECT_DIR$/Engine/src/engine/IntX.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/information/PathBetweenTwoTargetsInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/information/PathBetweenTwoTargetsInfo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/target/Target.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/target/Target.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exception/src/target/DependsOnConflict.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/target/DependsOnConflict.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/UIimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/UIimpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/PathBetweenTwoTargetsInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/information/PathBetweenTwoTargetsInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/target/Targets.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/target/Targets.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Engine/xml/Xmlimpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/xml/Xmlimpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/UI/UIimpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/UIimpl.class" afterDir="false" />
     </list>
@@ -107,7 +102,7 @@
       <workItem from="1636712961690" duration="172000" />
       <workItem from="1636807537670" duration="4000" />
       <workItem from="1636972352516" duration="34939000" />
-      <workItem from="1637136059584" duration="12023000" />
+      <workItem from="1637136059584" duration="14808000" />
     </task>
     <task id="LOCAL‎00001" summary="zxc">
       <created>1636536346510</created>
@@ -277,7 +272,19 @@
       <option name="presentableId" value="LOCAL‎00028" />
       <updated>1637138398897</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL‎00029" summary="Bar Sela">
+      <created>1637149141728</created>
+      <option name="number" value="LOCAL‎00029" />
+      <option name="presentableId" value="LOCAL‎00029" />
+      <updated>1637149141728</updated>
+    </task>
+    <task id="LOCAL‎00030" summary="Bar Sela">
+      <created>1637149173054</created>
+      <option name="number" value="LOCAL‎00030" />
+      <option name="presentableId" value="LOCAL‎00030" />
+      <updated>1637149173054</updated>
+    </task>
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -340,33 +347,43 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
-          <line>111</line>
+          <line>112</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
-          <line>113</line>
+          <line>114</line>
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java</url>
-          <line>118</line>
+          <line>142</line>
           <option name="timeStamp" value="64" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
-          <line>143</line>
+          <line>144</line>
           <option name="timeStamp" value="65" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
-          <line>144</line>
+          <line>145</line>
           <option name="timeStamp" value="66" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
-          <line>176</line>
+          <line>177</line>
           <option name="timeStamp" value="67" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
+          <line>217</line>
+          <option name="timeStamp" value="69" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java</url>
+          <line>170</line>
+          <option name="timeStamp" value="70" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Engine/src/information/TargetInformation.java</url>
@@ -378,7 +395,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
-          <line>97</line>
+          <line>98</line>
           <properties class="UIimpl" method="showTargetInfo">
             <option name="EMULATED" value="true" />
           </properties>

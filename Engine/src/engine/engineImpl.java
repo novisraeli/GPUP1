@@ -22,9 +22,27 @@ public class engineImpl implements engine {
 
 
     /// methods
+    /** If load file
+     *  Check if the XML file is open
+     *  @return true if is it opened, false if not
+     */
     @Override
     public boolean ifLoadFile(){return loadFile;}
 
+    /** Load file
+     *  Open XML file
+     *  Also check if the XML file is corrupt:
+     *  1. there is conflict between targets
+     *  2. all the targets are unique
+     *  3. all the targets are exists
+     *  if the XML is corrupt stay with the last detail you have
+     *  @exception target.TargetException
+     *  @exception target.TargetIsExists
+     *  @exception target.UniqueTarget
+     *  @exception target.DependsOnConflict
+     *  @exception target.RequiredForConflict
+     * @exception xml.XmlIsExists
+     */
     @Override
     public void loadFile(String path) throws Exception {/// option 2 in the menu
         Map<String, Target> targetMapTemp;

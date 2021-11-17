@@ -15,8 +15,8 @@ public class Target
     private String name;
     private Type type;
     private Status status=Status.Waiting;
-    private Set<String> setDependsOn;
-    private Set<String> setRequiredFor;
+    private Set setDependsOn;
+    private Set setRequiredFor;
 
     // Ctor
     public  Target(String name , String userData , Set setDependsOn , Set setRequiredFor) {
@@ -54,7 +54,7 @@ public class Target
     public void SetStatus(Status s) {
         this.status = s;
     }
-    public void run(int time, boolean random, float success, float warning, List<Information>res,Map<String, Target> targetMap) throws Exception {
+    public void run(int time, boolean random, float success, float warning, List<Information>res) throws Exception {
         Random r=new Random();
         float successRand;
         float warningRand;
@@ -62,14 +62,14 @@ public class Target
         if(!this.status.equals(Status.Waiting)){
             return;
         }
-        for(String s:setDependsOn){
-            if(targetMap.get(s).getStatus().equals(Status.Failure)||targetMap.get(s).getStatus().equals(Status.Skipped)){
-                targetMap.get(s).SetStatus(Status.Skipped);
+        for(Target t:(Set<Target>)setDependsOn){
+            if(t.getStatus().equals(Status.Failure)||t.getStatus().equals(Status.Skipped)){
+                t.SetStatus(Status.Skipped);
+                //need to create file in this condition too
                 res.add(new SumUpTarget(this.name,this.status.name(),"00:00:00:00"));
                 return;
             }
-
-            else if(targetMap.get(s).getStatus().equals(Status.Waiting)){
+            else if(t.getStatus().equals(Status.Waiting)){
                 return;
             }
         }
@@ -86,7 +86,7 @@ public class Target
         long minute = (simTime / (1000 * 60)) % 60;
         long hour = (simTime / (1000 * 60 * 60)) % 24;
         String simTimeString = String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
-        //sim target
+        //
         successRand=r.nextFloat();
         warningRand=r.nextFloat();
         if(success>=successRand){

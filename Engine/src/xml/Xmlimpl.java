@@ -1,5 +1,7 @@
 package xml;
 import generated.GPUPDescriptor;
+import generated.GPUPTarget;
+import generated.GPUPTargetDependencies;
 import target.*;
 
 import java.io.FileInputStream;
@@ -32,9 +34,10 @@ public class Xmlimpl implements Xml {
     }
 
     public Map<String, Target> makeAMap() throws Exception {
+        Target newTarget;
         Map<String, Target> targetsMap = new HashMap<>();
 /*
-        for (GPUPTarget p : GPUPDescriptor.getGPUPTargets().getGPUPTarget()) {
+        for (GPUPTarget p : gpupDescriptor.getGPUPTargets().getGPUPTarget()) {
 
             if (targetsMap.containsKey(p.getName())) {
                 throw new UniqueTarget(p.getName());
@@ -61,7 +64,7 @@ public class Xmlimpl implements Xml {
  */
         Set <String> setA = new HashSet<>();
         setA.add("B");
-        setA.add("D");
+        setA.add("G");
         Set <String> setB = new HashSet<>();
         setB.add("C");
         Set <String> setC = new HashSet<>();
