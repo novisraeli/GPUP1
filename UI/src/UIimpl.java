@@ -9,7 +9,6 @@ public class UIimpl implements UI {
     private boolean firstRun=true;
 
     public void mainMenu(){
-
         int input;
         boolean run =true;
         System.out.println("Welcome To Nov & Bar G.P.U.P\n\r");
@@ -291,7 +290,8 @@ public class UIimpl implements UI {
                 res=engine.runTask(time,random,success,warning,false);
             }
             else{
-                res=engine.runTask(time,random,success,warning,true);
+
+            res=engine.runTask(time,random,success,warning,true);
             }
             firstRun=false;
             for(Information i:res){

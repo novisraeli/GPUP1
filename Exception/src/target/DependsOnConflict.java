@@ -1,5 +1,7 @@
 package target;
-/// send error message if there is a conflict between two targets
+/**
+ * send error message if there is a conflict between two targets
+ */
 public class DependsOnConflict extends TargetException {
 
     public DependsOnConflict(String nameOne , String nameTwo){

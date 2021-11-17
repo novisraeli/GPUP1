@@ -19,14 +19,13 @@ public class Target
     private final Set<String> setDependsOn;
     private final Set<String> setRequiredFor;
 
-    // Ctor
+    /** ctor */
     public  Target(String name , String userData , Set<String> setDependsOn , Set<String> setRequiredFor) {
         this.name = name;
         this.userData = userData;
         this.setDependsOn = setDependsOn;
         this.setRequiredFor = setRequiredFor;
     }
-    // Get function
 
     /** Get name
      * @return name of target
@@ -35,22 +34,22 @@ public class Target
         return name;
     }
 
-    /** Get name
-     * @return name of target
+    /** Get user data
+     * @return data of target
      */
     public String getUserData() {
             return userData;
     }
 
-    /** Get name
-     * @return name of target
+    /** Get all depends-on
+     * @return set of depends-on string
      */
     public Set<String> getSetDependsOn() {
         return setDependsOn;
     }
 
-    /** Get name
-     * @return name of target
+    /** Get required-for
+     * @return set of required-for string
      */
     public Set<String> getSetRequiredFor() {
         return setRequiredFor;
@@ -69,13 +68,27 @@ public class Target
     public Status getStatus() {
         return status;
     }
-    // Add to set functio
+
+    /** Add to set depends-on
+     * @param st - target name to add
+     */
     public void addToSetDependsOn(String st) {setDependsOn.add(st);}
+
+    /** Add to set required-for
+     * @param st - target name to add
+     */
     public void addToSetRequiredFor(String st) {setRequiredFor.add(st);}
-    // Set function
+
+    /** Set type
+     * @param t- new target type
+     */
     public void SetType(Type t) {
         this.type = t;
     }
+
+    /** Set status
+     * @param s- new target status
+     */
     public void SetStatus(Status s) {
         this.status = s;
     }
@@ -88,7 +101,7 @@ public class Target
             }
         }
         boolean runCheck=true;
-        String fName=path+"\\"+this.name+".log";
+        String fName = path + "\\" + this.name + ".log";
         Random r=new Random();
         float successRand;
         float warningRand;
@@ -140,9 +153,9 @@ public class Target
     }
     private void moveForward(int time, boolean random, float success, float warning, List<Information>res,Map<String,Target>targetMap,String path,boolean runCheck) throws Exception {
         String fName=path+"\\"+this.name+".log";
-        if(!runCheck){
-            if(status!=Status.Skipped) {
-                status = Status.Skipped;
+        if (status == Status.Skipped)
+            return;
+        if(!runCheck ){
                 File f = new File(fName);
                 f.createNewFile();
                 FileWriter w = new FileWriter(fName);
@@ -156,7 +169,7 @@ public class Target
                         targetMap.get(s).moveForward(time, random, success, warning, res, targetMap, path, runCheck);
                     }
                 }
-            }
+
         }
         else{
             run(time,random,success,warning, res,targetMap,path);

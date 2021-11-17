@@ -181,7 +181,6 @@ public class engineImpl implements engine {
             for(Map.Entry<String, Target> e : targetMap.entrySet()){
                 e.getValue().SetStatus(Target.Status.Waiting);
             }
-
         }
         Set<Target>indi=new HashSet<>();
         Set<Target>leavies=new HashSet<>();
