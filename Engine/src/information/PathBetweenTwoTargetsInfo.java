@@ -29,7 +29,7 @@ public class PathBetweenTwoTargetsInfo implements Information{
         String st;
         int count = 1;
         if (paths.size() == 1)
-            return "There isn't path between " + source + "and " + destination + "with attitude of "+ attitude + "\n\r";
+            return "There isn't path between " + source + " and " + destination + " with attitude of "+ attitude + "\n\r";
 
         st = "Source: " + source + "\n\r" +
                 "Destination: " + destination + "\n\r" +

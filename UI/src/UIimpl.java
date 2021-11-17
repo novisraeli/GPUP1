@@ -134,7 +134,6 @@ public class UIimpl implements UI {
     public void showPathBetweenTwoTargets(){//option 4
         int x = 0;
         Dependence d = engineImpl.Dependence.DEPENDS_ON;
-        String st;
 
         System.out.println("Enter Targets Names IN TWO SEPERATE LINES");                    // get the names of targets
         String input1 = s.nextLine();
@@ -144,14 +143,22 @@ public class UIimpl implements UI {
         System.out.println("1 - DEPENDS_ON\n" + "2 - REQUIRED_FOR");
 
         while (x != 1 && x!= 2) {
-            x = s.nextInt();
-            s.nextLine();
-            if (x == 1)
-                d = engineImpl.Dependence.DEPENDS_ON;
-            else if (x == 2)
-                d = engineImpl.Dependence.REQUIRED_FOR;
-            else
-                System.out.println("Invalid option \n" + "1 - DEPENDS_ON\n" + "2 - REQUIRED_FOR\n");
+            if (s.hasNextInt()) {
+                x = s.nextInt();
+                s.nextLine();
+
+                if (x == 1)
+                    d = engineImpl.Dependence.DEPENDS_ON;
+                else if (x == 2)
+                    d = engineImpl.Dependence.REQUIRED_FOR;
+                else
+                    System.out.println("Invalid option \n" + "1 - DEPENDS_ON\n" + "2 - REQUIRED_FOR");
+            }
+            else {
+                System.out.println("Not a number, please choose a number\n" + "1 - DEPENDS_ON\n" + "2 - REQUIRED_FOR");
+                s.nextLine();
+            }
+
         }
 
         try{
@@ -227,7 +234,8 @@ public class UIimpl implements UI {
 
     public void circuitDetection(){
         System.out.println("Please enter name of target");
-        String input1=s.nextLine();
+
+        String input1 = s.nextLine();
         try {
             System.out.println(engine.circuitDetection(input1));
         }

@@ -1,10 +1,6 @@
 package xml;
-
 import generated.GPUPDescriptor;
-import generated.GPUPTarget;
-import generated.GPUPTargetDependencies;
 import target.*;
-
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -12,20 +8,18 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.util.*;
 
 
 public class Xmlimpl implements Xml {
-
-    private final GPUPDescriptor GPUPDescriptor;
+    private final GPUPDescriptor gpupDescriptor;
     private final static String JAXB_XML_PACKAGE_NAME = "generated";
 
     public Xmlimpl(String path) throws Exception {
 
         try {
             InputStream inputStream = new FileInputStream(new File(path));
-            GPUPDescriptor = deserializeFrom(inputStream);
+            gpupDescriptor = deserializeFrom(inputStream);
         } catch (Exception ex) {
             throw new XmlIsExists(path);
         }
@@ -38,9 +32,8 @@ public class Xmlimpl implements Xml {
     }
 
     public Map<String, Target> makeAMap() throws Exception {
-        Target newTarget;
         Map<String, Target> targetsMap = new HashMap<>();
-
+/*
         for (GPUPTarget p : GPUPDescriptor.getGPUPTargets().getGPUPTarget()) {
 
             if (targetsMap.containsKey(p.getName())) {
@@ -65,10 +58,32 @@ public class Xmlimpl implements Xml {
                 targetsMap.put(newTarget.getName(), newTarget);
             }
         }
+ */
+        Set <String> setA = new HashSet<>();
+        setA.add("B");
+        setA.add("D");
+        Set <String> setB = new HashSet<>();
+        setB.add("C");
+        Set <String> setC = new HashSet<>();
+        setC.add("A");
+        setC.add("F");
+        Set <String> setD = new HashSet<>();
+        setD.add("E");
+        Set <String> setE = new HashSet<>();
+        setE.add("A");
+        Set <String> setF = new HashSet<>();
+
+
+        targetsMap.put("A" , new Target("A" , null , setA , new HashSet()));
+        targetsMap.put("B" , new Target("B" , null , setB , new HashSet()));
+        targetsMap.put("C" , new Target("C" , null, setC , new HashSet()));
+        targetsMap.put("D" , new Target("D" , null , setD , new HashSet()));
+        targetsMap.put("E" , new Target("E" , null , setE , new HashSet()));
+        targetsMap.put("F" , new Target("F" , null , setF , new HashSet()));
+
         organizeTheDependencies(targetsMap);
         makeTypeForTargets(targetsMap);
             return targetsMap;
-
     }
 
     public void organizeTheDependencies(Map<String, Target> targetMap) throws Exception {
@@ -111,5 +126,8 @@ public class Xmlimpl implements Xml {
                         t.SetType(Target.Type.MIDDLE);
                 }
         );
+    }
+    public String getWorkingDirectoryXml(){
+        return gpupDescriptor.getGPUPConfiguration().getGPUPWorkingDirectory();
     }
 }

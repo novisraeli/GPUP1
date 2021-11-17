@@ -8,7 +8,7 @@ public class DependsOnConflict extends TargetException {
 
     @Override
     public String toString(){
-        return super.toString() + super.targetOne + "dependsOn " + super.targetTwo +
-                " then " + super.targetTwo + "can’t be dependsOn " + super.targetOne +"\n\r";
+        return super.toString() + super.targetOne + " dependsOn " + super.targetTwo +
+                " then " + super.targetTwo + " can’t be dependsOn " + super.targetOne +"\n\r";
     }
 }

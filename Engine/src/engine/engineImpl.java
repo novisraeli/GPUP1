@@ -8,11 +8,7 @@ import xml.Xmlimpl;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
+import java.util.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 import java.nio.file.Files;
@@ -20,10 +16,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class engineImpl implements engine {
-    //// member
-    private Xmlimpl file;
     private boolean loadFile;
     private Map<String, Target> targetMap;
+    private String workingDirectory;
 
 
     /// methods
@@ -33,14 +28,12 @@ public class engineImpl implements engine {
     @Override
     public void loadFile(String path) throws Exception {/// option 2 in the menu
         Map<String, Target> targetMapTemp;
-        try {
-            file = new Xmlimpl(path);                       // load XML file
-            targetMapTemp = file.makeAMap();// check if the XML file is proper and crate map (key - target name, val - target) from file
-            loadFile = true;
-            targetMap = targetMapTemp;
-        } catch (Exception ex) {
-            throw ex;
-        }
+        //// member
+        Xmlimpl file = new Xmlimpl(path);                       // load XML file
+        targetMapTemp = file.makeAMap();// check if the XML file is proper and crate map (key - target name, val - target) from file
+        workingDirectory = file.getWorkingDirectoryXml();
+        loadFile = true;
+        targetMap = targetMapTemp;
     }
 
     public void printXml() {
@@ -49,7 +42,7 @@ public class engineImpl implements engine {
 
     @Override
     public Information targetsInformation() { /// option 2 in the menu
-        int amountOfTargets = (int) targetMap.entrySet().stream().count();          // count all the targets in the map
+        int amountOfTargets = targetMap.entrySet().size();          // count all the targets in the map
 
         int levies = (int) targetMap.entrySet()                                     // count all the levies targets in the map
                 .stream()
@@ -90,9 +83,11 @@ public class engineImpl implements engine {
     }
 
     @Override
-    public PathBetweenTwoTargetsInfo findAPathBetweenTwoTargets(String t1, String t2, Dependence d) throws Exception {
+    public PathBetweenTwoTargetsInfo findAPathBetweenTwoTargets(String t1, String t2, Dependence dependence) throws Exception {
         Target target1 = targetMap.get(t1);
         Target target2 = targetMap.get(t2);
+        IntX i = new IntX();
+        i.x = 0;
 
         List<Targets> list = new ArrayList<>();
         list.add(new Targets());
@@ -102,53 +97,45 @@ public class engineImpl implements engine {
             throw new TargetIsExists(t1);
         if (null == target2)
             throw new TargetIsExists(t2);
-        if (d == Dependence.REQUIRED_FOR && target1.getSetRequiredFor().size() != 0)
-            findRequiredForPathBetweenTwoTargetsHelper(target1,target2,list,0);
-        else if (d == Dependence.DEPENDS_ON && target1.getSetDependsOn().size() != 0)
-            findDependsOnPathBetweenTwoTargetsHelper(target1,target2,list,0);
 
-        return  new PathBetweenTwoTargetsInfo(t1 , t2 , d.name() , list);
+        if (dependence == Dependence.REQUIRED_FOR && target1.getSetRequiredFor().size() != 0)
+            findPathBetweenTwoTargetsHelper(target1,target2,list,i, dependence);
+        else if (dependence == Dependence.DEPENDS_ON && target1.getSetDependsOn().size() != 0)
+            findPathBetweenTwoTargetsHelper(target1,target2,list,i , dependence);
+
+        return  new PathBetweenTwoTargetsInfo(t1 , t2 , dependence.name() , list);
     }
-    public void findRequiredForPathBetweenTwoTargetsHelper(Target t1, Target t2, List<Targets> listSt , int index) throws Exception {
-        if (t1.getSetRequiredFor().size() == 0)
-            listSt.get(index).getTargetsList().remove(listSt.get(index).getTargetsList().size()-1);
-        if (listSt.get(index).getTargetsList().contains(t1.getName())) // handle cycle
-            return;
-        else {
-            if (t1.getSetRequiredFor().contains(t2.getName())) {
-                Targets t = new Targets();
-                t.getTargetsList().addAll(listSt.get(index).getTargetsList());
-                listSt.add(new Targets());
-                listSt.get(index).setFind(true);
-                index++;
-                return;
-            }
+    public void findPathBetweenTwoTargetsHelper(Target t1, Target t2, List<Targets> listSt , IntX index , Dependence dependence) {
 
-            for (String st : t1.getSetRequiredFor()) {
-                listSt.get(index).getTargetsList().add(st);
-                findRequiredForPathBetweenTwoTargetsHelper(targetMap.get(st), t2, listSt, index);
-            }
+        Set<String> tOneSet;
+
+        if (Dependence.DEPENDS_ON == dependence)
+            tOneSet = t1.getSetDependsOn();
+        else
+            tOneSet = t1.getSetRequiredFor();
+
+
+        if (tOneSet.size() == 0) {
+            listSt.get(index.x).getTargetsList().remove(listSt.get(index.x).getTargetsList().size() - 1);
         }
-    }
-    public void findDependsOnPathBetweenTwoTargetsHelper(Target t1, Target t2, List<Targets> listSt , int index) throws Exception {
-        if (t1.getSetDependsOn().size() == 0)
-            listSt.get(index).getTargetsList().remove(listSt.get(index).getTargetsList().size()-1);
-        if (listSt.get(index).getTargetsList().contains(t1.getName()))  // handle cycle
-            return;
+
         else {
-            if (t1.getSetDependsOn().contains(t2.getName())) {
-                Targets t = new Targets();
-                t.getTargetsList().addAll(listSt.get(index).getTargetsList());
-                listSt.add(new Targets());
-                listSt.get(index).setFind(true);
-                index++;
-                return;
+            for (String st : tOneSet) {  /// search in all DEPENDS_ON or REQUIRED_FOR for each target
+                if (st.equals(t2.getName())) {
+                    listSt.add(new Targets()); /// the next list
+                    listSt.get(index.x).setFind(true); // find
+                    listSt.get(listSt.size()-1).getTargetsList().addAll(listSt.get(index.x).getTargetsList());
+                    ++index.x;
+                }
+
+                else if (! listSt.get(index.x).getTargetsList().contains(st)) { /// skip on direct dependency and handle cycle
+                    listSt.get(index.x).getTargetsList().add(st);
+                    findPathBetweenTwoTargetsHelper(targetMap.get(st), t2, listSt, index , dependence);
+                }
             }
 
-            for (String st : t1.getSetDependsOn()) {
-                listSt.get(index).getTargetsList().add(st);
-                findDependsOnPathBetweenTwoTargetsHelper(targetMap.get(st), t2, listSt, index);
-            }
+            if ( listSt.get(index.x).getTargetsList().size() != 0 )
+                listSt.get(index.x).getTargetsList().remove(listSt.get(index.x).getTargetsList().size()-1);
         }
     }
 
@@ -172,14 +159,14 @@ public class engineImpl implements engine {
         return res;
     }
     private void openDir() throws IOException {//doesnt have path yet,this func create directory for simulation task
-        Path path=Paths.get("test");
+        Path path=Paths.get(workingDirectory);
         Files.createDirectories(path);
-        File dir=new File("test");
+        File dir = new File(workingDirectory);
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.mm.yyyy HH.MM.SS");
         LocalDateTime now = LocalDateTime.now();
         String s ="Simulation "+dtf.format(now);
-        dir.renameTo(s);
+       // dir.renameTo(s);
     }
     private boolean taskDoneCheck(){
         for(Map.Entry<String, Target> e : targetMap.entrySet()){
