@@ -1,0 +1,486 @@
+Index: UI/src/UIimpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import engine.*;\nimport information.Information;\nimport engine.engine.*;\nimport java.util.*;\n\npublic class UIimpl implements UI {\n    private engine engine = new engineImpl();\n    private Scanner s = new Scanner(System.in);\n    private Information info;\n\n    public void mainMenu(){\n\n        int input;\n        boolean run =true;\n        System.out.println(\"Hello To Nov & Bar G.P.U.P\\n\\r\");\n        while(run){\n            System.out.println(\"Please choose an option: (number between 1 - 8)\");\n            printMainMenu();\n            if(s.hasNextInt()){\n                input =s.nextInt();\n                s.nextLine();\n                switch (input){//main menu switch\n                    case 1:\n                        loadFile();\n                        break;\n\n                    case 2:\n                        if(engine.ifLoadFile())\n                            showGraphInfo();\n                        break;\n\n                    case 3:\n                        if(engine.ifLoadFile())\n                            showTargetInfo();\n                        break;\n\n                    case 4:\n                        if(engine.ifLoadFile())\n                            showPathBetweenTwoTargets();\n                        break;\n\n                    case 5:\n                        if(engine.ifLoadFile())\n                            runTask();\n                        break;\n\n                    case 6:\n                        if(engine.ifLoadFile())\n                            circuitDetection();\n                        break;\n\n                    case 7:///////////////////////////////\n                        if(engine.ifLoadFile())\n                            printXml();\n                        break;\n                    case 8:\n                        run=false;\n                        System.out.println(\"Salamat\");\n                        break;\n                    default:\n                        System.out.println(\"Invalid option \\n\\rplease enter a number between 1 - 6\\n\\r\");\n                        break;\n                }\n            }\n            else{\n                System.out.println(\"Not a number!! \\n\\rplease enter a number between 1 - 6\\n\\r\");\n                s.nextLine();\n            }\n\n        }\n    engine.exit();\n    }\n\n    @Override\n    public boolean loadFile(){//option 1\n        String input;\n        System.out.println(\"Enter file full path ,or 0 to return to main menu\");\n        input=s.nextLine();\n        if(s.equals(\"0\")){\n            return false;\n        }\n        else {\n           try{\n               engine.loadFile(input);\n               return true;\n           }\n           catch (Exception e){\n               System.out.println(e);\n               return false;\n           }\n        }\n    }\n    @Override\n    public void showGraphInfo(){//option 2\n            System.out.println(engine.targetsInformation());\n    }\n    @Override\n    public void showTargetInfo(){//option 3\n        System.out.println(\"Enter Target Name\");\n        String input = s.nextLine();\n        try{\n            System.out.println(engine.specificTargetInformation(input));\n        }\n        catch (Exception e){\n            System.out.println(e);\n            System.out.println(\"choose one of the option:\\n\\r\" +\n                               \"1. Insert new target\\n\\r\" +\n                               \"2. Return to the menu\");\n            int inputInt = s.nextInt();\n            s.nextLine();\n\n            while (inputInt != 1 || inputInt != 2) {\n                if (1 == inputInt) {\n                    showTargetInfo();\n                    return;\n                } else\n                    if (2 == inputInt)\n                        return;\n                    else {\n                        System.out.println(\"Invalid option, choose again:\");\n                        inputInt = s.nextInt();\n                        s.nextLine();\n                }\n            }\n        }\n        //check Target exist in engine.checkTargetExist(input)\n        //if not print something about it and return\n\n        //run engine,showTargetInfo\n        //print what came back\n    }\n    @Override\n    public void showPathBetweenTwoTargets(){//option 4\n        int x = 0;\n        Dependence d = engineImpl.Dependence.DEPENDS_ON;\n        String st;\n\n        System.out.println(\"Enter Targets Names IN TWO SEPERATE LINES\");                    // get the names of targets\n        String input1 = s.nextLine();\n        String input2 = s.nextLine();\n\n        System.out.println(\"Enter the attitude between the targets\");                          // get the attitude between targets\n        System.out.println(\"1 - DEPENDS_ON\\n\" + \"2 - REQUIRED_FOR\");\n\n        while (x != 1 && x!= 2) {\n            x = s.nextInt();\n            s.nextLine();\n            if (x == 1)\n                d = engineImpl.Dependence.DEPENDS_ON;\n            else if (x == 2)\n                d = engineImpl.Dependence.REQUIRED_FOR;\n            else\n                System.out.println(\"Invalid option \\n\" + \"1 - DEPENDS_ON\\n\" + \"2 - REQUIRED_FOR\\n\");\n        }\n\n        try{\n            info = engine.findAPathBetweenTwoTargets(input1,input2 , d);\n            System.out.println(info);\n        }\n        catch (Exception e){\n\n            System.out.println(e); ///\n\n            System.out.println(\"choose one of the option:\\n\\r\" +\n                    \"1. Insert new targets\\n\\r\" +\n                    \"2. Return to the menu\");\n            int inputInt = s.nextInt();\n            s.nextLine();\n\n            while (inputInt != 1 || inputInt != 2) {\n                if (1 == inputInt) {\n                    showPathBetweenTwoTargets();\n                    return;\n                } else\n                if (2 == inputInt)\n                    return;\n                else {\n                    System.out.println(\"Invalid option, choose again:\");\n                    inputInt = s.nextInt();\n                    s.nextLine();\n                }\n            }\n        }\n        //check Targets exist in engine.checkTargetExist(input) can check for each target seperatlly\n        //if not print something about it and return\n\n        //run engine.showPathBetweenTwoTargets(input1,input2)\n        //print what came back\n    }\n\n    @Override\n    public void runTask() {//option 5\n        System.out.println(\"Enter task details as follows(EACH PARAMETER IS SEPERATED BY SPACE NOT BY ,)) : \");\n        System.out.println(\"simTime for each target(time in ms) ,random or set(1 for random, 0 for set)\");\n        System.out.println(\"chance of task succeeding(a number between 1 and 0)\");\n        System.out.println(\"if Succeed chance of warning(a number between 1 and 0)\");\n        float time,success,warning;\n        boolean random;\n        time=s.nextFloat();\n        random=s.nextBoolean();\n        success=s.nextFloat();\n        warning=s.nextFloat();\n        try{\n            System.out.println(engine.runTask(time,random,success,warning));//need to add params\n        }\n        catch(Exception e){\n            System.out.println(e);\n        }\n    }\n\n    public void circuitDetection(){\n        System.out.println(\"Please enter name of target\");\n        String input1=s.nextLine();\n        try {\n            System.out.println(engine.circuitDetection(input1));\n        }\n        catch (Exception e){\n            System.out.println(e);\n        }\n    }\n    public void printXml() {//option 7\n        System.out.println(\"\\n\" +\n                \"\\nThe XML File: \\n\\r\");\n        engine.printXml();\n    }\n\n    private void printMainMenu(){\n        System.out.println(\"1.Load file\");\n        System.out.println(\"2.Show info about the targets\");\n        System.out.println(\"3.Show info about a specific target\");\n        System.out.println(\"4.Find a path between 2 targets\");\n        System.out.println(\"5.Run task\");\n        System.out.println(\"6.Circuit detection\");\n        System.out.println(\"7.print xml\");\n        System.out.println(\"8.Exit\");\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/UI/src/UIimpl.java b/UI/src/UIimpl.java
+--- a/UI/src/UIimpl.java	(revision 297affedd080888583489b1030d190b318ea2333)
++++ b/UI/src/UIimpl.java	(date 1637148445120)
+@@ -133,7 +133,6 @@
+     public void showPathBetweenTwoTargets(){//option 4
+         int x = 0;
+         Dependence d = engineImpl.Dependence.DEPENDS_ON;
+-        String st;
+ 
+         System.out.println("Enter Targets Names IN TWO SEPERATE LINES");                    // get the names of targets
+         String input1 = s.nextLine();
+@@ -143,14 +142,22 @@
+         System.out.println("1 - DEPENDS_ON\n" + "2 - REQUIRED_FOR");
+ 
+         while (x != 1 && x!= 2) {
+-            x = s.nextInt();
+-            s.nextLine();
+-            if (x == 1)
+-                d = engineImpl.Dependence.DEPENDS_ON;
+-            else if (x == 2)
+-                d = engineImpl.Dependence.REQUIRED_FOR;
+-            else
+-                System.out.println("Invalid option \n" + "1 - DEPENDS_ON\n" + "2 - REQUIRED_FOR\n");
++            if (s.hasNextInt()) {
++                x = s.nextInt();
++                s.nextLine();
++
++                if (x == 1)
++                    d = engineImpl.Dependence.DEPENDS_ON;
++                else if (x == 2)
++                    d = engineImpl.Dependence.REQUIRED_FOR;
++                else
++                    System.out.println("Invalid option \n" + "1 - DEPENDS_ON\n" + "2 - REQUIRED_FOR");
++            }
++            else {
++                System.out.println("Not a number, please choose a number\n" + "1 - DEPENDS_ON\n" + "2 - REQUIRED_FOR");
++                s.nextLine();
++            }
++
+         }
+ 
+         try{
+@@ -210,7 +217,8 @@
+ 
+     public void circuitDetection(){
+         System.out.println("Please enter name of target");
+-        String input1=s.nextLine();
++
++        String input1 = s.nextLine();
+         try {
+             System.out.println(engine.circuitDetection(input1));
+         }
+Index: Engine/src/engine/engineImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package engine;\n\nimport information.*;\nimport target.Target;\nimport target.TargetIsExists;\nimport target.Targets;\nimport xml.Xmlimpl;\n\nimport java.util.ArrayList;\nimport java.util.List;\nimport java.util.Map;\nimport java.util.Set;\n\n\n\npublic class engineImpl implements engine {\n    //// member\n    private Xmlimpl file;\n    private boolean loadFile;\n    private Map<String, Target> targetMap;\n\n\n    /// methods\n    @Override\n    public boolean ifLoadFile(){return loadFile;}\n\n    @Override\n    public void loadFile(String path) throws Exception {/// option 2 in the menu\n        Map<String, Target> targetMapTemp;\n        try {\n            file = new Xmlimpl(path);                       // load XML file\n            targetMapTemp = file.makeAMap();// check if the XML file is proper and crate map (key - target name, val - target) from file\n            loadFile = true;\n            targetMap = targetMapTemp;\n        } catch (Exception ex) {\n            throw ex;\n        }\n    }\n\n    public void printXml() {\n        System.out.println(targetMap);\n    } // print all the Xml file\n\n    @Override\n    public Information targetsInformation() { /// option 2 in the menu\n        int amountOfTargets = (int) targetMap.entrySet().stream().count();          // count all the targets in the map\n\n        int levies = (int) targetMap.entrySet()                                     // count all the levies targets in the map\n                .stream()\n                .filter(e -> e.getValue().getType().equals(Target.Type.LEAF))\n                .count();\n\n        int roots = (int) targetMap.entrySet()                                      // count all the roots targets in the map\n                .stream()\n                .filter(e -> e.getValue().getType().equals(Target.Type.ROOT))\n                .count();\n\n        int middles = (int) targetMap.entrySet()                                    // count all the middles targets in the map\n                .stream()\n                .filter(e -> e.getValue().getType().equals(Target.Type.MIDDLE))\n                .count();\n\n        int independents = (int) targetMap.entrySet()                               // count all the independents targets in the map\n                .stream()\n                .filter(e -> e.getValue().getType().equals(Target.Type.INDEPENDENTS))\n                .count();\n\n        return new GraphInformation(amountOfTargets, levies, middles, roots, independents);\n    }\n\n    @Override\n    public Information specificTargetInformation(String name) throws Exception {\n        Target target = targetMap.get(name);\n\n        if (target == null)                                               // the  target not found in the map\n            throw new TargetIsExists(name);\n        else {\n            Target.Type type = target.getType();\n            Set<String> dependsOn = target.getSetDependsOn();\n            Set<String> requiredFor = target.getSetRequiredFor();\n            String data = target.getUserData();\n            return new TargetInformation(name, type, dependsOn, requiredFor, data);\n        }\n    }\n\n    @Override\n    public PathBetweenTwoTargetsInfo findAPathBetweenTwoTargets(String t1, String t2, Dependence d) throws Exception {\n        Target target1 = targetMap.get(t1);\n        Target target2 = targetMap.get(t2);\n\n        List<Targets> list = new ArrayList<>();\n        list.add(new Targets());\n\n       // check if the two targets are in the map\n        if (null == target1)\n            throw new TargetIsExists(t1);\n        if (null == target2)\n            throw new TargetIsExists(t2);\n        if (d == Dependence.REQUIRED_FOR && target1.getSetRequiredFor().size() != 0)\n            findRequiredForPathBetweenTwoTargetsHelper(target1,target2,list,0);\n        else if (d == Dependence.DEPENDS_ON && target1.getSetDependsOn().size() != 0)\n            findDependsOnPathBetweenTwoTargetsHelper(target1,target2,list,0);\n\n        return  new PathBetweenTwoTargetsInfo(t1 , t2 , d.name() , list);\n    }\n    public void findRequiredForPathBetweenTwoTargetsHelper(Target t1, Target t2, List<Targets> listSt , int index) throws Exception {\n        if (t1.getSetRequiredFor().size() == 0)\n            listSt.get(index).getTargetsList().remove(listSt.get(index).getTargetsList().size()-1);\n        if (listSt.get(index).getTargetsList().contains(t1.getName())) // handle cycle\n            return;\n        else {\n            if (t1.getSetRequiredFor().contains(t2.getName())) {\n                Targets t = new Targets();\n                t.getTargetsList().addAll(listSt.get(index).getTargetsList());\n                listSt.add(new Targets());\n                listSt.get(index).setFind(true);\n                index++;\n                return;\n            }\n\n            for (String st : t1.getSetRequiredFor()) {\n                listSt.get(index).getTargetsList().add(st);\n                findRequiredForPathBetweenTwoTargetsHelper(targetMap.get(st), t2, listSt, index);\n            }\n        }\n    }\n    public void findDependsOnPathBetweenTwoTargetsHelper(Target t1, Target t2, List<Targets> listSt , int index) throws Exception {\n        if (t1.getSetDependsOn().size() == 0)\n            listSt.get(index).getTargetsList().remove(listSt.get(index).getTargetsList().size()-1);\n        if (listSt.get(index).getTargetsList().contains(t1.getName()))  // handle cycle\n            return;\n        else {\n            if (t1.getSetDependsOn().contains(t2.getName())) {\n                Targets t = new Targets();\n                t.getTargetsList().addAll(listSt.get(index).getTargetsList());\n                listSt.add(new Targets());\n                listSt.get(index).setFind(true);\n                index++;\n                return;\n            }\n\n            for (String st : t1.getSetDependsOn()) {\n                listSt.get(index).getTargetsList().add(st);\n                findDependsOnPathBetweenTwoTargetsHelper(targetMap.get(st), t2, listSt, index);\n            }\n        }\n    }\n\n    @Override\n    public Information runTask(float time, boolean random, float success, float warning) throws Exception {\n        return null;\n    }\n\n    @Override\n    public void exit() {\n        System.exit(0);\n    }\n    @Override\n    public CircuitDetectionInfo circuitDetection(String name)throws Exception {\n        PathBetweenTwoTargetsInfo info = findAPathBetweenTwoTargets(name,name,Dependence.DEPENDS_ON);\n        return new CircuitDetectionInfo(name , info.getPaths());\n    }\n\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Engine/src/engine/engineImpl.java b/Engine/src/engine/engineImpl.java
+--- a/Engine/src/engine/engineImpl.java	(revision 297affedd080888583489b1030d190b318ea2333)
++++ b/Engine/src/engine/engineImpl.java	(date 1637148941788)
+@@ -6,18 +6,13 @@
+ import target.Targets;
+ import xml.Xmlimpl;
+ 
+-import java.util.ArrayList;
+-import java.util.List;
+-import java.util.Map;
+-import java.util.Set;
+-
++import java.util.*;
+ 
+ 
+ public class engineImpl implements engine {
+-    //// member
+-    private Xmlimpl file;
+     private boolean loadFile;
+     private Map<String, Target> targetMap;
++    private String workingDirectory;
+ 
+ 
+     /// methods
+@@ -27,14 +22,12 @@
+     @Override
+     public void loadFile(String path) throws Exception {/// option 2 in the menu
+         Map<String, Target> targetMapTemp;
+-        try {
+-            file = new Xmlimpl(path);                       // load XML file
+-            targetMapTemp = file.makeAMap();// check if the XML file is proper and crate map (key - target name, val - target) from file
+-            loadFile = true;
+-            targetMap = targetMapTemp;
+-        } catch (Exception ex) {
+-            throw ex;
+-        }
++        //// member
++        Xmlimpl file = new Xmlimpl(path);                       // load XML file
++        targetMapTemp = file.makeAMap();// check if the XML file is proper and crate map (key - target name, val - target) from file
++
++        loadFile = true;
++        targetMap = targetMapTemp;
+     }
+ 
+     public void printXml() {
+@@ -43,7 +36,7 @@
+ 
+     @Override
+     public Information targetsInformation() { /// option 2 in the menu
+-        int amountOfTargets = (int) targetMap.entrySet().stream().count();          // count all the targets in the map
++        int amountOfTargets = targetMap.entrySet().size();          // count all the targets in the map
+ 
+         int levies = (int) targetMap.entrySet()                                     // count all the levies targets in the map
+                 .stream()
+@@ -84,9 +77,11 @@
+     }
+ 
+     @Override
+-    public PathBetweenTwoTargetsInfo findAPathBetweenTwoTargets(String t1, String t2, Dependence d) throws Exception {
++    public PathBetweenTwoTargetsInfo findAPathBetweenTwoTargets(String t1, String t2, Dependence dependence) throws Exception {
+         Target target1 = targetMap.get(t1);
+         Target target2 = targetMap.get(t2);
++        IntX i = new IntX();
++        i.x = 0;
+ 
+         List<Targets> list = new ArrayList<>();
+         list.add(new Targets());
+@@ -96,53 +91,45 @@
+             throw new TargetIsExists(t1);
+         if (null == target2)
+             throw new TargetIsExists(t2);
+-        if (d == Dependence.REQUIRED_FOR && target1.getSetRequiredFor().size() != 0)
+-            findRequiredForPathBetweenTwoTargetsHelper(target1,target2,list,0);
+-        else if (d == Dependence.DEPENDS_ON && target1.getSetDependsOn().size() != 0)
+-            findDependsOnPathBetweenTwoTargetsHelper(target1,target2,list,0);
++
++        if (dependence == Dependence.REQUIRED_FOR && target1.getSetRequiredFor().size() != 0)
++            findPathBetweenTwoTargetsHelper(target1,target2,list,i, dependence);
++        else if (dependence == Dependence.DEPENDS_ON && target1.getSetDependsOn().size() != 0)
++            findPathBetweenTwoTargetsHelper(target1,target2,list,i , dependence);
+ 
+-        return  new PathBetweenTwoTargetsInfo(t1 , t2 , d.name() , list);
++        return  new PathBetweenTwoTargetsInfo(t1 , t2 , dependence.name() , list);
+     }
+-    public void findRequiredForPathBetweenTwoTargetsHelper(Target t1, Target t2, List<Targets> listSt , int index) throws Exception {
+-        if (t1.getSetRequiredFor().size() == 0)
+-            listSt.get(index).getTargetsList().remove(listSt.get(index).getTargetsList().size()-1);
+-        if (listSt.get(index).getTargetsList().contains(t1.getName())) // handle cycle
+-            return;
++    public void findPathBetweenTwoTargetsHelper(Target t1, Target t2, List<Targets> listSt , IntX index , Dependence dependence) {
++
++        Set<String> tOneSet;
++
++        if (Dependence.DEPENDS_ON == dependence)
++            tOneSet = t1.getSetDependsOn();
++        else
++            tOneSet = t1.getSetRequiredFor();
++
++
++        if (tOneSet.size() == 0) {
++            listSt.get(index.x).getTargetsList().remove(listSt.get(index.x).getTargetsList().size() - 1);
++        }
++
+         else {
+-            if (t1.getSetRequiredFor().contains(t2.getName())) {
+-                Targets t = new Targets();
+-                t.getTargetsList().addAll(listSt.get(index).getTargetsList());
+-                listSt.add(new Targets());
+-                listSt.get(index).setFind(true);
+-                index++;
+-                return;
+-            }
++            for (String st : tOneSet) {  /// search in all DEPENDS_ON or REQUIRED_FOR for each target
++                if (st.equals(t2.getName())) {
++                    listSt.add(new Targets()); /// the next list
++                    listSt.get(index.x).setFind(true); // find
++                    listSt.get(listSt.size()-1).getTargetsList().addAll(listSt.get(index.x).getTargetsList());
++                    ++index.x;
++                }
+ 
+-            for (String st : t1.getSetRequiredFor()) {
+-                listSt.get(index).getTargetsList().add(st);
+-                findRequiredForPathBetweenTwoTargetsHelper(targetMap.get(st), t2, listSt, index);
+-            }
+-        }
+-    }
+-    public void findDependsOnPathBetweenTwoTargetsHelper(Target t1, Target t2, List<Targets> listSt , int index) throws Exception {
+-        if (t1.getSetDependsOn().size() == 0)
+-            listSt.get(index).getTargetsList().remove(listSt.get(index).getTargetsList().size()-1);
+-        if (listSt.get(index).getTargetsList().contains(t1.getName()))  // handle cycle
+-            return;
+-        else {
+-            if (t1.getSetDependsOn().contains(t2.getName())) {
+-                Targets t = new Targets();
+-                t.getTargetsList().addAll(listSt.get(index).getTargetsList());
+-                listSt.add(new Targets());
+-                listSt.get(index).setFind(true);
+-                index++;
+-                return;
++                else if (! listSt.get(index.x).getTargetsList().contains(st)) { /// skip on direct dependency and handle cycle
++                    listSt.get(index.x).getTargetsList().add(st);
++                    findPathBetweenTwoTargetsHelper(targetMap.get(st), t2, listSt, index , dependence);
++                }
+             }
+ 
+-            for (String st : t1.getSetDependsOn()) {
+-                listSt.get(index).getTargetsList().add(st);
+-                findDependsOnPathBetweenTwoTargetsHelper(targetMap.get(st), t2, listSt, index);
+-            }
++            if ( listSt.get(index.x).getTargetsList().size() != 0 )
++                listSt.get(index.x).getTargetsList().remove(listSt.get(index.x).getTargetsList().size()-1);
+         }
+     }
+ 
+Index: Engine/src/xml/Xmlimpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package xml;\n\nimport generated.GPUPDescriptor;\nimport generated.GPUPTarget;\nimport generated.GPUPTargetDependencies;\nimport target.*;\n\n\nimport java.io.FileInputStream;\nimport java.io.InputStream;\nimport javax.xml.bind.JAXBContext;\nimport javax.xml.bind.JAXBException;\nimport javax.xml.bind.Unmarshaller;\nimport java.io.File;\nimport java.io.FileNotFoundException;\nimport java.util.*;\n\n\npublic class Xmlimpl implements Xml {\n\n    private final GPUPDescriptor GPUPDescriptor;\n    private final static String JAXB_XML_PACKAGE_NAME = \"generated\";\n\n    public Xmlimpl(String path) throws Exception {\n\n        try {\n            InputStream inputStream = new FileInputStream(new File(path));\n            GPUPDescriptor = deserializeFrom(inputStream);\n        } catch (Exception ex) {\n            throw new XmlIsExists(path);\n        }\n    }\n\n    private static GPUPDescriptor deserializeFrom(InputStream in) throws JAXBException {\n        JAXBContext jc = JAXBContext.newInstance(JAXB_XML_PACKAGE_NAME);\n        Unmarshaller u = jc.createUnmarshaller();\n        return (GPUPDescriptor) u.unmarshal(in);\n    }\n\n    public Map<String, Target> makeAMap() throws Exception {\n        Target newTarget;\n        Map<String, Target> targetsMap = new HashMap<>();\n\n        for (GPUPTarget p : GPUPDescriptor.getGPUPTargets().getGPUPTarget()) {\n\n            if (targetsMap.containsKey(p.getName())) {\n                throw new UniqueTarget(p.getName());\n            } else {\n                Set<String> newSetDependency = new HashSet<>();\n                Set<String> newSetRequiredFor = new HashSet<>();\n\n                if (p.getGPUPTargetDependencies() == null)\n                    newTarget = new Target(p.getName(), p.getGPUPUserData(), newSetDependency, newSetRequiredFor);\n\n                else {\n                    for (GPUPTargetDependencies.GPUGDependency p2 : p.getGPUPTargetDependencies().getGPUGDependency()) {\n                        if (p2.getType().equals(\"dependsOn\"))\n                            newSetDependency.add(p2.getValue());\n                        else if (p2.getType().equals(\"requiredFor\"))\n                            newSetRequiredFor.add(p2.getValue());\n                    }\n                    newTarget = new Target(p.getName(), p.getGPUPUserData(), newSetDependency, newSetRequiredFor);\n                }\n\n                targetsMap.put(newTarget.getName(), newTarget);\n            }\n        }\n        organizeTheDependencies(targetsMap);\n        makeTypeForTargets(targetsMap);\n            return targetsMap;\n\n    }\n\n    public void organizeTheDependencies(Map<String, Target> targetMap) throws Exception {\n        Set<String> setOfKey = targetMap.keySet();\n\n        for (String targetKey: setOfKey) // organize all the map\n        {\n            // organize the RequiredFor of all target\n            for (String st2 : targetMap.get(targetKey).getSetDependsOn()) {\n                if (setOfKey.contains(st2)) { // check if the target is exists in the xml file\n                    if (!targetMap.get(st2).getSetDependsOn().contains(targetKey)) // check if there is a conflict\n                        targetMap.get(st2).addToSetRequiredFor(targetKey);\n                    else throw new DependsOnConflict(targetKey,st2);\n                }\n                else\n                    throw new TargetIsExists(st2);\n            }\n            // organize the DependsOn of all target\n            for (String st2 : targetMap.get(targetKey).getSetRequiredFor()) {\n                if (setOfKey.contains(st2)) { // check if the target is exists in the xml file\n                    if (!targetMap.get(st2).getSetRequiredFor().contains(targetKey)) // check if there is a conflict\n                        targetMap.get(st2).addToSetDependsOn(targetKey);\n                    else throw new RequiredForConflict(targetKey,st2);\n                }\n                else\n                    throw new TargetIsExists(st2);\n            }\n        }\n    }\n    public void makeTypeForTargets(Map<String, Target> targetMap) {\n        targetMap.forEach((k,t) ->\n                {\n                    if (t.getSetRequiredFor().size() == 0 && t.getSetDependsOn().size() == 0)\n                        t.SetType(Target.Type.INDEPENDENTS);\n                    else if (t.getSetDependsOn().size() == 0)\n                        t.SetType(Target.Type.LEAF);\n                    else if (t.getSetRequiredFor().size() == 0)\n                        t.SetType(Target.Type.ROOT);\n                    else\n                        t.SetType(Target.Type.MIDDLE);\n                }\n        );\n    }\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Engine/src/xml/Xmlimpl.java b/Engine/src/xml/Xmlimpl.java
+--- a/Engine/src/xml/Xmlimpl.java	(revision 297affedd080888583489b1030d190b318ea2333)
++++ b/Engine/src/xml/Xmlimpl.java	(date 1637148941791)
+@@ -1,31 +1,25 @@
+ package xml;
+-
+ import generated.GPUPDescriptor;
+-import generated.GPUPTarget;
+-import generated.GPUPTargetDependencies;
+ import target.*;
+ 
+-
+ import java.io.FileInputStream;
+ import java.io.InputStream;
+ import javax.xml.bind.JAXBContext;
+ import javax.xml.bind.JAXBException;
+ import javax.xml.bind.Unmarshaller;
+ import java.io.File;
+-import java.io.FileNotFoundException;
+ import java.util.*;
+ 
+ 
+ public class Xmlimpl implements Xml {
+-
+-    private final GPUPDescriptor GPUPDescriptor;
++    private final GPUPDescriptor gpupDescriptor;
+     private final static String JAXB_XML_PACKAGE_NAME = "generated";
+ 
+     public Xmlimpl(String path) throws Exception {
+ 
+         try {
+             InputStream inputStream = new FileInputStream(new File(path));
+-            GPUPDescriptor = deserializeFrom(inputStream);
++            gpupDescriptor = deserializeFrom(inputStream);
+         } catch (Exception ex) {
+             throw new XmlIsExists(path);
+         }
+@@ -38,9 +32,8 @@
+     }
+ 
+     public Map<String, Target> makeAMap() throws Exception {
+-        Target newTarget;
+         Map<String, Target> targetsMap = new HashMap<>();
+-
++/*
+         for (GPUPTarget p : GPUPDescriptor.getGPUPTargets().getGPUPTarget()) {
+ 
+             if (targetsMap.containsKey(p.getName())) {
+@@ -65,10 +58,32 @@
+                 targetsMap.put(newTarget.getName(), newTarget);
+             }
+         }
++ */
++        Set <String> setA = new HashSet<>();
++        setA.add("B");
++        setA.add("D");
++        Set <String> setB = new HashSet<>();
++        setB.add("C");
++        Set <String> setC = new HashSet<>();
++        setC.add("A");
++        setC.add("F");
++        Set <String> setD = new HashSet<>();
++        setD.add("E");
++        Set <String> setE = new HashSet<>();
++        setE.add("A");
++        Set <String> setF = new HashSet<>();
++
++
++        targetsMap.put("A" , new Target("A" , null , setA , new HashSet()));
++        targetsMap.put("B" , new Target("B" , null , setB , new HashSet()));
++        targetsMap.put("C" , new Target("C" , null, setC , new HashSet()));
++        targetsMap.put("D" , new Target("D" , null , setD , new HashSet()));
++        targetsMap.put("E" , new Target("E" , null , setE , new HashSet()));
++        targetsMap.put("F" , new Target("F" , null , setF , new HashSet()));
++
+         organizeTheDependencies(targetsMap);
+         makeTypeForTargets(targetsMap);
+             return targetsMap;
+-
+     }
+ 
+     public void organizeTheDependencies(Map<String, Target> targetMap) throws Exception {
+@@ -112,4 +127,7 @@
+                 }
+         );
+     }
++    public String getWorkingDirectoryXml(){
++        return gpupDescriptor.getGPUPConfiguration().getGPUPWorkingDirectory();
++    }
+ }
+\ No newline at end of file
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<project version=\"4\">\n  <component name=\"ChangeListManager\">\n    <list default=\"true\" id=\"30f48137-87a5-4e03-962e-6e8bd68df68d\" name=\"Changes\" comment=\"Bar Sela\">\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/Engine/src/engine/engineImpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Engine/src/engine/engineImpl.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/Engine/src/information/CircuitDetectionInfo.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Engine/src/information/CircuitDetectionInfo.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/Engine/src/information/PathBetweenTwoTargetsInfo.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Engine/src/information/PathBetweenTwoTargetsInfo.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/Engine/src/target/Targets.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/Engine/src/target/Targets.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/UI/src/UIimpl.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/UI/src/UIimpl.java\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/Engine/information/PathBetweenTwoTargetsInfo.class\" beforeDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/Engine/target/Targets.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/Engine/target/Targets.class\" afterDir=\"false\" />\n      <change beforePath=\"$PROJECT_DIR$/out/production/UI/UIimpl.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/out/production/UI/UIimpl.class\" afterDir=\"false\" />\n    </list>\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\n  </component>\n  <component name=\"FileTemplateManagerImpl\">\n    <option name=\"RECENT_TEMPLATES\">\n      <list>\n        <option value=\"Interface\" />\n        <option value=\"Class\" />\n      </list>\n    </option>\n  </component>\n  <component name=\"Git.Settings\">\n    <option name=\"PREVIOUS_COMMIT_AUTHORS\">\n      <list>\n        <option value=\"nov israeli &lt;nov.israeli888@gmail.com&gt;\" />\n      </list>\n    </option>\n    <option name=\"PUSH_TAGS\">\n      <GitPushTagMode>\n        <option name=\"argument\" value=\"--tags\" />\n        <option name=\"title\" value=\"All\" />\n      </GitPushTagMode>\n    </option>\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$\" />\n  </component>\n  <component name=\"GitSEFilterConfiguration\">\n    <file-type-list>\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\n      <filtered-out-file-type name=\"TAG\" />\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\n    </file-type-list>\n  </component>\n  <component name=\"HighlightingSettingsPerFile\">\n    <setting file=\"jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_301.jdk/Contents/Home/src.zip!/java/util/HashSet.java\" root0=\"SKIP_INSPECTION\" />\n  </component>\n  <component name=\"ProjectFrameBounds\" extendedState=\"6\">\n    <option name=\"x\" value=\"390\" />\n    <option name=\"y\" value=\"30\" />\n    <option name=\"width\" value=\"2100\" />\n    <option name=\"height\" value=\"1500\" />\n  </component>\n  <component name=\"ProjectId\" id=\"20iixnmBC5nOpmacU5bSVUJFsGH\" />\n  <component name=\"ProjectLevelVcsManager\">\n    <ConfirmationsSetting value=\"2\" id=\"Add\" />\n  </component>\n  <component name=\"ProjectViewState\">\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\n    <option name=\"showLibraryContents\" value=\"true\" />\n  </component>\n  <component name=\"PropertiesComponent\">\n    <property name=\"ASKED_ADD_EXTERNAL_FILES\" value=\"true\" />\n    <property name=\"ChangesTree.GroupingKeys\" value=\"directory\" />\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\n    <property name=\"WebServerToolWindowFactoryState\" value=\"false\" />\n    <property name=\"project.structure.last.edited\" value=\"Modules\" />\n    <property name=\"project.structure.proportion\" value=\"0.15\" />\n    <property name=\"project.structure.side.proportion\" value=\"0.2\" />\n    <property name=\"settings.editor.selected.configurable\" value=\"editor.preferences.fonts.default\" />\n  </component>\n  <component name=\"RunManager\">\n    <configuration name=\"main\" type=\"Application\" factoryName=\"Application\" temporary=\"true\" nameIsGenerated=\"true\">\n      <option name=\"MAIN_CLASS_NAME\" value=\"main\" />\n      <module name=\"UI\" />\n      <method v=\"2\">\n        <option name=\"Make\" enabled=\"true\" />\n      </method>\n    </configuration>\n    <recent_temporary>\n      <list>\n        <item itemvalue=\"Application.main\" />\n      </list>\n    </recent_temporary>\n  </component>\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\n  <component name=\"TaskManager\">\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\n      <changelist id=\"30f48137-87a5-4e03-962e-6e8bd68df68d\" name=\"Changes\" comment=\"\" />\n      <created>1636534060126</created>\n      <option name=\"number\" value=\"Default\" />\n      <option name=\"presentableId\" value=\"Default\" />\n      <updated>1636534060126</updated>\n      <workItem from=\"1636534062741\" duration=\"27000\" />\n      <workItem from=\"1636534134964\" duration=\"484000\" />\n      <workItem from=\"1636534671547\" duration=\"16035000\" />\n      <workItem from=\"1636712961690\" duration=\"172000\" />\n      <workItem from=\"1636807537670\" duration=\"4000\" />\n      <workItem from=\"1636972352516\" duration=\"34939000\" />\n      <workItem from=\"1637136059584\" duration=\"1341000\" />\n    </task>\n    <task id=\"LOCAL\u200E00001\" summary=\"zxc\">\n      <created>1636536346510</created>\n      <option name=\"number\" value=\"LOCAL\u200E00001\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00001\" />\n      <updated>1636536346510</updated>\n    </task>\n    <task id=\"LOCAL\u200E00002\" summary=\"zxc\">\n      <created>1636536370594</created>\n      <option name=\"number\" value=\"LOCAL\u200E00002\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00002\" />\n      <updated>1636536370594</updated>\n    </task>\n    <task id=\"LOCAL\u200E00003\" summary=\"bar sela\">\n      <created>1636536377644</created>\n      <option name=\"number\" value=\"LOCAL\u200E00003\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00003\" />\n      <updated>1636536377644</updated>\n    </task>\n    <task id=\"LOCAL\u200E00004\" summary=\"Merge remote-tracking branch 'origin/master'\">\n      <created>1636540270843</created>\n      <option name=\"number\" value=\"LOCAL\u200E00004\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00004\" />\n      <updated>1636540270843</updated>\n    </task>\n    <task id=\"LOCAL\u200E00005\" summary=\"Merge remote-tracking branch 'origin/master'\">\n      <created>1636542968700</created>\n      <option name=\"number\" value=\"LOCAL\u200E00005\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00005\" />\n      <updated>1636542968700</updated>\n    </task>\n    <task id=\"LOCAL\u200E00006\" summary=\"Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;UI/src/UI.java\">\n      <created>1636543508863</created>\n      <option name=\"number\" value=\"LOCAL\u200E00006\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00006\" />\n      <updated>1636543508863</updated>\n    </task>\n    <task id=\"LOCAL\u200E00007\" summary=\"Merge remote-tracking branch 'origin/master'\">\n      <created>1636545043696</created>\n      <option name=\"number\" value=\"LOCAL\u200E00007\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00007\" />\n      <updated>1636545043696</updated>\n    </task>\n    <task id=\"LOCAL\u200E00008\" summary=\"Merge remote-tracking branch 'origin/master'\">\n      <created>1636549521300</created>\n      <option name=\"number\" value=\"LOCAL\u200E00008\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00008\" />\n      <updated>1636549521300</updated>\n    </task>\n    <task id=\"LOCAL\u200E00009\" summary=\"Merge remote-tracking branch 'origin/master'\">\n      <created>1636550827160</created>\n      <option name=\"number\" value=\"LOCAL\u200E00009\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00009\" />\n      <updated>1636550827160</updated>\n    </task>\n    <task id=\"LOCAL\u200E00010\" summary=\"Merge remote-tracking branch 'origin/master'\">\n      <created>1636550832604</created>\n      <option name=\"number\" value=\"LOCAL\u200E00010\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00010\" />\n      <updated>1636550832604</updated>\n    </task>\n    <task id=\"LOCAL\u200E00011\" summary=\"Merge remote-tracking branch 'origin/master'\">\n      <created>1636550840509</created>\n      <option name=\"number\" value=\"LOCAL\u200E00011\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00011\" />\n      <updated>1636550840509</updated>\n    </task>\n    <task id=\"LOCAL\u200E00012\" summary=\"Merge remote-tracking branch 'origin/master'\">\n      <created>1636550845954</created>\n      <option name=\"number\" value=\"LOCAL\u200E00012\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00012\" />\n      <updated>1636550845954</updated>\n    </task>\n    <task id=\"LOCAL\u200E00013\" summary=\"Merge remote-tracking branch 'origin/master'\">\n      <created>1636551354349</created>\n      <option name=\"number\" value=\"LOCAL\u200E00013\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00013\" />\n      <updated>1636551354349</updated>\n    </task>\n    <task id=\"LOCAL\u200E00014\" summary=\"Merge remote-tracking branch 'origin/master'\">\n      <created>1636553052358</created>\n      <option name=\"number\" value=\"LOCAL\u200E00014\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00014\" />\n      <updated>1636553052358</updated>\n    </task>\n    <task id=\"LOCAL\u200E00015\" summary=\"bar tsukerberg\">\n      <created>1636558070597</created>\n      <option name=\"number\" value=\"LOCAL\u200E00015\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00015\" />\n      <updated>1636558070597</updated>\n    </task>\n    <task id=\"LOCAL\u200E00016\" summary=\"bar tsukerberg\">\n      <created>1636558504677</created>\n      <option name=\"number\" value=\"LOCAL\u200E00016\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00016\" />\n      <updated>1636558504677</updated>\n    </task>\n    <task id=\"LOCAL\u200E00017\" summary=\"Bar Sela\">\n      <created>1636562916712</created>\n      <option name=\"number\" value=\"LOCAL\u200E00017\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00017\" />\n      <updated>1636562916712</updated>\n    </task>\n    <task id=\"LOCAL\u200E00018\" summary=\"Bar Sela\">\n      <created>1636567432333</created>\n      <option name=\"number\" value=\"LOCAL\u200E00018\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00018\" />\n      <updated>1636567432333</updated>\n    </task>\n    <task id=\"LOCAL\u200E00019\" summary=\"Bar Sela\">\n      <created>1636641029440</created>\n      <option name=\"number\" value=\"LOCAL\u200E00019\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00019\" />\n      <updated>1636641029440</updated>\n    </task>\n    <task id=\"LOCAL\u200E00020\" summary=\"Bar Sela\">\n      <created>1636642226800</created>\n      <option name=\"number\" value=\"LOCAL\u200E00020\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00020\" />\n      <updated>1636642226800</updated>\n    </task>\n    <task id=\"LOCAL\u200E00021\" summary=\"Bar Sela\">\n      <created>1636974027744</created>\n      <option name=\"number\" value=\"LOCAL\u200E00021\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00021\" />\n      <updated>1636974027744</updated>\n    </task>\n    <task id=\"LOCAL\u200E00022\" summary=\"Bar Sela\">\n      <created>1636980754037</created>\n      <option name=\"number\" value=\"LOCAL\u200E00022\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00022\" />\n      <updated>1636980754037</updated>\n    </task>\n    <task id=\"LOCAL\u200E00023\" summary=\"Bar Sela\">\n      <created>1636985330931</created>\n      <option name=\"number\" value=\"LOCAL\u200E00023\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00023\" />\n      <updated>1636985330931</updated>\n    </task>\n    <task id=\"LOCAL\u200E00024\" summary=\"Bar Sela\">\n      <created>1637054192751</created>\n      <option name=\"number\" value=\"LOCAL\u200E00024\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00024\" />\n      <updated>1637054192751</updated>\n    </task>\n    <task id=\"LOCAL\u200E00025\" summary=\"Bar Sela\">\n      <created>1637098721072</created>\n      <option name=\"number\" value=\"LOCAL\u200E00025\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00025\" />\n      <updated>1637098721072</updated>\n    </task>\n    <task id=\"LOCAL\u200E00026\" summary=\"Bar Sela\">\n      <created>1637098737266</created>\n      <option name=\"number\" value=\"LOCAL\u200E00026\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00026\" />\n      <updated>1637098737266</updated>\n    </task>\n    <task id=\"LOCAL\u200E00027\" summary=\"Bar Sela\">\n      <created>1637098753562</created>\n      <option name=\"number\" value=\"LOCAL\u200E00027\" />\n      <option name=\"presentableId\" value=\"LOCAL\u200E00027\" />\n      <updated>1637098753562</updated>\n    </task>\n    <option name=\"localTasksCounter\" value=\"28\" />\n    <servers />\n  </component>\n  <component name=\"TypeScriptGeneratedFilesManager\">\n    <option name=\"version\" value=\"3\" />\n  </component>\n  <component name=\"Vcs.Log.Tabs.Properties\">\n    <option name=\"TAB_STATES\">\n      <map>\n        <entry key=\"57af23f1-ebdc-4980-8642-23c6d9864134\">\n          <value>\n            <State>\n              <option name=\"SHOW_ONLY_AFFECTED_CHANGES\" value=\"true\" />\n              <option name=\"FILTERS\">\n                <map>\n                  <entry key=\"branch\">\n                    <value>\n                      <list>\n                        <option value=\"HEAD\" />\n                      </list>\n                    </value>\n                  </entry>\n                  <entry key=\"structure\">\n                    <value>\n                      <list>\n                        <option value=\"dir:/Users/bar_sela/IdeaProjects/GPUP1/Engine\" />\n                      </list>\n                    </value>\n                  </entry>\n                </map>\n              </option>\n            </State>\n          </value>\n        </entry>\n        <entry key=\"MAIN\">\n          <value>\n            <State />\n          </value>\n        </entry>\n      </map>\n    </option>\n    <option name=\"OPEN_GENERIC_TABS\">\n      <map>\n        <entry key=\"57af23f1-ebdc-4980-8642-23c6d9864134\" value=\"TOOL_WINDOW\" />\n      </map>\n    </option>\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\n  </component>\n  <component name=\"VcsManagerConfiguration\">\n    <option name=\"ADD_EXTERNAL_FILES_SILENTLY\" value=\"true\" />\n    <MESSAGE value=\"zxc\" />\n    <MESSAGE value=\"bar sela\" />\n    <MESSAGE value=\"Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;UI/src/UI.java\" />\n    <MESSAGE value=\"Merge remote-tracking branch 'origin/master'\" />\n    <MESSAGE value=\"bar tsukerberg\" />\n    <MESSAGE value=\"Bar Sela\" />\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Bar Sela\" />\n  </component>\n  <component name=\"XDebuggerManager\">\n    <breakpoint-manager>\n      <breakpoints>\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\n          <url>file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java</url>\n          <line>127</line>\n          <option name=\"timeStamp\" value=\"48\" />\n        </line-breakpoint>\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\n          <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>\n          <line>53</line>\n          <option name=\"timeStamp\" value=\"51\" />\n        </line-breakpoint>\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\n          <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>\n          <line>223</line>\n          <option name=\"timeStamp\" value=\"52\" />\n        </line-breakpoint>\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\n          <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>\n          <line>111</line>\n          <option name=\"timeStamp\" value=\"54\" />\n        </line-breakpoint>\n        <line-breakpoint enabled=\"true\" type=\"java-line\">\n          <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>\n          <line>113</line>\n          <option name=\"timeStamp\" value=\"56\" />\n        </line-breakpoint>\n        <line-breakpoint enabled=\"true\" type=\"java-method\">\n          <url>file://$PROJECT_DIR$/Engine/src/information/TargetInformation.java</url>\n          <line>29</line>\n          <properties class=\"information.TargetInformation\" method=\"toString\">\n            <option name=\"EMULATED\" value=\"true\" />\n          </properties>\n          <option name=\"timeStamp\" value=\"50\" />\n        </line-breakpoint>\n        <line-breakpoint enabled=\"true\" type=\"java-method\">\n          <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>\n          <line>97</line>\n          <properties class=\"UIimpl\" method=\"showTargetInfo\">\n            <option name=\"EMULATED\" value=\"true\" />\n          </properties>\n          <option name=\"timeStamp\" value=\"57\" />\n        </line-breakpoint>\n      </breakpoints>\n    </breakpoint-manager>\n  </component>\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 297affedd080888583489b1030d190b318ea2333)
++++ b/.idea/workspace.xml	(date 1637148941806)
+@@ -2,15 +2,17 @@
+ <project version="4">
+   <component name="ChangeListManager">
+     <list default="true" id="30f48137-87a5-4e03-962e-6e8bd68df68d" name="Changes" comment="Bar Sela">
++      <change afterPath="$PROJECT_DIR$/Engine/src/engine/IntX.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Engine/src/information/CircuitDetectionInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/information/CircuitDetectionInfo.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/Engine/src/information/PathBetweenTwoTargetsInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/information/PathBetweenTwoTargetsInfo.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/Engine/src/target/Targets.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/target/Targets.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/Exception/src/target/DependsOnConflict.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/target/DependsOnConflict.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/UI/src/UIimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/UIimpl.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" beforeDir="false" />
+-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/PathBetweenTwoTargetsInfo.class" beforeDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/PathBetweenTwoTargetsInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/information/PathBetweenTwoTargetsInfo.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/Engine/target/Targets.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/target/Targets.class" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/out/production/Engine/xml/Xmlimpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/xml/Xmlimpl.class" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/out/production/UI/UIimpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/UIimpl.class" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+@@ -105,7 +107,7 @@
+       <workItem from="1636712961690" duration="172000" />
+       <workItem from="1636807537670" duration="4000" />
+       <workItem from="1636972352516" duration="34939000" />
+-      <workItem from="1637136059584" duration="1341000" />
++      <workItem from="1637136059584" duration="12023000" />
+     </task>
+     <task id="LOCAL‎00001" summary="zxc">
+       <created>1636536346510</created>
+@@ -269,7 +271,13 @@
+       <option name="presentableId" value="LOCAL‎00027" />
+       <updated>1637098753562</updated>
+     </task>
+-    <option name="localTasksCounter" value="28" />
++    <task id="LOCAL‎00028" summary="Bar Sela">
++      <created>1637138398897</created>
++      <option name="number" value="LOCAL‎00028" />
++      <option name="presentableId" value="LOCAL‎00028" />
++      <updated>1637138398897</updated>
++    </task>
++    <option name="localTasksCounter" value="29" />
+     <servers />
+   </component>
+   <component name="TypeScriptGeneratedFilesManager">
+@@ -331,29 +339,34 @@
+     <breakpoint-manager>
+       <breakpoints>
+         <line-breakpoint enabled="true" type="java-line">
+-          <url>file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java</url>
+-          <line>127</line>
+-          <option name="timeStamp" value="48" />
++          <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
++          <line>111</line>
++          <option name="timeStamp" value="54" />
+         </line-breakpoint>
+         <line-breakpoint enabled="true" type="java-line">
+           <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
+-          <line>53</line>
+-          <option name="timeStamp" value="51" />
++          <line>113</line>
++          <option name="timeStamp" value="56" />
++        </line-breakpoint>
++        <line-breakpoint enabled="true" type="java-line">
++          <url>file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java</url>
++          <line>118</line>
++          <option name="timeStamp" value="64" />
+         </line-breakpoint>
+         <line-breakpoint enabled="true" type="java-line">
+           <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
+-          <line>223</line>
+-          <option name="timeStamp" value="52" />
++          <line>143</line>
++          <option name="timeStamp" value="65" />
+         </line-breakpoint>
+         <line-breakpoint enabled="true" type="java-line">
+           <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
+-          <line>111</line>
+-          <option name="timeStamp" value="54" />
++          <line>144</line>
++          <option name="timeStamp" value="66" />
+         </line-breakpoint>
+         <line-breakpoint enabled="true" type="java-line">
+           <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
+-          <line>113</line>
+-          <option name="timeStamp" value="56" />
++          <line>176</line>
++          <option name="timeStamp" value="67" />
+         </line-breakpoint>
+         <line-breakpoint enabled="true" type="java-method">
+           <url>file://$PROJECT_DIR$/Engine/src/information/TargetInformation.java</url>
+@@ -373,5 +386,10 @@
+         </line-breakpoint>
+       </breakpoints>
+     </breakpoint-manager>
++    <pin-to-top-manager>
++      <pinned-members>
++        <PinnedItemInfo parentTag="target.Targets" memberName="targetsList" />
++      </pinned-members>
++    </pin-to-top-manager>
+   </component>
+ </project>
+\ No newline at end of file
+Index: Exception/src/target/DependsOnConflict.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package target;\n/// send error message if there is a conflict between two targets\npublic class DependsOnConflict extends TargetException {\n\n    public DependsOnConflict(String nameOne , String nameTwo){\n        super(nameOne , nameTwo);\n    }\n\n    @Override\n    public String toString(){\n        return super.toString() + super.targetOne + \"dependsOn \" + super.targetTwo +\n                \" then \" + super.targetTwo + \"can’t be dependsOn \" + super.targetOne +\"\\n\\r\";\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Exception/src/target/DependsOnConflict.java b/Exception/src/target/DependsOnConflict.java
+--- a/Exception/src/target/DependsOnConflict.java	(revision 297affedd080888583489b1030d190b318ea2333)
++++ b/Exception/src/target/DependsOnConflict.java	(date 1637147524680)
+@@ -8,7 +8,7 @@
+ 
+     @Override
+     public String toString(){
+-        return super.toString() + super.targetOne + "dependsOn " + super.targetTwo +
+-                " then " + super.targetTwo + "can’t be dependsOn " + super.targetOne +"\n\r";
++        return super.toString() + super.targetOne + " dependsOn " + super.targetTwo +
++                " then " + super.targetTwo + " can’t be dependsOn " + super.targetOne +"\n\r";
+     }
+ }
+Index: Engine/src/engine/IntX.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Engine/src/engine/IntX.java b/Engine/src/engine/IntX.java
+new file mode 100644
+--- /dev/null	(date 1637146699602)
++++ b/Engine/src/engine/IntX.java	(date 1637146699602)
+@@ -0,0 +1,5 @@
++package engine;
++
++public class IntX {
++    public int x;
++}
+Index: Engine/src/information/PathBetweenTwoTargetsInfo.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package information;\nimport target.Target;\nimport target.Targets;\n\nimport java.util.List;\n\n/// contain all the information about the path between two targets:\n/// - source target\n/// - destination target\n/// - attitude (dependsOn / requiredFor)\n/// - the path between the targets\n\npublic class PathBetweenTwoTargetsInfo implements Information{\n\n    private String source;\n    private String destination;\n    private String attitude;\n    private List<Targets> paths;\n\n    public PathBetweenTwoTargetsInfo(String source , String destination , String attitude ,List<Targets> paths){\n        this.source = source;\n        this.destination = destination;\n        this.attitude = attitude;\n        this.paths = paths;\n    }\n\n    @Override\n    public String toString() {\n        String st;\n        int count = 1;\n        if (paths.size() == 1)\n            return \"There isn't path between \" + source + \"and \" + destination + \"with attitude of \"+ attitude + \"\\n\\r\";\n\n        st = \"Source: \" + source + \"\\n\\r\" +\n                \"Destination: \" + destination + \"\\n\\r\" +\n                \"Attitude: \" + attitude + \"\\n\\rPath:\\n\\r\";\n\n        for(int i = 0 ; i<paths.size(); ++i)\n            if (paths.get(i).getFind() == true)\n                if (paths.get(i).getTargetsList().size() == 0) {\n                    st += count + \". \" + \"Direct dependency\" + \"\\n\\r\";\n                    ++count;\n                }\n                else {\n                    st += count + \". \" + paths.get(i).getTargetsList() + \"\\n\\r\";\n                    ++count;\n                }\n        return st;\n    }\n\n    public List<Targets> getPaths(){return paths;}\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Engine/src/information/PathBetweenTwoTargetsInfo.java b/Engine/src/information/PathBetweenTwoTargetsInfo.java
+--- a/Engine/src/information/PathBetweenTwoTargetsInfo.java	(revision 297affedd080888583489b1030d190b318ea2333)
++++ b/Engine/src/information/PathBetweenTwoTargetsInfo.java	(date 1637138731815)
+@@ -29,7 +29,7 @@
+         String st;
+         int count = 1;
+         if (paths.size() == 1)
+-            return "There isn't path between " + source + "and " + destination + "with attitude of "+ attitude + "\n\r";
++            return "There isn't path between " + source + " and " + destination + " with attitude of "+ attitude + "\n\r";
+ 
+         st = "Source: " + source + "\n\r" +
+                 "Destination: " + destination + "\n\r" +
