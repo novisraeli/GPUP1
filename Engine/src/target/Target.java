@@ -5,6 +5,7 @@ import information.SumUpTarget;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Target
@@ -79,31 +80,18 @@ public class Target
         this.status = s;
     }
     public void run(int time, boolean random, float success, float warning, List<Information>res,Map<String,Target>targetMap,String path) throws Exception {
+        if(!this.setDependsOn.isEmpty()){
+            for(String s:setDependsOn){
+                if(targetMap.get(s).getStatus()==Status.Waiting){
+                    return;
+                }
+            }
+        }
+        boolean runCheck=true;
         String fName=path+"\\"+this.name+".log";
         Random r=new Random();
         float successRand;
         float warningRand;
-
-        if(!this.status.name().equals(Status.Waiting.name())){
-            return;
-        }
-        for(String s:setDependsOn){
-            if(targetMap.get(s).getStatus().name().equals(Status.Failure.name())||targetMap.get(s).getStatus().name().equals(Status.Skipped.name())){
-                targetMap.get(s).SetStatus(Status.Skipped);
-                File f=new File(fName);
-                f.createNewFile();
-                FileWriter w = new FileWriter(fName);
-                w.write("Target name: " + this.name + "\n\r" +
-                        "Target result: " + Status.Skipped.name() + "\n\r" +
-                        "Target time : 00:00:00:00 \n\r");
-                w.close();
-                res.add(new SumUpTarget(this.name,this.status.name(),"00:00:00:00"));
-                return;
-            }
-            else if(targetMap.get(s).getStatus().name().equals(Status.Waiting.name())){
-                return;
-            }
-        }
         //here we sim the task
         if(random){//set random time
             time=r.nextInt(time)+1;
@@ -117,20 +105,24 @@ public class Target
         long minute = (simTime / (1000 * 60)) % 60;
         long hour = (simTime / (1000 * 60 * 60)) % 24;
         String simTimeString = String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
-        //
+        //sim
+
         successRand=r.nextFloat();
         warningRand=r.nextFloat();
         if(success>=successRand){
             if(warning>=warningRand){
-              this.status=Status.Warning;
+                this.status=Status.Warning;
             }
             else{
                 this.status=Status.Success;
             }
         }
         else{
+            runCheck=false;
             this.status=Status.Failure;
+
         }
+        //update
         res.add(new SumUpTarget(this.name,this.status.name(),simTimeString));
         File f=new File(fName);
         f.createNewFile();
@@ -139,9 +131,37 @@ public class Target
                 "Target result: " + this.status.name() + "\n\r" +
                 "Target time : "+simTimeString +"\n\r");
         w.close();
-
+        //move to inners
+        if(!this.setRequiredFor.isEmpty()){
+            for(String s:setRequiredFor){
+                targetMap.get(s).moveForward(time,random,success,warning, res,targetMap,path,runCheck);
+            }
+        }
     }
-
+    private void moveForward(int time, boolean random, float success, float warning, List<Information>res,Map<String,Target>targetMap,String path,boolean runCheck) throws Exception {
+        String fName=path+"\\"+this.name+".log";
+        if(!runCheck){
+            if(status!=Status.Skipped) {
+                status = Status.Skipped;
+                File f = new File(fName);
+                f.createNewFile();
+                FileWriter w = new FileWriter(fName);
+                w.write("Target name: " + this.name + "\n\r" +
+                        "Target result: " + Status.Skipped.name() + "\n\r" +
+                        "Target time : 00:00:00:00 \n\r");
+                w.close();
+                res.add(new SumUpTarget(this.name, this.status.name(), "00:00:00:00"));
+                if (!this.setRequiredFor.isEmpty()) {
+                    for (String s : setRequiredFor) {
+                        targetMap.get(s).moveForward(time, random, success, warning, res, targetMap, path, runCheck);
+                    }
+                }
+            }
+        }
+        else{
+            run(time,random,success,warning, res,targetMap,path);
+        }
+    }
     @Override
     public String toString() {
         return "Target: "+ name + "\n\r"

@@ -197,30 +197,29 @@ public class UIimpl implements UI {
 
     @Override
     public void runTask() {//option 5
-        boolean flag=true;
-        float success=-1,warning=-1;
-        int time=-1;
-        int temp=-1;
-        boolean random=false, fromScratch=false;
-        List<Information>res;
+
+        boolean flag = true;
+        float success = -1, warning = -1;
+        int time = -1;
+        int temp = -1;
+        boolean random = false, fromScratch = false;
+        List<Information> res;
         System.out.println("Enter task details:  ");
-        while(flag){
+        while (flag) {
             System.out.println("First enter simulation time for each target(natural number)");
-            if(!s.hasNextInt()) {
+            if (!s.hasNextInt()) {
                 System.out.println("Wrong input");
-            }
-            else{
-                time=s.nextInt();
-                if(time<=0){
+            } else {
+                time = s.nextInt();
+                if (time <= 0) {
                     System.out.println("Wrong input");
-                }
-                else {
+                } else {
                     flag = false;
                 }
             }
         }
-        flag=true;
-        while(flag) {
+        flag = true;
+        while (flag) {
             System.out.println("Next choose Random or set time(0=set 1=random)");
             if (!s.hasNextInt()) {
                 System.out.println("Wrong input");
@@ -228,20 +227,18 @@ public class UIimpl implements UI {
                 temp = s.nextInt();
                 if (temp != 0 && temp != 1) {
                     System.out.println("Wrong input1");
-                }
-                else {
+                } else {
                     if (temp == 1) {
                         random = true;
+                    } else {
+                        random = false;
                     }
-                    else{
-                        random=false;
-                    }
-                    flag=false;
+                    flag = false;
                 }
             }
         }
-        flag=true;
-        while(flag){
+        flag = true;
+        while (flag) {
             System.out.println("Then chance of task succeeding(a number between 1 and 0)");
             if (!s.hasNextFloat()) {
                 System.out.println("Wrong input");
@@ -254,8 +251,8 @@ public class UIimpl implements UI {
                 }
             }
         }
-        flag=true;
-        while (flag){
+        flag = true;
+        while (flag) {
             System.out.println("if Succeed chance of warning(a number between 1 and 0)");
             if (!s.hasNextFloat()) {
                 System.out.println("Wrong input");
@@ -268,8 +265,8 @@ public class UIimpl implements UI {
                 }
             }
         }
-        flag=true;
-        while (flag){
+        flag = true;
+        while (flag) {
             System.out.println("lastly if to keep going from previous task(1=yes,0=no)");
             if (!s.hasNextInt()) {
                 System.out.println("Wrong input");
@@ -280,11 +277,10 @@ public class UIimpl implements UI {
                 } else {
                     if (temp == 1) {
                         fromScratch = true;
+                    } else {
+                        fromScratch = false;
                     }
-                    else{
-                        fromScratch=false;
-                    }
-                    flag=false;
+                    flag = false;
                 }
             }
         }

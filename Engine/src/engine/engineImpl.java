@@ -183,12 +183,32 @@ public class engineImpl implements engine {
             }
 
         }
+        Set<Target>indi=new HashSet<>();
+        Set<Target>leavies=new HashSet<>();
+
+
+        for(Map.Entry<String,Target>e:targetMap.entrySet()){
+            if(e.getValue().getType()== Target.Type.INDEPENDENTS){
+                indi.add(e.getValue());
+            }
+            else if(e.getValue().getType()== Target.Type.LEAF){
+                leavies.add(e.getValue());
+            }
+        }
+        for(Target t:indi){
+            t.run(time,random,success,warning,res,targetMap,path);
+        }
+        for(Target t:leavies){
+            t.run(time,random,success,warning,res,targetMap,path);
+        }
+        /*
         while(!done) {
             for (Map.Entry<String, Target> e : targetMap.entrySet()) {
                 e.getValue().run(time,random,success,warning,res,targetMap,path);
             }
             done=taskDoneCheck();
         }
+        */
         return res;
     }
     private String openDir() throws IOException {//doesnt have path yet,this func create directory for simulation task
