@@ -1,0 +1,19 @@
+<changelist name="Uncommitted_changes_before_Update_at_17_11_2021,_14_23_[Changes]" date="1637151838239" recycled="true" deleted="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_11_2021,_14_23_[Changes]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 17/11/2021, 14:23 [Changes]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/UI/UIimpl.class" />
+    <option name="AFTER_PATH" value="out/production/UI/UIimpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_11_2021,_14_23_[Changes]/UIimpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Engine/engine/engineImpl.class" />
+    <option name="AFTER_PATH" value="out/production/Engine/engine/engineImpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_11_2021,_14_23_[Changes]/engineImpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Engine/xml/Xmlimpl.class" />
+    <option name="AFTER_PATH" value="out/production/Engine/xml/Xmlimpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_17_11_2021,_14_23_[Changes]/Xmlimpl.class" />
+  </binary>
+</changelist>
