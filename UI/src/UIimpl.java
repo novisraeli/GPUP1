@@ -180,8 +180,6 @@ public class UIimpl implements UI {
                     s.nextLine();
                 }
             }
-
-
         }
         //check Targets exist in engine.checkTargetExist(input) can check for each target seperatlly
         //if not print something about it and return

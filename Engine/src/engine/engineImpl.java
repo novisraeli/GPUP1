@@ -105,42 +105,42 @@ public class engineImpl implements engine {
     }
     public void findRequiredForPathBetweenTwoTargetsHelper(Target t1, Target t2, List<Targets> listSt , int index) throws Exception {
         if (t1.getSetRequiredFor().size() == 0)
-            listSt.get(index).targetsList.remove(listSt.get(index).targetsList.size()-1);
-        if (listSt.get(index).targetsList.contains(t1.getName())) // handle cycle
+            listSt.get(index).getTargetsList().remove(listSt.get(index).getTargetsList().size()-1);
+        if (listSt.get(index).getTargetsList().contains(t1.getName())) // handle cycle
             return;
         else {
             if (t1.getSetRequiredFor().contains(t2.getName())) {
                 Targets t = new Targets();
-                t.targetsList.addAll(listSt.get(index).targetsList);
+                t.getTargetsList().addAll(listSt.get(index).getTargetsList());
                 listSt.add(new Targets());
-                listSt.get(index).find = true;
+                listSt.get(index).setFind(true);
                 index++;
                 return;
             }
 
             for (String st : t1.getSetRequiredFor()) {
-                listSt.get(index).targetsList.add(st);
+                listSt.get(index).getTargetsList().add(st);
                 findRequiredForPathBetweenTwoTargetsHelper(targetMap.get(st), t2, listSt, index);
             }
         }
     }
     public void findDependsOnPathBetweenTwoTargetsHelper(Target t1, Target t2, List<Targets> listSt , int index) throws Exception {
         if (t1.getSetDependsOn().size() == 0)
-            listSt.get(index).targetsList.remove(listSt.get(index).targetsList.size()-1);
-        if (listSt.get(index).targetsList.contains(t1.getName()))  // handle cycle
+            listSt.get(index).getTargetsList().remove(listSt.get(index).getTargetsList().size()-1);
+        if (listSt.get(index).getTargetsList().contains(t1.getName()))  // handle cycle
             return;
         else {
             if (t1.getSetDependsOn().contains(t2.getName())) {
                 Targets t = new Targets();
-                t.targetsList.addAll(listSt.get(index).targetsList);
+                t.getTargetsList().addAll(listSt.get(index).getTargetsList());
                 listSt.add(new Targets());
-                listSt.get(index).find = true;
+                listSt.get(index).setFind(true);
                 index++;
                 return;
             }
 
             for (String st : t1.getSetDependsOn()) {
-                listSt.get(index).targetsList.add(st);
+                listSt.get(index).getTargetsList().add(st);
                 findDependsOnPathBetweenTwoTargetsHelper(targetMap.get(st), t2, listSt, index);
             }
         }

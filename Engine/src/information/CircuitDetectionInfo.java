@@ -23,11 +23,12 @@ public class CircuitDetectionInfo implements Information{
         st = "Target name: " + name + "\n\r" +
                 "Cycle path:\n\r";
 
-        for(int i = 0 ; i<paths.size(); ++i)
-            if (paths.get(i).find == true){
-                st += count + ". " + paths.get(i).targetsList + "\n\r";
+        for (Targets path : paths) {
+            if (path.getFind()) {
+                st += count + ". " + path.getTargetsList() + "\n\r";
                 ++count;
             }
+        }
         return st;
     }
 }

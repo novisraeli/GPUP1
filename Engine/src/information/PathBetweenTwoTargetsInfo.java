@@ -36,13 +36,13 @@ public class PathBetweenTwoTargetsInfo implements Information{
                 "Attitude: " + attitude + "\n\rPath:\n\r";
 
         for(int i = 0 ; i<paths.size(); ++i)
-            if (paths.get(i).find == true)
-                if (paths.get(i).targetsList.size() == 0) {
+            if (paths.get(i).getFind() == true)
+                if (paths.get(i).getTargetsList().size() == 0) {
                     st += count + ". " + "Direct dependency" + "\n\r";
                     ++count;
                 }
                 else {
-                    st += count + ". " + paths.get(i).targetsList + "\n\r";
+                    st += count + ". " + paths.get(i).getTargetsList() + "\n\r";
                     ++count;
                 }
         return st;

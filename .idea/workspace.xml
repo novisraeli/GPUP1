@@ -2,24 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="30f48137-87a5-4e03-962e-6e8bd68df68d" name="Changes" comment="Bar Sela">
-      <change afterPath="$PROJECT_DIR$/Engine/src/information/CircuitDetectionInfo.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/target/Targets.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/information/CircuitDetectionInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/information/CircuitDetectionInfo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/information/PathBetweenTwoTargetsInfo.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/information/PathBetweenTwoTargetsInfo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/information/TargetInformation.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/information/TargetInformation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/target/Target.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/target/Target.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exception/src/target/RequiredForConflict.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/target/RequiredForConflict.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exception/src/xml/XmlException.java" beforeDir="false" afterPath="$PROJECT_DIR$/Exception/src/xml/XmlException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/target/Targets.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/target/Targets.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/UIimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/UIimpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/PathBetweenTwoTargetsInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/information/PathBetweenTwoTargetsInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/TargetInformation.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/information/TargetInformation.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/xml/Xmlimpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/xml/Xmlimpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Exception/xml/XmlException.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Exception/xml/XmlException.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/PathBetweenTwoTargetsInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/target/Targets.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/target/Targets.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/UI/UIimpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/UIimpl.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -113,7 +104,8 @@
       <workItem from="1636534671547" duration="16035000" />
       <workItem from="1636712961690" duration="172000" />
       <workItem from="1636807537670" duration="4000" />
-      <workItem from="1636972352516" duration="34093000" />
+      <workItem from="1636972352516" duration="34939000" />
+      <workItem from="1637136059584" duration="1341000" />
     </task>
     <task id="LOCAL‎00001" summary="zxc">
       <created>1636536346510</created>
@@ -259,7 +251,25 @@
       <option name="presentableId" value="LOCAL‎00024" />
       <updated>1637054192751</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL‎00025" summary="Bar Sela">
+      <created>1637098721072</created>
+      <option name="number" value="LOCAL‎00025" />
+      <option name="presentableId" value="LOCAL‎00025" />
+      <updated>1637098721072</updated>
+    </task>
+    <task id="LOCAL‎00026" summary="Bar Sela">
+      <created>1637098737266</created>
+      <option name="number" value="LOCAL‎00026" />
+      <option name="presentableId" value="LOCAL‎00026" />
+      <updated>1637098737266</updated>
+    </task>
+    <task id="LOCAL‎00027" summary="Bar Sela">
+      <created>1637098753562</created>
+      <option name="number" value="LOCAL‎00027" />
+      <option name="presentableId" value="LOCAL‎00027" />
+      <updated>1637098753562</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -332,7 +342,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/UIimpl.java</url>
-          <line>225</line>
+          <line>223</line>
           <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

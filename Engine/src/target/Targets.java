@@ -4,12 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Targets {
-    public List<String> targetsList;
-    public boolean find;
+    private List<String> targetsList;
+    private boolean find;
 
-
+    // Ctor
     public Targets(){
         targetsList = new ArrayList<>();
         find = false;
     }
+    // Get
+    public List<String> getTargetsList(){return targetsList;}
+    public boolean getFind(){return find;}
+    // Set
+    public void setFind(boolean f){find = f;}
 }
