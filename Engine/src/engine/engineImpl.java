@@ -152,7 +152,7 @@ public class engineImpl implements engine {
         }
         while(!done) {
             for (Map.Entry<String, Target> e : targetMap.entrySet()) {
-                e.getValue().run(time,random,success,warning,res);
+                e.getValue().run(time,random,success,warning,res,targetMap);
             }
             done=taskDoneCheck();
         }
