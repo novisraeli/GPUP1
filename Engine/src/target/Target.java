@@ -2,6 +2,9 @@ package target;
 
 import information.Information;
 import information.SumUpTarget;
+
+import java.io.File;
+import java.io.FileWriter;
 import java.util.*;
 
 public class Target
@@ -75,22 +78,29 @@ public class Target
     public void SetStatus(Status s) {
         this.status = s;
     }
-    public void run(int time, boolean random, float success, float warning, List<Information>res,Map<String,Target>targetMap) throws Exception {
+    public void run(int time, boolean random, float success, float warning, List<Information>res,Map<String,Target>targetMap,String path) throws Exception {
+        String fName=path+"\\"+this.name+".log";
         Random r=new Random();
         float successRand;
         float warningRand;
 
-        if(!this.status.equals(Status.Waiting)){
+        if(!this.status.name().equals(Status.Waiting.name())){
             return;
         }
         for(String s:setDependsOn){
-            if(targetMap.get(s).getStatus().equals(Status.Failure)||targetMap.get(s).getStatus().equals(Status.Skipped)){
+            if(targetMap.get(s).getStatus().name().equals(Status.Failure.name())||targetMap.get(s).getStatus().name().equals(Status.Skipped.name())){
                 targetMap.get(s).SetStatus(Status.Skipped);
-                //need to create file in this condition too
+                File f=new File(fName);
+                f.createNewFile();
+                FileWriter w = new FileWriter(fName);
+                w.write("Target name: " + this.name + "\n\r" +
+                        "Target result: " + Status.Skipped.name() + "\n\r" +
+                        "Target time : 00:00:00:00 \n\r");
+                w.close();
                 res.add(new SumUpTarget(this.name,this.status.name(),"00:00:00:00"));
                 return;
             }
-            else if(targetMap.get(s).getStatus().equals(Status.Waiting)){
+            else if(targetMap.get(s).getStatus().name().equals(Status.Waiting.name())){
                 return;
             }
         }
@@ -122,7 +132,13 @@ public class Target
             this.status=Status.Failure;
         }
         res.add(new SumUpTarget(this.name,this.status.name(),simTimeString));
-        //wright to file as well
+        File f=new File(fName);
+        f.createNewFile();
+        FileWriter w = new FileWriter(fName);
+        w.write("Target name: " + this.name + "\n\r" +
+                "Target result: " + this.status.name() + "\n\r" +
+                "Target time : "+simTimeString +"\n\r");
+        w.close();
 
     }
 
