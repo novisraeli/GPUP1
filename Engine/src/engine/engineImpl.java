@@ -44,7 +44,7 @@ public class engineImpl implements engine {
         //// member
         Xmlimpl file = new Xmlimpl(path);                       // load XML file
         targetMapTemp = file.makeAMap();// check if the XML file is proper and crate map (key - target name, val - target) from file
-        workingDirectory = file.getWorkingDirectoryXml();
+        workingDirectory= file.getWorkingDirectoryXml();
         loadFile = true;
         targetMap = targetMapTemp;
     }
@@ -176,7 +176,7 @@ public class engineImpl implements engine {
     public List<Information> runTask(int time, boolean random, float success, float warning,boolean keepLastRun) throws Exception {
         boolean done=false;
         List<Information>res=new ArrayList<Information>();
-        openDir();
+        String path=openDir();
         if(!keepLastRun){
             for(Map.Entry<String, Target> e : targetMap.entrySet()){
                 e.getValue().SetStatus(Target.Status.Waiting);
@@ -185,26 +185,30 @@ public class engineImpl implements engine {
         }
         while(!done) {
             for (Map.Entry<String, Target> e : targetMap.entrySet()) {
-                e.getValue().run(time,random,success,warning,res,targetMap);
+                e.getValue().run(time,random,success,warning,res,targetMap,path);
             }
             done=taskDoneCheck();
         }
         return res;
     }
-    private void openDir() throws IOException {//doesnt have path yet,this func create directory for simulation task
+    private String openDir() throws IOException {//doesnt have path yet,this func create directory for simulation task
         Path path=Paths.get(workingDirectory);
         Files.createDirectories(path);
-        File dir = new File(workingDirectory);
-
+        //File dir = new File(workingDirectory);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.mm.yyyy HH.MM.SS");
         LocalDateTime now = LocalDateTime.now();
         String s ="Simulation "+dtf.format(now);
-       // dir.renameTo(s);
+        s= workingDirectory+"\\"+s;
+        Path innerPath=Paths.get(s);
+        Files.createDirectories(innerPath);
+        //File dir2 = new File(s);
+        return s;
     }
     private boolean taskDoneCheck(){
         for(Map.Entry<String, Target> e : targetMap.entrySet()){
-            if(e.getValue().getStatus().equals(Target.Status.Waiting));
-            return false;
+            if(e.getValue().getStatus().name().equals(Target.Status.Waiting.name())) {
+                return false;
+            }
         }
         return true;
     }

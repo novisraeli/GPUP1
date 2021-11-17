@@ -197,22 +197,98 @@ public class UIimpl implements UI {
 
     @Override
     public void runTask() {//option 5
+        boolean flag=true;
+        float success=-1,warning=-1;
+        int time=-1;
+        int temp=-1;
+        boolean random=false, fromScratch=false;
         List<Information>res;
-        System.out.println("Enter task details as follows(EACH PARAMETER IS SEPERATED BY SPACE NOT BY ,)) : ");
-        System.out.println("simTime for each target(time in ms) ,random or set(1 for random, 0 for set)");
-        System.out.println("chance of task succeeding(a number between 1 and 0)");
-        System.out.println("if Succeed chance of warning(a number between 1 and 0)");
-        System.out.println("lastly if to keep going from previous task(1=yes,0=no)");
-        float success,warning;
-        int time;
-        boolean random, fromScratch;
+        System.out.println("Enter task details:  ");
+        while(flag){
+            System.out.println("First enter simulation time for each target(natural number)");
+            if(!s.hasNextInt()) {
+                System.out.println("Wrong input");
+            }
+            else{
+                time=s.nextInt();
+                if(time<=0){
+                    System.out.println("Wrong input");
+                }
+                else {
+                    flag = false;
+                }
+            }
+        }
+        flag=true;
+        while(flag) {
+            System.out.println("Next choose Random or set time(0=set 1=random)");
+            if (!s.hasNextInt()) {
+                System.out.println("Wrong input");
+            } else {
+                temp = s.nextInt();
+                if (temp != 0 && temp != 1) {
+                    System.out.println("Wrong input1");
+                }
+                else {
+                    if (temp == 1) {
+                        random = true;
+                    }
+                    else{
+                        random=false;
+                    }
+                    flag=false;
+                }
+            }
+        }
+        flag=true;
+        while(flag){
+            System.out.println("Then chance of task succeeding(a number between 1 and 0)");
+            if (!s.hasNextFloat()) {
+                System.out.println("Wrong input");
+            } else {
+                success = s.nextFloat();
+                if (success < 0 || success > 1) {
+                    System.out.println("Wrong input");
+                } else {
+                    flag = false;
+                }
+            }
+        }
+        flag=true;
+        while (flag){
+            System.out.println("if Succeed chance of warning(a number between 1 and 0)");
+            if (!s.hasNextFloat()) {
+                System.out.println("Wrong input");
+            } else {
+                warning = s.nextFloat();
+                if (warning < 0 || warning > 1) {
+                    System.out.println("Wrong input");
+                } else {
+                    flag = false;
+                }
+            }
+        }
+        flag=true;
+        while (flag){
+            System.out.println("lastly if to keep going from previous task(1=yes,0=no)");
+            if (!s.hasNextInt()) {
+                System.out.println("Wrong input");
+            } else {
+                temp = s.nextInt();
+                if (temp != 0 && temp != 1) {
+                    System.out.println("Wrong input");
+                } else {
+                    if (temp == 1) {
+                        fromScratch = true;
+                    }
+                    else{
+                        fromScratch=false;
+                    }
+                    flag=false;
+                }
+            }
+        }
 
-        time=s.nextInt();
-        random=s.nextBoolean();
-        success=s.nextFloat();
-        warning=s.nextFloat();
-        fromScratch=s.nextBoolean();
-        //need to check valid input
         try{
             if((fromScratch&&firstRun)||!fromScratch){
                 System.out.println("no previous run,starting from scratch");
