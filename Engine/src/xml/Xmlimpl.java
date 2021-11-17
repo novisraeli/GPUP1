@@ -36,7 +36,7 @@ public class Xmlimpl implements Xml {
     public Map<String, Target> makeAMap() throws Exception {
         Target newTarget;
         Map<String, Target> targetsMap = new HashMap<>();
-/*
+
         for (GPUPTarget p : gpupDescriptor.getGPUPTargets().getGPUPTarget()) {
 
             if (targetsMap.containsKey(p.getName())) {
@@ -61,7 +61,7 @@ public class Xmlimpl implements Xml {
                 targetsMap.put(newTarget.getName(), newTarget);
             }
         }
- */
+ /*
         Set <String> setA = new HashSet<>();
         setA.add("B");
         setA.add("G");
@@ -83,7 +83,7 @@ public class Xmlimpl implements Xml {
         targetsMap.put("D" , new Target("D" , null , setD , new HashSet()));
         targetsMap.put("E" , new Target("E" , null , setE , new HashSet()));
         targetsMap.put("F" , new Target("F" , null , setF , new HashSet()));
-
+*/
         organizeTheDependencies(targetsMap);
         makeTypeForTargets(targetsMap);
             return targetsMap;

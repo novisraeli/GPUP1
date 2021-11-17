@@ -3,11 +3,11 @@ package information;
 /// - The file open successfully or not
 
 public class LoadFileInfo implements Information{
-    private boolean status;
+    private final boolean status;
+
     public LoadFileInfo(boolean status) {
         this.status = status;
     }
-
     @Override
     public String toString() {
         if (true == status)

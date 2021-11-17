@@ -31,17 +31,12 @@ public class engineImpl implements engine {
 
     /** Load file
      *  Open XML file
-     *  Also check if the XML file is corrupt:
-     *  1. there is conflict between targets
-     *  2. all the targets are unique
-     *  3. all the targets are exists
      *  if the XML is corrupt stay with the last detail you have
-     *  @exception target.TargetException
-     *  @exception target.TargetIsExists
-     *  @exception target.UniqueTarget
-     *  @exception target.DependsOnConflict
-     *  @exception target.RequiredForConflict
-     * @exception xml.XmlIsExists
+     *  @throws  target.TargetIsExists on if target isn't exists
+     *  @throws target.UniqueTarget on if target isn't unique
+     *  @throws target.DependsOnConflict on there is conflict between targets
+     *  @throws target.RequiredForConflict on there is conflict between targets
+     *  @throws xml.XmlIsExists on the XML not exists
      */
     @Override
     public void loadFile(String path) throws Exception {/// option 2 in the menu
@@ -54,12 +49,15 @@ public class engineImpl implements engine {
         targetMap = targetMapTemp;
     }
 
-    public void printXml() {
-        System.out.println(targetMap);
-    } // print all the Xml file
-
+    /** Targets in formation
+     *  @return all the information about the graph:
+     *  amount of roots
+     *  amount of leaves
+     *  amount of middles
+     *  amount of independents
+     */
     @Override
-    public Information targetsInformation() { /// option 2 in the menu
+    public Information targetsInFormation() { /// option 2 in the menu
         int amountOfTargets = targetMap.entrySet().size();          // count all the targets in the map
 
         int levies = (int) targetMap.entrySet()                                     // count all the levies targets in the map
@@ -85,6 +83,15 @@ public class engineImpl implements engine {
         return new GraphInformation(amountOfTargets, levies, middles, roots, independents);
     }
 
+    /** Specific target information
+     *  @return all the information about the targets:
+     *  target name
+     *  type (root, middle , leaf , independent)
+     *  all the target that depends-on
+     *  all the target required-for
+     *  user data
+     * @throws TargetIsExists on if target isn't exists
+     */
     @Override
     public Information specificTargetInformation(String name) throws Exception {
         Target target = targetMap.get(name);
@@ -100,6 +107,12 @@ public class engineImpl implements engine {
         }
     }
 
+    /** Specific target information
+     *  @return all the information between the targets:
+     *  target names
+     *  all the path between the targets with a specific dependence
+     * @throws TargetIsExists on if target isn't exists
+     */
     @Override
     public PathBetweenTwoTargetsInfo findAPathBetweenTwoTargets(String t1, String t2, Dependence dependence) throws Exception {
         Target target1 = targetMap.get(t1);
@@ -123,6 +136,8 @@ public class engineImpl implements engine {
 
         return  new PathBetweenTwoTargetsInfo(t1 , t2 , dependence.name() , list);
     }
+    /** Specific target information - helper (recursion)
+     */
     public void findPathBetweenTwoTargetsHelper(Target t1, Target t2, List<Targets> listSt , IntX index , Dependence dependence) {
 
         Set<String> tOneSet;
@@ -193,14 +208,29 @@ public class engineImpl implements engine {
         }
         return true;
     }
+
+    /** Exit
+     */
     @Override
     public void exit() {
         System.exit(0);
     }
+
+    /** Circuit detection info
+     *  @return all the information between the targets:
+     *  target names
+     *  all the cycle paths
+     * @throws TargetIsExists on if target isn't exists
+     */
     @Override
     public CircuitDetectionInfo circuitDetection(String name)throws Exception {
         PathBetweenTwoTargetsInfo info = findAPathBetweenTwoTargets(name,name,Dependence.DEPENDS_ON);
         return new CircuitDetectionInfo(name , info.getPaths());
     }
 
+
+/////////// help to understand the xml
+    public void printXml() {
+        System.out.println(targetMap);
+    } // print all the Xml file
 }

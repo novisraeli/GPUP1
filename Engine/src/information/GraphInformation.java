@@ -8,11 +8,11 @@ package information;
 
 public class GraphInformation implements Information{ // 2
 
-    private int amountOfTargets;
-    private int levies;
-    private int middles;
-    private int roots;
-    private int independents;
+    private final int amountOfTargets;
+    private final int levies;
+    private final int middles;
+    private final int roots;
+    private final int independents;
 
     public GraphInformation(int amountOfTargets , int levies, int middles, int roots,int independents)
     {

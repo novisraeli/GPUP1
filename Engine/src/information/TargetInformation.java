@@ -11,11 +11,11 @@ import java.util.Set;
 
 public class TargetInformation implements Information{ // 3
 
-    private String name;
-    private Target.Type type;
-    private Set<String> dependsOn;
-    private Set<String> requiredFor;
-    private String data;
+    private final String name;
+    private final Target.Type type;
+    private final Set<String> dependsOn;
+    private final Set<String> requiredFor;
+    private final String data;
 
     public TargetInformation( String name , Target.Type type , Set<String> dependsOn , Set<String> requiredFor , String data)
     {

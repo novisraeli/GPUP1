@@ -4,16 +4,15 @@ import engine.engine.*;
 import java.util.*;
 
 public class UIimpl implements UI {
-    private engine engine = new engineImpl();
-    private Scanner s = new Scanner(System.in);
-    private Information info;
+    private final engine engine = new engineImpl();
+    private final Scanner s = new Scanner(System.in);
     private boolean firstRun=true;
 
     public void mainMenu(){
 
         int input;
         boolean run =true;
-        System.out.println("Hello To Nov & Bar G.P.U.P\n\r");
+        System.out.println("Welcome To Nov & Bar G.P.U.P\n\r");
         while(run){
             System.out.println("Please choose an option: (number between 1 - 8)");
             printMainMenu();
@@ -93,7 +92,7 @@ public class UIimpl implements UI {
     }
     @Override
     public void showGraphInfo(){//option 2
-            System.out.println(engine.targetsInformation());
+            System.out.println(engine.targetsInFormation());
     }
     @Override
     public void showTargetInfo(){//option 3
@@ -162,7 +161,7 @@ public class UIimpl implements UI {
         }
 
         try{
-            info = engine.findAPathBetweenTwoTargets(input1,input2 , d);
+            Information info = engine.findAPathBetweenTwoTargets(input1, input2, d);
             System.out.println(info);
         }
         catch (Exception e){

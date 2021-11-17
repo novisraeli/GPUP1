@@ -8,9 +8,9 @@ import java.text.SimpleDateFormat;
 
 public class SumUpTarget implements Information{
 
-    private String name;
-    private String result;
-    private String time;
+    private final String name;
+    private final String result;
+    private final String time;
 
     public SumUpTarget(String name , String result ,String time  ){
         this.name = name;

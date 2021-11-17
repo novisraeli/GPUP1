@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Targets {
-    private List<String> targetsList;
+    private final List<String> targetsList;
     private boolean find;
 
     // Ctor

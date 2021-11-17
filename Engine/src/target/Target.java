@@ -2,45 +2,66 @@ package target;
 
 import information.Information;
 import information.SumUpTarget;
-
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Target
 {
     public enum Type {INDEPENDENTS, LEAF, MIDDLE, ROOT}
     public enum Status {Waiting,Success,Warning ,Skipped ,Failure}
-    private String userData;
-    private String name;
+    private final String userData;
+    private final String name;
     private Type type;
     private Status status=Status.Waiting;
-    private Set<String> setDependsOn;
-    private Set<String> setRequiredFor;
+    private final Set<String> setDependsOn;
+    private final Set<String> setRequiredFor;
 
     // Ctor
-    public  Target(String name , String userData , Set setDependsOn , Set setRequiredFor) {
+    public  Target(String name , String userData , Set<String> setDependsOn , Set<String> setRequiredFor) {
         this.name = name;
         this.userData = userData;
         this.setDependsOn = setDependsOn;
         this.setRequiredFor = setRequiredFor;
     }
     // Get function
+
+    /** Get name
+     * @return name of target
+     */
     public String getName() {
         return name;
     }
+
+    /** Get name
+     * @return name of target
+     */
     public String getUserData() {
             return userData;
-        }
+    }
+
+    /** Get name
+     * @return name of target
+     */
     public Set<String> getSetDependsOn() {
         return setDependsOn;
     }
+
+    /** Get name
+     * @return name of target
+     */
     public Set<String> getSetRequiredFor() {
         return setRequiredFor;
     }
+
+    /** Get type
+     * @return type of target
+     */
     public Type getType() {
         return type;
     }
+
+    /** Get status
+     * @return status of target
+     */
     public Status getStatus() {
         return status;
     }

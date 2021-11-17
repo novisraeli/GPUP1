@@ -1,5 +1,4 @@
 package information;
-import target.Target;
 import target.Targets;
 
 import java.util.List;
@@ -12,10 +11,10 @@ import java.util.List;
 
 public class PathBetweenTwoTargetsInfo implements Information{
 
-    private String source;
-    private String destination;
-    private String attitude;
-    private List<Targets> paths;
+    private final String source;
+    private final String destination;
+    private final String attitude;
+    private final List<Targets> paths;
 
     public PathBetweenTwoTargetsInfo(String source , String destination , String attitude ,List<Targets> paths){
         this.source = source;
@@ -35,14 +34,13 @@ public class PathBetweenTwoTargetsInfo implements Information{
                 "Destination: " + destination + "\n\r" +
                 "Attitude: " + attitude + "\n\rPath:\n\r";
 
-        for(int i = 0 ; i<paths.size(); ++i)
-            if (paths.get(i).getFind() == true)
-                if (paths.get(i).getTargetsList().size() == 0) {
+        for (Targets path : paths)
+            if (path.getFind())
+                if (path.getTargetsList().size() == 0) {
                     st += count + ". " + "Direct dependency" + "\n\r";
                     ++count;
-                }
-                else {
-                    st += count + ". " + paths.get(i).getTargetsList() + "\n\r";
+                } else {
+                    st += count + ". " + path.getTargetsList() + "\n\r";
                     ++count;
                 }
         return st;

@@ -5,8 +5,8 @@ import target.Targets;
 import java.util.List;
 
 public class CircuitDetectionInfo implements Information{
-    private String name;
-    private List<Targets> paths;
+    private final String name;
+    private final List<Targets> paths;
 
     public CircuitDetectionInfo(String name ,List<Targets> paths){
         this.name = name;
