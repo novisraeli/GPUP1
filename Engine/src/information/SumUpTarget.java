@@ -1,4 +1,5 @@
 package information;
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 
 /// Sum up target:
@@ -6,7 +7,7 @@ import java.text.SimpleDateFormat;
 /// - the target result
 /// - date
 
-public class SumUpTarget implements Information{
+public class SumUpTarget implements Information , Serializable {
 
     private final String name;
     private final String result;

@@ -6,8 +6,7 @@ import target.TargetIsExists;
 import target.Targets;
 import xml.Xmlimpl;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
@@ -19,6 +18,7 @@ public class engineImpl implements engine {
     private boolean loadFile;
     private Map<String, Target> targetMap;
     private String workingDirectory;
+    private List<Information> res;
 
 
     /// methods
@@ -174,8 +174,8 @@ public class engineImpl implements engine {
 
     @Override
     public List<Information> runTask(int time, boolean random, float success, float warning,boolean keepLastRun) throws Exception {
-        boolean done=false;
-        List<Information>res=new ArrayList<Information>();
+        boolean done = false;
+       res = new ArrayList<Information>();
         String path=openDir();
         if(!keepLastRun){
             for(Map.Entry<String, Target> e : targetMap.entrySet()){
@@ -232,6 +232,32 @@ public class engineImpl implements engine {
         return true;
     }
 
+    @Override
+    public void writeTargetsAndInformationToTextFile(String path)throws Exception{
+        try{
+        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path));
+            out.writeObject(targetMap);
+            out.writeObject(workingDirectory);
+            out.writeObject(res);
+            out.flush();
+        }
+        catch (FileNotFoundException e){throw e;}
+        catch (Exception e){throw e;}
+    }
+    @Override
+    public void readTargetsAndInformationToTextFile(String path) throws Exception {
+        // Read the array list  from the file
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(path))) {
+            // we know that we read array list of Persons
+            loadFile = true;
+            targetMap = (Map<String, Target>) in.readObject();
+            workingDirectory = (String)  in.readObject();
+            res = (ArrayList<Information>) in.readObject();
+        }
+        catch (FileNotFoundException e){throw e;}
+        catch (Exception e){throw e;}
+    }
+
     /** Exit
      */
     @Override
@@ -252,8 +278,9 @@ public class engineImpl implements engine {
     }
 
 
-/////////// help to understand the xml
-    public void printXml() {
+/////////// help to understand
+@Override
+    public void printAllTargets() {
         System.out.println(targetMap);
     } // print all the Xml file
 }

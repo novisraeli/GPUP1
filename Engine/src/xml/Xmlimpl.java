@@ -26,13 +26,11 @@ public class Xmlimpl implements Xml {
             throw new XmlIsExists(path);
         }
     }
-
     private static GPUPDescriptor deserializeFrom(InputStream in) throws JAXBException {
         JAXBContext jc = JAXBContext.newInstance(JAXB_XML_PACKAGE_NAME);
         Unmarshaller u = jc.createUnmarshaller();
         return (GPUPDescriptor) u.unmarshal(in);
     }
-
     public Map<String, Target> makeAMap() throws Exception {
         Target newTarget;
         Map<String, Target> targetsMap = new HashMap<>();
@@ -61,7 +59,8 @@ public class Xmlimpl implements Xml {
                 targetsMap.put(newTarget.getName(), newTarget);
             }
         }
- /*
+ /* /// test :
+
         Set <String> setA = new HashSet<>();
         setA.add("B");
         setA.add("G");
@@ -88,7 +87,6 @@ public class Xmlimpl implements Xml {
         makeTypeForTargets(targetsMap);
             return targetsMap;
     }
-
     public void organizeTheDependencies(Map<String, Target> targetMap) throws Exception {
         Set<String> setOfKey = targetMap.keySet();
 

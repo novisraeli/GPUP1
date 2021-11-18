@@ -1,110 +1,133 @@
 import engine.*;
 import information.Information;
 import engine.engine.*;
+
+import java.io.FileOutputStream;
+import java.io.ObjectOutputStream;
 import java.util.*;
 
 public class UIimpl implements UI {
     private final engine engine = new engineImpl();
     private final Scanner s = new Scanner(System.in);
-    private boolean firstRun=true;
+    private boolean firstRun = true;
 
-    public void mainMenu(){
+    @Override
+    public void mainMenu() {
         int input;
-        boolean run =true;
+        boolean run = true;
         System.out.println("Welcome To Nov & Bar G.P.U.P\n\r");
-        while(run){
+        while (run) {
             System.out.println("Please choose an option: (number between 1 - 8)");
             printMainMenu();
-            if(s.hasNextInt()){
-                input =s.nextInt();
+            if (s.hasNextInt()) {
+                input = s.nextInt();
                 s.nextLine();
-                switch (input){//main menu switch
+                switch (input) {//main menu switch
                     case 1:
                         loadFile();
                         break;
 
                     case 2:
-                        if(engine.ifLoadFile())
+                        if (engine.ifLoadFile())
                             showGraphInfo();
                         break;
 
                     case 3:
-                        if(engine.ifLoadFile())
+                        if (engine.ifLoadFile())
                             showTargetInfo();
                         break;
 
                     case 4:
-                        if(engine.ifLoadFile())
+                        if (engine.ifLoadFile())
                             showPathBetweenTwoTargets();
                         break;
 
                     case 5:
-                        if(engine.ifLoadFile())
+                        if (engine.ifLoadFile())
                             runTask();
                         break;
 
                     case 6:
-                        if(engine.ifLoadFile())
+                        if (engine.ifLoadFile())
                             circuitDetection();
                         break;
 
                     case 7:///////////////////////////////
-                        if(engine.ifLoadFile())
-                            printXml();
+                        if (engine.ifLoadFile())
+                            engine.printAllTargets();
                         break;
-                    case 8:
-                        run=false;
+                    case 8:///////////////////////////////
+                        writeTargetsAndInformationToFile();
+                        break;
+                    case 9:
+                        run = false;
                         System.out.println("Salamat");
                         break;
                     default:
                         System.out.println("Invalid option \n\rplease enter a number between 1 - 6\n\r");
                         break;
                 }
-            }
-            else{
+            } else {
                 System.out.println("Not a number!! \n\rplease enter a number between 1 - 6\n\r");
                 s.nextLine();
             }
 
         }
-    engine.exit();
+        engine.exit();
     }
 
     @Override
-    public boolean loadFile(){//option 1
+    public void loadFile() {//option 1
         String input;
-        System.out.println("Enter file full path ,or 0 to return to main menu");
-        input=s.nextLine();
-        if(s.equals("0")){
-            return false;
+        int choose = 0;
+        System.out.println("Please choose an option: (number between 1 - 2)\n\r" +
+                            "1. Load information from XML file\n\r" +
+                            "2. Load the last saved state\n\r" +
+                            "3. Return to menu");
+        while (choose != 1 && choose != 2 && choose != 3) { /// check if you insert the right number
+            if (s.hasNextInt())
+                choose = s.nextInt();
+            else
+                System.out.println("Invalid option \n\rplease enter a number between 1 - 3");
+            s.nextLine();
         }
-        else {
-           try{
-               engine.loadFile(input);
-               return true;
-           }
-           catch (Exception e){
-               System.out.println(e);
-               return false;
-           }
+
+        if (choose != 3) {  /// if you not choose to return to menu
+            try {
+                if (1 == choose){ /// load form xml file
+                    System.out.println("Enter XML file (full path)");
+                    input = s.nextLine();
+                    engine.loadFile(input);
+                }
+
+                if (2 == choose){
+                    System.out.println("Enter TEXT file (without '.bin')");
+                    input = s.nextLine();
+                    engine.readTargetsAndInformationToTextFile(input + ".bin");
+                }
+
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
     }
+
     @Override
-    public void showGraphInfo(){//option 2
-            System.out.println(engine.targetsInFormation());
+    public void showGraphInfo() {//option 2
+        System.out.println(engine.targetsInFormation());
     }
+
     @Override
-    public void showTargetInfo(){//option 3
+    public void showTargetInfo() {//option 3
         System.out.println("Enter Target Name");
         String input = s.nextLine();
-        try{
+        try {
             System.out.println(engine.specificTargetInformation(input));
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
             System.out.println("choose one of the option:\n\r" +
-                               "1. Insert new target\n\r" +
-                               "2. Return to the menu");
+                    "1. Insert new target\n\r" +
+                    "2. Return to the menu");
             int inputInt = s.nextInt();
             s.nextLine();
 
@@ -112,13 +135,12 @@ public class UIimpl implements UI {
                 if (1 == inputInt) {
                     showTargetInfo();
                     return;
-                } else
-                    if (2 == inputInt)
-                        return;
-                    else {
-                        System.out.println("Invalid option, choose again:");
-                        inputInt = s.nextInt();
-                        s.nextLine();
+                } else if (2 == inputInt)
+                    return;
+                else {
+                    System.out.println("Invalid option, choose again:");
+                    inputInt = s.nextInt();
+                    s.nextLine();
                 }
             }
         }
@@ -128,8 +150,9 @@ public class UIimpl implements UI {
         //run engine,showTargetInfo
         //print what came back
     }
+
     @Override
-    public void showPathBetweenTwoTargets(){//option 4
+    public void showPathBetweenTwoTargets() {//option 4
         int x = 0;
         Dependence d = engineImpl.Dependence.DEPENDS_ON;
 
@@ -140,7 +163,7 @@ public class UIimpl implements UI {
         System.out.println("Enter the attitude between the targets");                          // get the attitude between targets
         System.out.println("1 - DEPENDS_ON\n" + "2 - REQUIRED_FOR");
 
-        while (x != 1 && x!= 2) {
+        while (x != 1 && x != 2) {
             if (s.hasNextInt()) {
                 x = s.nextInt();
                 s.nextLine();
@@ -151,19 +174,17 @@ public class UIimpl implements UI {
                     d = engineImpl.Dependence.REQUIRED_FOR;
                 else
                     System.out.println("Invalid option \n" + "1 - DEPENDS_ON\n" + "2 - REQUIRED_FOR");
-            }
-            else {
+            } else {
                 System.out.println("Not a number, please choose a number\n" + "1 - DEPENDS_ON\n" + "2 - REQUIRED_FOR");
                 s.nextLine();
             }
 
         }
 
-        try{
+        try {
             Information info = engine.findAPathBetweenTwoTargets(input1, input2, d);
             System.out.println(info);
-        }
-        catch (Exception e){
+        } catch (Exception e) {
 
             System.out.println(e); ///
 
@@ -177,8 +198,7 @@ public class UIimpl implements UI {
                 if (1 == inputInt) {
                     showPathBetweenTwoTargets();
                     return;
-                } else
-                if (2 == inputInt)
+                } else if (2 == inputInt)
                     return;
                 else {
                     System.out.println("Invalid option, choose again:");
@@ -284,50 +304,63 @@ public class UIimpl implements UI {
             }
         }
 
-        try{
-            if((fromScratch&&firstRun)||!fromScratch){
+        try {
+            if (!fromScratch || firstRun) {
                 System.out.println("no previous run,starting from scratch");
-                res=engine.runTask(time,random,success,warning,false);
-            }
-            else{
+                res = engine.runTask(time, random, success, warning, false);
+            } else {
 
-            res=engine.runTask(time,random,success,warning,true);
+                res = engine.runTask(time, random, success, warning, true);
             }
-            firstRun=false;
-            for(Information i:res){
+            firstRun = false;
+            for (Information i : res) {
                 System.out.println(i);
             }
-        }
-        catch(Exception e){
+
+
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
 
-    public void circuitDetection(){
+    @Override
+    public void circuitDetection() {
         System.out.println("Please enter name of target");
 
         String input1 = s.nextLine();
         try {
             System.out.println(engine.circuitDetection(input1));
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             System.out.println(e);
         }
     }
-    public void printXml() {//option 7
-        System.out.println("\n" +
-                "\nThe XML File: \n\r");
-        engine.printXml();
-    }
 
-    private void printMainMenu(){
+    @Override
+    public void printMainMenu() {
         System.out.println("1.Load file");
         System.out.println("2.Show info about the targets");
         System.out.println("3.Show info about a specific target");
         System.out.println("4.Find a path between 2 targets");
         System.out.println("5.Run task");
         System.out.println("6.Circuit detection");
-        System.out.println("7.print xml");
-        System.out.println("8.Exit");
+        System.out.println("7.Print xml");
+        System.out.println("8.Write all the targets and the task information to text file");
+        System.out.println("9.Exit");
+    }
+
+    @Override
+    public void writeTargetsAndInformationToFile() {
+        String path;
+        System.out.println("Enter file full path ,or 0 to return to main menu");
+        path = s.nextLine();
+        if (!s.equals("0")) {
+            try {
+                ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path));
+                engine.writeTargetsAndInformationToTextFile(path);
+                out.flush();
+            } catch (Exception e) {
+                System.out.println(e);
+            }
+        }
     }
 }
