@@ -182,6 +182,13 @@ public class engineImpl implements engine {
                 e.getValue().SetStatus(Target.Status.Waiting);
             }
         }
+        else{
+            for(Map.Entry<String, Target> e : targetMap.entrySet()){
+                if(e.getValue().getStatus()== Target.Status.Skipped||e.getValue().getStatus()== Target.Status.Failure){
+                    e.getValue().SetStatus(Target.Status.Waiting);
+                }
+            }
+        }
         Set<Target>indi=new HashSet<>();
         Set<Target>leavies=new HashSet<>();
 

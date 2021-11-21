@@ -101,6 +101,13 @@ public class Target implements Serializable
                 }
             }
         }
+        if(status==Status.Success||status==Status.Warning){
+            if(!this.setRequiredFor.isEmpty()){
+                for(String s:setRequiredFor){
+                    targetMap.get(s).moveForward(time,random,success,warning, res,targetMap,path,true);
+                }
+            }
+        }
         boolean runCheck=true;
         String fName = path + "\\" + this.name + ".log";
         Random r=new Random();
