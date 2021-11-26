@@ -1,6 +1,7 @@
 import engine.*;
 import information.Information;
 import engine.engine.*;
+import xml.XmlNotLoad;
 
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
@@ -28,38 +29,29 @@ public class UIimpl implements UI {
                         break;
 
                     case 2:
-                        if (engine.ifLoadFile())
                             showGraphInfo();
                         break;
 
                     case 3:
-                        if (engine.ifLoadFile())
                             showTargetInfo();
                         break;
 
                     case 4:
-                        if (engine.ifLoadFile())
                             showPathBetweenTwoTargets();
                         break;
 
                     case 5:
-                        if (engine.ifLoadFile())
                             runTask();
                         break;
 
                     case 6:
-                        if (engine.ifLoadFile())
                             circuitDetection();
                         break;
 
                     case 7:///////////////////////////////
-                        if (engine.ifLoadFile())
-                            engine.printAllTargets();
-                        break;
-                    case 8:///////////////////////////////
                         writeTargetsAndInformationToFile();
                         break;
-                    case 9:
+                    case 8:
                         run = false;
                         System.out.println("Salamat");
                         break;
@@ -114,7 +106,13 @@ public class UIimpl implements UI {
 
     @Override
     public void showGraphInfo() {//option 2
-        System.out.println(engine.targetsInFormation());
+        try {
+            System.out.println(engine.targetsInFormation());
+        }
+        catch (Exception e) {
+            System.out.println(e);
+        }
+
     }
 
     @Override
@@ -123,6 +121,8 @@ public class UIimpl implements UI {
         String input = s.nextLine();
         try {
             System.out.println(engine.specificTargetInformation(input));
+        } catch (XmlNotLoad notLoad) {
+            System.out.println(notLoad);
         } catch (Exception e) {
             System.out.println(e);
             System.out.println("choose one of the option:\n\r" +
@@ -184,6 +184,8 @@ public class UIimpl implements UI {
         try {
             Information info = engine.findAPathBetweenTwoTargets(input1, input2, d);
             System.out.println(info);
+        } catch (XmlNotLoad notLoad) {
+            System.out.println(notLoad);
         } catch (Exception e) {
 
             System.out.println(e); ///
@@ -228,8 +230,10 @@ public class UIimpl implements UI {
             System.out.println("First enter simulation time for each target(natural number)");
             if (!s.hasNextInt()) {
                 System.out.println("Wrong input");
+                s.nextLine();
             } else {
                 time = s.nextInt();
+                s.nextLine();
                 if (time <= 0) {
                     System.out.println("Wrong input");
                 } else {
@@ -241,11 +245,13 @@ public class UIimpl implements UI {
         while (flag) {
             System.out.println("Next choose Random or set time(0=set 1=random)");
             if (!s.hasNextInt()) {
+                s.nextLine();
                 System.out.println("Wrong input");
             } else {
                 temp = s.nextInt();
+                s.nextLine();
                 if (temp != 0 && temp != 1) {
-                    System.out.println("Wrong input1");
+                    System.out.println("Wrong input");
                 } else {
                     if (temp == 1) {
                         random = true;
@@ -261,8 +267,10 @@ public class UIimpl implements UI {
             System.out.println("Then chance of task succeeding(a number between 1 and 0)");
             if (!s.hasNextFloat()) {
                 System.out.println("Wrong input");
+                s.nextLine();
             } else {
                 success = s.nextFloat();
+                s.nextLine();
                 if (success < 0 || success > 1) {
                     System.out.println("Wrong input");
                 } else {
@@ -275,8 +283,10 @@ public class UIimpl implements UI {
             System.out.println("if Succeed chance of warning(a number between 1 and 0)");
             if (!s.hasNextFloat()) {
                 System.out.println("Wrong input");
+                s.nextLine();
             } else {
                 warning = s.nextFloat();
+                s.nextLine();
                 if (warning < 0 || warning > 1) {
                     System.out.println("Wrong input");
                 } else {
@@ -289,8 +299,10 @@ public class UIimpl implements UI {
             System.out.println("lastly if to keep going from previous task(1=yes,0=no)");
             if (!s.hasNextInt()) {
                 System.out.println("Wrong input");
+                s.nextLine();
             } else {
                 temp = s.nextInt();
+                s.nextLine();
                 if (temp != 0 && temp != 1) {
                     System.out.println("Wrong input");
                 } else {
@@ -343,15 +355,14 @@ public class UIimpl implements UI {
         System.out.println("4.Find a path between 2 targets");
         System.out.println("5.Run task");
         System.out.println("6.Circuit detection");
-        System.out.println("7.Print xml");
-        System.out.println("8.Write all the targets and the task information to text file");
-        System.out.println("9.Exit");
+        System.out.println("7.Write all the targets and the task information to text file");
+        System.out.println("8.Exit");
     }
 
     @Override
     public void writeTargetsAndInformationToFile() {
         String path;
-        System.out.println("Enter file full path ,or 0 to return to main menu");
+        System.out.println("Enter file full path (with .bin at the end of the name file),or 0 to return to main menu");
         path = s.nextLine();
         if (!s.equals("0")) {
             try {

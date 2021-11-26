@@ -4,6 +4,7 @@ import information.*;
 import target.Target;
 import target.TargetIsExists;
 import target.Targets;
+import xml.XmlNotLoad;
 import xml.Xmlimpl;
 
 import java.io.*;
@@ -15,19 +16,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class engineImpl implements engine {
-    private boolean loadFile;
+    private boolean loadFile = false;
     private Map<String, Target> targetMap;
     private String workingDirectory;
     private List<Information> res;
 
-
-    /// methods
-    /** If load file
-     *  Check if the XML file is open
-     *  @return true if is it opened, false if not
-     */
-    @Override
-    public boolean ifLoadFile(){return loadFile;}
 
     /** Load file
      *  Open XML file
@@ -57,7 +50,9 @@ public class engineImpl implements engine {
      *  amount of independents
      */
     @Override
-    public Information targetsInFormation() { /// option 2 in the menu
+    public Information targetsInFormation() throws Exception{ /// option 2 in the menu
+        if (!loadFile)
+            throw new XmlNotLoad();
         int amountOfTargets = targetMap.entrySet().size();          // count all the targets in the map
 
         int levies = (int) targetMap.entrySet()                                     // count all the levies targets in the map
@@ -94,6 +89,8 @@ public class engineImpl implements engine {
      */
     @Override
     public Information specificTargetInformation(String name) throws Exception {
+        if (!loadFile)
+            throw new XmlNotLoad();
         Target target = targetMap.get(name);
 
         if (target == null)                                               // the  target not found in the map
@@ -115,6 +112,8 @@ public class engineImpl implements engine {
      */
     @Override
     public PathBetweenTwoTargetsInfo findAPathBetweenTwoTargets(String t1, String t2, Dependence dependence) throws Exception {
+        if (!loadFile)
+            throw new XmlNotLoad();
         Target target1 = targetMap.get(t1);
         Target target2 = targetMap.get(t2);
         IntX i = new IntX();
@@ -174,6 +173,8 @@ public class engineImpl implements engine {
 
     @Override
     public List<Information> runTask(int time, boolean random, float success, float warning,boolean keepLastRun) throws Exception {
+        if (!loadFile)
+            throw new XmlNotLoad();
         boolean done = false;
        res = new ArrayList<Information>();
         String path=openDir();
@@ -280,14 +281,10 @@ public class engineImpl implements engine {
      */
     @Override
     public CircuitDetectionInfo circuitDetection(String name)throws Exception {
+        if (!loadFile)
+            throw new XmlNotLoad();
         PathBetweenTwoTargetsInfo info = findAPathBetweenTwoTargets(name,name,Dependence.DEPENDS_ON);
         return new CircuitDetectionInfo(name , info.getPaths());
     }
 
-
-/////////// help to understand
-@Override
-    public void printAllTargets() {
-        System.out.println(targetMap);
-    } // print all the Xml file
 }

@@ -141,11 +141,10 @@ public class Target implements Serializable
         else{
             runCheck=false;
             this.status=Status.Failure;
-
         }
         //update
         res.add(new SumUpTarget(this.name,this.status.name(),simTimeString));
-        File f=new File(fName);
+        File f = new File(fName);
         f.createNewFile();
         FileWriter w = new FileWriter(fName);
         w.write("Target name: " + this.name + "\n\r" +
