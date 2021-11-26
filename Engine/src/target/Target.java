@@ -170,6 +170,7 @@ public class Target implements Serializable
                         "Target result: " + Status.Skipped.name() + "\n\r" +
                         "Target time : 00:00:00:00 \n\r");
                 w.close();
+                this.SetStatus(Status.Skipped);
                 res.add(new SumUpTarget(this.name, this.status.name(), "00:00:00:00"));
                 if (!this.setRequiredFor.isEmpty()) {
                     for (String s : setRequiredFor) {
