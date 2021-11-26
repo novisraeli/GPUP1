@@ -179,12 +179,12 @@ public class engineImpl implements engine {
         res = new ArrayList<Information>();
         String path=openDir();
         if(!keepLastRun){
-            for(Map.Entry<String, Target> e : targetMap.entrySet()){
+            for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all targets to waiting
                 e.getValue().SetStatus(Target.Status.Waiting);
             }
         }
         else{
-            for(Map.Entry<String, Target> e : targetMap.entrySet()){
+            for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all failed or skipped targets to waiting
                 if(e.getValue().getStatus()== Target.Status.Skipped||e.getValue().getStatus()== Target.Status.Failure){
                     e.getValue().SetStatus(Target.Status.Waiting);
                 }
@@ -199,7 +199,7 @@ public class engineImpl implements engine {
                 indi.add(e.getValue());
             }
             else if(e.getValue().getType()== Target.Type.LEAF){
-                leavies.add(e.getValue());
+                leavies.add(e.getValue());//run on all leavies
             }
         }
         for(Target t:indi){

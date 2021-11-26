@@ -96,12 +96,12 @@ public class Target implements Serializable
     public void run(int time, boolean random, float success, float warning, List<Information>res,Map<String,Target>targetMap,String path) throws Exception {
         if(!this.setDependsOn.isEmpty()){
             for(String s:setDependsOn){
-                if(targetMap.get(s).getStatus()==Status.Waiting){
+                if(targetMap.get(s).getStatus()==Status.Waiting){//dont run if depends on is still waiting
                     return;
                 }
             }
         }
-        if(status==Status.Success||status==Status.Warning){
+        if(status==Status.Success||status==Status.Warning){//if run on already go to inners
             if(!this.setRequiredFor.isEmpty()){
                 for(String s:setRequiredFor){
                     targetMap.get(s).moveForward(time,random,success,warning, res,targetMap,path,true);
@@ -163,7 +163,7 @@ public class Target implements Serializable
         String fName=path+"\\"+this.name+".log";
         if (status == Status.Skipped)
             return;
-        if(!runCheck ){
+        if(!runCheck ){//print skipped
                 File f = new File(fName);
                 f.createNewFile();
                 FileWriter w = new FileWriter(fName);
@@ -180,7 +180,7 @@ public class Target implements Serializable
                 }
 
         }
-        else{
+        else{//run on this
             run(time,random,success,warning, res,targetMap,path);
         }
     }

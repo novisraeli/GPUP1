@@ -364,6 +364,11 @@ public class UIimpl implements UI {
         String path;
         System.out.println("Enter file full path (with .bin at the end of the name file),or 0 to return to main menu");
         path = s.nextLine();
+        while(!path.endsWith(".bin")){
+            System.out.println("invalid path");
+            System.out.println("Enter file full path (with .bin at the end of the name file),or 0 to return to main menu");
+            path = s.nextLine();
+        }
         if (!s.equals("0")) {
             try {
                 ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path));
