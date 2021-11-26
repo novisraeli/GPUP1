@@ -325,7 +325,6 @@ public class UIimpl implements UI {
 
                 res = engine.runTask(time, random, success, warning, true);
             }
-            firstRun = false;
             for (Information i : res) {
                 System.out.println(i);
             }

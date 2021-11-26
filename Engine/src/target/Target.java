@@ -107,6 +107,7 @@ public class Target implements Serializable
                     targetMap.get(s).moveForward(time,random,success,warning, res,targetMap,path,true);
                 }
             }
+            return;
         }
         boolean runCheck=true;
         String fName = path + "\\" + this.name + ".log";

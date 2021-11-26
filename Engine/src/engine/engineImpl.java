@@ -176,7 +176,7 @@ public class engineImpl implements engine {
         if (!loadFile)
             throw new XmlNotLoad();
         boolean done = false;
-       res = new ArrayList<Information>();
+        res = new ArrayList<Information>();
         String path=openDir();
         if(!keepLastRun){
             for(Map.Entry<String, Target> e : targetMap.entrySet()){
