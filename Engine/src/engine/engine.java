@@ -16,6 +16,8 @@ public interface engine{
     Information circuitDetection(String name)throws Exception;
     void writeTargetsAndInformationToTextFile(String path)throws Exception;
     void readTargetsAndInformationToTextFile(String path) throws Exception;
+    boolean ifRunTask();
+
     void exit();
 
 

@@ -286,5 +286,7 @@ public class engineImpl implements engine {
         PathBetweenTwoTargetsInfo info = findAPathBetweenTwoTargets(name,name,Dependence.DEPENDS_ON);
         return new CircuitDetectionInfo(name , info.getPaths());
     }
-
+    public boolean ifRunTask(){
+        return res==null;
+    }
 }

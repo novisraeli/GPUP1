@@ -317,6 +317,7 @@ public class UIimpl implements UI {
         }
 
         try {
+            firstRun=engine.ifRunTask();
             if (!fromScratch || firstRun) {
                 System.out.println("no previous run,starting from scratch");
                 res = engine.runTask(time, random, success, warning, false);
