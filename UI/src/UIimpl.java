@@ -93,7 +93,7 @@ public class UIimpl implements UI {
                 }
 
                 if (2 == choose){
-                    System.out.println("Enter TEXT file (without '.bin')");
+                    System.out.println("Enter BIN file (without '.bin')");
                     input = s.nextLine();
                     engine.readTargetsAndInformationToTextFile(input + ".bin");
                 }
@@ -362,14 +362,13 @@ public class UIimpl implements UI {
     @Override
     public void writeTargetsAndInformationToFile() {
         String path;
-        System.out.println("Enter file full path (with .bin at the end of the name file),or 0 to return to main menu");
+        System.out.println("Enter file full path (with .bin at the end of the name file)");
         path = s.nextLine();
         while(!path.endsWith(".bin")){
             System.out.println("invalid path");
             System.out.println("Enter file full path (with .bin at the end of the name file),or 0 to return to main menu");
             path = s.nextLine();
         }
-        if (!s.equals("0")) {
             try {
                 ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path));
                 engine.writeTargetsAndInformationToTextFile(path);
@@ -377,6 +376,6 @@ public class UIimpl implements UI {
             } catch (Exception e) {
                 System.out.println(e);
             }
-        }
+        
     }
 }
