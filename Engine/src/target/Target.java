@@ -13,7 +13,7 @@ public class Target implements Serializable
 {
     public enum Type {INDEPENDENTS, LEAF, MIDDLE, ROOT}
     public enum Status {Waiting,Success,Warning ,Skipped ,Failure}
-    private final String userData;
+    private String userData;
     private final String name;
     private Type type;
     private Status status=Status.Waiting;
@@ -86,7 +86,7 @@ public class Target implements Serializable
     public void SetType(Type t) {
         this.type = t;
     }
-
+    public void SetUserData(String s){this.userData = s;}
     /** Set status
      * @param s- new target status
      */

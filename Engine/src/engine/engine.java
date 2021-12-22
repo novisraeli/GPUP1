@@ -7,6 +7,7 @@ import java.util.*;
 import java.util.List;
 
 public interface engine{
+
     enum Dependence{DEPENDS_ON , REQUIRED_FOR}
     void loadFile(String path) throws Exception;
     Information targetsInFormation() throws Exception ;

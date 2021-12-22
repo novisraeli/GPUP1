@@ -289,4 +289,6 @@ public class engineImpl implements engine {
     public boolean ifRunTask(){
         return res==null;
     }
+
+    public Map<String, Target> getMap(){return targetMap;}
 }
