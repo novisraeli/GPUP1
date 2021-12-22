@@ -1,7 +1,6 @@
 package xml;
-import generated.GPUPDescriptor;
-import generated.GPUPTarget;
-import generated.GPUPTargetDependencies;
+import generated2.*;
+import target.DependsOnConflict;
 import target.*;
 
 import java.io.FileInputStream;
@@ -14,11 +13,10 @@ import java.util.*;
 
 
 public class Xmlimpl implements Xml {
-    private final GPUPDescriptor gpupDescriptor;
-    private final static String JAXB_XML_PACKAGE_NAME = "generated";
+    private final generated2.GPUPDescriptor gpupDescriptor;
+    private final static String JAXB_XML_PACKAGE_NAME = "generated2";
 
     public Xmlimpl(String path) throws Exception {
-
         try {
             InputStream inputStream = new FileInputStream(new File(path));
             gpupDescriptor = deserializeFrom(inputStream);
@@ -131,4 +129,6 @@ public class Xmlimpl implements Xml {
     public String getWorkingDirectoryXml(){
         return gpupDescriptor.getGPUPConfiguration().getGPUPWorkingDirectory();
     }
+    public int getMaxParallelism(){
+        return gpupDescriptor.getGPUPConfiguration().getGPUPMaxParallelism();}
 }
