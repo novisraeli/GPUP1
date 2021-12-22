@@ -14,13 +14,18 @@ import java.time.LocalDateTime;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class engineImpl implements engine {
     private boolean loadFile = false;
     private Map<String, Target> targetMap;
     private String workingDirectory;
     private List<Information> res;
-
+    private int maxThreads;
+    private Set<Set<String>> serielSets;
 
     /** Load file
      *  Open XML file
@@ -40,6 +45,9 @@ public class engineImpl implements engine {
         workingDirectory= file.getWorkingDirectoryXml();
         loadFile = true;
         targetMap = targetMapTemp;
+        maxThreads=file.getMaxParallelism();
+        serielSets=file.getSerielSets();
+
     }
 
     /** Targets in formation
@@ -177,7 +185,7 @@ public class engineImpl implements engine {
             throw new XmlNotLoad();
         boolean done = false;
         res = new ArrayList<Information>();
-        String path=openDir();
+        //String path=openDir();
         if(!keepLastRun){
             for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all targets to waiting
                 e.getValue().SetStatus(Target.Status.Waiting);
@@ -218,13 +226,58 @@ public class engineImpl implements engine {
         */
         return res;
     }
-    private String openDir() throws IOException {//doesnt have path yet,this func create directory for simulation task
+    public void taskSetUp(int time, boolean random, float success, float warning,boolean keepLastRun,String taskType,int threadsNum) throws Exception {
+        int randomTime=0;
+        if (!loadFile)
+            throw new XmlNotLoad();
+        String path=openDir(taskType);
+        if(!keepLastRun){
+            for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all targets to waiting
+                e.getValue().SetStatus(Target.Status.Waiting);
+            }
+        }
+        else{
+            for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all failed or skipped targets to waiting
+                if(e.getValue().getStatus()== Target.Status.Skipped||e.getValue().getStatus()== Target.Status.Failure){
+                    e.getValue().SetStatus(Target.Status.Waiting);
+                }
+            }
+        }
+        //set up thread pool
+        ExecutorService threads= Executors.newFixedThreadPool(threadsNum);
+        List<Target> l=new ArrayList<>();
+        Set<String> req;
+        Random r=new Random();
+        //now set variables for run
+        for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all targets to waiting
+            if(random){
+                randomTime=r.nextInt(time)+1;
+            }
+            e.getValue().setRunTime(randomTime);
+            e.getValue().setSuccessChance(success);
+            e.getValue().setWarningChance(warning);
+            e.getValue().setPath(path);
+            l.add(e.getValue());
+        }
+        //run on all targets
+        while(!taskDoneCheck()) {
+            for (Target t : l) {
+
+            }
+        }
+        for(Map.Entry<String, Target> e : targetMap.entrySet()){
+
+        }
+
+    }
+    //may need to splite to 2 funcs because to task types
+    private String openDir(String taskType) throws IOException {//doesnt have path yet,this func create directory for simulation task
         Path path=Paths.get(workingDirectory);
         Files.createDirectories(path);
         //File dir = new File(workingDirectory);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.mm.yyyy HH.MM.SS");
         LocalDateTime now = LocalDateTime.now();
-        String s ="Simulation "+dtf.format(now);
+        String s =taskType+" "+dtf.format(now);
         s= workingDirectory+"\\"+s;
         Path innerPath=Paths.get(s);
         Files.createDirectories(innerPath);
@@ -233,7 +286,7 @@ public class engineImpl implements engine {
     }
     private boolean taskDoneCheck(){
         for(Map.Entry<String, Target> e : targetMap.entrySet()){
-            if(e.getValue().getStatus().name().equals(Target.Status.Waiting.name())) {
+            if(e.getValue().getStatus()== Target.Status.Waiting) {
                 return false;
             }
         }
@@ -291,4 +344,8 @@ public class engineImpl implements engine {
     }
 
     public Map<String, Target> getMap(){return targetMap;}
+    public int getMaxThreads(){
+        return maxThreads;
+    }
+
 }

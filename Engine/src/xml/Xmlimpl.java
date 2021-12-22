@@ -1,5 +1,6 @@
 package xml;
 import generated2.*;
+import generated2.GPUPDescriptor.GPUPSerialSets.GPUPSerialSet;
 import target.DependsOnConflict;
 import target.*;
 
@@ -130,5 +131,28 @@ public class Xmlimpl implements Xml {
         return gpupDescriptor.getGPUPConfiguration().getGPUPWorkingDirectory();
     }
     public int getMaxParallelism(){
-        return gpupDescriptor.getGPUPConfiguration().getGPUPMaxParallelism();}
+        return gpupDescriptor.getGPUPConfiguration().getGPUPMaxParallelism();
+    }
+    public Set<Set<String>> getSerielSets(){
+        Set<Set<String>> res=new HashSet<>();
+        List<GPUPSerialSet> temp=gpupDescriptor.getGPUPSerialSets().getGPUPSerialSet();
+
+        for(GPUPSerialSet s:temp){
+            Set<String> set=new HashSet<>();
+            String t="";
+            String targets=s.getTargets();
+            for(int i=0;i<targets.length();i++){
+                if(targets.charAt(i)==','){
+                    set.add(t);
+                    t="";
+                }
+                else{
+                    t+=targets.charAt(i);
+                }
+            }
+            res.add(set);
+        }
+        return res;
+    }
+
 }
