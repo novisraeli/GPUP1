@@ -9,16 +9,22 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
-public class Target implements Serializable
+public class Target implements Serializable,Runnable
 {
     public enum Type {INDEPENDENTS, LEAF, MIDDLE, ROOT}
     public enum Status {Waiting,Success,Warning ,Skipped ,Failure}
-    private String userData;
+    private final String userData;
     private final String name;
     private Type type;
     private Status status=Status.Waiting;
     private final Set<String> setDependsOn;
     private final Set<String> setRequiredFor;
+    private int runTime=0;
+    private float failChance=0;
+    private float warningChance=0;
+    private Map<String, Target> targetMap;
+
+
 
     /** ctor */
     public  Target(String name , String userData , Set<String> setDependsOn , Set<String> setRequiredFor) {
@@ -86,7 +92,18 @@ public class Target implements Serializable
     public void SetType(Type t) {
         this.type = t;
     }
-    public void SetUserData(String s){this.userData = s;}
+    public void setMap(Map<String, Target> t){
+        targetMap=t;
+    }
+    public void setFailChance(float f){
+        failChance=f;
+    }
+    public void setWarningChance(float f){
+        warningChance=f;
+    }
+    public void setRunTime(int i){
+        runTime=i;
+    }
     /** Set status
      * @param s- new target status
      */
@@ -191,6 +208,20 @@ public class Target implements Serializable
                 + "Target RequiredFor:" + setRequiredFor + "\n\r"
                 + "Target type:" + type + "\n\r"
                 + "Target Data: "+ userData + "\n\r" ;
+    }
+    public void run(){
+        try{
+            if(!this.setDependsOn.isEmpty()){
+                for(String s:setDependsOn){
+                    if(targetMap.get(s).getStatus()==Status.Waiting){//dont run if depends on is still waiting
+                        return;
+                    }
+                }
+            }
+        }
+        catch (Exception e){
+
+        }
     }
 }
 
