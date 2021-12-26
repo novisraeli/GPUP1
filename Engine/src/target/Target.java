@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.util.*;
 
-public class Target implements Serializable
+public class Target implements Serializable,Runnable
 {
     public enum Type {INDEPENDENTS, LEAF, MIDDLE, ROOT}
     public enum Status {Waiting,Success,Warning ,Skipped ,Failure}
@@ -19,6 +19,12 @@ public class Target implements Serializable
     private Status status=Status.Waiting;
     private final Set<String> setDependsOn;
     private final Set<String> setRequiredFor;
+    private int runTime=0;
+    private float successChance=0;
+    private float warningChance=0;
+    private Map<String, Target> targetMap;
+    private String simTimeString;
+    private String path;
 
     /** ctor */
     public  Target(String name , String userData , Set<String> setDependsOn , Set<String> setRequiredFor) {
@@ -86,7 +92,30 @@ public class Target implements Serializable
     public void SetType(Type t) {
         this.type = t;
     }
+
     public void SetUserData(String s){this.userData = s;}
+
+    public void setMap(Map<String, Target> t){
+        targetMap=t;
+    }
+    public void setSuccessChance(float f){
+        successChance=f;
+    }
+    public void setWarningChance(float f){
+        warningChance=f;
+    }
+    public void setRunTime(int i){
+        runTime=i;
+    }
+    public String getSimTimeString(){
+        return simTimeString;
+    }
+    public void setPath(String s){
+        path=s + "\\" + this.name + ".log";
+    }
+    public String getPath(){
+        return path;
+    }
     /** Set status
      * @param s- new target status
      */
@@ -192,6 +221,49 @@ public class Target implements Serializable
                 + "Target type:" + type + "\n\r"
                 + "Target Data: "+ userData + "\n\r" ;
     }
+    public void run(){
+        try{
+            if(!this.setDependsOn.isEmpty()){
+                for(String s:setDependsOn){
+                    if(targetMap.get(s).getStatus()==Status.Waiting){//dont run if depends on is still waiting
+                        return;
+                    }
+                    else if(targetMap.get(s).getStatus()==Status.Failure){
+                        this.status=Status.Skipped;
+                        simTimeString="00:00:00:00";
+                    }
+                }
+            }
+            long startTime = System.currentTimeMillis();//sim target and keep time of sim
+            Thread.sleep((long)runTime);
+            long simTime=System.currentTimeMillis()-startTime;
+            //turn simTime to string
+            long millis = simTime % 1000;
+            long second = (simTime / 1000) % 60;
+            long minute = (simTime / (1000 * 60)) % 60;
+            long hour = (simTime / (1000 * 60 * 60)) % 24;
+            String simTimeString = String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
+            Random r=new Random();
+            float successRand=r.nextFloat();
+            float warningRand=r.nextFloat();
+            if(successChance>=successRand){
+                if(warningChance>=warningRand){
+                    this.status=Status.Warning;
+                }
+                else{
+                    this.status=Status.Success;
+                }
+            }
+            else{
+                this.status=Status.Failure;
+            }
+        }
+        catch (Exception e){
+
+        }
+    }
+
+
 }
 
 
