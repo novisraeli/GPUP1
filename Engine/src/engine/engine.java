@@ -1,6 +1,7 @@
 package engine;
 
 import information.Information;
+import target.Target;
 import target.Targets;
 import java.util.*;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 public interface engine{
 
+    Map<String, Target> getMap();
     enum Dependence{DEPENDS_ON , REQUIRED_FOR}
     void loadFile(String path) throws Exception;
     Information targetsInFormation() throws Exception ;

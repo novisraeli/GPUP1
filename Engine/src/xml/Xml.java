@@ -1,6 +1,6 @@
 package xml;
 
-import generated.GPUPTargets;
+import generated2.GPUPTargets;
 import org.w3c.dom.Document;
 
 import javax.xml.bind.JAXBException;

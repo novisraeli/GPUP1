@@ -6,19 +6,17 @@ import java.util.Set;
 
 public class targetTable extends Target{
     private CheckBox remark;
-
-
-    public  targetTable(String name , String userData , Set<String> setDependsOn , Set<String> setRequiredFor) {
-        super(name,userData,setDependsOn,setRequiredFor);
-        this.remark = new CheckBox();
-    }
+    private int directRequiredForTableCol;
+    private int directDepemdsOnTableCol;
 
     public  targetTable(Target t) {
         super(t.getName(),t.getUserData(),t.getSetDependsOn(),t.getSetRequiredFor());
         this.remark = new CheckBox();
         this.SetStatus( t.getStatus());
         this.SetType(t.getType());
-        this.SetUserData("bar");
+        this.SetUserData(t.getUserData());
+        this.directRequiredForTableCol = t.getSetRequiredFor().size();
+        directDepemdsOnTableCol =  t.getSetDependsOn().size();
     }
 
     public CheckBox getRemark() {
