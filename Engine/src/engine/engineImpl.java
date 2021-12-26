@@ -179,6 +179,43 @@ public class engineImpl implements engine {
         }
     }
 
+
+    public Information whatIf(String s,boolean dir){
+        Set<String>res=new HashSet<>();
+        Target t=null;
+        for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all targets to waiting
+            if(e.getKey().equals(s)){
+                t=e.getValue();
+            }
+        }
+        if(dir){
+            whatIfDepends(t,res);
+
+        }
+        else{
+            whatIfRequired(t,res);
+        }
+        return new WhatIfInfo(res,dir);
+
+    }
+    private void whatIfDepends(Target t,Set<String>res){
+        if(t.getSetDependsOn().isEmpty()){
+            return;
+        }
+        for(String s:t.getSetDependsOn()){
+            res.add(s);
+            whatIfDepends(targetMap.get(s),res);
+        }
+    }
+    private void whatIfRequired(Target t,Set<String>res){
+        if(t.getSetRequiredFor().isEmpty()){
+            return;
+        }
+        for(String s:t.getSetRequiredFor()){
+            res.add(s);
+            whatIfRequired(targetMap.get(s),res);
+        }
+    }
     @Override
     public List<Information> runTask(int time, boolean random, float success, float warning,boolean keepLastRun) throws Exception {
         if (!loadFile)
