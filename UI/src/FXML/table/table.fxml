@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
@@ -10,76 +11,130 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1300.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.table.tableController">
    <center>
-      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="394.0" prefWidth="525.0" styleClass="background" BorderPane.alignment="CENTER">
          <content>
-            <GridPane minHeight="380.0" minWidth="580.0">
+            <GridPane minHeight="730.0" minWidth="1075.0" prefHeight="730.0" prefWidth="1075.0" styleClass="background">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView prefHeight="368.0" prefWidth="519.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                  <TableView fx:id="tableView" minHeight="750.0" minWidth="1075.0" prefHeight="750.0" prefWidth="1075.0" styleClass="tableView" stylesheets="@../utility/table.css" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                      <columns>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="120.0" styleClass="tableColumn" text="Name" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="99.0" styleClass="tableColumn" text="Type" />
+                        <TableColumn fx:id="nameTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="200.0" styleClass="tableColumn" text="Name" />
+                        <TableColumn fx:id="typeTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="200.0" styleClass="tableColumn" text="Type" />
                         <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="170.0" styleClass="tableColumn" text="Required For">
                            <columns>
-                              <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="67.0" styleClass="tableColumn" text="Direct" />
-                              <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="67.0" styleClass="tableColumn" text="Total" />
+                              <TableColumn fx:id="directRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
+                              <TableColumn fx:id="totalRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
                            </columns>
                         </TableColumn>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="77.0" styleClass="tableColumn" text="Depends On">
+                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="105.0" styleClass="tableColumn" text="Depends On">
                            <columns>
-                              <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="67.0" styleClass="tableColumn" text="Direct" />
-                              <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="67.0" styleClass="tableColumn" text="Total" />
+                              <TableColumn fx:id="directDepemdsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
+                              <TableColumn fx:id="totalDepemdsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
                            </columns>
                         </TableColumn>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="109.0" styleClass="tableColumn" text="Data" />
+                        <TableColumn fx:id="dataTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="388.0" styleClass="tableColumn" text="Data" />
                      </columns>
                   </TableView>
-                  <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="1">
-                     <children>
-                        <Label styleClass="labelSumUp" text="SumUp:">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
-                           </padding>
-                        </Label>
-                        <Label styleClass="labelSumUp" text="Amount of targets - ">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
-                           </padding>
-                        </Label>
-                        <Label styleClass="labelSumUp" text="Leaves - ">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
-                           </padding>
-                        </Label>
-                        <Label styleClass="labelSumUp" text="Middle -">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
-                           </padding>
-                        </Label>
-                        <Label styleClass="labelSumUp" text="Roots - ">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
-                           </padding>
-                        </Label>
-                        <Label styleClass="labelSumUp" text="Independents - ">
-                           <padding>
-                              <Insets bottom="5.0" left="5.0" right="10.0" top="5.0" />
-                           </padding>
-                        </Label>
-                     </children>
-                  </HBox>
                </children>
             </GridPane>
          </content>
       </ScrollPane>
    </center>
+   <right>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="750.0" prefWidth="209.0" styleClass="background" BorderPane.alignment="CENTER">
+         <content>
+            <VBox id="sumUp-vbox" prefHeight="748.0" prefWidth="249.0" styleClass="background">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="52.0" prefWidth="211.0" styleClass="background">
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <children>
+                        <Label id="titleLabel" alignment="CENTER" prefHeight="27.0" prefWidth="215.0" text="SumUp" />
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="3.0" top="6.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="targets - " />
+                        <Text fx:id="targetNumberText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="3.0" top="6.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Leaves - " />
+                        <Text fx:id="leavesNumberText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="3.0" top="6.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Middle -" />
+                        <Text fx:id="middleNumberText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="3.0" top="6.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Roots - " />
+                        <Text fx:id="rootsNumberText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox>
+                     <VBox.margin>
+                        <Insets bottom="8.0" left="3.0" top="6.0" />
+                     </VBox.margin>
+                     <children>
+                        <Label text="Independents - " />
+                        <Text fx:id="indepNumberText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text">
+                           <HBox.margin>
+                              <Insets left="5.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </content>
+      </ScrollPane>
+   </right>
+   <stylesheets>
+      <URL value="@css/table.css" />
+      <URL value="@../utility/backgroung.css" />
+   </stylesheets>
 </BorderPane>

@@ -8,6 +8,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleButton?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -17,40 +18,40 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="604.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.path.pathController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1300.0" stylesheets="@css/path.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.path.pathController">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <GridPane minHeight="380.0" minWidth="580.0">
+            <GridPane minHeight="670.0" minWidth="1290.0" prefHeight="670.0" prefWidth="1290.0">
               <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="491.0" minWidth="10.0" prefWidth="479.0" />
-                  <ColumnConstraints hgrow="ALWAYS" maxWidth="292.0" minWidth="10.0" prefWidth="107.0" />
+                <ColumnConstraints hgrow="NEVER" maxWidth="941.0" minWidth="10.0" prefWidth="782.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="521.0" minWidth="0.0" prefWidth="516.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView fx:id="tableView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="398.0" prefWidth="20.0" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
+                  <TableView fx:id="tableView" minHeight="720.0" minWidth="780.0" prefHeight="720.0" prefWidth="780.0" styleClass="path-table-view" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                      <columns>
-                        <TableColumn fx:id="nameTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Name" />
-                        <TableColumn fx:id="typeTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="100.0" text="Type" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="184.0" text="Required For">
+                        <TableColumn fx:id="remarkTableCol" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" styleClass="tableColumn" />
+                        <TableColumn fx:id="nameTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Name" />
+                        <TableColumn fx:id="typeTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Type" />
+                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="0.0" styleClass="tableColumn" text="Required For">
                            <columns>
-                              <TableColumn fx:id="directRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="40.0" text="Direct" />
-                              <TableColumn fx:id="totalRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="40.0" text="Total" />
+                              <TableColumn fx:id="directRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
+                              <TableColumn fx:id="totalRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
                            </columns>
                         </TableColumn>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="105.0" text="Depends On">
+                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="114.0" styleClass="tableColumn" text="Depends On">
                            <columns>
-                              <TableColumn fx:id="directDepemdsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="40.0" text="Direct" />
-                              <TableColumn fx:id="TotalDepemdsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="40.0" text="Total" />
+                              <TableColumn fx:id="directDepemdsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
+                              <TableColumn fx:id="TotalDepemdsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
                            </columns>
                         </TableColumn>
-                        <TableColumn fx:id="dataTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="106.0" text="Data" />
-                        <TableColumn fx:id="remarkTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="27.0" />
+                        <TableColumn fx:id="dataTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Data" />
                      </columns>
                   </TableView>
-                  <GridPane GridPane.columnIndex="1">
+                  <GridPane styleClass="path" GridPane.columnIndex="1">
                      <columnConstraints>
                         <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
                      </columnConstraints>
@@ -59,21 +60,21 @@
                         <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="346.0" vgrow="ALWAYS" />
                      </rowConstraints>
                      <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+                        <VBox prefHeight="200.0" prefWidth="100.0" styleClass="path" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
                            <children>
-                              <Label prefHeight="43.0" prefWidth="138.0" text="Path between" VBox.vgrow="ALWAYS">
+                              <Label prefHeight="43.0" prefWidth="138.0" styleClass="path-label" text="Path between" VBox.vgrow="ALWAYS">
                                  <VBox.margin>
                                     <Insets left="10.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                               </Label>
-                              <Label prefHeight="43.0" prefWidth="138.0" text="two targets">
+                              <Label prefHeight="43.0" prefWidth="138.0" styleClass="path-label" text="two targets">
                                  <VBox.margin>
                                     <Insets bottom="5.0" left="10.0" right="5.0" />
                                  </VBox.margin>
                               </Label>
                            </children>
                         </VBox>
-                        <ListView fx:id="pathListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="335.0" prefWidth="186.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+                        <ListView fx:id="pathListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="335.0" prefWidth="186.0" styleClass="path" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
                      </children>
                   </GridPane>
                </children>
@@ -82,23 +83,25 @@
       </ScrollPane>
    </center>
    <bottom>
-      <GridPane prefHeight="20.0" BorderPane.alignment="CENTER">
+      <GridPane prefHeight="25.0" styleClass="path" BorderPane.alignment="CENTER">
          <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.0" minWidth="10.0" prefWidth="550.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.0" minWidth="10.0" prefWidth="550.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.0" minWidth="10.0" prefWidth="550.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.0" minWidth="10.0" prefWidth="580.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="160.0" prefWidth="100.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.0" minWidth="60.0" prefWidth="60.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.0" minWidth="10.0" prefWidth="153.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.0" minWidth="10.0" prefWidth="239.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.0" minWidth="10.0" prefWidth="106.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="583.0" minWidth="10.0" prefWidth="195.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="583.0" minWidth="10.0" prefWidth="159.0" />
+            <ColumnConstraints hgrow="NEVER" maxWidth="1.7976931348623157E308" minWidth="147.0" prefWidth="214.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.0" minWidth="60.0" prefWidth="144.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.0" minWidth="60.0" prefWidth="100.0" />
          </columnConstraints>
          <rowConstraints>
-            <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ComboBox fx:id="depenceComboBox" minHeight="10.0" prefHeight="17.0" prefWidth="136.0" GridPane.columnIndex="3" />
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="2">
+            <ComboBox fx:id="depenceComboBox" minHeight="10.0" prefHeight="17.0" prefWidth="136.0" styleClass="path" GridPane.columnIndex="4" />
+            <HBox prefHeight="25.0" prefWidth="103.0" styleClass="path" GridPane.columnIndex="3">
                <children>
-                  <Label text="Source:" HBox.hgrow="ALWAYS">
+                  <Label prefHeight="25.0" prefWidth="48.0" styleClass="path-label" text="Source:" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets />
                      </HBox.margin>
@@ -106,16 +109,16 @@
                         <Insets right="5.0" top="1.0" />
                      </padding>
                   </Label>
-                  <Text fx:id="sourceText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" HBox.hgrow="ALWAYS">
+                  <Text fx:id="sourceText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="path-text" text="Text" wrappingWidth="51.27001953125" HBox.hgrow="ALWAYS">
                      <HBox.margin>
-                        <Insets top="1.0" />
+                        <Insets top="7.0" />
                      </HBox.margin>
                   </Text>
                </children>
             </HBox>
-            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="4">
+            <HBox prefHeight="100.0" prefWidth="200.0" styleClass="path" GridPane.columnIndex="5">
                <children>
-                  <Label text="destination:" HBox.hgrow="ALWAYS">
+                  <Label prefHeight="26.0" prefWidth="71.0" styleClass="path-label" text="destination:" HBox.hgrow="ALWAYS">
                      <HBox.margin>
                         <Insets left="20.0" />
                      </HBox.margin>
@@ -123,19 +126,19 @@
                         <Insets right="5.0" top="1.0" />
                      </padding>
                   </Label>
-                  <Text fx:id="destinationText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" HBox.hgrow="ALWAYS">
+                  <Text fx:id="destinationText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="path-text" text="Text" wrappingWidth="60.27001953125" HBox.hgrow="ALWAYS">
                      <HBox.margin>
-                        <Insets top="1.0" />
+                        <Insets top="7.0" />
                      </HBox.margin>
                   </Text>
                </children>
             </HBox>
-            <Button fx:id="switchButton" minHeight="10.0" mnemonicParsing="false" onAction="#switchAction" prefHeight="17.0" prefWidth="40.0" text="Switch" GridPane.columnIndex="5">
+            <Button fx:id="switchButton" minHeight="20.0" mnemonicParsing="false" onAction="#switchAction" prefHeight="20.0" prefWidth="50.0" styleClass="path-button" text="Switch" GridPane.columnIndex="6">
                <font>
                   <Font size="9.0" />
                </font>
             </Button>
-            <Button fx:id="clearButton" minHeight="10.0" mnemonicParsing="false" onAction="#clearAction" prefHeight="17.0" prefWidth="40.0" text="Clear">
+            <Button fx:id="clearButton" minHeight="20.0" minWidth="50.0" mnemonicParsing="false" onAction="#clearAction" prefHeight="20.0" prefWidth="50.0" styleClass="path-button" text="Clear">
                <font>
                   <Font size="9.0" />
                </font>
@@ -143,7 +146,30 @@
                   <Insets left="10.0" />
                </GridPane.margin>
             </Button>
-            <Button fx:id="button" mnemonicParsing="false" onAction="#set" text="Button" GridPane.columnIndex="1" />
+            <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
+               <children>
+                  <ToggleButton fx:id="toggleButtonPath" minHeight="20.0" minWidth="50.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="50.0" styleClass="path-button" text="Path">
+                     <HBox.margin>
+                        <Insets left="1.0" right="1.0" top="4.0" />
+                     </HBox.margin>
+                  </ToggleButton>
+                  <ToggleButton fx:id="toggleButtonCycle" minHeight="20.0" minWidth="50.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="50.0" styleClass="path-button" text="Cycle">
+                     <HBox.margin>
+                        <Insets right="1.0" top="4.0" />
+                     </HBox.margin>
+                  </ToggleButton>
+               </children>
+            </HBox>
+            <Button fx:id="runButton" minHeight="20.0" mnemonicParsing="false" onAction="#runButtonAction" prefHeight="20.0" prefWidth="50.0" styleClass="path-button" text="Run" GridPane.columnIndex="7">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Button>
+            <Button id="setButton" fx:id="setButton" minHeight="20.0" minWidth="50.0" mnemonicParsing="false" onAction="#setForRun" prefHeight="20.0" prefWidth="50.0" styleClass="path-button" text="Set" GridPane.columnIndex="2">
+               <font>
+                  <Font size="9.0" />
+               </font>
+            </Button>
          </children>
       </GridPane>
    </bottom>

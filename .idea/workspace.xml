@@ -12,24 +12,53 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="bar">
-      <change afterPath="$PROJECT_DIR$/Engine/src/mypackage/G.P.U.P-V2.xsd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/mypackage/GPUPDescriptor.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/mypackage/GPUPTarget.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/mypackage/GPUPTargetDependencies.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/mypackage/GPUPTargets.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Engine/src/mypackage/ObjectFactory.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/error/erroe.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/error/errorController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/error/errorMain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/file/css/file.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/file/css/programming.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/file/fileController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/main/css/mainApp.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/path/css/path.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/setting/css/setting.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/setting/setting.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/setting/settingController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/table/css/table.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/table/tableController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/task/css/task.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/task/task.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/utility/backgroung.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/utility/table.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/whatIf/whatIfController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/circle.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/circle/circle.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/ex1-big.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/file.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/file/file.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/mainApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/main/mainApp.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/path.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/path/path.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/table.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/table/table.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/whatIf.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/whatIf/whatIf.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/controller/pathController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/path/pathController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/generated/GPUPConfiguration.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/generated/GPUPDescriptor.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/generated/GPUPTarget.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/generated/GPUPTargetDependencies.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/generated/GPUPTargets.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/generated/ObjectFactory.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/target/targetTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/target/targetTable.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/xml/Xml.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/xml/Xml.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/circle/circle.fxml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/file/file.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/file/file.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/main/mainApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/main/mainApp.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/path/path.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/path/path.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/path/pathController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/path/pathController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/table/table.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/table/table.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/whatIf/whatIf.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/whatIf/whatIf.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engine$Dependence.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engine$Dependence.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated/GPUPConfiguration.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated/GPUPDescriptor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated/GPUPTarget.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated/GPUPTargetDependencies$GPUGDependency.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated/GPUPTargetDependencies.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated/GPUPTargets.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated/ObjectFactory.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/xml/Xmlimpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/xml/Xmlimpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/UI/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/main.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -157,18 +186,22 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/UI/src/FXML/utility" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="configurable.group.language" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/UI/src/FXML/utility" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/UI/src/FXML/circle/css" />
+      <recent name="$PROJECT_DIR$/UI/src/FXML/file/css" />
       <recent name="$PROJECT_DIR$/UI/src/FXML/file" />
+      <recent name="$PROJECT_DIR$/UI/src/FXML/file/resource" />
       <recent name="$PROJECT_DIR$/UI/src/FXML/main" />
-      <recent name="$PROJECT_DIR$/UI/src/FXML/path" />
-      <recent name="$PROJECT_DIR$/UI/src/FXML/table" />
-      <recent name="$PROJECT_DIR$/UI/src/FXML/whatIf" />
     </key>
   </component>
   <component name="RunManager">
@@ -216,7 +249,10 @@
       <workItem from="1640025772025" duration="178000" />
       <workItem from="1640119415741" duration="2203000" />
       <workItem from="1640122014129" duration="7416000" />
-      <workItem from="1640169812525" duration="476000" />
+      <workItem from="1640169812525" duration="4124000" />
+      <workItem from="1640179370532" duration="8483000" />
+      <workItem from="1640260233220" duration="19280000" />
+      <workItem from="1640367445428" duration="23094000" />
     </task>
     <task id="LOCAL‎00001" summary="zxc">
       <created>1636536346510</created>
@@ -436,7 +472,19 @@
       <option name="presentableId" value="LOCAL‎00036" />
       <updated>1640168556194</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL‎00037" summary="bar">
+      <created>1640170377178</created>
+      <option name="number" value="LOCAL‎00037" />
+      <option name="presentableId" value="LOCAL‎00037" />
+      <updated>1640170377178</updated>
+    </task>
+    <task id="LOCAL‎00038" summary="bar">
+      <created>1640170656035</created>
+      <option name="number" value="LOCAL‎00038" />
+      <option name="presentableId" value="LOCAL‎00038" />
+      <updated>1640170656035</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -572,24 +620,24 @@
           <option name="timeStamp" value="96" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/FXML/path/pathController.java</url>
-          <line>124</line>
-          <option name="timeStamp" value="106" />
+          <url>file://$PROJECT_DIR$/UI/src/FXML/error/errorMain.java</url>
+          <line>27</line>
+          <option name="timeStamp" value="108" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/FXML/table/tableController.java</url>
+          <line>16</line>
+          <option name="timeStamp" value="127" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/path/pathController.java</url>
-          <line>102</line>
-          <option name="timeStamp" value="111" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/FXML/path/pathController.java</url>
-          <line>91</line>
-          <option name="timeStamp" value="112" />
+          <line>88</line>
+          <option name="timeStamp" value="131" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Engine/src/information/TargetInformation.java</url>
           <line>29</line>
-          <properties class="information.TargetInformation">
+          <properties class="information.TargetInformation" method="toString">
             <option name="EMULATED" value="true" />
           </properties>
           <option name="timeStamp" value="50" />
@@ -619,6 +667,10 @@
         <PinnedItemInfo parentTag="target.Targets" memberName="targetsList" />
       </pinned-members>
     </pin-to-top-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/Engine/src/information/Information.java">

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1300.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.path.pathController">
+   <center>
+      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" styleClass="background" BorderPane.alignment="CENTER">
+         <content>
+            <GridPane minHeight="748.0" minWidth="1290.0" prefHeight="748.0" prefWidth="1290.0" styleClass="background">
+              <columnConstraints>
+                <ColumnConstraints hgrow="NEVER" maxWidth="1053.0" minWidth="10.0" prefWidth="1046.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="521.0" minWidth="0.0" prefWidth="252.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <GridPane styleClass="background" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="780.0" prefWidth="780.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints minHeight="720.0" prefHeight="720.0" vgrow="NEVER" />
+                        <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
+                     </rowConstraints>
+                     <children>
+                        <TableView fx:id="tableView" minHeight="720.0" minWidth="780.0" prefHeight="720.0" prefWidth="780.0" styleClass="tableView" stylesheets="@../utility/table.css" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+                           <columns>
+                              <TableColumn fx:id="remarkTableCol" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" styleClass="tableColumn" />
+                              <TableColumn fx:id="nameTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Name" />
+                              <TableColumn fx:id="typeTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Type" />
+                              <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="0.0" styleClass="tableColumn" text="Required For">
+                                 <columns>
+                                    <TableColumn fx:id="directRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
+                                    <TableColumn fx:id="totalRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
+                                 </columns>
+                              </TableColumn>
+                              <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="114.0" styleClass="tableColumn" text="Depends On">
+                                 <columns>
+                                    <TableColumn fx:id="directDepemdsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
+                                    <TableColumn fx:id="TotalDepemdsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
+                                 </columns>
+                              </TableColumn>
+                              <TableColumn fx:id="dataTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Data" />
+                              <TableColumn fx:id="dataTableCol1" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="265.0" styleClass="tableColumn" text="Status" />
+                           </columns>
+                        </TableView>
+                        <HBox prefHeight="100.0" prefWidth="200.0" styleClass="background" GridPane.rowIndex="1">
+                           <children>
+                              <Button id="clearButton" fx:id="clearButton" minHeight="20.0" minWidth="50.0" mnemonicParsing="false" onAction="#clearAction" prefHeight="20.0" prefWidth="50.0" text="Clear" HBox.hgrow="NEVER">
+                                 <font>
+                                    <Font size="9.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets left="10.0" right="20.0" top="6.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <CheckBox mnemonicParsing="false" styleClass="taskMangerLabel" text="With Required-For" HBox.hgrow="NEVER">
+                                 <HBox.margin>
+                                    <Insets top="6.0" />
+                                 </HBox.margin>
+                              </CheckBox>
+                              <CheckBox mnemonicParsing="false" styleClass="taskMangerLabel" text="With Dpends-On " HBox.hgrow="NEVER">
+                                 <HBox.margin>
+                                    <Insets left="20.0" top="6.0" />
+                                 </HBox.margin>
+                              </CheckBox>
+                           </children>
+                        </HBox>
+                     </children>
+                  </GridPane>
+                  <GridPane styleClass="background" GridPane.columnIndex="1">
+                     <columnConstraints>
+                        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
+                     </columnConstraints>
+                     <rowConstraints>
+                        <RowConstraints maxHeight="280.0" minHeight="52.0" prefHeight="52.0" vgrow="NEVER" />
+                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="346.0" vgrow="ALWAYS" />
+                     </rowConstraints>
+                     <children>
+                        <Label id="titleLabel" alignment="CENTER" prefHeight="55.0" prefWidth="252.0" styleClass="background" text="Task manger" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="background" GridPane.rowIndex="1">
+                           <children>
+                              <GridPane layoutY="31.0" styleClass="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columnConstraints>
+                                    <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="258.0" />
+                                 </columnConstraints>
+                                 <rowConstraints>
+                                    <RowConstraints maxHeight="194.0" minHeight="10.0" prefHeight="85.0" vgrow="NEVER" />
+                                    <RowConstraints maxHeight="389.0" minHeight="10.0" prefHeight="126.0" vgrow="NEVER" />
+                                    <RowConstraints maxHeight="445.0" minHeight="10.0" prefHeight="263.0" vgrow="NEVER" />
+                                    <RowConstraints maxHeight="356.0" minHeight="10.0" prefHeight="98.0" vgrow="NEVER" />
+                                    <RowConstraints maxHeight="356.0" minHeight="10.0" prefHeight="48.0" vgrow="NEVER" />
+                                    <RowConstraints maxHeight="316.0" minHeight="10.0" prefHeight="40.0" vgrow="NEVER" />
+                                    <RowConstraints maxHeight="316.0" minHeight="10.0" prefHeight="69.0" vgrow="NEVER" />
+                                 </rowConstraints>
+                                 <children>
+                                    <BorderPane GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+                                       <left>
+                                          <Label styleClass="taskMangerLabel" text="Compiler " BorderPane.alignment="CENTER">
+                                             <BorderPane.margin>
+                                                <Insets left="10.0" />
+                                             </BorderPane.margin>
+                                          </Label>
+                                       </left>
+                                       <center>
+                                          <ToggleButton mnemonicParsing="false" styleClass="toggleButtonTaskManger" text="ToggleButton" BorderPane.alignment="CENTER" />
+                                       </center>
+                                       <right>
+                                          <Label styleClass="taskMangerLabel" text="Simulation " BorderPane.alignment="CENTER">
+                                             <BorderPane.margin>
+                                                <Insets right="10.0" />
+                                             </BorderPane.margin>
+                                          </Label>
+                                       </right>
+                                    </BorderPane>
+                                    <ComboBox id="comboBoxTaskManger" minHeight="30.0" prefHeight="30.0" prefWidth="200.0" GridPane.rowIndex="3">
+                                       <GridPane.margin>
+                                          <Insets left="10.0" />
+                                       </GridPane.margin>
+                                    </ComboBox>
+                                    <ProgressBar id="proggressBar" prefHeight="20.0" prefWidth="165.0" progress="0.0" GridPane.rowIndex="5">
+                                       <GridPane.margin>
+                                          <Insets left="10.0" />
+                                       </GridPane.margin>
+                                    </ProgressBar>
+                                    <BorderPane maxHeight="47.0" maxWidth="353.0" minHeight="46.0" minWidth="234.0" prefHeight="47.0" prefWidth="234.0" GridPane.hgrow="NEVER" GridPane.rowIndex="6" GridPane.vgrow="NEVER">
+                                       <right>
+                                          <HBox prefHeight="51.0" prefWidth="184.0" BorderPane.alignment="CENTER">
+                                             <children>
+                                                <Button minHeight="30.0" minWidth="83.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" styleClass="buttonButtonTaskManger" text="Pause">
+                                                   <HBox.margin>
+                                                      <Insets right="10.0" top="10.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                                <Button minHeight="30.0" minWidth="83.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="83.0" styleClass="buttonButtonTaskManger" text="Run">
+                                                   <HBox.margin>
+                                                      <Insets left="10.0" right="10.0" top="10.0" />
+                                                   </HBox.margin>
+                                                </Button>
+                                             </children>
+                                          </HBox>
+                                       </right>
+                                    </BorderPane>
+                                    <HBox opacity="0.19" GridPane.rowIndex="1">
+                                       <children>
+                                          <VBox prefHeight="121.0" prefWidth="173.0">
+                                             <children>
+                                                <Label styleClass="taskMangerLabel" text="Processing time:">
+                                                   <VBox.margin>
+                                                      <Insets left="10.0" top="10.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label styleClass="taskMangerLabel" text="The chance for success">
+                                                   <VBox.margin>
+                                                      <Insets left="10.0" top="20.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                                <Label styleClass="taskMangerLabel" text="Success with a warning">
+                                                   <VBox.margin>
+                                                      <Insets left="10.0" top="20.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <VBox>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <children>
+                                                <Spinner maxHeight="17.0" minHeight="9.0" prefHeight="17.0" prefWidth="53.0" styleClass="taskMangerSpinner">
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Spinner>
+                                                <Spinner maxHeight="17.0" minHeight="9.0" prefHeight="17.0" prefWidth="53.0" styleClass="taskMangerSpinner">
+                                                   <VBox.margin>
+                                                      <Insets top="20.0" />
+                                                   </VBox.margin>
+                                                </Spinner>
+                                                <Spinner maxHeight="21.0" minHeight="9.0" prefHeight="17.0" prefWidth="53.0" styleClass="taskMangerSpinner">
+                                                   <VBox.margin>
+                                                      <Insets top="20.0" />
+                                                   </VBox.margin>
+                                                </Spinner>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                    <HBox prefHeight="35.0" prefWidth="211.0" GridPane.rowIndex="4">
+                                       <children>
+                                          <VBox prefHeight="121.0" prefWidth="173.0">
+                                             <children>
+                                                <Label styleClass="taskMangerLabel" text="Number of task in parallel">
+                                                   <VBox.margin>
+                                                      <Insets left="10.0" top="10.0" />
+                                                   </VBox.margin>
+                                                </Label>
+                                             </children>
+                                          </VBox>
+                                          <VBox>
+                                             <HBox.margin>
+                                                <Insets />
+                                             </HBox.margin>
+                                             <children>
+                                                <Spinner maxHeight="17.0" minHeight="9.0" prefHeight="17.0" prefWidth="53.0" styleClass="taskMangerSpinner">
+                                                   <VBox.margin>
+                                                      <Insets top="10.0" />
+                                                   </VBox.margin>
+                                                </Spinner>
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </GridPane>
+                           </children>
+                        </AnchorPane>
+                     </children>
+                  </GridPane>
+               </children>
+            </GridPane>
+         </content>
+      </ScrollPane>
+   </center>
+   <stylesheets>
+      <URL value="@../utility/table.css" />
+      <URL value="@../utility/backgroung.css" />
+      <URL value="@css/task.css" />
+   </stylesheets>
+</BorderPane>
