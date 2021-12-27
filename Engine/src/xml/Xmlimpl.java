@@ -146,7 +146,7 @@ public class Xmlimpl implements Xml {
                     set.add(t);
                     t="";
                 }
-                else{
+                else{///
                     t+=targets.charAt(i);
                 }
             }
