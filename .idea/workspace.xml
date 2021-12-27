@@ -33,6 +33,7 @@
       <change afterPath="$PROJECT_DIR$/UI/src/FXML/whatIf/whatIfController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/generated/GPUPConfiguration.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/generated/GPUPDescriptor.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/generated/GPUPTarget.java" beforeDir="false" />
@@ -41,6 +42,7 @@
       <change beforePath="$PROJECT_DIR$/Engine/src/generated/ObjectFactory.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/target/targetTable.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/target/targetTable.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/xml/Xml.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/xml/Xml.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/FXML/circle/circle.fxml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/FXML/file/file.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/file/file.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/FXML/main/mainApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/main/mainApp.fxml" afterDir="false" />
@@ -97,7 +99,13 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoTaskController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/UI/src/FXML/file/fileController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_301.jdk/Contents/Home/src.zip!/java/util/HashSet.java" root0="SKIP_INSPECTION" />
+    <setting file="file://$PROJECT_DIR$/UI/src/FXML/error/errorMain.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoMain.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">

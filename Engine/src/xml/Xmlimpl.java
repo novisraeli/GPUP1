@@ -1,7 +1,7 @@
 package xml;
-//import generated2.*;
+import generated2.*;
 //import generated2.GPUPDescriptor.GPUPSerialSets.GPUPSerialSet;
-import generated.*;
+
 import target.DependsOnConflict;
 import target.*;
 
@@ -136,9 +136,9 @@ public class Xmlimpl implements Xml {
     }
     public Set<Set<String>> getSerielSets(){
         Set<Set<String>> res=new HashSet<>();
-        List<GPUPSerialSet> temp=gpupDescriptor.getGPUPSerialSets().getGPUPSerialSet();
+        List<GPUPDescriptor.GPUPSerialSets.GPUPSerialSet> temp=gpupDescriptor.getGPUPSerialSets().getGPUPSerialSet();
 
-        for(GPUPSerialSet s:temp){
+        for(GPUPDescriptor.GPUPSerialSets.GPUPSerialSet s:temp){
             Set<String> set=new HashSet<>();
             String t="";
             String targets=s.getTargets();

@@ -100,7 +100,7 @@ public class taskController {
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     String name = tableView.getSelectionModel().getSelectedItem().getName();
-                    String type = tableView.getSelectionModel().getSelectedItem().getStatus().toString();
+                    String type = tableView.getSelectionModel().getSelectedItem().getType().toString();
                     String serialSets = "";
                     String process = "";
                     new targetInfoMain(name, type, serialSets, process);

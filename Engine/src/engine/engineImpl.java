@@ -395,6 +395,25 @@ public class engineImpl implements engine {
     }
 
     public synchronized Map<String, Target> getMap(){return targetMap;}
+
+    @Override
+    public void whatIf(String target, List<String>  newList, Dependence dependence) {
+        Set<String> tOneSet;
+        if (!newList.contains(target)) {
+            newList.add(target);
+            if (Dependence.DEPENDS_ON == dependence)
+                tOneSet = targetMap.get(target).getSetDependsOn();
+            else
+                tOneSet = targetMap.get(target).getSetRequiredFor();
+
+            if (tOneSet.size() != 0) {
+                for (String st2 : tOneSet) {
+                    whatIf(targetMap.get(st2).getName(), newList, dependence);
+                }
+            }
+        }
+    }
+
     public int getMaxThreads(){
         return maxThreads;
     }
