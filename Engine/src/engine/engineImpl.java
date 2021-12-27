@@ -179,7 +179,7 @@ public class engineImpl implements engine {
         }
     }
 
-
+///
     public Information whatIf(String s,boolean dir){
         Set<String>res=new HashSet<>();
         Target t=null;
