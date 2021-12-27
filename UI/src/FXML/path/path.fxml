@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
@@ -18,20 +19,20 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1300.0" stylesheets="@css/path.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.path.pathController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1300.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.path.pathController">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <content>
-            <GridPane minHeight="670.0" minWidth="1290.0" prefHeight="670.0" prefWidth="1290.0">
+            <GridPane minHeight="670.0" minWidth="1290.0" prefHeight="670.0" prefWidth="1290.0" styleClass="background">
               <columnConstraints>
-                <ColumnConstraints hgrow="NEVER" maxWidth="941.0" minWidth="10.0" prefWidth="782.0" />
-                  <ColumnConstraints hgrow="ALWAYS" maxWidth="521.0" minWidth="0.0" prefWidth="516.0" />
+                <ColumnConstraints hgrow="NEVER" maxWidth="856.0" minWidth="10.0" prefWidth="856.0" />
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="521.0" minWidth="0.0" prefWidth="442.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <TableView fx:id="tableView" minHeight="720.0" minWidth="780.0" prefHeight="720.0" prefWidth="780.0" styleClass="path-table-view" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+                  <TableView fx:id="tableView" maxWidth="850.0" minHeight="720.0" minWidth="850.0" prefHeight="720.0" prefWidth="850.0" styleClass="background" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="remarkTableCol" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" styleClass="tableColumn" />
                         <TableColumn fx:id="nameTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Name" />
@@ -44,14 +45,15 @@
                         </TableColumn>
                         <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="114.0" styleClass="tableColumn" text="Depends On">
                            <columns>
-                              <TableColumn fx:id="directDepemdsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
-                              <TableColumn fx:id="TotalDepemdsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
+                              <TableColumn fx:id="directDependsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
+                              <TableColumn fx:id="totalDependsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
                            </columns>
                         </TableColumn>
+                        <TableColumn fx:id="serialSetTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Serial Sets" />
                         <TableColumn fx:id="dataTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Data" />
                      </columns>
                   </TableView>
-                  <GridPane styleClass="path" GridPane.columnIndex="1">
+                  <GridPane prefHeight="716.0" prefWidth="353.0" styleClass="path" GridPane.columnIndex="1">
                      <columnConstraints>
                         <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
                      </columnConstraints>
@@ -98,7 +100,7 @@
             <RowConstraints minHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <ComboBox fx:id="depenceComboBox" minHeight="10.0" prefHeight="17.0" prefWidth="136.0" styleClass="path" GridPane.columnIndex="4" />
+            <ComboBox id="depComboBox" fx:id="depenceComboBox" minHeight="10.0" prefHeight="17.0" prefWidth="136.0" styleClass="path" GridPane.columnIndex="4" />
             <HBox prefHeight="25.0" prefWidth="103.0" styleClass="path" GridPane.columnIndex="3">
                <children>
                   <Label prefHeight="25.0" prefWidth="48.0" styleClass="path-label" text="Source:" HBox.hgrow="ALWAYS">
@@ -148,14 +150,19 @@
             </Button>
             <HBox prefHeight="100.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="CENTER">
                <children>
-                  <ToggleButton fx:id="toggleButtonPath" minHeight="20.0" minWidth="50.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="50.0" styleClass="path-button" text="Path">
+                  <ToggleButton id="pathToggle" fx:id="toggleButtonPath" minHeight="20.0" minWidth="50.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="50.0" text="Path">
                      <HBox.margin>
-                        <Insets left="1.0" right="1.0" top="4.0" />
+                        <Insets left="1.0" right="3.0" top="4.0" />
                      </HBox.margin>
                   </ToggleButton>
-                  <ToggleButton fx:id="toggleButtonCycle" minHeight="20.0" minWidth="50.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="50.0" styleClass="path-button" text="Cycle">
+                  <ToggleButton id="cycleToggle" fx:id="toggleButtonCycle" minHeight="20.0" minWidth="50.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="50.0" text="Cycle">
                      <HBox.margin>
-                        <Insets right="1.0" top="4.0" />
+                        <Insets right="3.0" top="4.0" />
+                     </HBox.margin>
+                  </ToggleButton>
+                  <ToggleButton id="whatIfToggle" fx:id="toggleButtonWhatIf" minHeight="20.0" minWidth="50.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="50.0" text="What-If">
+                     <HBox.margin>
+                        <Insets right="3.0" top="4.0" />
                      </HBox.margin>
                   </ToggleButton>
                </children>
@@ -173,4 +180,8 @@
          </children>
       </GridPane>
    </bottom>
+   <stylesheets>
+      <URL value="@css/path.css" />
+      <URL value="@../utility/backgroung.css" />
+   </stylesheets>
 </BorderPane>

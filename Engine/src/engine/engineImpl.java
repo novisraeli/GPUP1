@@ -58,7 +58,7 @@ public class engineImpl implements engine {
      *  amount of independents
      */
     @Override
-    public Information targetsInFormation() throws Exception{ /// option 2 in the menu
+    public GraphInformation targetsInFormation() throws Exception{ /// option 2 in the menu
         if (!loadFile)
             throw new XmlNotLoad();
         int amountOfTargets = targetMap.entrySet().size();          // count all the targets in the map
@@ -179,43 +179,6 @@ public class engineImpl implements engine {
         }
     }
 
-
-    public Information whatIf(String s,boolean dir){
-        Set<String>res=new HashSet<>();
-        Target t=null;
-        for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all targets to waiting
-            if(e.getKey().equals(s)){
-                t=e.getValue();
-            }
-        }
-        if(dir){
-            whatIfDepends(t,res);
-
-        }
-        else{
-            whatIfRequired(t,res);
-        }
-        return new WhatIfInfo(res,dir);
-
-    }
-    private void whatIfDepends(Target t,Set<String>res){
-        if(t.getSetDependsOn().isEmpty()){
-            return;
-        }
-        for(String s:t.getSetDependsOn()){
-            res.add(s);
-            whatIfDepends(targetMap.get(s),res);
-        }
-    }
-    private void whatIfRequired(Target t,Set<String>res){
-        if(t.getSetRequiredFor().isEmpty()){
-            return;
-        }
-        for(String s:t.getSetRequiredFor()){
-            res.add(s);
-            whatIfRequired(targetMap.get(s),res);
-        }
-    }
     @Override
     public List<Information> runTask(int time, boolean random, float success, float warning,boolean keepLastRun) throws Exception {
         /*
@@ -247,14 +210,14 @@ public class engineImpl implements engine {
             else if(e.getValue().getType()== Target.Type.LEAF){
                 leavies.add(e.getValue());//run on all leavies
             }
-        }
+        }     /*
         for(Target t:indi){
             t.run(time,random,success,warning,res,targetMap,path);
         }
         for(Target t:leavies){
             t.run(time,random,success,warning,res,targetMap,path);
         }
-        /*
+
         while(!done) {
             for (Map.Entry<String, Target> e : targetMap.entrySet()) {
                 e.getValue().run(time,random,success,warning,res,targetMap,path);
@@ -283,11 +246,8 @@ public class engineImpl implements engine {
                 }
             }
         }
-
-
         //set up thread pool
         ExecutorService threads= Executors.newFixedThreadPool(threadsNum);
-
         List<Target> l=new ArrayList<>();
         Set<String> req;
         Random r=new Random();

@@ -1,36 +1,47 @@
 package FXML.file;
-
-import FXML.error.errorController;
 import FXML.error.errorMain;
 import FXML.main.mainAppController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+import engine.engine;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextFlow;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import target.Target;
 import target.targetTable;
-
 import java.io.File;
-import java.io.IOException;
-import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
-
 public class fileController {
-    private mainAppController mainController;
-    @FXML
-    private Button loadFileButton;
 
-    @FXML
-    void loadFileButton(ActionEvent event) throws IOException {
+    private mainAppController mainController;
+    public void setMainController(mainAppController mainController) {
+        this.mainController = mainController;
+    }
+    public void addDataToTable() {
+        try {
+            mainController.observableList().clear();
+            Map<String, Target> map = mainController.getEngine().getMap();
+            for (String keys : map.keySet()) {
+                targetTable t = new targetTable(map.get(keys));
+                //t.setSerialSetTableCol();
+                List<String > list= new ArrayList<>();
+                mainController.getEngine().whatIf(t.getName(),list, engine.Dependence.DEPENDS_ON);
+                t.setTotalDependsOnTableCol(list.size()-1);
+                list.clear();
+                mainController.getEngine().whatIf(t.getName(),list, engine.Dependence.REQUIRED_FOR);
+                t.setTotalRequiredForTableCol(list.size()-1);
+                mainController.observableList().add(t);
+            }
+        }
+        catch (Exception e){new errorMain(e);}
+    }
+
+    ////// set on action button
+    @FXML void loadFileButton(ActionEvent event) {
         try{
             File file = new FileChooser().showOpenDialog(new Stage());
             mainController.getEngine().loadFile(file.getPath());
@@ -39,24 +50,11 @@ public class fileController {
             mainController.showTable();
         }
         catch (Exception e) {
-              new errorMain(e);
+            new errorMain(e);
         }
     }
 
-    public void setMainController(mainAppController mainController) {
-        this.mainController = mainController;
-    }
-
-    public void addDataToTable() {
-        try {
-            mainController.observableList().removeAll();
-            Map<String, Target> map = mainController.getEngine().getMap();
-            for (String keys : map.keySet())
-            {
-                mainController.observableList().add(new targetTable(map.get(keys)));
-            }
-        }
-        catch (Exception e){
-        }
-    }
+    ////// fxml member
+    @FXML private BorderPane image;
+    @FXML private Button loadFileButton;
 }

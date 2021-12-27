@@ -32,4 +32,17 @@ public class GraphInformation implements Information{ // 2
                 "amount Of roots: " + roots + "\n\r" +
                 "amount Of independents: " + independents + "\n\r";
     }
+    public String getAmountOfTargets(){return String.valueOf(amountOfTargets);}
+    public String getLevies(){return String.valueOf(levies);}
+    public String getMiddle(){return String.valueOf(middles);}
+    public String getRoot(){return String.valueOf(roots);}
+    public String getIndependents(){return String.valueOf(independents);}
+
+
+
+
+
+
+
+
 }

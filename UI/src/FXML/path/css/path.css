@@ -38,3 +38,28 @@
 .path-button:hover {
     -fx-background-color: linear-gradient(#2A5058, #61a2b1);
 }
+
+#depComboBox{
+    -fx-font-size: 10px;
+}
+
+#pathToggle{
+    -fx-font-family:"Times New Roman";
+    -fx-text-fill: black;
+    -fx-font-size: 10px;
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
+
+#cycleToggle{
+    -fx-font-family:"Times New Roman";
+    -fx-text-fill: black;
+    -fx-font-size: 10px;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+}
+#whatIfToggle{
+    -fx-font-family:"Times New Roman";
+    -fx-text-fill: black;
+    -fx-font-size: 10px;
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+}
+
