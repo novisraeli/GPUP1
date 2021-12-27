@@ -15,8 +15,8 @@ import java.util.*;
 
 
 public class Xmlimpl implements Xml {
-    private final generated.GPUPDescriptor gpupDescriptor;
-    private final static String JAXB_XML_PACKAGE_NAME = "generated"; /////////////////
+    private final generated2.GPUPDescriptor gpupDescriptor;
+    private final static String JAXB_XML_PACKAGE_NAME = "generated2";
 
     public Xmlimpl(String path) throws Exception {
         try {
@@ -131,12 +131,9 @@ public class Xmlimpl implements Xml {
     public String getWorkingDirectoryXml(){
         return gpupDescriptor.getGPUPConfiguration().getGPUPWorkingDirectory();
     }
-    /*
     public int getMaxParallelism(){
         return gpupDescriptor.getGPUPConfiguration().getGPUPMaxParallelism();
     }
-
-
     public Set<Set<String>> getSerielSets(){
         Set<Set<String>> res=new HashSet<>();
         List<GPUPSerialSet> temp=gpupDescriptor.getGPUPSerialSets().getGPUPSerialSet();
@@ -158,5 +155,5 @@ public class Xmlimpl implements Xml {
         }
         return res;
     }
-     */
+
 }
