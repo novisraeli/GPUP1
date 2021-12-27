@@ -218,6 +218,7 @@ public class engineImpl implements engine {
     }
     @Override
     public List<Information> runTask(int time, boolean random, float success, float warning,boolean keepLastRun) throws Exception {
+        /*
         if (!loadFile)
             throw new XmlNotLoad();
         boolean done = false;
@@ -260,8 +261,10 @@ public class engineImpl implements engine {
             }
             done=taskDoneCheck();
         }
-        */
+
         return res;
+        */
+        return null;//temp
     }
     public void taskSetUp(int time, boolean random, float success, float warning,boolean keepLastRun,String taskType,int threadsNum) throws Exception {
         int randomTime=0;
@@ -280,8 +283,11 @@ public class engineImpl implements engine {
                 }
             }
         }
+
+
         //set up thread pool
         ExecutorService threads= Executors.newFixedThreadPool(threadsNum);
+
         List<Target> l=new ArrayList<>();
         Set<String> req;
         Random r=new Random();
@@ -294,17 +300,28 @@ public class engineImpl implements engine {
             e.getValue().setSuccessChance(success);
             e.getValue().setWarningChance(warning);
             e.getValue().setPath(path);
-            l.add(e.getValue());
+            e.getValue().setStartWaitingTime(System.currentTimeMillis());
+            if(e.getValue().getType()==Target.Type.LEAF||e.getValue().getType()==Target.Type.LEAF){
+                l.add(e.getValue());
+            }
+        }
+        for(Target tar:l){
+            tar.setIsInQueue(true);
+            threads.execute(tar);
         }
         //run on all targets
         while(!taskDoneCheck()) {
-            for (Target t : l) {
-
+            for(Map.Entry<String, Target> e : targetMap.entrySet()){
+                if(e.getValue().getStatus()==Target.Status.Waiting&&!e.getValue().getIsInQueue()) {
+                    if (checkSerielSets(e.getValue().getName())) {
+                        e.getValue().setIsInQueue(true);
+                        threads.execute(e.getValue());
+                    }
+                }
             }
         }
-        for(Map.Entry<String, Target> e : targetMap.entrySet()){
-
-        }
+        //if we got here the there is not more waiting targets
+        threads.shutdown();
 
     }
     //may need to splite to 2 funcs because to task types
@@ -380,9 +397,20 @@ public class engineImpl implements engine {
         return res==null;
     }
 
-    public Map<String, Target> getMap(){return targetMap;}
+    public synchronized Map<String, Target> getMap(){return targetMap;}
     public int getMaxThreads(){
         return maxThreads;
     }
-
+    private boolean checkSerielSets(String t){
+        for (Set<String> set:serielSets){
+            if(set.contains(t)){
+                for(String s : set){
+                    if(targetMap.get(s).getIsInQueue()){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
 }

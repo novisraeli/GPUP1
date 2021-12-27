@@ -11,6 +11,8 @@ import java.util.*;
 
 public class Target implements Serializable,Runnable
 {
+
+
     public enum Type {INDEPENDENTS, LEAF, MIDDLE, ROOT}
     public enum Status {Waiting,Success,Warning ,Skipped ,Failure}
     private String userData;
@@ -25,7 +27,9 @@ public class Target implements Serializable,Runnable
     private Map<String, Target> targetMap;
     private String simTimeString;
     private String path;
-
+    private boolean isInQueue;
+    private boolean isRunning;
+    private long startWaitingTime;
     /** ctor */
     public  Target(String name , String userData , Set<String> setDependsOn , Set<String> setRequiredFor) {
         this.name = name;
@@ -115,6 +119,26 @@ public class Target implements Serializable,Runnable
     }
     public String getPath(){
         return path;
+    }
+    public boolean getIsInQueue() {
+        return isInQueue;
+    }
+    public void setIsInQueue(boolean b){
+        isInQueue=b;
+    }
+    public synchronized boolean getIsRunning(){
+        return isRunning;
+    }
+    public String getWaitingTime(){
+        long temp= System.currentTimeMillis()-startWaitingTime;
+        long millis = temp % 1000;
+        long second = (temp / 1000) % 60;
+        long minute = (temp / (1000 * 60)) % 60;
+        long hour = (temp / (1000 * 60 * 60)) % 24;
+        return String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
+    }
+    public void setStartWaitingTime(long t){
+        startWaitingTime=t;
     }
     /** Set status
      * @param s- new target status
@@ -222,18 +246,25 @@ public class Target implements Serializable,Runnable
                 + "Target Data: "+ userData + "\n\r" ;
     }
     public void run(){
+
         try{
             if(!this.setDependsOn.isEmpty()){
                 for(String s:setDependsOn){
                     if(targetMap.get(s).getStatus()==Status.Waiting){//dont run if depends on is still waiting
+                        isRunning=false;
+                        isInQueue=false;
                         return;
                     }
                     else if(targetMap.get(s).getStatus()==Status.Failure){
+                        isInQueue=false;
+                        isRunning=false;
                         this.status=Status.Skipped;
                         simTimeString="00:00:00:00";
+                        return;
                     }
                 }
             }
+            isRunning=true;
             long startTime = System.currentTimeMillis();//sim target and keep time of sim
             Thread.sleep((long)runTime);
             long simTime=System.currentTimeMillis()-startTime;
@@ -257,6 +288,8 @@ public class Target implements Serializable,Runnable
             else{
                 this.status=Status.Failure;
             }
+            isRunning=false;
+            isInQueue=false;
         }
         catch (Exception e){
 
