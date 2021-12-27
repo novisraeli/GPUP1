@@ -11,3 +11,6 @@
 .text{
     -fx-font-family:"Times New Roman";
 }
+.tableView {
+    -fx-control-inner-background-alt: -fx-control-inner-background ;
+}

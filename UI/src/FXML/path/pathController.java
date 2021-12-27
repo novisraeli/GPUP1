@@ -1,8 +1,6 @@
 package FXML.path;
 import FXML.error.errorMain;
 import FXML.main.mainAppController;
-import FXML.task.taskController;
-import FXML.utility.buttonColor;
 import engine.*;
 import information.Information;
 import javafx.beans.binding.Bindings;
@@ -15,15 +13,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 import target.Target;
 import target.targetTable;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,52 +34,50 @@ public class pathController {
     private ObservableSet<CheckBox> unselectedCheckBoxes = FXCollections.observableSet();
     private IntegerBinding numCheckBoxesSelected = Bindings.size(selectedCheckBoxes);
     private final int maxNumSelected =  2;
-    private buttonColor color;
     public pathController(){
         isSourceSelected = new SimpleBooleanProperty(false);
         isDestinationSelected = new SimpleBooleanProperty(false);
-        color = new buttonColor();
-
     }
     @FXML
     public void initialize() {
         setDefault();
-        groupToggle();
         setBinding();
+        toggleButtonWhatIf.setOpacity(0.3);
+        toggleButtonCycle.setOpacity(0.3);
     }
     public void groupToggle(){
         toggleButtonWhatIf.selectedProperty().addListener( (observable, oldValue, newValue) -> {
-            if (newValue == true) {
-                toggleButtonWhatIf.setStyle(color.isSelected);
+            if (newValue) {
+                toggleButtonWhatIf.setOpacity(1);
                 toggleButtonPath.setSelected(false);
                 toggleButtonCycle.setSelected(false);
             }
             else {
-                toggleButtonWhatIf.setStyle(color.notSelected);
+                toggleButtonWhatIf.setOpacity(0.3);
             }
         }) ;
 
 
         toggleButtonCycle.selectedProperty().addListener( (observable, oldValue, newValue) -> {
-            if (newValue == true) {
-                toggleButtonCycle.setStyle(color.isSelected);
+            if (newValue) {
+                toggleButtonCycle.setOpacity(1);
                 toggleButtonPath.setSelected(false);
                 toggleButtonWhatIf.setSelected(false);
             }
             else {
-                toggleButtonCycle.setStyle(color.notSelected);
+                toggleButtonCycle.setOpacity(0.3);
             }
         }) ;
 
 
         toggleButtonPath.selectedProperty().addListener( (observable, oldValue, newValue) -> {
-            if (newValue == true) {
-                toggleButtonPath.setStyle(color.isSelected);
+            if (newValue) {
+                toggleButtonPath.setOpacity(1);
                 toggleButtonWhatIf.setSelected(false);
                 toggleButtonCycle.setSelected(false);
             }
             else {
-                toggleButtonPath.setStyle(color.notSelected);
+                toggleButtonPath.setOpacity(0.3);
             }
         }) ;
     }
@@ -121,6 +117,7 @@ public class pathController {
     public void setMainController(mainAppController mainController) {
         this.mainController = mainController;
         setTableCol();
+        groupToggle();
     }
     public void show() {
         tableView.setItems(mainController.items);
@@ -145,6 +142,43 @@ public class pathController {
             }
 
         });
+    }
+
+    public void changeButtonColor(String newColorString){
+        setButton.setStyle(newColorString);
+        runButton.setStyle(newColorString);
+        clearButton.setStyle(newColorString);
+        switchButton.setStyle(newColorString);
+    }
+    public void changeToggleColor(){
+            toggleButtonPath.setStyle(mainController.toggleColor);
+            toggleButtonWhatIf.setStyle(mainController.toggleColor);
+            toggleButtonCycle.setStyle(mainController.toggleColor);
+    }
+    public void changeComboBoxColor(String newColorString){
+        depenceComboBox.setStyle(newColorString);
+    }
+    public void changeTableColor(String newColorString){
+        tableView.setStyle(newColorString);
+        remarkTableCol.setStyle(newColorString);
+        nameTableCol.setStyle(newColorString);
+        typeTableCol.setStyle(newColorString);
+        directRequiredForTableCol.setStyle(newColorString);
+        totalRequiredForTableCol.setStyle(newColorString);
+        directDependsOnTableCol.setStyle(newColorString);
+        totalDependsOnTableCol.setStyle(newColorString);
+        dataTableCol.setStyle(newColorString);
+        serialSetTableCol.setStyle(newColorString);
+        dependsOnTableCol.setStyle(newColorString);
+        requiredForTableCol.setStyle(newColorString);
+    }
+    public void changeBackgroundColor(String newColorString){
+        pathListView.setStyle(newColorString);
+        vboxPath.setStyle(newColorString);
+        gridPanePath.setStyle(newColorString);
+        gridPaneTablePath.setStyle(newColorString);
+        hbox1.setStyle(newColorString);
+        hbox2.setStyle(newColorString);
     }
 
 ////// set on action button
@@ -205,6 +239,7 @@ public class pathController {
                     List<String> whatIfList = new ArrayList<>();
                     mainController.getEngine().whatIf(sourceText.getText(),whatIfList , depenceComboBox.getValue());
                     pathListView.getItems().clear();
+                    whatIfList.remove(0);
                     pathListView.getItems().add(whatIfList.toString());
                 }
 
@@ -230,6 +265,8 @@ public class pathController {
     @FXML private TableColumn<targetTable, Integer> totalDependsOnTableCol;
     @FXML private TableColumn<targetTable, String> dataTableCol;
     @FXML private TableColumn<targetTable, Integer> serialSetTableCol;
+    @FXML private TableColumn<targetTable, Integer> dependsOnTableCol;
+    @FXML private TableColumn<targetTable, Integer> requiredForTableCol;
     @FXML private ListView<String> pathListView;
     @FXML private ComboBox<engine.Dependence> depenceComboBox;
     @FXML private Text sourceText;
@@ -241,6 +278,11 @@ public class pathController {
     @FXML private ToggleButton toggleButtonWhatIf;
     @FXML private Button runButton;
     @FXML private Button setButton;
+    @FXML private VBox vboxPath;
+    @FXML private GridPane gridPanePath;
+    @FXML private HBox hbox1;
+    @FXML private HBox hbox2;
+    @FXML private GridPane gridPaneTablePath;
 
 }
 

@@ -24,7 +24,7 @@
                <children>
                   <TabPane prefHeight="200.0" prefWidth="200.0" styleClass="tap-pane" stylesheets="@css/mainApp.css" tabClosingPolicy="UNAVAILABLE" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                     <tabs>
-                        <Tab styleClass="tab-label" text="File">
+                        <Tab fx:id="fileTab" styleClass="tab-label" text="File">
                            <content>
                               <AnchorPane prefHeight="353.0" prefWidth="602.0">
                                  <children>
@@ -64,7 +64,7 @@
                                  </children></AnchorPane>
                         </content>
                       </Tab>
-                        <Tab styleClass="tab-label" text="Setting">
+                        <Tab fx:id="settingTab" styleClass="tab-label" text="Setting">
                           <content>
                             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>

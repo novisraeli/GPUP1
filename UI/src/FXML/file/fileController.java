@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import target.Target;
@@ -16,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 public class fileController {
-
     private mainAppController mainController;
     public void setMainController(mainAppController mainController) {
         this.mainController = mainController;
@@ -42,7 +42,9 @@ public class fileController {
         }
         catch (Exception e){new errorMain(e);}
     }
-
+    public void changeButtonColor(String newColorString){
+        loadFileButton.setStyle(newColorString);
+    }
     ////// set on action button
     @FXML void loadFileButton(ActionEvent event) {
         try{

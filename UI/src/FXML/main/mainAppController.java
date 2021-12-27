@@ -13,18 +13,18 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.paint.Color;
 import target.Target;
 import target.targetTable;
 
 
 public class mainAppController {
-
+    public String color = "-fx-background-color: linear-gradient(#2A5058, #61a2b1)";
+    public String toggleColor = "-fx-background-color: linear-gradient(#2A5058, #61a2b1)";
     private final engine engine = new engineImpl();
     private final SimpleBooleanProperty isFileSelected;
     public ObservableList<targetTable> items = FXCollections.observableArrayList();
-
     public mainAppController() {
-
         isFileSelected = new SimpleBooleanProperty(false);
     }
     @FXML public void initialize() {
@@ -58,8 +58,8 @@ public class mainAppController {
     public void setMainForComponentController(){
         if (fileComponentController != null && pathComponentController != null &&
                 settingComponentController != null && tableComponentController != null &&
-               taskComponentController != null){
-
+               taskComponentController != null && settingComponentController != null){
+            settingComponentController.setMainController(this);
             fileComponentController.setMainController(this);
             pathComponentController.setMainController(this);
             settingComponentController.setMainController(this);
@@ -79,6 +79,44 @@ public class mainAppController {
         pathTab.disableProperty().bind(isFileSelected.not());
         taskTab.disableProperty().bind(isFileSelected.not());
     }
+    public void changeTabColor(Color newColor){
+        String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
+       // -fx-background-color: rgba(170, 170, 170, 204);
+        tableTab.setStyle(newColorString);
+        graphTab.setStyle(newColorString);
+        pathTab.setStyle(newColorString);
+        taskTab.setStyle(newColorString);
+        fileTab.setStyle(newColorString);
+        settingTab.setStyle(newColorString);
+    }
+    public void changeButtonColor(Color newColor){
+        String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
+        fileComponentController.changeButtonColor(newColorString);
+        pathComponentController.changeButtonColor(newColorString);
+        taskComponentController.changeButtonColor(newColorString);
+    }
+    public void changeToggleColor(){
+        pathComponentController.changeToggleColor();
+        taskComponentController.changeToggleColor();
+    }
+    public void changeComboBoxColor(Color newColor){
+        String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
+        pathComponentController.changeComboBoxColor(newColorString);
+        taskComponentController.changeComboBoxColor(newColorString);
+    }
+    public void changeTableColor(Color newColor) {
+        String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
+        pathComponentController.changeTableColor(newColorString);
+        tableComponentController.changeTableColor(newColorString);
+        taskComponentController.changeTableColor(newColorString);
+    }
+    public void changeBackgroundColor(Color newColor) {
+        String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
+        pathComponentController.changeBackgroundColor(newColorString);
+        tableComponentController.changeBackgroundColor(newColorString);
+        taskComponentController.changeBackgroundColor(newColorString);
+    }
+
 
 
     /// tab fxml
@@ -86,6 +124,8 @@ public class mainAppController {
     @FXML private Tab graphTab;
     @FXML private Tab pathTab;
     @FXML private Tab taskTab;
+    @FXML private Tab fileTab;
+    @FXML private Tab settingTab;
     @FXML private BorderPane mainBorderPane;
     @FXML private BorderPane fileComponent;
     @FXML private fileController fileComponentController;
@@ -97,5 +137,6 @@ public class mainAppController {
     @FXML private tableController tableComponentController;
     @FXML private BorderPane taskComponent;
     @FXML private taskController taskComponentController;
+
 }
 
