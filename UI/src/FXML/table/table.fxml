@@ -65,7 +65,7 @@
                         <Label id="titleLabel" alignment="CENTER" prefHeight="27.0" prefWidth="220.0" text="SumUp" />
                      </children>
                   </HBox>
-                  <Label text="Targets">
+                  <Label text="Targets" underline="true">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
@@ -140,16 +140,16 @@
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Line>
-                  <Label text="Serial Set">
+                  <Label text="Serial Set" underline="true">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
                   </Label>
-                  <VBox fx:id="serialSetVbox" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="206.0" minWidth="206.0" prefHeight="423.0" prefWidth="206.0" styleClass="background" VBox.vgrow="ALWAYS">
+                  <Text fx:id="serialSetText" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text" text="Text">
                      <VBox.margin>
                         <Insets top="20.0" />
                      </VBox.margin>
-                  </VBox>
+                  </Text>
                </children>
             </VBox>
          </content>

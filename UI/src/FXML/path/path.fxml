@@ -6,7 +6,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.ToggleButton?>
@@ -20,70 +19,6 @@
 <?import javafx.scene.text.Text?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1300.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.path.pathController">
-   <center>
-      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
-         <content>
-            <GridPane minHeight="670.0" minWidth="1290.0" prefHeight="670.0" prefWidth="1290.0" styleClass="background">
-              <columnConstraints>
-                <ColumnConstraints hgrow="NEVER" maxWidth="856.0" minWidth="10.0" prefWidth="856.0" />
-                  <ColumnConstraints hgrow="ALWAYS" maxWidth="521.0" minWidth="0.0" prefWidth="442.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <TableView fx:id="tableView" maxWidth="850.0" minHeight="720.0" minWidth="850.0" prefHeight="720.0" prefWidth="850.0" styleClass="background" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
-                     <columns>
-                        <TableColumn fx:id="remarkTableCol" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" styleClass="tableColumn" />
-                        <TableColumn fx:id="nameTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Name" />
-                        <TableColumn fx:id="typeTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Type" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="0.0" styleClass="tableColumn" text="Required For">
-                           <columns>
-                              <TableColumn fx:id="directRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
-                              <TableColumn fx:id="totalRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
-                           </columns>
-                        </TableColumn>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="114.0" styleClass="tableColumn" text="Depends On">
-                           <columns>
-                              <TableColumn fx:id="directDependsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
-                              <TableColumn fx:id="totalDependsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
-                           </columns>
-                        </TableColumn>
-                        <TableColumn fx:id="serialSetTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Serial Sets" />
-                        <TableColumn fx:id="dataTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Data" />
-                     </columns>
-                  </TableView>
-                  <GridPane prefHeight="716.0" prefWidth="353.0" styleClass="path" GridPane.columnIndex="1">
-                     <columnConstraints>
-                        <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
-                     </columnConstraints>
-                     <rowConstraints>
-                        <RowConstraints maxHeight="280.0" minHeight="52.0" prefHeight="52.0" vgrow="NEVER" />
-                        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="346.0" vgrow="ALWAYS" />
-                     </rowConstraints>
-                     <children>
-                        <VBox prefHeight="200.0" prefWidth="100.0" styleClass="path" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
-                           <children>
-                              <Label prefHeight="43.0" prefWidth="138.0" styleClass="path-label" text="Path between" VBox.vgrow="ALWAYS">
-                                 <VBox.margin>
-                                    <Insets left="10.0" right="5.0" top="5.0" />
-                                 </VBox.margin>
-                              </Label>
-                              <Label prefHeight="43.0" prefWidth="138.0" styleClass="path-label" text="two targets">
-                                 <VBox.margin>
-                                    <Insets bottom="5.0" left="10.0" right="5.0" />
-                                 </VBox.margin>
-                              </Label>
-                           </children>
-                        </VBox>
-                        <ListView fx:id="pathListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="335.0" prefWidth="186.0" styleClass="path" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
-                     </children>
-                  </GridPane>
-               </children>
-            </GridPane>
-         </content>
-      </ScrollPane>
-   </center>
    <bottom>
       <GridPane prefHeight="25.0" styleClass="path" BorderPane.alignment="CENTER">
          <columnConstraints>
@@ -184,4 +119,64 @@
       <URL value="@css/path.css" />
       <URL value="@../utility/backgroung.css" />
    </stylesheets>
+   <center>
+      <GridPane minHeight="670.0" minWidth="1290.0" prefHeight="670.0" prefWidth="1290.0" styleClass="background" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="NEVER" maxWidth="856.0" minWidth="10.0" prefWidth="856.0" />
+            <ColumnConstraints hgrow="ALWAYS" maxWidth="521.0" minWidth="0.0" prefWidth="442.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TableView fx:id="tableView" maxWidth="850.0" minHeight="720.0" minWidth="850.0" prefHeight="720.0" prefWidth="850.0" styleClass="background" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="remarkTableCol" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" styleClass="tableColumn" />
+                  <TableColumn fx:id="nameTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Name" />
+                  <TableColumn fx:id="typeTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Type" />
+                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="0.0" styleClass="tableColumn" text="Required For">
+                     <columns>
+                        <TableColumn fx:id="directRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
+                        <TableColumn fx:id="totalRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
+                     </columns>
+                  </TableColumn>
+                  <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="114.0" styleClass="tableColumn" text="Depends On">
+                     <columns>
+                        <TableColumn fx:id="directDependsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
+                        <TableColumn fx:id="totalDependsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
+                     </columns>
+                  </TableColumn>
+                  <TableColumn fx:id="serialSetTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Serial Sets" />
+                  <TableColumn fx:id="dataTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Data" />
+               </columns>
+            </TableView>
+            <GridPane prefHeight="716.0" prefWidth="353.0" styleClass="path" GridPane.columnIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints maxHeight="280.0" minHeight="52.0" prefHeight="52.0" vgrow="NEVER" />
+                  <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="346.0" vgrow="ALWAYS" />
+               </rowConstraints>
+               <children>
+                  <VBox prefHeight="200.0" prefWidth="100.0" styleClass="path" GridPane.hgrow="NEVER" GridPane.vgrow="NEVER">
+                     <children>
+                        <Label prefHeight="43.0" prefWidth="138.0" styleClass="path-label" text="Path between" VBox.vgrow="ALWAYS">
+                           <VBox.margin>
+                              <Insets left="10.0" right="5.0" top="5.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label prefHeight="43.0" prefWidth="138.0" styleClass="path-label" text="two targets">
+                           <VBox.margin>
+                              <Insets bottom="5.0" left="10.0" right="5.0" />
+                           </VBox.margin>
+                        </Label>
+                     </children>
+                  </VBox>
+                  <ListView fx:id="pathListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="335.0" prefWidth="186.0" styleClass="path" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.vgrow="ALWAYS" />
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+   </center>
 </BorderPane>

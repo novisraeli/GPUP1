@@ -9,15 +9,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import target.Target;
 import target.targetTable;
 
 public class tableController {
     private mainAppController mainController;
-
-    @FXML public void initialize() {
-    }
 
     public void setMainController(mainAppController mainController) {
         this.mainController = mainController;
@@ -34,7 +32,14 @@ public class tableController {
             rootsNumberText.setText(info.getRoot());
             indepNumberText.setText(info.getIndependents());
             leavesNumberText.setText(info.getLevies());
-
+            String serialSetString = "";
+            for(String st : mainController.getEngine().getSerialSets().keySet()) {
+                serialSetString += "name:  "+ st + " - " + mainController.getEngine().getSerialSets().get(st) + "\n\n";
+            }
+            if (serialSetString.equals(""))
+                serialSetText.setText("There isn't serial set");
+            else
+                serialSetText.setText(serialSetString);
         }
         catch (Exception e){new errorMain(e);}
     }
@@ -54,6 +59,7 @@ public class tableController {
     @FXML private Text middleNumberText;
     @FXML private Text rootsNumberText;
     @FXML private Text indepNumberText;
+    @FXML private Text serialSetText;
 }
 
 

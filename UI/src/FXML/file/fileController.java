@@ -34,6 +34,9 @@ public class fileController {
                 list.clear();
                 mainController.getEngine().whatIf(t.getName(),list, engine.Dependence.REQUIRED_FOR);
                 t.setTotalRequiredForTableCol(list.size()-1);
+
+                t.setSerialSetTableCol(mainController.getEngine().getAllSerialSetsWithYou(t.getName()).size());
+
                 mainController.observableList().add(t);
             }
         }

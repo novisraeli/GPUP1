@@ -23,4 +23,6 @@ public interface engine{
     void readTargetsAndInformationToTextFile(String path) throws Exception;
     boolean ifRunTask();
     void exit();
+    Map<String,Set<String>> getSerialSets();
+    Map<String,Set<String>> getAllSerialSetsWithYou(String t);
 }

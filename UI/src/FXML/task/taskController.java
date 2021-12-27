@@ -22,6 +22,8 @@ import target.UniqueTarget;
 import target.targetTable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 public class taskController {
 
@@ -37,19 +39,11 @@ public class taskController {
         isCompiler = new SimpleBooleanProperty(true);
     }
     @FXML public void initialize() {
-        //task toggle
-        compilerToggle.setSelected(true);
-        compilerToggle.setStyle("-fx-background-color: linear-gradient(#2A5058, #61a2b1)");
-        simulationToggle.setStyle("-fx-background-color: linear-gradient(#61a2b1, #2A5058)");
-
-
-        ///spinner
-        ProcessingTimeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0));
-        successSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0));
-        successWithWarningSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0));
-        numOfTreadsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1));
-
-        ///which task
+        setSpinner();
+        setToggles();
+        setRunAndPauseButton();
+        setComboBox();
+        clickOnRow();
         simulationBox.disableProperty().bind(isCompiler);
         isCompiler.addListener((obs, oldSelectedCount, newSelectedCount) -> {
             if (isCompiler.getValue()) {
@@ -61,57 +55,6 @@ public class taskController {
                 compilerToggle.setStyle("-fx-background-color: linear-gradient(#61a2b1, #2A5058)");
             }
         });
-
-        ///run pause button
-        runButton.setStyle("-fx-background-color: linear-gradient(#2A5058, #61a2b1)");
-        pauseButton.setStyle("-fx-background-color: linear-gradient(#2A5058, #61a2b1)");
-
-        isRunSelected.addListener((obs, oldSelectedCount, newSelectedCount) -> {
-            if (isRunSelected.getValue())
-                runButton.setStyle("-fx-background-color: linear-gradient(#2A5058, #61a2b1)");
-            else
-                runButton.setStyle("-fx-background-color: linear-gradient(#61a2b1, #2A5058)");
-        });
-
-        isPauseSelected.addListener((obs, oldSelectedCount, newSelectedCount) -> {
-            if (isPauseSelected.getValue())
-                pauseButton.setStyle("-fx-background-color: linear-gradient(#2A5058, #61a2b1)");
-            else
-                pauseButton.setStyle("-fx-background-color: linear-gradient(#61a2b1, #2A5058)");
-        });
-
-        ///combo box
-        scratchOrIncremental.getItems().add("Scratch");
-        scratchOrIncremental.getItems().add("Incremental");
-        scratchOrIncremental.setValue("Scratch");
-/*
-        tableView.setOnMouseClicked(new EventHandler<MouseEvent>(){
-            @Override
-            public void handle(MouseEvent event) {
-                new errorMain(new UniqueTarget(tableView.getSelectionModel().getSelectedItem().getName()));
-            }
-        });
-
- */
-
-
-        tableView.setRowFactory( tv -> {
-            TableRow<targetTable> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                    String name = tableView.getSelectionModel().getSelectedItem().getName();
-                    String type = tableView.getSelectionModel().getSelectedItem().getType().toString();
-                    String serialSets = "";
-                    String process = "";
-                    new targetInfoMain(name, type, serialSets, process);
-                }
-            });
-            return row ;
-        });
-
-
-
-
     }
     private void configureCheckBoxTask(CheckBox checkBox) {
         if (checkBox.isSelected())
@@ -131,9 +74,6 @@ public class taskController {
     }
     public void setMainController(mainAppController mainController) {
         this.mainController = mainController;
-        mainController.setGeneralTableCol(nameTableCol, typeTableCol, dataTableCol, serialSetTableCol,
-                directRequiredForTableCol, directDependsOnTableCol,
-                totalRequiredForTableCol, totalDependsOnTableCol);
         setTableCol();
     }
     public void show() {
@@ -158,11 +98,99 @@ public class taskController {
             catch (Exception e){}
     }
     public void setTableCol(){
+        mainController.setGeneralTableCol(nameTableCol, typeTableCol, dataTableCol, serialSetTableCol,
+                directRequiredForTableCol, directDependsOnTableCol,
+                totalRequiredForTableCol, totalDependsOnTableCol);
         statusTableCol.setCellValueFactory(new PropertyValueFactory<>("status"));
         remarkTableCol.setCellValueFactory(new PropertyValueFactory<>("checkBoxTask"));
     }
+    public void setComboBox(){
+        scratchOrIncremental.getItems().add("Scratch");
+        scratchOrIncremental.getItems().add("Incremental");
+        scratchOrIncremental.setValue("Scratch");
+    }
+    public void setRunAndPauseButton(){
+        runButton.setStyle("-fx-background-color: linear-gradient(#2A5058, #61a2b1)");
+        pauseButton.setStyle("-fx-background-color: linear-gradient(#2A5058, #61a2b1)");
+        isRunSelected.addListener((obs, oldSelectedCount, newSelectedCount) -> {
+            if (isRunSelected.getValue())
+                runButton.setStyle("-fx-background-color: linear-gradient(#2A5058, #61a2b1)");
+            else
+                runButton.setStyle("-fx-background-color: linear-gradient(#61a2b1, #2A5058)");
+        });
+        isPauseSelected.addListener((obs, oldSelectedCount, newSelectedCount) -> {
+            if (isPauseSelected.getValue())
+                pauseButton.setStyle("-fx-background-color: linear-gradient(#2A5058, #61a2b1)");
+            else
+                pauseButton.setStyle("-fx-background-color: linear-gradient(#61a2b1, #2A5058)");
+        });
+    }
+    public void setToggles(){
+        compilerToggle.setSelected(true);
+        compilerToggle.setStyle("-fx-background-color: linear-gradient(#2A5058, #61a2b1)");
+        simulationToggle.setStyle("-fx-background-color: linear-gradient(#61a2b1, #2A5058)");
+    }
+    public void setSpinner(){
+        ProcessingTimeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0));
+        successSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0));
+        successWithWarningSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0));
+        numOfTreadsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1));
+    }
+    public void clickOnRow() {
+        tableView.setRowFactory( tv -> {
+            TableRow<targetTable> row = new TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
+                    List<String> list = new ArrayList<>();
+                    Target t = mainController.getEngine().getMap().get(tableView.getSelectionModel().getSelectedItem().getName());
+                    String process = "";
+                    String name = t.getName();
+                    String type = t.getType().toString();
 
-    ///
+                    String serialSets;
+                    Map<String, Set<String>> serialSetsMap = mainController.getEngine().getAllSerialSetsWithYou(t.getName());
+                    if (serialSetsMap.size() == 0)
+                        serialSets = "doesn't belong to any serial set";
+                    else
+                        serialSets = serialSetsMap + "\n";
+
+                    if (t.getIsRunning())
+                        process = t.getWaitingTime();
+                    else{
+                        switch (t.getStatus())
+                        {
+                            // skipped waiting skipped in-process finished
+                            case Waiting:
+                                process = "is waiting: " + t.getWaitingTime() + " ms\n";
+                                mainController.getEngine().whatIf(name,list , engine.Dependence.DEPENDS_ON);
+                                process += "is waiting for " + list + " targets";
+                                break;
+
+                            case Skipped:
+                                mainController.getEngine().whatIf(name,list , engine.Dependence.DEPENDS_ON);
+                                process += list.stream()
+                                        .filter(e -> mainController.getEngine().getMap().get(e).getStatus().equals(Target.Status.Failure))
+                                        .toString();
+                                break;
+
+                            case Failure:
+                                process = Target.Status.Failure.toString();
+                                break;
+
+                            case Success:
+                                process = Target.Status.Success.toString();
+                                break;
+                        }
+                    }
+
+                    new targetInfoMain(name, type, serialSets, process);
+                }
+            });
+            return row ;
+        });
+    }
+
+        ///
     @FXML void clearAction(ActionEvent event) {
         ObservableList<targetTable> data = tableView.getItems();
         for (targetTable p : data)
@@ -197,6 +225,7 @@ public class taskController {
     @FXML void simulationToggleSelected(ActionEvent event) {
         isCompiler.set(false);
     }
+
     ///fxml member
     @FXML private TableView<targetTable> tableView;
     @FXML private TableColumn<targetTable,Boolean> remarkTableCol;

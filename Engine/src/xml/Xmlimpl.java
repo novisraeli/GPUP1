@@ -36,8 +36,7 @@ public class Xmlimpl implements Xml {
         Map<String, Target> targetsMap = new HashMap<>();
 
         for (GPUPTarget p : gpupDescriptor.getGPUPTargets().getGPUPTarget()) {
-
-            if (targetsMap.containsKey(p.getName())) {
+            if (targetsMap.containsKey(p.getName().toUpperCase()) || targetsMap.containsKey(p.getName())) {
                 throw new UniqueTarget(p.getName());
             } else {
                 Set<String> newSetDependency = new HashSet<>();
@@ -55,12 +54,10 @@ public class Xmlimpl implements Xml {
                     }
                     newTarget = new Target(p.getName(), p.getGPUPUserData(), newSetDependency, newSetRequiredFor);
                 }
-
                 targetsMap.put(newTarget.getName(), newTarget);
             }
         }
  /* /// test :
-
         Set <String> setA = new HashSet<>();
         setA.add("B");
         setA.add("G");
@@ -134,8 +131,8 @@ public class Xmlimpl implements Xml {
     public int getMaxParallelism(){
         return gpupDescriptor.getGPUPConfiguration().getGPUPMaxParallelism();
     }
-    public Set<Set<String>> getSerielSets(){
-        Set<Set<String>> res=new HashSet<>();
+    public Map<String,Set<String>> getSerialSets(){
+        Map<String,Set<String>> serialSets = new HashMap<>();
         List<GPUPDescriptor.GPUPSerialSets.GPUPSerialSet> temp=gpupDescriptor.getGPUPSerialSets().getGPUPSerialSet();
 
         for(GPUPDescriptor.GPUPSerialSets.GPUPSerialSet s:temp){
@@ -151,9 +148,9 @@ public class Xmlimpl implements Xml {
                     t+=targets.charAt(i);
                 }
             }
-            res.add(set);
+            serialSets.put(s.getName(),set);
         }
-        return res;
+        return serialSets;
     }
 
 }

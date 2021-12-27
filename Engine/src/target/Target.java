@@ -11,14 +11,12 @@ import java.util.*;
 
 public class Target implements Serializable,Runnable
 {
-
-
     public enum Type {INDEPENDENTS, LEAF, MIDDLE, ROOT}
     public enum Status {Waiting,Success,Warning ,Skipped ,Failure}
     private String userData;
     private final String name;
     private Type type;
-    private Status status=Status.Waiting;
+    private Status status = Status.Waiting;
     private final Set<String> setDependsOn;
     private final Set<String> setRequiredFor;
     private int runTime=0;
@@ -30,6 +28,7 @@ public class Target implements Serializable,Runnable
     private boolean isInQueue;
     private boolean isRunning;
     private long startWaitingTime;
+
     /** ctor */
     public  Target(String name , String userData , Set<String> setDependsOn , Set<String> setRequiredFor) {
         this.name = name;

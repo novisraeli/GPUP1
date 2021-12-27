@@ -43,7 +43,6 @@ public class pathController {
         color = new buttonColor();
 
     }
-
     @FXML
     public void initialize() {
         setDefault();

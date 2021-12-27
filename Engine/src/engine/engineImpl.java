@@ -25,7 +25,7 @@ public class engineImpl implements engine {
     private String workingDirectory;
     private List<Information> res;
     private int maxThreads;
-    private Set<Set<String>> serielSets;
+    private Map<String,Set<String>> serialSets;
 
     /** Load file
      *  Open XML file
@@ -46,8 +46,7 @@ public class engineImpl implements engine {
         loadFile = true;
         targetMap = targetMapTemp;
         maxThreads=file.getMaxParallelism();
-        serielSets=file.getSerielSets();
-
+        serialSets = file.getSerialSets();
     }
 
     /** Targets in formation
@@ -179,25 +178,6 @@ public class engineImpl implements engine {
         }
     }
 
-
-    public Information whatIf(String s,boolean dir){
-        Set<String>res=new HashSet<>();
-        Target t=null;
-        for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all targets to waiting
-            if(e.getKey().equals(s)){
-                t=e.getValue();
-            }
-        }
-        if(dir){
-            whatIfDepends(t,res);
-
-        }
-        else{
-            whatIfRequired(t,res);
-        }
-        return new WhatIfInfo(res,dir);
-
-    }
     private void whatIfDepends(Target t,Set<String>res){
         if(t.getSetDependsOn().isEmpty()){
             return;
@@ -310,7 +290,7 @@ public class engineImpl implements engine {
         while(!taskDoneCheck()) {
             for(Map.Entry<String, Target> e : targetMap.entrySet()){
                 if(e.getValue().getStatus()==Target.Status.Waiting&&!e.getValue().getIsInQueue()) {
-                    if (checkSerielSets(e.getValue().getName())) {
+                    if (checkSerialSets(e.getValue().getName())) {
                         e.getValue().setIsInQueue(true);
                         threads.execute(e.getValue());
                     }
@@ -321,7 +301,7 @@ public class engineImpl implements engine {
         threads.shutdown();
 
     }
-    //may need to splite to 2 funcs because to task types
+    //may need to split to 2 funcs because to task types
     private String openDir(String taskType) throws IOException {//doesnt have path yet,this func create directory for simulation task
         Path path=Paths.get(workingDirectory);
         Files.createDirectories(path);
@@ -413,12 +393,11 @@ public class engineImpl implements engine {
             }
         }
     }
-
     public int getMaxThreads(){
         return maxThreads;
     }
-    private boolean checkSerielSets(String t){
-        for (Set<String> set:serielSets){
+    private boolean checkSerialSets(String t){
+        for (Set<String> set:serialSets.values()){
             if(set.contains(t)){
                 for(String s : set){
                     if(targetMap.get(s).getIsInQueue()){
@@ -429,4 +408,24 @@ public class engineImpl implements engine {
         }
         return true;
     }
+    @Override
+    public Map<String,Set<String>> getAllSerialSetsWithYou(String t){
+        Map<String,Set<String>> newSet = new HashMap<>();
+        for (String key : serialSets.keySet())
+            if(serialSets.get(key).contains(t)) {
+                newSet.put(key,serialSets.get(key));
+            }
+        return newSet;
+    }
+
+    @Override
+    public Map<String,Set<String>> getSerialSets(){
+        return serialSets;
+    }
+
+
+
+
+
+
 }

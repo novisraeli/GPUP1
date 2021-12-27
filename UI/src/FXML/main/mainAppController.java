@@ -18,41 +18,24 @@ import target.targetTable;
 
 
 public class mainAppController {
+
     private final engine engine = new engineImpl();
     private final SimpleBooleanProperty isFileSelected;
     public ObservableList<targetTable> items = FXCollections.observableArrayList();
-/// tab fxml
-    @FXML private Tab tableTab;
-    @FXML private Tab graphTab;
-    @FXML private Tab pathTab;
-    @FXML private Tab taskTab;
-
-    @FXML private BorderPane mainBorderPane;
-    @FXML private BorderPane fileComponent;
-    @FXML private fileController fileComponentController;
-
-    @FXML private BorderPane pathComponent;
-    @FXML private pathController pathComponentController;
-
-    @FXML private BorderPane settingComponent;
-    @FXML private settingController settingComponentController;
-
-    @FXML private BorderPane tableComponent;
-    @FXML private tableController tableComponentController;
-
-    @FXML private BorderPane taskComponent;
-    @FXML private taskController taskComponentController;
 
     public mainAppController() {
+
         isFileSelected = new SimpleBooleanProperty(false);
     }
-
-    public SimpleBooleanProperty isFileSelected(){return isFileSelected;}
-    public ObservableList observableList(){return items;}
-
     @FXML public void initialize() {
         setMainForComponentController();
         setBinding();
+    }
+    public SimpleBooleanProperty isFileSelected(){
+        return isFileSelected;
+    }
+    public ObservableList observableList(){
+        return items;
     }
     public static void setGeneralTableCol(TableColumn<targetTable,String> nameTableCol,
                                           TableColumn<targetTable, Target.Type> typeTableCol,
@@ -96,5 +79,23 @@ public class mainAppController {
         pathTab.disableProperty().bind(isFileSelected.not());
         taskTab.disableProperty().bind(isFileSelected.not());
     }
+
+
+    /// tab fxml
+    @FXML private Tab tableTab;
+    @FXML private Tab graphTab;
+    @FXML private Tab pathTab;
+    @FXML private Tab taskTab;
+    @FXML private BorderPane mainBorderPane;
+    @FXML private BorderPane fileComponent;
+    @FXML private fileController fileComponentController;
+    @FXML private BorderPane pathComponent;
+    @FXML private pathController pathComponentController;
+    @FXML private BorderPane settingComponent;
+    @FXML private settingController settingComponentController;
+    @FXML private BorderPane tableComponent;
+    @FXML private tableController tableComponentController;
+    @FXML private BorderPane taskComponent;
+    @FXML private taskController taskComponentController;
 }
 
