@@ -11,8 +11,8 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.BorderPane;
 
 public class settingController {
-        private mainAppController mainController;
-        @FXML public void initialize() {
+    private mainAppController mainController;
+    @FXML public void initialize() {
             durationSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1500, 350));
             ofOffButton.setSelected(true);
         }
@@ -29,7 +29,7 @@ public class settingController {
             });
 
             toggleColor.valueProperty().addListener((obs, oldString, newString) -> {
-                mainController.toggleColor = "-fx-background-color: rgb(" + toggleColor.getValue().getRed()*255 + "," +  toggleColor.getValue().getGreen()*255 +"," +  toggleColor.getValue().getBlue()*255 +")";
+                mainController.setToggleColor("-fx-background-color: rgb(" + toggleColor.getValue().getRed()*255 + "," +  toggleColor.getValue().getGreen()*255 +"," +  toggleColor.getValue().getBlue()*255 +")");
                 mainController.changeToggleColor();
             });
 
@@ -55,10 +55,10 @@ public class settingController {
             durationSpinner.disableProperty().bind(ofOffButton.selectedProperty().not());
             ofOffButton.selectedProperty().addListener((obs, oldString, isSelected) -> {
                 if (!ofOffButton.isSelected()) {
-                    mainController.time = 1;
+                    mainController.setTime(1);
                 }
                 else {
-                    mainController.time = durationSpinner.getValue();
+                    mainController.setTime(durationSpinner.getValue());
                 }
             });
         }

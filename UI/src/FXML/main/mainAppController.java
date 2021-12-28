@@ -34,15 +34,12 @@ import java.util.List;
 
 
 public class mainAppController {
-    List<Rectangle> recList = new ArrayList<>();
-    AnchorPane fileIcon = new AnchorPane();
-    public Integer time = 350;
-    public String color = "-fx-background-color: linear-gradient(#2A5058, #61a2b1)";
-    public String toggleColor = "-fx-background-color: linear-gradient(#2A5058, #61a2b1)";
+    private List<Rectangle> recList = new ArrayList<>();
+    private int time = 350;
+    private String toggleColor = "-fx-background-color: linear-gradient(#2A5058, #61a2b1)";
     private final engine engine = new engineImpl();
     private final SimpleBooleanProperty isFileSelected;
     public ObservableList<targetTable> items = FXCollections.observableArrayList();
-
 
     public mainAppController() {
         isFileSelected = new SimpleBooleanProperty(false);
@@ -139,6 +136,9 @@ public class mainAppController {
     public void setTreadsSpinner() {
         taskComponentController.setTreadsSpinner();
     }
+    public void setToggleColor(String toggleColor){this.toggleColor = toggleColor;}
+    public String getToggleColor(){return toggleColor;}
+    public void setTime(int time){this.time = time;}
 
     @FXML public void fileTabSelected(){
         TranslateTransition openNav;

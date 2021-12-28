@@ -41,11 +41,11 @@ public class taskController {
         simulationBox.disableProperty().bind(isCompiler);
         isCompiler.addListener((obs, oldSelectedCount, newSelectedCount) -> {
             if (isCompiler.getValue()) {
-                compilerToggle.setStyle(mainController.toggleColor);
+                compilerToggle.setStyle(mainController.getToggleColor());
                 simulationToggle.setOpacity(0.3);
             }
             else {
-                simulationToggle.setStyle(mainController.toggleColor);
+                simulationToggle.setStyle(mainController.getToggleColor());
                 compilerToggle.setOpacity(0.3);
             }
         });
@@ -125,7 +125,7 @@ public class taskController {
     }
     public void setToggles(){
         compilerToggle.setSelected(true);
-        compilerToggle.setStyle(mainController.color);
+        compilerToggle.setStyle(mainController.getToggleColor());
         //compilerToggle.setStyle("-fx-background-color: linear-gradient(#2A5058, #61a2b1)");
         simulationToggle.setStyle("-fx-background-color: linear-gradient(#61a2b1, #2A5058)");
     }
@@ -198,8 +198,8 @@ public class taskController {
 
     }
     public void changeToggleColor(){
-        compilerToggle.setStyle(mainController.toggleColor);
-        simulationToggle.setStyle(mainController.toggleColor);
+        compilerToggle.setStyle(mainController.getToggleColor());
+        simulationToggle.setStyle(mainController.getToggleColor());
     }
     public void changeComboBoxColor(String newColorString){
         scratchOrIncremental.setStyle(newColorString);

@@ -151,9 +151,9 @@ public class pathController {
         switchButton.setStyle(newColorString);
     }
     public void changeToggleColor(){
-            toggleButtonPath.setStyle(mainController.toggleColor);
-            toggleButtonWhatIf.setStyle(mainController.toggleColor);
-            toggleButtonCycle.setStyle(mainController.toggleColor);
+            toggleButtonPath.setStyle(mainController.getToggleColor());
+            toggleButtonWhatIf.setStyle(mainController.getToggleColor());
+            toggleButtonCycle.setStyle(mainController.getToggleColor());
     }
     public void changeComboBoxColor(String newColorString){
         depenceComboBox.setStyle(newColorString);

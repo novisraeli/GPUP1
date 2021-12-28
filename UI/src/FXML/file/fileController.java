@@ -22,6 +22,21 @@ import java.util.Map;
 
 public class fileController {
     private mainAppController mainController;
+    @FXML public void initialize() {
+        /**
+         *
+         */
+        image.widthProperty().addListener((a,c,d)->{
+            Image img = new Image("/FXML/file/css/programming.jpg");
+            BackgroundImage bImg = new BackgroundImage(img,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.DEFAULT,
+                    new BackgroundSize(image.getWidth(),image.getHeight(),true, true, true, true));
+            Background bGround = new Background(bImg);
+            image.setBackground(bGround);
+        });
+    }
     public void setMainController(mainAppController mainController) {
         this.mainController = mainController;
     }
@@ -58,14 +73,11 @@ public class fileController {
             addDataToTable();
             mainController.showTable();
             mainController.setTreadsSpinner();
-
             mainController.fileAnimation();
         }
         catch (Exception e) {
             new errorMain(e);
         }
-        /////////////////////////////////////////
-
     }
     public Button getFileButton(){return loadFileButton;}
 
