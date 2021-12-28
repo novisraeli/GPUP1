@@ -133,24 +133,34 @@ public class Xmlimpl implements Xml {
     }
     public Map<String,Set<String>> getSerialSets(){
         Map<String,Set<String>> serialSets = new HashMap<>();
-        List<GPUPDescriptor.GPUPSerialSets.GPUPSerialSet> temp=gpupDescriptor.getGPUPSerialSets().getGPUPSerialSet();
+        if (gpupDescriptor.getGPUPSerialSets() != null) {
+            List<GPUPDescriptor.GPUPSerialSets.GPUPSerialSet> temp = gpupDescriptor.getGPUPSerialSets().getGPUPSerialSet();
 
-        for(GPUPDescriptor.GPUPSerialSets.GPUPSerialSet s:temp){
-            Set<String> set=new HashSet<>();
-            String t="";
-            String targets=s.getTargets();
-            for(int i=0;i<targets.length();i++){
-                if(targets.charAt(i)==','){
-                    set.add(t);
-                    t="";
+            for (GPUPDescriptor.GPUPSerialSets.GPUPSerialSet s : temp) {
+                Set<String> set = new HashSet<>();
+                String t = "";
+                String targets = s.getTargets();
+                for (int i = 0; i < targets.length(); i++) {
+                    if (targets.charAt(i) != ',') {
+                        t += targets.charAt(i);
+                        set.add(t);
+                        t = "";
+                    }
                 }
-                else{
-                    t+=targets.charAt(i);
-                }
+                serialSets.put(s.getName(), set);
             }
-            serialSets.put(s.getName(),set);
         }
         return serialSets;
+    }
+    public void checkSerialSets(Map<String, Target> targetMap , Map<String,Set<String>> serialSets) throws Exception{
+        for (Set<String> setTarget : serialSets.values())
+        {
+            for (String name : setTarget)
+            {
+                if (!targetMap.containsKey(name))
+                    throw new TargetIsExists(name + " in serial set");
+            }
+        }
     }
 
 }

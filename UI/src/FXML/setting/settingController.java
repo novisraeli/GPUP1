@@ -1,14 +1,23 @@
 package FXML.setting;
 
 import FXML.main.mainAppController;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.ColorPicker;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.BorderPane;
 
 public class settingController {
         private mainAppController mainController;
+        @FXML public void initialize() {
+            durationSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1500, 350));
+            ofOffButton.setSelected(true);
+        }
 
-        public void setMainController(mainAppController mainController) {
+    public void setMainController(mainAppController mainController) {
             this.mainController = mainController;
 
             tabColor.valueProperty().addListener((obs, oldString, newString) -> {
@@ -37,7 +46,24 @@ public class settingController {
                 String newColorString = "-fx-background-color: rgb(" + backgroundColor.getValue().getRed()*255 + "," +  backgroundColor.getValue().getGreen()*255 +"," +  backgroundColor.getValue().getBlue()*255 +")";
                 borderPaneSetting.setStyle(newColorString);
             });
+
+           /* durationSpinner.valueProperty().addListener((obs, oldString, newString) -> {
+                mainController.time = newString;
+            });
+
+            */
+            durationSpinner.disableProperty().bind(ofOffButton.selectedProperty().not());
+            ofOffButton.selectedProperty().addListener((obs, oldString, isSelected) -> {
+                if (!ofOffButton.isSelected()) {
+                    mainController.time = 1;
+                }
+                else {
+                    mainController.time = durationSpinner.getValue();
+                }
+            });
         }
+    public boolean animation(){return ofOffButton.isSelected();}
+
         @FXML private ColorPicker backgroundColor;
         @FXML private ColorPicker tableColor;
         @FXML private ColorPicker buttonColor;
@@ -45,4 +71,6 @@ public class settingController {
         @FXML private ColorPicker combBoxColor;
         @FXML private ColorPicker tabColor;
         @FXML private BorderPane borderPaneSetting;
+        @FXML private Spinner<Integer> durationSpinner;
+        @FXML private RadioButton ofOffButton;
     }

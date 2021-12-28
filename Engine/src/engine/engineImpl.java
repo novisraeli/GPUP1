@@ -25,7 +25,7 @@ public class engineImpl implements engine {
     private String workingDirectory;
     private List<Information> res;
     private int maxThreads;
-    private Map<String,Set<String>> serialSets;
+    private Map<String,Set<String>> serialSets = new HashMap<>();
 
     /** Load file
      *  Open XML file
@@ -43,10 +43,12 @@ public class engineImpl implements engine {
         Xmlimpl file = new Xmlimpl(path);                       // load XML file
         targetMapTemp = file.makeAMap();// check if the XML file is proper and crate map (key - target name, val - target) from file
         workingDirectory= file.getWorkingDirectoryXml();
-        loadFile = true;
-        targetMap = targetMapTemp;
         maxThreads=file.getMaxParallelism();
         serialSets = file.getSerialSets();
+        file.checkSerialSets(targetMapTemp,serialSets);
+        loadFile = true;
+        targetMap = targetMapTemp;
+
     }
 
     /** Targets in formation
@@ -393,6 +395,7 @@ public class engineImpl implements engine {
             }
         }
     }
+    @Override
     public int getMaxThreads(){
         return maxThreads;
     }

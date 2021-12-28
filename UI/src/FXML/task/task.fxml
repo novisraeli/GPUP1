@@ -228,22 +228,22 @@
                                           </Label>
                                        </children>
                                     </VBox>
-                                    <VBox fx:id="vbox2">
+                                    <VBox fx:id="vbox2" prefHeight="155.0" prefWidth="74.0">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
                                        <children>
-                                          <Spinner fx:id="ProcessingTimeSpinner" maxHeight="17.0" minHeight="20.0" prefHeight="17.0" prefWidth="53.0" styleClass="taskMangerSpinner">
+                                          <Spinner fx:id="ProcessingTimeSpinner" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" prefWidth="72.0" styleClass="taskMangerSpinner">
                                              <VBox.margin>
                                                 <Insets top="10.0" />
                                              </VBox.margin>
                                           </Spinner>
-                                          <Spinner fx:id="successSpinner" maxHeight="17.0" minHeight="20.0" prefHeight="17.0" prefWidth="53.0" styleClass="taskMangerSpinner">
+                                          <Spinner fx:id="successSpinner" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" prefWidth="72.0" styleClass="taskMangerSpinner">
                                              <VBox.margin>
                                                 <Insets top="20.0" />
                                              </VBox.margin>
                                           </Spinner>
-                                          <Spinner fx:id="successWithWarningSpinner" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" prefWidth="53.0" styleClass="taskMangerSpinner">
+                                          <Spinner fx:id="successWithWarningSpinner" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" prefWidth="72.0" styleClass="taskMangerSpinner">
                                              <VBox.margin>
                                                 <Insets top="20.0" />
                                              </VBox.margin>

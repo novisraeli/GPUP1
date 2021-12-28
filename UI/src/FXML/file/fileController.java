@@ -2,13 +2,17 @@ package FXML.file;
 import FXML.error.errorMain;
 import FXML.main.mainAppController;
 import engine.engine;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import target.Target;
 import target.targetTable;
 import java.io.File;
@@ -53,11 +57,17 @@ public class fileController {
             mainController.isFileSelected().set(true);
             addDataToTable();
             mainController.showTable();
+            mainController.setTreadsSpinner();
+
+            mainController.fileAnimation();
         }
         catch (Exception e) {
             new errorMain(e);
         }
+        /////////////////////////////////////////
+
     }
+    public Button getFileButton(){return loadFileButton;}
 
     ////// fxml member
     @FXML private BorderPane image;

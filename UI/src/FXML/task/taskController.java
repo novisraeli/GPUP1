@@ -3,24 +3,18 @@ import FXML.error.errorMain;
 import FXML.main.mainAppController;
 import FXML.task.processing.targetInfoMain;
 import engine.engine;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import target.Target;
-import target.UniqueTarget;
 import target.targetTable;
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +35,6 @@ public class taskController {
         isCompiler = new SimpleBooleanProperty(true);
     }
     @FXML public void initialize() {
-        setSpinner();
         setRunAndPauseButton();
         setComboBox();
         clickOnRow();
@@ -77,6 +70,7 @@ public class taskController {
         this.mainController = mainController;
         setTableCol();
         setToggles();
+        setSpinner();
     }
     public void show() {
         tableView.setItems(mainController.items);
@@ -97,7 +91,9 @@ public class taskController {
                 }
             }
 
-            catch (Exception e){}
+            catch (Exception e){
+                new errorMain(e);
+            }
     }
     public void setTableCol(){
         mainController.setGeneralTableCol(nameTableCol, typeTableCol, dataTableCol, serialSetTableCol,
@@ -137,7 +133,9 @@ public class taskController {
         ProcessingTimeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0));
         successSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0));
         successWithWarningSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0));
-        numOfTreadsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1));
+    }
+    public void setTreadsSpinner() {
+        numOfTreadsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, mainController.getEngine().getMaxThreads(), 1));
     }
     public void clickOnRow() {
         tableView.setRowFactory( tv -> {
@@ -259,8 +257,9 @@ public class taskController {
                 fromScratch = true;
             else
                 fromScratch = false;
-            mainController.getEngine().runTask(ProcessingTimeSpinner.getValue(),true,successSpinner.getValue(),successWithWarningSpinner.getValue(),fromScratch);
-            // uiAdapter, () -> toggleTaskButtons(false));
+            if(simulationToggle.isSelected())
+                mainController.getEngine().runTask(ProcessingTimeSpinner.getValue(),true,successSpinner.getValue(),successWithWarningSpinner.getValue(),fromScratch);
+            if (compilerToggle.isSelected()){}
         }
         catch (Exception e){new errorMain(e);}
 
@@ -303,7 +302,6 @@ public class taskController {
     @FXML private CheckBox withDepend;
     @FXML private Label taskMangerTitle;
     @FXML private HBox hboxTask;
-
     @FXML private GridPane gridPaneTAsk;
     @FXML private GridPane gridPaneTask2;
     @FXML private HBox hbox2;

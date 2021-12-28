@@ -5,25 +5,45 @@ import FXML.setting.settingController;
 import FXML.table.tableController;
 import FXML.task.taskController;
 import engine.*;
+import javafx.animation.Animation;
+import javafx.animation.PathTransition;
+import javafx.animation.Timeline;
+import javafx.animation.TranslateTransition;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
+import javafx.scene.shape.CubicCurveTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Rectangle;
+import javafx.util.Duration;
 import target.Target;
 import target.targetTable;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class mainAppController {
+    List<Rectangle> recList = new ArrayList<>();
+    AnchorPane fileIcon = new AnchorPane();
+    public Integer time = 350;
     public String color = "-fx-background-color: linear-gradient(#2A5058, #61a2b1)";
     public String toggleColor = "-fx-background-color: linear-gradient(#2A5058, #61a2b1)";
     private final engine engine = new engineImpl();
     private final SimpleBooleanProperty isFileSelected;
     public ObservableList<targetTable> items = FXCollections.observableArrayList();
+
+
     public mainAppController() {
         isFileSelected = new SimpleBooleanProperty(false);
     }
@@ -116,10 +136,92 @@ public class mainAppController {
         tableComponentController.changeBackgroundColor(newColorString);
         taskComponentController.changeBackgroundColor(newColorString);
     }
+    public void setTreadsSpinner() {
+        taskComponentController.setTreadsSpinner();
+    }
 
-
+    @FXML public void fileTabSelected(){
+        TranslateTransition openNav;
+        openNav = new TranslateTransition(new Duration(time), fileComponent);
+        openNav.setToX(0);
+        fileComponent.setTranslateX(-(fileComponent.getWidth()));
+        openNav.play();
+    }
+    @FXML public void tableTabSelected(){
+        TranslateTransition openNav;
+        openNav = new TranslateTransition(new Duration(time), tableComponent);
+        openNav.setToX(0);
+        tableComponent.setTranslateX(-(tableComponent.getWidth()));
+        openNav.play();
+    }
+    @FXML public void graphTabSelected(){
+        TranslateTransition openNav;
+        openNav = new TranslateTransition(new Duration(time), settingAnchorPane);
+        openNav.setToX(0);
+        settingAnchorPane.setTranslateX(-(settingAnchorPane.getWidth()));
+        openNav.play();
+    }
+    @FXML public void pathTabSelected(){
+        TranslateTransition openNav;
+        openNav = new TranslateTransition(new Duration(time), pathComponent);
+        openNav.setToX(0);
+        pathComponent.setTranslateX(-(pathComponent.getWidth()));
+        openNav.play();
+    }
+    @FXML public void taskTabSelected(){
+        TranslateTransition openNav;
+        openNav = new TranslateTransition(new Duration(time), taskComponent);
+        openNav.setToX(0);
+        taskComponent.setTranslateX(-(taskComponent.getWidth()));
+        openNav.play();
+    }
+    @FXML public void settingTabSelected(){
+        TranslateTransition openNav;
+        openNav = new TranslateTransition(new Duration(time), settingComponent);
+        openNav.setToX(0);
+        settingComponent.setTranslateX(-(settingComponent.getWidth()));
+        openNav.play();
+    }
+    public void fileAnimation() {
+        if(settingComponentController.animation())
+        {
+            recList.add(oneFileAnimation(195*1.5));
+            recList.add(oneFileAnimation(195*2.5));
+            recList.add(oneFileAnimation(195*3.5));
+            recList.add(oneFileAnimation(195*4.5));
+            fileComponent.getChildren().addAll(recList);
+        }
+    }
+    public Rectangle oneFileAnimation(double x) {
+        final Rectangle rectPath = new Rectangle (0, 0, 40, 40);
+        rectPath.setArcHeight(10);
+        rectPath.setArcWidth(10);
+        rectPath.setFill(new ImagePattern(new Image("/FXML/utility/file icon.png")));
+        Path path = new Path();
+        path.getElements().add(new MoveTo(fileComponentController.getFileButton().getLayoutX(),fileComponentController.getFileButton().getLayoutY()));
+        path.getElements().add(new CubicCurveTo(fileComponentController.getFileButton().getLayoutX(), fileComponentController.getFileButton().getLayoutY(), x, 0, x, 0));
+        PathTransition pathTransition = new PathTransition();
+        pathTransition.setDuration(Duration.millis(2000));
+        pathTransition.setPath(path);
+        pathTransition.setNode(rectPath);
+        pathTransition.setOrientation(PathTransition.OrientationType.ORTHOGONAL_TO_TANGENT);
+        pathTransition.setCycleCount(1);
+        pathTransition.setAutoReverse(true);
+        pathTransition.play();
+        pathTransition.statusProperty().addListener((a,b,c)->{
+            if (c == Animation.Status.STOPPED) {
+                fileComponent.getChildren().remove(recList.get(0));
+                fileComponent.getChildren().remove(recList.get(1));
+                fileComponent.getChildren().remove(recList.get(2));
+                fileComponent.getChildren().remove(recList.get(3));
+                recList.clear();
+            }
+        });
+        return rectPath;
+    }
 
     /// tab fxml
+    @FXML private AnchorPane settingAnchorPane;
     @FXML private Tab tableTab;
     @FXML private Tab graphTab;
     @FXML private Tab pathTab;
