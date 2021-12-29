@@ -1,0 +1,23 @@
+.tab-pane
+{
+    -fx-tab-min-width:195px;
+}
+.tab{
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
+
+.tab-pane .tab:selected
+{
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+}
+
+.tab .tab-label {
+    -fx-alignment: CENTER;
+    -fx-text-fill: black;
+    -fx-font-size: 20px;
+    -fx-font-family:"Times New Roman";
+}
+
+.tab:selected .tab-label {
+    -fx-alignment: CENTER;
+}

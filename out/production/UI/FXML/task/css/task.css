@@ -1,0 +1,41 @@
+#titleLabel{
+    -fx-font-size: 20px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #818181;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+.taskMangerLabel{
+    -fx-font-weight: bold;
+    -fx-font-family:"Times New Roman";
+}
+
+.taskMangerSpinner{}
+.toggleButtonTaskManger{}
+#proggressBar{}
+#comboBoxTaskManger{
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+}
+
+#clearButton{
+    -fx-font-family:"Times New Roman";
+    -fx-text-fill: black;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+}
+#clearButton:hover {
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
+
+.buttonButtonTaskManger{
+    -fx-font-family:"Times New Roman";
+    -fx-text-fill: black;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+}
+.buttonButtonTaskManger:hover {
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+}
