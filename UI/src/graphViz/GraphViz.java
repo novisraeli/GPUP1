@@ -25,6 +25,7 @@ package graphViz;
  ******************************************************************************
  */
 
+import javafx.scene.paint.Color;
 import target.Target;
 
 import java.io.BufferedReader;
@@ -37,6 +38,8 @@ import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
+import java.util.Set;
 
 /**
  * <dl>
@@ -365,24 +368,9 @@ public class GraphViz
 
         this.graph = sb;
     }
- /*   //////////////////////////////////////////////////////////////////////////////////////
-    public String createDotGraph(String dotFormat,String fileName)
-    {
-        GraphViz gv=new GraphViz();
-        gv.addln(gv.start_graph());
-        gv.add(dotFormat);
-        gv.addln(gv.end_graph());
-        String type = "png";
-        // gv.increaseDpi();
-        gv.decreaseDpi();
-        gv.decreaseDpi();
-        String pathImage = "/graphViz/GPUP." + type;
-        File out = new File(pathImage);
-        gv.writeGraphToFile( gv.getGraph( gv.getDotSource(), type ), out );
-        return pathImage;
-    }
-*/
-    public String makeDotFormat(Map<String, Target> targetMap){
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    public String makeDotFormat(Map<String, Target> targetMap , Map<String, Set<String>> serialSets){
         String dotFormat ="";
         for (String key : targetMap.keySet())
         {
@@ -390,9 +378,28 @@ public class GraphViz
                 dotFormat += targetMap.get(key).getName() + ";\n";
             else {
                 for (String DependsOn :targetMap.get(key).getSetDependsOn())
-                    dotFormat += targetMap.get(key).getName() + " -> " + DependsOn +";\n";
+                    dotFormat += targetMap.get(key).getName()
+                            + " -> "
+                            + DependsOn
+                            +";\n";
             }
         }
+
+        for (String key : serialSets.keySet())
+        {
+            Random random = new Random();
+            final float R = 1.0f;;
+            final float G = 1.0f;//1.0 for brilliant, 0.0 for dull
+            final float B = 1.0f; //1.0 for brighter, 0.0 for black
+            //Color color = new Color(0.5, 0.5, 0.5);
+            if (serialSets.size() != 0) {
+                for (String name : serialSets.get(key)) {
+                    dotFormat += name + "[color=" + " \"green:red;0.25:blue\" " + "]";
+                    //dotFormat += name + "[color=" + " \"green:red;0.25:blue\" " + "]";
+                }
+            }
+        }
+
         return dotFormat;
     }
 

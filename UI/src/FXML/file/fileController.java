@@ -22,6 +22,7 @@ import java.util.Map;
 
 public class fileController {
     private mainAppController mainController;
+    private String fileName;
     @FXML public void initialize() {
         /**
          *
@@ -69,11 +70,14 @@ public class fileController {
         try{
             File file = new FileChooser().showOpenDialog(new Stage());
             mainController.getEngine().loadFile(file.getPath());
-            mainController.isFileSelected().set(true);
             addDataToTable();
             mainController.showTable();
             mainController.setTreadsSpinner();
             mainController.fileAnimation();
+            //int i = fileName.lastIndexOf('.');
+            //fileName = fileName.substring(i+1);
+            mainController.isFileSelected().set(true);
+            mainController.change().set(true);
         }
         catch (Exception e) {
             new errorMain(e);

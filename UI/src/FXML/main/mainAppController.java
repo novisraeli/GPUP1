@@ -32,31 +32,46 @@ import target.Target;
 import target.targetTable;
 
 import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class mainAppController {
     private List<Rectangle> recList = new ArrayList<>();
+    Boolean changeBackground;
     private int time = 350;
     private String toggleColor = "-fx-background-color: linear-gradient(#2A5058, #61a2b1)";
     private final engine engine = new engineImpl();
     private final SimpleBooleanProperty isFileSelected;
+    private final SimpleBooleanProperty changeGraph;
     public ObservableList<targetTable> items = FXCollections.observableArrayList();
 
     public mainAppController() {////
         isFileSelected = new SimpleBooleanProperty(false);
-        isFileSelected.addListener((a,b,isSelected)->{
+        changeGraph = new SimpleBooleanProperty(false);
+        changeGraph.addListener((a,b,isSelected)->{
             if (isSelected)
             {
-                createDotGraph("gpupImage");
+                File f = createDotGraph("image");
+                Image image = new Image(f.toURI().toString());
+               // image = new Image("/graphViz/temp/image.png", graphAnchorPane.getWidth(), graphAnchorPane.getHeight(), false, false);
+                    BackgroundImage bImg = new BackgroundImage(image,
+                            BackgroundRepeat.NO_REPEAT,
+                            BackgroundRepeat.NO_REPEAT,
+                            BackgroundPosition.DEFAULT,
+                            new BackgroundSize(graphAnchorPane.getWidth(), graphAnchorPane.getHeight(), true, true, true, true));
+                    Background bGround = new Background(bImg);
+                    graphAnchorPane.setBackground(bGround);
+                    changeGraph.set(false);
             }
         });
     }
-    public void createDotGraph(String fileName)
+    public File createDotGraph(String fileName)
     {
             GraphViz gv = new GraphViz();
-            String dotFormat = gv.makeDotFormat(engine.getMap());
+            String dotFormat = gv.makeDotFormat(engine.getMap() , engine.getSerialSets());
             gv.addln(gv.start_graph());
             gv.add(dotFormat);
             gv.addln(gv.end_graph());
@@ -64,9 +79,10 @@ public class mainAppController {
             // gv.increaseDpi();
             gv.decreaseDpi();
             gv.decreaseDpi();
-          //  String pathImage = "/graphViz/GPUP." + type;
-            File out = new File("C:/Users/danse/IdeaProjects/GPUP3/UI/src/graphViz/temp/" +fileName+"."+ type);
+            String pathImage = "C:/Users/danse/IdeaProjects/GPUP3/UI/src/graphViz/temp/" +fileName+"."+ type;
+            File out = new File(pathImage);
             gv.writeGraphToFile(gv.getGraph(gv.getDotSource(), type), out);
+            return out;
     }
 
     @FXML public void initialize() {
@@ -75,6 +91,9 @@ public class mainAppController {
     }
     public SimpleBooleanProperty isFileSelected(){
         return isFileSelected;
+    }
+    public SimpleBooleanProperty change(){
+        return changeGraph;
     }
     public ObservableList observableList(){
         return items;
@@ -213,7 +232,11 @@ public class mainAppController {
             recList.add(oneFileAnimation(195*2.5));
             recList.add(oneFileAnimation(195*3.5));
             recList.add(oneFileAnimation(195*4.5));
-            fileComponent.getChildren().addAll(recList);
+            fileComponent.getChildren().add(recList.get(0));
+            fileComponent.getChildren().add(recList.get(1));
+            fileComponent.getChildren().add(recList.get(2));
+            fileComponent.getChildren().add(recList.get(3));
+            //fileComponent.getChildren().addAll(recList);
         }
     }
     public Rectangle oneFileAnimation(double x) {
@@ -234,10 +257,10 @@ public class mainAppController {
         pathTransition.play();
         pathTransition.statusProperty().addListener((a,b,c)->{
             if (c == Animation.Status.STOPPED) {
-                fileComponent.getChildren().remove(recList.get(0));
-                fileComponent.getChildren().remove(recList.get(1));
-                fileComponent.getChildren().remove(recList.get(2));
-                fileComponent.getChildren().remove(recList.get(3));
+                 fileComponent.getChildren().remove(recList.get(0));
+                 fileComponent.getChildren().remove(recList.get(1));
+                 fileComponent.getChildren().remove(recList.get(2));
+                 fileComponent.getChildren().remove(recList.get(3));
                 recList.clear();
             }
         });
@@ -264,6 +287,7 @@ public class mainAppController {
     @FXML private tableController tableComponentController;
     @FXML private BorderPane taskComponent;
     @FXML private taskController taskComponentController;
+    @FXML private BorderPane graphComponent;
 
 }
 

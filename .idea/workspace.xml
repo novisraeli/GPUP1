@@ -12,9 +12,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="bar">
+      <change afterPath="$PROJECT_DIR$/UI/src/graphViz/temp/image.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src.graphViz.DotGraph.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/main/mainApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/main/mainApp.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BARSELA.dot" beforeDir="false" afterPath="$PROJECT_DIR$/BARSELA.dot" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/file/fileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/file/fileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/file/fileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/file/fileController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/main/mainApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/main/mainApp.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/main/mainAppController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/main/mainAppController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,12 +61,11 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoTaskController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/file/fileController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_301.jdk/Contents/Home/src.zip!/java/util/HashSet.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/error/errorMain.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoMain.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -218,6 +225,8 @@
       <workItem from="1640683676984" duration="2043000" />
       <workItem from="1640715868494" duration="17122000" />
       <workItem from="1640773056675" duration="2335000" />
+      <workItem from="1640775559008" duration="3439000" />
+      <workItem from="1640781208467" duration="13133000" />
     </task>
     <task id="LOCAL‎00001" summary="zxc">
       <created>1636536346510</created>
@@ -628,39 +637,14 @@
           <option name="timeStamp" value="199" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java</url>
-          <line>116</line>
-          <option name="timeStamp" value="201" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/path/pathController.java</url>
           <line>62</line>
           <option name="timeStamp" value="203" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java</url>
-          <line>218</line>
-          <option name="timeStamp" value="211" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java</url>
-          <line>152</line>
-          <option name="timeStamp" value="219" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java</url>
-          <line>136</line>
-          <option name="timeStamp" value="224" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="229" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java</url>
-          <line>107</line>
-          <option name="timeStamp" value="233" />
+          <url>file://$PROJECT_DIR$/UI/src/FXML/file/fileController.java</url>
+          <line>72</line>
+          <option name="timeStamp" value="280" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Engine/src/information/TargetInformation.java</url>
