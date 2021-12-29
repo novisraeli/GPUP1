@@ -1,20 +1,18 @@
 package FXML.main;
-import FXML.error.errorMain;
 import FXML.file.fileController;
 import FXML.path.pathController;
 import FXML.setting.settingController;
 import FXML.table.tableController;
 import FXML.task.taskController;
+import FXML.treeView.treeViewController;
 import engine.*;
 import graphViz.GraphViz;
 import javafx.animation.Animation;
 import javafx.animation.PathTransition;
-import javafx.animation.Timeline;
 import javafx.animation.TranslateTransition;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
@@ -30,17 +28,13 @@ import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 import target.Target;
 import target.targetTable;
-
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class mainAppController {
-    private List<Rectangle> recList = new ArrayList<>();
-    Boolean changeBackground;
+    private final List<Rectangle> recList = new ArrayList<>();
     private int time = 350;
     private String toggleColor = "-fx-background-color: linear-gradient(#2A5058, #61a2b1)";
     private final engine engine = new engineImpl();
@@ -48,29 +42,20 @@ public class mainAppController {
     private final SimpleBooleanProperty changeGraph;
     public ObservableList<targetTable> items = FXCollections.observableArrayList();
 
-    public mainAppController() {////
+    public mainAppController() {
         isFileSelected = new SimpleBooleanProperty(false);
+
         changeGraph = new SimpleBooleanProperty(false);
         changeGraph.addListener((a,b,isSelected)->{
-            if (isSelected)
-            {
-                File f = createDotGraph("image");
-                Image image = new Image(f.toURI().toString());
-               // image = new Image("/graphViz/temp/image.png", graphAnchorPane.getWidth(), graphAnchorPane.getHeight(), false, false);
-                    BackgroundImage bImg = new BackgroundImage(image,
-                            BackgroundRepeat.NO_REPEAT,
-                            BackgroundRepeat.NO_REPEAT,
-                            BackgroundPosition.DEFAULT,
-                            new BackgroundSize(graphAnchorPane.getWidth(), graphAnchorPane.getHeight(), true, true, true, true));
-                    Background bGround = new Background(bImg);
-                    graphAnchorPane.setBackground(bGround);
-                    changeGraph.set(false);
+            if (isSelected) {
+                changeBackgroundGraph();
+                treeViewComponentController.setTreeView();
             }
         });
     }
     public File createDotGraph(String fileName)
     {
-            GraphViz gv = new GraphViz();
+            GraphViz gv = new GraphViz(engine.getWorkingDirectory());
             String dotFormat = gv.makeDotFormat(engine.getMap() , engine.getSerialSets());
             gv.addln(gv.start_graph());
             gv.add(dotFormat);
@@ -118,13 +103,14 @@ public class mainAppController {
     public void setMainForComponentController(){
         if (fileComponentController != null && pathComponentController != null &&
                 settingComponentController != null && tableComponentController != null &&
-               taskComponentController != null && settingComponentController != null){
-            settingComponentController.setMainController(this);
+               taskComponentController != null && treeViewComponentController != null){
+
             fileComponentController.setMainController(this);
             pathComponentController.setMainController(this);
             settingComponentController.setMainController(this);
             tableComponentController.setMainController(this);
             taskComponentController.setMainController(this);
+            treeViewComponentController.setMainController(this);
         }
     }
     public engine getEngine(){return engine;}
@@ -138,6 +124,7 @@ public class mainAppController {
         graphTab.disableProperty().bind(isFileSelected.not());
         pathTab.disableProperty().bind(isFileSelected.not());
         taskTab.disableProperty().bind(isFileSelected.not());
+        treeViewTab.disableProperty().bind(isFileSelected.not());
     }
     public void changeTabColor(Color newColor){
         String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
@@ -148,6 +135,7 @@ public class mainAppController {
         taskTab.setStyle(newColorString);
         fileTab.setStyle(newColorString);
         settingTab.setStyle(newColorString);
+        treeViewTab.setStyle(newColorString);
     }
     public void changeButtonColor(Color newColor){
         String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
@@ -175,6 +163,7 @@ public class mainAppController {
         pathComponentController.changeBackgroundColor(newColorString);
         tableComponentController.changeBackgroundColor(newColorString);
         taskComponentController.changeBackgroundColor(newColorString);
+        treeViewComponentController.changeBackgroundColor(newColorString);
     }
     public void setTreadsSpinner() {
         taskComponentController.setTreadsSpinner();
@@ -225,18 +214,22 @@ public class mainAppController {
         settingComponent.setTranslateX(-(settingComponent.getWidth()));
         openNav.play();
     }
+    @FXML public void treeTableSelected(){
+        TranslateTransition openNav;
+        openNav = new TranslateTransition(new Duration(time), treeViewComponent);
+        openNav.setToX(0);
+        treeViewComponent.setTranslateX(-(treeViewComponent.getWidth()));
+        openNav.play();
+    }
     public void fileAnimation() {
         if(settingComponentController.animation())
         {
-            recList.add(oneFileAnimation(195*1.5));
-            recList.add(oneFileAnimation(195*2.5));
-            recList.add(oneFileAnimation(195*3.5));
-            recList.add(oneFileAnimation(195*4.5));
-            fileComponent.getChildren().add(recList.get(0));
-            fileComponent.getChildren().add(recList.get(1));
-            fileComponent.getChildren().add(recList.get(2));
-            fileComponent.getChildren().add(recList.get(3));
-            //fileComponent.getChildren().addAll(recList);
+            recList.add(oneFileAnimation(180*1.5));
+            recList.add(oneFileAnimation(180*2.5));
+            recList.add(oneFileAnimation(180*3.5));
+            recList.add(oneFileAnimation(180*4.5));
+            recList.add(oneFileAnimation(180*5.5));
+            fileComponent.getChildren().addAll(recList);
         }
     }
     public Rectangle oneFileAnimation(double x) {
@@ -261,16 +254,30 @@ public class mainAppController {
                  fileComponent.getChildren().remove(recList.get(1));
                  fileComponent.getChildren().remove(recList.get(2));
                  fileComponent.getChildren().remove(recList.get(3));
+                fileComponent.getChildren().remove(recList.get(4));
                 recList.clear();
             }
         });
         return rectPath;
     }
-
+    public void changeBackgroundGraph(){
+        File f = createDotGraph("image");
+        Image image = new Image(f.toURI().toString());
+        // image = new Image("/graphViz/temp/image.png", graphAnchorPane.getWidth(), graphAnchorPane.getHeight(), false, false);
+        BackgroundImage bImg = new BackgroundImage(image,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundRepeat.NO_REPEAT,
+                BackgroundPosition.DEFAULT,
+                new BackgroundSize(1300, 750, true, true, true, true));
+        Background bGround = new Background(bImg);
+        graphAnchorPane.setBackground(bGround);
+        changeGraph.set(false);
+    }
     /// tab fxml
     @FXML private AnchorPane settingAnchorPane;
     @FXML private AnchorPane graphAnchorPane;
     @FXML private Tab tableTab;
+    @FXML private Tab treeViewTab;
     @FXML private Tab graphTab;
     @FXML private Tab pathTab;
     @FXML private Tab taskTab;
@@ -288,6 +295,9 @@ public class mainAppController {
     @FXML private BorderPane taskComponent;
     @FXML private taskController taskComponentController;
     @FXML private BorderPane graphComponent;
+  //  @FXML private treeViewController treeViewComponentController;
+    @FXML private BorderPane treeViewComponent;
+    @FXML private treeViewController treeViewComponentController;
 
 }
 

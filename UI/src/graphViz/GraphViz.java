@@ -87,24 +87,24 @@ public class GraphViz
     /**
      * Load the config.properties file.
      */
-    private final static String cfgProp = "/Users/seteropere/NetBeansProjects/TestApplication/src/config.properties";
-    private final static Properties configFile = new Properties() {
-        private final static long serialVersionUID = 1L; {
-            try {
-                load(new FileInputStream(cfgProp));
-            } catch (Exception e) {}
-        }
-    };
+    //private final static String cfgProp = "/Users/seteropere/NetBeansProjects/TestApplication/src/config.properties";
+    //private final static Properties configFile = new Properties() {
+    //    private final static long serialVersionUID = 1L; {
+    //        try {
+     //           load(new FileInputStream(cfgProp));
+     //       } catch (Exception e) {}
+    //    }
+   // };
 
     /**
      * The dir. where temporary files will be created.
      */
-    private static String TEMP_DIR = "C:/Users/danse/Documents/demo";
+    private String TEMP_DIR ;
 
     /**
      * Where is your dot program located? It will be called externally.
      */
-    private static String DOT_ = "C:/Program Files (x86)/Graphviz/bin/dot.exe";
+    private String DOT_ = "C:/Program Files (x86)/Graphviz/bin/dot.exe";
 
     /**
      * The image size in dpi. 96 dpi is normal size. Higher values are 10% higher each.
@@ -150,7 +150,8 @@ public class GraphViz
      * Constructor: creates a new com.company.GraphViz object that will contain
      * a graph.
      */
-    public GraphViz() {
+    public GraphViz(String Path) {
+        TEMP_DIR = Path;
     }
 
     /**
@@ -252,7 +253,7 @@ public class GraphViz
         byte[] img_stream = null;
 
         try {
-            img = File.createTempFile("graph_", "."+type, new File(GraphViz.TEMP_DIR));
+            img = File.createTempFile("graph_", "."+type, new File(TEMP_DIR));
             Runtime rt = Runtime.getRuntime();
 
             // patch by Mike Chenault
@@ -271,7 +272,7 @@ public class GraphViz
                 System.err.println("Warning: " + img.getAbsolutePath() + " could not be deleted!");
         }
         catch (java.io.IOException ioe) {
-            System.err.println("Error:    in I/O processing of tempfile in dir " + GraphViz.TEMP_DIR+"\n");
+            System.err.println("Error:    in I/O processing of tempfile in dir " + TEMP_DIR+"\n");
             System.err.println("       or in calling external command");
             ioe.printStackTrace();
         }
@@ -292,7 +293,7 @@ public class GraphViz
     {
         File temp;
         try {
-            temp = File.createTempFile("BARSELA",".dot", new File(GraphViz.TEMP_DIR));
+            temp = File.createTempFile("BARSELA",".dot", new File(TEMP_DIR));
             FileWriter fout = new FileWriter(temp);
             fout.write(str);
             BufferedWriter br=new BufferedWriter(new FileWriter("BARSELA.dot"));

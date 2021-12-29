@@ -1,6 +1,6 @@
 .tab-pane
 {
-    -fx-tab-min-width:195px;
+    -fx-tab-min-width:169px;
 }
 .tab{
     -fx-background-color: linear-gradient(#2A5058, #61a2b1);

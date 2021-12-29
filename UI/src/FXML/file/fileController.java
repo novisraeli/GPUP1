@@ -74,8 +74,6 @@ public class fileController {
             mainController.showTable();
             mainController.setTreadsSpinner();
             mainController.fileAnimation();
-            //int i = fileName.lastIndexOf('.');
-            //fileName = fileName.substring(i+1);
             mainController.isFileSelected().set(true);
             mainController.change().set(true);
         }

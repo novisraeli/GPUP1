@@ -28,6 +28,8 @@ public class engineImpl implements engine {
     private Map<String,Set<String>> serialSets = new HashMap<>();
     private boolean stopThreads;
     private static int workingThreads=0;
+    @Override
+    public String getWorkingDirectory(){return workingDirectory;}
     /** Load file
      *  Open XML file
      *  if the XML is corrupt stay with the last detail you have

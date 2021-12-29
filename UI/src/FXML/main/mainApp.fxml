@@ -47,6 +47,15 @@
                             <AnchorPane fx:id="graphAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                           </content>
                         </Tab>
+                        <Tab fx:id="treeViewTab" disable="true" onSelectionChanged="#treeTableSelected" text="Tree view">
+                          <content>
+                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <fx:include fx:id="treeViewComponent" source="../treeView/treeView.fxml" />
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </Tab>
                         <Tab fx:id="pathTab" disable="true" onSelectionChanged="#pathTabSelected" styleClass="tab-label" text="Path">
                            <content>
                               <AnchorPane fx:id="pathAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">

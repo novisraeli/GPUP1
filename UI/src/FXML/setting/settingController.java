@@ -9,6 +9,8 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 
 public class settingController {
     private mainAppController mainController;
@@ -45,6 +47,8 @@ public class settingController {
                 mainController.changeBackgroundColor(backgroundColor.getValue());
                 String newColorString = "-fx-background-color: rgb(" + backgroundColor.getValue().getRed()*255 + "," +  backgroundColor.getValue().getGreen()*255 +"," +  backgroundColor.getValue().getBlue()*255 +")";
                 borderPaneSetting.setStyle(newColorString);
+                vbox.setStyle(newColorString);
+                hbox.setStyle(newColorString);
             });
 
            /* durationSpinner.valueProperty().addListener((obs, oldString, newString) -> {
@@ -63,14 +67,15 @@ public class settingController {
             });
         }
     public boolean animation(){return ofOffButton.isSelected();}
-
-        @FXML private ColorPicker backgroundColor;
-        @FXML private ColorPicker tableColor;
-        @FXML private ColorPicker buttonColor;
-        @FXML private ColorPicker toggleColor;
-        @FXML private ColorPicker combBoxColor;
-        @FXML private ColorPicker tabColor;
-        @FXML private BorderPane borderPaneSetting;
-        @FXML private Spinner<Integer> durationSpinner;
-        @FXML private RadioButton ofOffButton;
-    }
+    @FXML private HBox hbox;
+    @FXML private VBox vbox;
+    @FXML private ColorPicker backgroundColor;
+    @FXML private ColorPicker tableColor;
+    @FXML private ColorPicker buttonColor;
+    @FXML private ColorPicker toggleColor;
+    @FXML private ColorPicker combBoxColor;
+    @FXML private ColorPicker tabColor;
+    @FXML private BorderPane borderPaneSetting;
+    @FXML private Spinner<Integer> durationSpinner;
+    @FXML private RadioButton ofOffButton;
+}

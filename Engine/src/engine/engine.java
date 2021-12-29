@@ -25,4 +25,5 @@ public interface engine{
     Map<String,Set<String>> getSerialSets();
     Map<String,Set<String>> getAllSerialSetsWithYou(String t);
     int getMaxThreads();
+    String getWorkingDirectory();
 }
