@@ -20,14 +20,14 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class engineImpl implements engine {
-    private String nameFile;
     private boolean loadFile = false;
     private Map<String, Target> targetMap;
     private String workingDirectory;
     private List<Information> res;
     private int maxThreads;
     private Map<String,Set<String>> serialSets = new HashMap<>();
-
+    private boolean stopThreads;
+    private static int workingThreads=0;
     /** Load file
      *  Open XML file
      *  if the XML is corrupt stay with the last detail you have
@@ -49,6 +49,10 @@ public class engineImpl implements engine {
         file.checkSerialSets(targetMapTemp,serialSets);
         loadFile = true;
         targetMap = targetMapTemp;
+        stopThreads=false;
+    }
+    public synchronized void setStopThreads(boolean b){
+        stopThreads=b;
     }
 
     /** Targets in formation
@@ -290,6 +294,12 @@ public class engineImpl implements engine {
         }
         //run on all targets
         while(!taskDoneCheck()) {
+            if(stopThreads){
+                threads.wait();
+            }
+            else{
+                threads.notifyAll();
+            }
             for(Map.Entry<String, Target> e : targetMap.entrySet()){
                 if(e.getValue().getStatus()==Target.Status.Waiting&&!e.getValue().getIsInQueue()) {
                     if (checkSerialSets(e.getValue().getName())) {
@@ -425,9 +435,26 @@ public class engineImpl implements engine {
     public Map<String,Set<String>> getSerialSets(){
         return serialSets;
     }
-
-
-
+    public synchronized double getPrecentageDone(){
+        int count=0;
+        int doneCount=0;
+        for(Map.Entry<String, Target> e : targetMap.entrySet()){
+            if(e.getValue().getStatus()!=Target.Status.Waiting){
+                doneCount++;
+            }
+            count++;
+        }
+        return ((double)doneCount)/count;
+    }
+    public static synchronized int getWorkingThreads(){
+        return workingThreads;
+    }
+    public static synchronized void incrementWorkingThreads(){
+        workingThreads++;
+    }
+    public static synchronized void decrementWorkingThreads(){
+        workingThreads--;
+    }
 
 
 
