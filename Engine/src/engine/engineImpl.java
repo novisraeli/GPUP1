@@ -54,9 +54,7 @@ public class engineImpl implements engine {
     public synchronized void setStopThreads(boolean b){
         stopThreads=b;
     }
-    public synchronized boolean getStopThreads(){
-        return stopThreads;
-    }
+
     /** Targets in formation
      *  @return all the information about the graph:
      *  amount of roots
@@ -276,7 +274,6 @@ public class engineImpl implements engine {
         List<Target> l=new ArrayList<>();
         Set<String> req;
         Random r=new Random();
-
         //now set variables for run
         for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all targets to waiting
             if(random){

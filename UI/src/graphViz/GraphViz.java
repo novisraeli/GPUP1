@@ -1,4 +1,6 @@
-package graphViz;// com.company.GraphViz.java - a simple API to call dot from Java programs
+package graphViz;
+
+;// com.company.GraphViz.java - a simple API to call dot from Java programs
 
 /*$Id$*/
 /*
@@ -82,9 +84,7 @@ public class GraphViz
     /**
      * Load the config.properties file.
      */
-    /*
     private final static String cfgProp = "/Users/seteropere/NetBeansProjects/TestApplication/src/config.properties";
-
     private final static Properties configFile = new Properties() {
         private final static long serialVersionUID = 1L; {
             try {
@@ -93,12 +93,10 @@ public class GraphViz
         }
     };
 
-     */
-
     /**
      * The dir. where temporary files will be created.
      */
-    private static String TEMP_DIR = "/graphViz/temp";
+    private static String TEMP_DIR = "C:/Users/danse/Documents/demo";
 
     /**
      * Where is your dot program located? It will be called externally.
@@ -367,7 +365,7 @@ public class GraphViz
 
         this.graph = sb;
     }
-    //////////////////////////////////////////////////////////////////////////////////////
+ /*   //////////////////////////////////////////////////////////////////////////////////////
     public String createDotGraph(String dotFormat,String fileName)
     {
         GraphViz gv=new GraphViz();
@@ -383,11 +381,9 @@ public class GraphViz
         gv.writeGraphToFile( gv.getGraph( gv.getDotSource(), type ), out );
         return pathImage;
     }
-
+*/
     public String makeDotFormat(Map<String, Target> targetMap){
-        String dotFormat;
-
-        dotFormat = "digraph GPUP {\n";
+        String dotFormat ="";
         for (String key : targetMap.keySet())
         {
             if (targetMap.get(key).getSetDependsOn().size() == 0)
@@ -397,7 +393,8 @@ public class GraphViz
                     dotFormat += targetMap.get(key).getName() + " -> " + DependsOn +";\n";
             }
         }
-        dotFormat += "}";
         return dotFormat;
     }
+
+
 } // end of class com.company.GraphViz

@@ -1,4 +1,5 @@
 package FXML.main;
+import FXML.error.errorMain;
 import FXML.file.fileController;
 import FXML.path.pathController;
 import FXML.setting.settingController;
@@ -30,6 +31,7 @@ import javafx.util.Duration;
 import target.Target;
 import target.targetTable;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -47,11 +49,26 @@ public class mainAppController {
         isFileSelected.addListener((a,b,isSelected)->{
             if (isSelected)
             {
-                GraphViz graph = new GraphViz();
-                graph.createDotGraph(graph.makeDotFormat(engine.getMap()),"gpup12");
+                createDotGraph("gpupImage");
             }
         });
     }
+    public void createDotGraph(String fileName)
+    {
+            GraphViz gv = new GraphViz();
+            String dotFormat = gv.makeDotFormat(engine.getMap());
+            gv.addln(gv.start_graph());
+            gv.add(dotFormat);
+            gv.addln(gv.end_graph());
+            String type = "png";
+            // gv.increaseDpi();
+            gv.decreaseDpi();
+            gv.decreaseDpi();
+          //  String pathImage = "/graphViz/GPUP." + type;
+            File out = new File("C:/Users/danse/IdeaProjects/GPUP3/UI/src/graphViz/temp/" +fileName+"."+ type);
+            gv.writeGraphToFile(gv.getGraph(gv.getDotSource(), type), out);
+    }
+
     @FXML public void initialize() {
         setMainForComponentController();
         setBinding();
@@ -229,6 +246,7 @@ public class mainAppController {
 
     /// tab fxml
     @FXML private AnchorPane settingAnchorPane;
+    @FXML private AnchorPane graphAnchorPane;
     @FXML private Tab tableTab;
     @FXML private Tab graphTab;
     @FXML private Tab pathTab;
