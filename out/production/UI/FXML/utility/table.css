@@ -1,0 +1,11 @@
+.tableView{
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+    -fx-text-fill: black;
+}
+
+.tableView .tableColumn{
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+    -fx-effect: dropshadow(two-pass-box,rgb(10,101,107),15,0.0,0.1,3);
+    -fx-font-weight: bold;
+    -fx-font-family:"Times New Roman";
+}

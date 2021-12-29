@@ -1,0 +1,11 @@
+.settingLabel{
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-font-family:"Times New Roman";
+}
+
+.settingTitleLabel{
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-font-family:"Times New Roman";
+}

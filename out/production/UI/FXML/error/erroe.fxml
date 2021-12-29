@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="400.0" styleClass="background" stylesheets="@../utility/backgroung.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.error.errorController">
+   <center>
+      <FlowPane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <children>
+            <Text fx:id="errorText" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
+               <FlowPane.margin>
+                  <Insets left="20.0" top="20.0" />
+               </FlowPane.margin>
+            </Text>
+         </children>
+      </FlowPane>
+   </center>
+</BorderPane>
