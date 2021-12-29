@@ -12,17 +12,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="bar">
+      <change afterPath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/file/fileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/file/fileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/path/pathController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/path/pathController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/setting/settingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/setting/settingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/UI.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/UIimpl.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/UIimpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/main.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/UI.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -224,7 +217,8 @@
       <workItem from="1640367445428" duration="23094000" />
       <workItem from="1640683534128" duration="137000" />
       <workItem from="1640683676984" duration="2043000" />
-      <workItem from="1640715868494" duration="16625000" />
+      <workItem from="1640715868494" duration="17122000" />
+      <workItem from="1640773056675" duration="1775000" />
     </task>
     <task id="LOCAL‎00001" summary="zxc">
       <created>1636536346510</created>
@@ -480,7 +474,13 @@
       <option name="presentableId" value="LOCAL‎00042" />
       <updated>1640732426321</updated>
     </task>
-    <option name="localTasksCounter" value="43" />
+    <task id="LOCAL‎00043" summary="bar">
+      <created>1640734433335</created>
+      <option name="number" value="LOCAL‎00043" />
+      <option name="presentableId" value="LOCAL‎00043" />
+      <updated>1640734433335</updated>
+    </task>
+    <option name="localTasksCounter" value="44" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -606,7 +606,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java</url>
-          <line>110</line>
+          <line>117</line>
           <option name="timeStamp" value="201" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -616,7 +616,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java</url>
-          <line>212</line>
+          <line>219</line>
           <option name="timeStamp" value="211" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -636,7 +636,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java</url>
-          <line>101</line>
+          <line>108</line>
           <option name="timeStamp" value="233" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">

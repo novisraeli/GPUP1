@@ -5,6 +5,7 @@ import FXML.setting.settingController;
 import FXML.table.tableController;
 import FXML.task.taskController;
 import engine.*;
+import graphViz.GraphViz;
 import javafx.animation.Animation;
 import javafx.animation.PathTransition;
 import javafx.animation.Timeline;
@@ -43,6 +44,13 @@ public class mainAppController {
 
     public mainAppController() {
         isFileSelected = new SimpleBooleanProperty(false);
+        isFileSelected.addListener((a,b,isSelected)->{
+            if (isSelected)
+            {
+                GraphViz graph = new GraphViz();
+                graph.createDotGraph(graph.makeDotFormat(engine.getMap()),"gpup12");
+            }
+        });
     }
     @FXML public void initialize() {
         setMainForComponentController();
@@ -70,7 +78,6 @@ public class mainAppController {
         totalDependsOnTableCol.setCellValueFactory(new PropertyValueFactory<>("totalDependsOnTableCol"));
         serialSetTableCol.setCellValueFactory(new PropertyValueFactory<>("serialSetTableCol"));
         dataTableCol.setCellValueFactory(new PropertyValueFactory<>("userData"));
-
     }
     public void setMainForComponentController(){
         if (fileComponentController != null && pathComponentController != null &&
