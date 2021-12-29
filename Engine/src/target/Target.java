@@ -1,5 +1,6 @@
 package target;
 
+import engine.engineImpl;
 import information.Information;
 import information.SumUpTarget;
 
@@ -28,7 +29,7 @@ public class Target implements Serializable,Runnable
     private boolean isInQueue;
     private boolean isRunning;
     private long startWaitingTime;
-
+    private String failReason;
     /** ctor */
     public  Target(String name , String userData , Set<String> setDependsOn , Set<String> setRequiredFor) {
         this.name = name;
@@ -145,6 +146,9 @@ public class Target implements Serializable,Runnable
     public void SetStatus(Status s) {
         this.status = s;
     }
+    public synchronized String getFailReason(){
+        return failReason;
+    }
     public void run(int time, boolean random, float success, float warning, List<Information>res,Map<String,Target>targetMap,String path) throws Exception {
         if(!this.setDependsOn.isEmpty()){
             for(String s:setDependsOn){
@@ -245,25 +249,33 @@ public class Target implements Serializable,Runnable
                 + "Target Data: "+ userData + "\n\r" ;
     }
     public void run(){
-
+        engineImpl.incrementWorkingThreads();
+        isRunning=true;
         try{
             if(!this.setDependsOn.isEmpty()){
                 for(String s:setDependsOn){
                     if(targetMap.get(s).getStatus()==Status.Waiting){//dont run if depends on is still waiting
                         isRunning=false;
                         isInQueue=false;
+                        engineImpl.decrementWorkingThreads();
                         return;
                     }
-                    else if(targetMap.get(s).getStatus()==Status.Failure){
+                    else if(targetMap.get(s).getStatus()==Status.Failure||targetMap.get(s).getStatus()==Status.Skipped){
+                        if(targetMap.get(s).getStatus()==Status.Failure){
+                            failReason=s;
+                        }
+                        else{
+                            failReason=targetMap.get(s).failReason;
+                        }
                         isInQueue=false;
                         isRunning=false;
                         this.status=Status.Skipped;
                         simTimeString="00:00:00:00";
+                        engineImpl.decrementWorkingThreads();
                         return;
                     }
                 }
             }
-            isRunning=true;
             long startTime = System.currentTimeMillis();//sim target and keep time of sim
             Thread.sleep((long)runTime);
             long simTime=System.currentTimeMillis()-startTime;
@@ -289,6 +301,7 @@ public class Target implements Serializable,Runnable
             }
             isRunning=false;
             isInQueue=false;
+            engineImpl.decrementWorkingThreads();
         }
         catch (Exception e){
 
