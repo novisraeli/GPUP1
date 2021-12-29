@@ -12,10 +12,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="bar">
-      <change afterPath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/UI.class" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 1/G.P.U.P-V1.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 1/ex1-big.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 1/ex1-cycle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 1/ex1-error-2.2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 1/ex1-error-2.4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 1/ex1-small.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/G.P.U.P-V2.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/XOO.rar" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/ex2-big.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/ex2-compilation.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/ex2-cycle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/ex2-error.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/ex2-full-serial-set.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/ex2-small.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 3/G.P.U.P-V3.xsd" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 3/ex3-compilation.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 3/ex3-error-2.3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 3/ex3-small.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -218,7 +232,7 @@
       <workItem from="1640683534128" duration="137000" />
       <workItem from="1640683676984" duration="2043000" />
       <workItem from="1640715868494" duration="17122000" />
-      <workItem from="1640773056675" duration="1775000" />
+      <workItem from="1640773056675" duration="2089000" />
     </task>
     <task id="LOCAL‎00001" summary="zxc">
       <created>1636536346510</created>
@@ -480,7 +494,13 @@
       <option name="presentableId" value="LOCAL‎00043" />
       <updated>1640734433335</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL‎00044" summary="bar">
+      <created>1640774861135</created>
+      <option name="number" value="LOCAL‎00044" />
+      <option name="presentableId" value="LOCAL‎00044" />
+      <updated>1640774861135</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="ToolWindowManager">
