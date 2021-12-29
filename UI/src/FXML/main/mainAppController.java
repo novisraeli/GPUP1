@@ -42,7 +42,7 @@ public class mainAppController {
     private final SimpleBooleanProperty isFileSelected;
     public ObservableList<targetTable> items = FXCollections.observableArrayList();
 
-    public mainAppController() {//
+    public mainAppController() {////
         isFileSelected = new SimpleBooleanProperty(false);
         isFileSelected.addListener((a,b,isSelected)->{
             if (isSelected)
