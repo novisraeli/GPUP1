@@ -27,7 +27,7 @@
       <URL value="@css/task.css" />
    </stylesheets>
    <center>
-      <GridPane minHeight="748.0" minWidth="1290.0" prefHeight="748.0" prefWidth="1290.0" styleClass="background" BorderPane.alignment="CENTER">
+      <GridPane fx:id="gridPaneTAsk" minHeight="748.0" minWidth="1290.0" prefHeight="748.0" prefWidth="1290.0" styleClass="background" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="NEVER" maxWidth="1053.0" minWidth="10.0" prefWidth="1046.0" />
             <ColumnConstraints hgrow="ALWAYS" maxWidth="521.0" minWidth="0.0" prefWidth="252.0" />
@@ -45,18 +45,18 @@
                   <RowConstraints maxHeight="30.0" minHeight="10.0" prefHeight="30.0" vgrow="NEVER" />
                </rowConstraints>
                <children>
-                  <TableView fx:id="tableView" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="709.0" prefWidth="1047.0" styleClass="tableView" stylesheets="@../utility/table.css" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+                  <TableView fx:id="tableView" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1046.0" styleClass="tableView" stylesheets="@../utility/table.css" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
                      <columns>
                         <TableColumn fx:id="remarkTableCol" maxWidth="30.0" minWidth="30.0" prefWidth="30.0" styleClass="tableColumn" />
                         <TableColumn fx:id="nameTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Name" />
                         <TableColumn fx:id="typeTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Type" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="0.0" styleClass="tableColumn" text="Required For">
+                        <TableColumn fx:id="requiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="0.0" styleClass="tableColumn" text="Required For">
                            <columns>
                               <TableColumn fx:id="directRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
                               <TableColumn fx:id="totalRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
                            </columns>
                         </TableColumn>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="114.0" styleClass="tableColumn" text="Depends On">
+                        <TableColumn fx:id="dependsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="114.0" styleClass="tableColumn" text="Depends On">
                            <columns>
                               <TableColumn fx:id="directDependsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
                               <TableColumn fx:id="totalDependsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="75.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
@@ -64,10 +64,10 @@
                         </TableColumn>
                         <TableColumn fx:id="serialSetTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Serial Sets" />
                         <TableColumn fx:id="dataTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="150.0" styleClass="tableColumn" text="Data" />
-                        <TableColumn fx:id="statusTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="190.0" styleClass="tableColumn" text="Status" />
+                        <TableColumn fx:id="statusTableCol" maxWidth="1.7976931348623157E308" minWidth="150.0" prefWidth="188.0" styleClass="tableColumn" text="Status" />
                      </columns>
                   </TableView>
-                  <HBox prefHeight="100.0" prefWidth="200.0" styleClass="background" GridPane.rowIndex="1">
+                  <HBox fx:id="hboxTask" prefHeight="100.0" prefWidth="200.0" styleClass="background" GridPane.rowIndex="1">
                      <children>
                         <Button id="clearButton" fx:id="clearButton" minHeight="20.0" minWidth="50.0" mnemonicParsing="false" onAction="#clearAction" prefHeight="20.0" prefWidth="50.0" text="Clear" HBox.hgrow="NEVER">
                            <font>
@@ -100,10 +100,10 @@
                   <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="346.0" vgrow="ALWAYS" />
                </rowConstraints>
                <children>
-                  <Label id="titleLabel" alignment="CENTER" prefHeight="55.0" prefWidth="252.0" styleClass="background" text="Task manger" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
+                  <Label id="titleLabel" fx:id="taskMangerTitle" alignment="CENTER" prefHeight="55.0" prefWidth="252.0" styleClass="background" text="Task manger" textAlignment="CENTER" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER" />
                   <AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" styleClass="background" GridPane.rowIndex="1">
                      <children>
-                        <GridPane layoutY="31.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="699.0" prefWidth="253.0" styleClass="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <GridPane fx:id="gridPaneTask2" layoutY="31.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="699.0" prefWidth="253.0" styleClass="background" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columnConstraints>
                               <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="258.0" />
                            </columnConstraints>
@@ -116,7 +116,7 @@
                               <RowConstraints maxHeight="316.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
                            </rowConstraints>
                            <children>
-                              <HBox alignment="CENTER" prefHeight="34.0" prefWidth="252.0" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
+                              <HBox fx:id="hbox2" alignment="CENTER" prefHeight="34.0" prefWidth="252.0" GridPane.halignment="CENTER" GridPane.hgrow="NEVER" GridPane.valignment="CENTER" GridPane.vgrow="NEVER">
                                  <children>
                                     <ToggleButton fx:id="compilerToggle" contentDisplay="CENTER" mnemonicParsing="false" onAction="#compilerToggleSelected" prefHeight="50.0" prefWidth="100.0" text="Compiler ">
                                        <HBox.margin>
@@ -130,7 +130,7 @@
                                     </ToggleButton>
                                  </children>
                               </HBox>
-                              <VBox alignment="CENTER" prefHeight="86.0" prefWidth="254.0" GridPane.rowIndex="2">
+                              <VBox fx:id="hbox3" alignment="CENTER" prefHeight="86.0" prefWidth="254.0" GridPane.rowIndex="2">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
@@ -209,7 +209,7 @@
                               </BorderPane>
                               <HBox fx:id="simulationBox" GridPane.rowIndex="1">
                                  <children>
-                                    <VBox prefHeight="121.0" prefWidth="173.0">
+                                    <VBox fx:id="vbox1" prefHeight="121.0" prefWidth="173.0">
                                        <children>
                                           <Label styleClass="taskMangerLabel" text="Processing time: (ms)">
                                              <VBox.margin>
@@ -228,22 +228,22 @@
                                           </Label>
                                        </children>
                                     </VBox>
-                                    <VBox>
+                                    <VBox fx:id="vbox2" prefHeight="155.0" prefWidth="74.0">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>
                                        <children>
-                                          <Spinner fx:id="ProcessingTimeSpinner" maxHeight="17.0" minHeight="20.0" prefHeight="17.0" prefWidth="53.0" styleClass="taskMangerSpinner">
+                                          <Spinner fx:id="ProcessingTimeSpinner" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" prefWidth="72.0" styleClass="taskMangerSpinner">
                                              <VBox.margin>
                                                 <Insets top="10.0" />
                                              </VBox.margin>
                                           </Spinner>
-                                          <Spinner fx:id="successSpinner" maxHeight="17.0" minHeight="20.0" prefHeight="17.0" prefWidth="53.0" styleClass="taskMangerSpinner">
+                                          <Spinner fx:id="successSpinner" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" prefWidth="72.0" styleClass="taskMangerSpinner">
                                              <VBox.margin>
                                                 <Insets top="20.0" />
                                              </VBox.margin>
                                           </Spinner>
-                                          <Spinner fx:id="successWithWarningSpinner" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" prefWidth="53.0" styleClass="taskMangerSpinner">
+                                          <Spinner fx:id="successWithWarningSpinner" maxHeight="20.0" minHeight="20.0" prefHeight="20.0" prefWidth="72.0" styleClass="taskMangerSpinner">
                                              <VBox.margin>
                                                 <Insets top="20.0" />
                                              </VBox.margin>
@@ -252,9 +252,9 @@
                                     </VBox>
                                  </children>
                               </HBox>
-                              <HBox prefHeight="35.0" prefWidth="211.0" GridPane.rowIndex="3">
+                              <HBox fx:id="hbox5" prefHeight="35.0" prefWidth="211.0" GridPane.rowIndex="3">
                                  <children>
-                                    <VBox prefHeight="121.0" prefWidth="173.0">
+                                    <VBox fx:id="vbox3" prefHeight="121.0" prefWidth="173.0">
                                        <children>
                                           <Label styleClass="taskMangerLabel" text="Number of task in parallel">
                                              <VBox.margin>
@@ -263,7 +263,7 @@
                                           </Label>
                                        </children>
                                     </VBox>
-                                    <VBox>
+                                    <VBox fx:id="vbox4">
                                        <HBox.margin>
                                           <Insets />
                                        </HBox.margin>

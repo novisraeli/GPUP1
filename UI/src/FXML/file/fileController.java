@@ -2,12 +2,17 @@ package FXML.file;
 import FXML.error.errorMain;
 import FXML.main.mainAppController;
 import engine.engine;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import target.Target;
 import target.targetTable;
 import java.io.File;
@@ -16,8 +21,22 @@ import java.util.List;
 import java.util.Map;
 
 public class fileController {
-
     private mainAppController mainController;
+    @FXML public void initialize() {
+        /**
+         *
+         */
+        image.widthProperty().addListener((a,c,d)->{
+            Image img = new Image("/FXML/file/css/programming.jpg");
+            BackgroundImage bImg = new BackgroundImage(img,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundRepeat.NO_REPEAT,
+                    BackgroundPosition.DEFAULT,
+                    new BackgroundSize(image.getWidth(),image.getHeight(),true, true, true, true));
+            Background bGround = new Background(bImg);
+            image.setBackground(bGround);
+        });
+    }
     public void setMainController(mainAppController mainController) {
         this.mainController = mainController;
     }
@@ -42,7 +61,9 @@ public class fileController {
         }
         catch (Exception e){new errorMain(e);}
     }
-
+    public void changeButtonColor(String newColorString){
+        loadFileButton.setStyle(newColorString);
+    }
     ////// set on action button
     @FXML void loadFileButton(ActionEvent event) {
         try{
@@ -51,11 +72,14 @@ public class fileController {
             mainController.isFileSelected().set(true);
             addDataToTable();
             mainController.showTable();
+            mainController.setTreadsSpinner();
+            mainController.fileAnimation();
         }
         catch (Exception e) {
             new errorMain(e);
         }
     }
+    public Button getFileButton(){return loadFileButton;}
 
     ////// fxml member
     @FXML private BorderPane image;

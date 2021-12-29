@@ -54,12 +54,14 @@
     -fx-font-family:"Times New Roman";
     -fx-text-fill: black;
     -fx-font-size: 10px;
-    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
+
 }
 #whatIfToggle{
     -fx-font-family:"Times New Roman";
     -fx-text-fill: black;
     -fx-font-size: 10px;
-    -fx-background-color: linear-gradient(#61a2b1, #2A5058);
+    -fx-background-color: linear-gradient(#2A5058, #61a2b1);
 }
 
+#table {    -fx-control-inner-background-alt: -fx-control-inner-background ;}

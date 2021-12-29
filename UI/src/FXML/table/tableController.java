@@ -9,6 +9,9 @@ import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import target.Target;
@@ -43,7 +46,25 @@ public class tableController {
         }
         catch (Exception e){new errorMain(e);}
     }
-
+    public void changeTableColor(String newColorString){
+        tableView.setStyle(newColorString);
+        nameTableCol.setStyle(newColorString);
+        typeTableCol.setStyle(newColorString);
+        directRequiredForTableCol.setStyle(newColorString);
+        totalRequiredForTableCol.setStyle(newColorString);
+        directDependsOnTableCol.setStyle(newColorString);
+        totalDependsOnTableCol.setStyle(newColorString);
+        dataTableCol.setStyle(newColorString);
+        serialSetTableCol.setStyle(newColorString);
+        dependsOnTableCol.setStyle(newColorString);
+        requiredForTableCol.setStyle(newColorString);
+    }
+    public void changeBackgroundColor(String newColorString){
+        vboxTable.setStyle(newColorString);
+        hboxTable.setStyle(newColorString);
+        borderPaneTable.setStyle(newColorString);
+        gridPaneTable.setStyle(newColorString);
+    }
     ////// fxml member
     @FXML private TableView<targetTable> tableView;
     @FXML private TableColumn<targetTable, String> nameTableCol;
@@ -54,12 +75,18 @@ public class tableController {
     @FXML private TableColumn<targetTable, Integer> totalDependsOnTableCol;
     @FXML private TableColumn<targetTable, Integer> serialSetTableCol;
     @FXML private TableColumn<targetTable, String> dataTableCol;
+    @FXML private TableColumn<targetTable, Integer> dependsOnTableCol;
+    @FXML private TableColumn<targetTable, String> requiredForTableCol;
     @FXML private Text targetNumberText;
     @FXML private Text leavesNumberText;
     @FXML private Text middleNumberText;
     @FXML private Text rootsNumberText;
     @FXML private Text indepNumberText;
     @FXML private Text serialSetText;
+    @FXML private VBox vboxTable;
+    @FXML private HBox hboxTable;
+    @FXML private BorderPane borderPaneTable;
+    @FXML private GridPane gridPaneTable;
 }
 
 

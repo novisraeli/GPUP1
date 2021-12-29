@@ -2,95 +2,110 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ColorPicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tooltip?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane minHeight="0.0" minWidth="0.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.setting.settingController">
+<BorderPane fx:id="borderPaneSetting" minHeight="0.0" minWidth="0.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.setting.settingController">
    <center>
       <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="604.0" styleClass="background">
          <content>
             <HBox styleClass="background">
                <children>
-                  <VBox prefHeight="398.0" prefWidth="163.0" styleClass="background">
+                  <VBox prefHeight="403.0" prefWidth="193.0" styleClass="background">
                      <children>
-                        <Label id="a" styleClass="settingTitleLabel" text="Background">
+                        <Label id="a" styleClass="settingTitleLabel" text="Background Color">
                            <VBox.margin>
                               <Insets left="10.0" top="20.0" />
                            </VBox.margin>
                         </Label>
-                        <Label minHeight="0.0" minWidth="0.0" styleClass="settingLabel" text="Color">
-                           <VBox.margin>
-                              <Insets left="10.0" top="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label id="a" styleClass="settingTitleLabel" text="Table">
+                        <Label id="a" styleClass="settingTitleLabel" text="Table color">
                            <VBox.margin>
                               <Insets left="10.0" top="20.0" />
                            </VBox.margin>
                         </Label>
-                        <Label styleClass="settingLabel" text="Color">
-                           <VBox.margin>
-                              <Insets left="10.0" top="10.0" />
-                           </VBox.margin>
-                        </Label>
-                        <Label id="a" styleClass="settingTitleLabel" text="Button">
+                        <Label id="a" styleClass="settingTitleLabel" text="Button color">
                            <VBox.margin>
                               <Insets left="10.0" top="20.0" />
                            </VBox.margin>
                         </Label>
-                        <Label styleClass="settingLabel" text="Color">
+                        <Label id="a" styleClass="settingTitleLabel" text="Toggle color">
                            <VBox.margin>
-                              <Insets left="10.0" top="10.0" />
+                              <Insets left="10.0" top="20.0" />
                            </VBox.margin>
                         </Label>
-                        <Label styleClass="settingLabel" text="Font color">
+                        <Label id="a" styleClass="settingTitleLabel" text="ComboBox color">
                            <VBox.margin>
-                              <Insets left="10.0" top="10.0" />
+                              <Insets left="10.0" top="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label id="a" styleClass="settingTitleLabel" text="Tab color">
+                           <VBox.margin>
+                              <Insets left="10.0" top="20.0" />
+                           </VBox.margin>
+                        </Label>
+                        <Label id="a" styleClass="settingTitleLabel" text="duration">
+                           <VBox.margin>
+                              <Insets left="10.0" top="20.0" />
                            </VBox.margin>
                         </Label>
                      </children>
                   </VBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0">
+                  <VBox prefHeight="398.0" prefWidth="266.0">
                      <children>
-                        <Label>
+                        <ColorPicker fx:id="backgroundColor">
+                           <VBox.margin>
+                              <Insets top="16.0" />
+                           </VBox.margin>
+                        </ColorPicker>
+                        <ColorPicker fx:id="tableColor">
+                           <VBox.margin>
+                              <Insets top="16.0" />
+                           </VBox.margin>
+                        </ColorPicker>
+                        <ColorPicker fx:id="buttonColor">
+                           <VBox.margin>
+                              <Insets top="16.0" />
+                           </VBox.margin>
+                        </ColorPicker>
+                        <ColorPicker fx:id="toggleColor">
+                           <VBox.margin>
+                              <Insets top="16.0" />
+                           </VBox.margin>
+                        </ColorPicker>
+                        <ColorPicker fx:id="combBoxColor">
+                           <VBox.margin>
+                              <Insets top="16.0" />
+                           </VBox.margin>
+                        </ColorPicker>
+                        <ColorPicker fx:id="tabColor">
+                           <VBox.margin>
+                              <Insets top="16.0" />
+                           </VBox.margin>
+                        </ColorPicker>
+                        <HBox>
                            <VBox.margin>
                               <Insets top="20.0" />
                            </VBox.margin>
-                        </Label>
-                        <ComboBox fx:id="backGroundColorComboBox" minWidth="150.0">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </ComboBox>
-                        <Label>
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
-                        </Label>
-                        <ComboBox fx:id="tableColorComboBox" prefWidth="150.0">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </ComboBox>
-                        <Label>
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
-                        </Label>
-                        <ComboBox fx:id="buttonColorComboBox" prefWidth="150.0">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </ComboBox>
-                        <ComboBox fx:id="buttonFontColorComboBox" prefWidth="150.0">
-                           <VBox.margin>
-                              <Insets top="10.0" />
-                           </VBox.margin>
-                        </ComboBox>
+                           <children>
+                              <Spinner fx:id="durationSpinner" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="27.0" prefWidth="128.0">
+                                 <tooltip>
+                                    <Tooltip text="sad" />
+                                 </tooltip>
+                              </Spinner>
+                              <RadioButton fx:id="ofOffButton" mnemonicParsing="false" text="ON/ OFF">
+                                 <HBox.margin>
+                                    <Insets left="20.0" top="4.0" />
+                                 </HBox.margin>
+                              </RadioButton>
+                           </children>
+                        </HBox>
                      </children>
                   </VBox>
                </children>

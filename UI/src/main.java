@@ -8,10 +8,6 @@ import java.net.URL;
 
 public class main extends Application {
     public final static String APP_FXML_INCLUDE_RESOURCE = "/FXML/main/mainApp.fxml";
-   /* public static void main(String[]args){
-        UIimpl u = new UIimpl();
-        u.mainMenu();
-    }*/
 
     public static void main(String[] args) {
         Thread.currentThread().setName("main");

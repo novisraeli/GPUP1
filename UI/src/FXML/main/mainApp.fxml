@@ -24,49 +24,49 @@
                <children>
                   <TabPane prefHeight="200.0" prefWidth="200.0" styleClass="tap-pane" stylesheets="@css/mainApp.css" tabClosingPolicy="UNAVAILABLE" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS">
                     <tabs>
-                        <Tab styleClass="tab-label" text="File">
+                        <Tab fx:id="fileTab" onSelectionChanged="#fileTabSelected" styleClass="tab-label" text="File">
                            <content>
-                              <AnchorPane prefHeight="353.0" prefWidth="602.0">
+                              <AnchorPane fx:id="fileAnchorPane" prefHeight="353.0" prefWidth="602.0">
                                  <children>
                                     <fx:include fx:id="fileComponent" source="../file/file.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </content>
                         </Tab>
-                      <Tab fx:id="tableTab" disable="true" styleClass="tab-label" text="Table">
+                      <Tab fx:id="tableTab" disable="true" onSelectionChanged="#tableTabSelected" styleClass="tab-label" text="Table">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <AnchorPane fx:id="tableAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
                                     <fx:include fx:id="tableComponent" source="../table/table.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                         </content>
                       </Tab>
-                        <Tab fx:id="graphTab" disable="true" styleClass="tab-label" text="Graph">
+                        <Tab fx:id="graphTab" disable="true" onSelectionChanged="#graphTabSelected" styleClass="tab-label" text="Graph">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <AnchorPane fx:id="geaphAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                           </content>
                         </Tab>
-                        <Tab fx:id="pathTab" disable="true" styleClass="tab-label" text="Path">
+                        <Tab fx:id="pathTab" disable="true" onSelectionChanged="#pathTabSelected" styleClass="tab-label" text="Path">
                            <content>
-                              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                              <AnchorPane fx:id="pathAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
                                     <fx:include fx:id="pathComponent" source="../path/path.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children>
                               </AnchorPane>
                            </content>
                         </Tab>
-                      <Tab fx:id="taskTab" disable="true" styleClass="tab-label" text="Task">
+                      <Tab fx:id="taskTab" disable="true" onSelectionChanged="#taskTabSelected" styleClass="tab-label" text="Task">
                         <content>
-                          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                          <AnchorPane fx:id="taskAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
                                     <fx:include fx:id="taskComponent" source="../task/task.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                  </children></AnchorPane>
                         </content>
                       </Tab>
-                        <Tab styleClass="tab-label" text="Setting">
+                        <Tab fx:id="settingTab" onSelectionChanged="#settingTabSelected" styleClass="tab-label" text="Setting">
                           <content>
-                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                            <AnchorPane fx:id="settingAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                                  <children>
                                     <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                                     <fx:include fx:id="settingComponent" source="../setting/setting.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />

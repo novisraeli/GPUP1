@@ -10,7 +10,6 @@ import java.util.List;
 
 public interface engine{
     enum Dependence{DEPENDS_ON , REQUIRED_FOR}
-
     Map<String, Target> getMap();
     public void whatIf(String t1, List<String>  newList, Dependence dependence);
     void loadFile(String path) throws Exception;
@@ -25,4 +24,5 @@ public interface engine{
     void exit();
     Map<String,Set<String>> getSerialSets();
     Map<String,Set<String>> getAllSerialSetsWithYou(String t);
+    int getMaxThreads();
 }

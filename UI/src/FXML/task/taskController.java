@@ -3,22 +3,18 @@ import FXML.error.errorMain;
 import FXML.main.mainAppController;
 import FXML.task.processing.targetInfoMain;
 import engine.engine;
-import javafx.beans.binding.Bindings;
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.ObservableSet;
-import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import target.Target;
-import target.UniqueTarget;
 import target.targetTable;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,20 +35,18 @@ public class taskController {
         isCompiler = new SimpleBooleanProperty(true);
     }
     @FXML public void initialize() {
-        setSpinner();
-        setToggles();
         setRunAndPauseButton();
         setComboBox();
         clickOnRow();
         simulationBox.disableProperty().bind(isCompiler);
         isCompiler.addListener((obs, oldSelectedCount, newSelectedCount) -> {
             if (isCompiler.getValue()) {
-                compilerToggle.setStyle("-fx-background-color: linear-gradient(#2A5058, #61a2b1)");
-                simulationToggle.setStyle("-fx-background-color: linear-gradient(#61a2b1, #2A5058)");
+                compilerToggle.setStyle(mainController.getToggleColor());
+                simulationToggle.setOpacity(0.3);
             }
             else {
-                simulationToggle.setStyle("-fx-background-color: linear-gradient(#2A5058, #61a2b1)");
-                compilerToggle.setStyle("-fx-background-color: linear-gradient(#61a2b1, #2A5058)");
+                simulationToggle.setStyle(mainController.getToggleColor());
+                compilerToggle.setOpacity(0.3);
             }
         });
     }
@@ -75,6 +69,8 @@ public class taskController {
     public void setMainController(mainAppController mainController) {
         this.mainController = mainController;
         setTableCol();
+        setToggles();
+        setSpinner();
     }
     public void show() {
         tableView.setItems(mainController.items);
@@ -95,7 +91,9 @@ public class taskController {
                 }
             }
 
-            catch (Exception e){}
+            catch (Exception e){
+                new errorMain(e);
+            }
     }
     public void setTableCol(){
         mainController.setGeneralTableCol(nameTableCol, typeTableCol, dataTableCol, serialSetTableCol,
@@ -127,14 +125,17 @@ public class taskController {
     }
     public void setToggles(){
         compilerToggle.setSelected(true);
-        compilerToggle.setStyle("-fx-background-color: linear-gradient(#2A5058, #61a2b1)");
+        compilerToggle.setStyle(mainController.getToggleColor());
+        //compilerToggle.setStyle("-fx-background-color: linear-gradient(#2A5058, #61a2b1)");
         simulationToggle.setStyle("-fx-background-color: linear-gradient(#61a2b1, #2A5058)");
     }
     public void setSpinner(){
         ProcessingTimeSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1000, 0));
         successSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0));
         successWithWarningSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 0));
-        numOfTreadsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, 1));
+    }
+    public void setTreadsSpinner() {
+        numOfTreadsSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(1, mainController.getEngine().getMaxThreads(), 1));
     }
     public void clickOnRow() {
         tableView.setRowFactory( tv -> {
@@ -190,6 +191,50 @@ public class taskController {
         });
     }
 
+    public void changeButtonColor(String newColorString){
+        runButton.setStyle(newColorString);
+        clearButton.setStyle(newColorString);
+        pauseButton.setStyle(newColorString);
+
+    }
+    public void changeToggleColor(){
+        compilerToggle.setStyle(mainController.getToggleColor());
+        simulationToggle.setStyle(mainController.getToggleColor());
+    }
+    public void changeComboBoxColor(String newColorString){
+        scratchOrIncremental.setStyle(newColorString);
+    }
+    public void changeTableColor(String newColorString){
+        tableView.setStyle(newColorString);
+        remarkTableCol.setStyle(newColorString);
+        nameTableCol.setStyle(newColorString);
+        typeTableCol.setStyle(newColorString);
+        directRequiredForTableCol.setStyle(newColorString);
+        totalRequiredForTableCol.setStyle(newColorString);
+        directDependsOnTableCol.setStyle(newColorString);
+        totalDependsOnTableCol.setStyle(newColorString);
+        dataTableCol.setStyle(newColorString);
+        serialSetTableCol.setStyle(newColorString);
+        dependsOnTableCol.setStyle(newColorString);
+        requiredForTableCol.setStyle(newColorString);
+        statusTableCol.setStyle(newColorString);
+    }
+    public void changeBackgroundColor(String newColorString){
+        simulationBox.setStyle(newColorString);
+        taskMangerTitle.setStyle(newColorString);
+        hboxTask.setStyle(newColorString);
+        gridPaneTAsk.setStyle(newColorString);
+        gridPaneTask2.setStyle(newColorString);
+        hbox2.setStyle(newColorString);
+        hbox3.setStyle(newColorString);
+        vbox1.setStyle(newColorString);
+        vbox2.setStyle(newColorString);
+        hbox5.setStyle(newColorString);
+        vbox3.setStyle(newColorString);
+        vbox4.setStyle(newColorString);
+    }
+
+
         ///
     @FXML void clearAction(ActionEvent event) {
         ObservableList<targetTable> data = tableView.getItems();
@@ -212,8 +257,9 @@ public class taskController {
                 fromScratch = true;
             else
                 fromScratch = false;
-            mainController.getEngine().runTask(ProcessingTimeSpinner.getValue(),true,successSpinner.getValue(),successWithWarningSpinner.getValue(),fromScratch);
-            // uiAdapter, () -> toggleTaskButtons(false));
+            if(simulationToggle.isSelected())
+                mainController.getEngine().runTask(ProcessingTimeSpinner.getValue(),true,successSpinner.getValue(),successWithWarningSpinner.getValue(),fromScratch);
+            if (compilerToggle.isSelected()){}
         }
         catch (Exception e){new errorMain(e);}
 
@@ -238,6 +284,8 @@ public class taskController {
     @FXML private TableColumn<targetTable, String> dataTableCol;
     @FXML private TableColumn<targetTable, String> statusTableCol;
     @FXML private TableColumn<targetTable, Integer> serialSetTableCol;
+    @FXML private TableColumn<targetTable, Integer> dependsOnTableCol;
+    @FXML private TableColumn<targetTable, String> requiredForTableCol;
     @FXML private Button clearButton;
     @FXML private ComboBox<String> scratchOrIncremental;
     @FXML private ToggleButton compilerToggle;
@@ -252,4 +300,15 @@ public class taskController {
     @FXML private Spinner<Integer> numOfTreadsSpinner;
     @FXML private CheckBox withRequired;
     @FXML private CheckBox withDepend;
+    @FXML private Label taskMangerTitle;
+    @FXML private HBox hboxTask;
+    @FXML private GridPane gridPaneTAsk;
+    @FXML private GridPane gridPaneTask2;
+    @FXML private HBox hbox2;
+    @FXML private VBox hbox3;
+    @FXML private VBox vbox1;
+    @FXML private VBox vbox2;
+    @FXML private HBox hbox5;
+    @FXML private VBox vbox3;
+    @FXML private VBox vbox4;
 }

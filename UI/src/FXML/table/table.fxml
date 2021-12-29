@@ -15,49 +15,13 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1300.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.table.tableController">
-   <center>
-      <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="394.0" prefWidth="525.0" styleClass="background" BorderPane.alignment="CENTER">
-         <content>
-            <GridPane minHeight="0.0" minWidth="0.0" prefHeight="748.0" prefWidth="1080.0" styleClass="background">
-              <columnConstraints>
-                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <TableView fx:id="tableView" maxWidth="1080.0" minHeight="0.0" minWidth="0.0" prefHeight="748.0" prefWidth="1080.0" styleClass="tableView" stylesheets="@../utility/table.css" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
-                     <columns>
-                        <TableColumn fx:id="nameTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="200.0" styleClass="tableColumn" text="Name" />
-                        <TableColumn fx:id="typeTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="200.0" styleClass="tableColumn" text="Type" />
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="170.0" styleClass="tableColumn" text="Required For">
-                           <columns>
-                              <TableColumn fx:id="directRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
-                              <TableColumn fx:id="totalRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
-                           </columns>
-                        </TableColumn>
-                        <TableColumn maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="105.0" styleClass="tableColumn" text="Depends On">
-                           <columns>
-                              <TableColumn fx:id="directDependsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
-                              <TableColumn fx:id="totalDependsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
-                           </columns>
-                        </TableColumn>
-                        <TableColumn fx:id="serialSetTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Serial Sets" />
-                        <TableColumn fx:id="dataTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="313.0" styleClass="tableColumn" text="Data" />
-                     </columns>
-                  </TableView>
-               </children>
-            </GridPane>
-         </content>
-      </ScrollPane>
-   </center>
+<BorderPane id="root" fx:id="borderPaneTable" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1300.0" styleClass="background" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.table.tableController">
    <right>
       <ScrollPane fitToHeight="true" fitToWidth="true" prefHeight="750.0" prefWidth="209.0" styleClass="background" BorderPane.alignment="CENTER">
          <content>
-            <VBox id="sumUp-vbox" prefHeight="748.0" prefWidth="230.0" styleClass="background">
+            <VBox id="sumUp-vbox" fx:id="vboxTable" prefHeight="748.0" prefWidth="230.0" styleClass="background">
                <children>
-                  <HBox alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="200.0" styleClass="background">
+                  <HBox fx:id="hboxTable" alignment="CENTER" minHeight="-Infinity" minWidth="-Infinity" prefHeight="53.0" prefWidth="200.0" styleClass="background">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -159,4 +123,36 @@
       <URL value="@css/table.css" />
       <URL value="@../utility/backgroung.css" />
    </stylesheets>
+   <center>
+      <GridPane fx:id="gridPaneTable" maxWidth="1900.0" minHeight="0.0" minWidth="0.0" prefHeight="748.0" prefWidth="1900.0" styleClass="background" BorderPane.alignment="CENTER">
+        <columnConstraints>
+          <ColumnConstraints hgrow="ALWAYS" maxWidth="1100.0" minWidth="10.0" prefWidth="1100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <TableView fx:id="tableView" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="750.0" prefWidth="1080.0" styleClass="tableView" stylesheets="@../utility/table.css" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="TOP" GridPane.vgrow="ALWAYS">
+               <columns>
+                  <TableColumn fx:id="nameTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="200.0" styleClass="tableColumn" text="Name" />
+                  <TableColumn fx:id="typeTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="200.0" styleClass="tableColumn" text="Type" />
+                  <TableColumn fx:id="requiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="170.0" styleClass="tableColumn" text="Required For">
+                     <columns>
+                        <TableColumn fx:id="directRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
+                        <TableColumn fx:id="totalRequiredForTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
+                     </columns>
+                  </TableColumn>
+                  <TableColumn fx:id="dependsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="105.0" styleClass="tableColumn" text="Depends On">
+                     <columns>
+                        <TableColumn fx:id="directDependsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Direct" />
+                        <TableColumn fx:id="totalDependsOnTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Total" />
+                     </columns>
+                  </TableColumn>
+                  <TableColumn fx:id="serialSetTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="75.0" styleClass="tableColumn" text="Serial Sets" />
+                  <TableColumn fx:id="dataTableCol" maxWidth="1.7976931348623157E308" minWidth="-1.0" prefWidth="303.0" styleClass="tableColumn" text="Data" />
+               </columns>
+            </TableView>
+         </children>
+      </GridPane>
+   </center>
 </BorderPane>

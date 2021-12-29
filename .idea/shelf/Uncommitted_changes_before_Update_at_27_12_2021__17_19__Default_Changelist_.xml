@@ -1,0 +1,39 @@
+<changelist name="Uncommitted_changes_before_Update_at_27_12_2021,_17_19_[Default_Changelist]" date="1640618373178" recycled="false" toDelete="true">
+  <option name="PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_12_2021,_17_19_[Default_Changelist]/shelved.patch" />
+  <option name="DESCRIPTION" value="Uncommitted changes before Update at 27/12/2021, 17:19 [Default Changelist]" />
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Engine/engine/engine$Dependence.class" />
+    <option name="AFTER_PATH" value="out/production/Engine/engine/engine$Dependence.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_12_2021,_17_19_[Default_Changelist]/engine$Dependence.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/UI/UIimpl.class" />
+    <option name="AFTER_PATH" value="out/production/UI/UIimpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_12_2021,_17_19_[Default_Changelist]/UIimpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Engine/information/GraphInformation.class" />
+    <option name="AFTER_PATH" value="out/production/Engine/information/GraphInformation.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_12_2021,_17_19_[Default_Changelist]/GraphInformation.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Engine/xml/Xmlimpl.class" />
+    <option name="AFTER_PATH" value="out/production/Engine/xml/Xmlimpl.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_12_2021,_17_19_[Default_Changelist]/Xmlimpl.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/UI/main.class" />
+    <option name="AFTER_PATH" value="out/production/UI/main.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_12_2021,_17_19_[Default_Changelist]/main.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Engine/target/Target.class" />
+    <option name="AFTER_PATH" value="out/production/Engine/target/Target.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_12_2021,_17_19_[Default_Changelist]/Target.class" />
+  </binary>
+  <binary>
+    <option name="BEFORE_PATH" value="out/production/Engine/engine/engine.class" />
+    <option name="AFTER_PATH" value="out/production/Engine/engine/engine.class" />
+    <option name="SHELVED_PATH" value="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_12_2021,_17_19_[Default_Changelist]/engine.class" />
+  </binary>
+</changelist>

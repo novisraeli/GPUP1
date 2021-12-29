@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -24,6 +25,7 @@ public class errorMain {
             Parent root = fxmlLoader.load(url.openStream());
             Scene scene = new Scene(root, 400, 200);
             primaryStage.setScene(scene);
+            primaryStage.initModality(Modality.APPLICATION_MODAL);
             primaryStage.show();
             errorController controller = fxmlLoader.getController();
             controller.error(e);
