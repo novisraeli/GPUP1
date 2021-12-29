@@ -49,9 +49,7 @@ public class mainAppController {
         isFileSelected.addListener((a,b,isSelected)->{
             if (isSelected)
             {
-
-                createDotGraph("DotGraph");
-          //      graph.createDotGraph(graph.makeDotFormat(engine.getMap()),"gpup12");
+                createDotGraph("gpupImage");
             }
         });
     }
@@ -236,6 +234,10 @@ public class mainAppController {
         pathTransition.play();
         pathTransition.statusProperty().addListener((a,b,c)->{
             if (c == Animation.Status.STOPPED) {
+                fileComponent.getChildren().remove(recList.get(0));
+                fileComponent.getChildren().remove(recList.get(1));
+                fileComponent.getChildren().remove(recList.get(2));
+                fileComponent.getChildren().remove(recList.get(3));
                 recList.clear();
             }
         });
@@ -244,6 +246,7 @@ public class mainAppController {
 
     /// tab fxml
     @FXML private AnchorPane settingAnchorPane;
+    @FXML private AnchorPane graphAnchorPane;
     @FXML private Tab tableTab;
     @FXML private Tab graphTab;
     @FXML private Tab pathTab;

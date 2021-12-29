@@ -44,7 +44,7 @@
                       </Tab>
                         <Tab fx:id="graphTab" disable="true" onSelectionChanged="#graphTabSelected" styleClass="tab-label" text="Graph">
                           <content>
-                            <AnchorPane fx:id="geaphAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <AnchorPane fx:id="graphAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
                           </content>
                         </Tab>
                         <Tab fx:id="pathTab" disable="true" onSelectionChanged="#pathTabSelected" styleClass="tab-label" text="Path">
