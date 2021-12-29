@@ -20,6 +20,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
 public class engineImpl implements engine {
+    private String nameFile;
     private boolean loadFile = false;
     private Map<String, Target> targetMap;
     private String workingDirectory;
@@ -48,7 +49,6 @@ public class engineImpl implements engine {
         file.checkSerialSets(targetMapTemp,serialSets);
         loadFile = true;
         targetMap = targetMapTemp;
-
     }
 
     /** Targets in formation

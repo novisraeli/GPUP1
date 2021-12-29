@@ -12,88 +12,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="bar">
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Engine.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/Exception.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/UI.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/IntX.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engine$Dependence.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated/G.P.U.P-V1.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated/GPUPConfiguration.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated/GPUPDescriptor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated/GPUPTarget.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated/GPUPTargetDependencies$GPUGDependency.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated/GPUPTargetDependencies.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated/GPUPTargets.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated/ObjectFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated2/G.P.U.P-V2.xsd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated2/GPUPConfiguration.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated2/GPUPDescriptor$GPUPSerialSets$GPUPSerialSet.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated2/GPUPDescriptor$GPUPSerialSets.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated2/GPUPDescriptor.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated2/GPUPTarget.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated2/GPUPTargetDependencies$GPUGDependency.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated2/GPUPTargetDependencies.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated2/GPUPTargets.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/generated2/ObjectFactory.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/CircuitDetectionInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/GraphInformation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/Information.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/LoadFileInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/PathBetweenTwoTargetsInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/SumUpTarget.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/TargetInformation.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/information/WhatIfInfo.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/target/Target$Status.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/target/Target$Type.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/target/Target.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/target/Targets.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/target/targetTable.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/xml/Xml.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/xml/Xmlimpl.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Exception/META-INF/MANIFEST.MF" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Exception/target/DependsOnConflict.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Exception/target/RequiredForConflict.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Exception/target/TargetException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Exception/target/TargetIsExists.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Exception/target/UniqueTarget.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Exception/task/TaskException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Exception/xml/XmlCorrupt.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Exception/xml/XmlException.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Exception/xml/XmlIsExists.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Exception/xml/XmlNotLoad.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/error/erroe.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/error/errorController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/error/errorMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/file/css/file.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/file/css/programming.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/file/file.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/file/fileController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/main/css/mainApp.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/main/mainApp.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/main/mainAppController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/path/css/path.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/path/path.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/path/pathController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/setting/css/setting.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/setting/setting.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/setting/settingController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/table/css/table.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/table/table.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/table/tableController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/css/task.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/processing/targetInfoMain.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/processing/targetInfoTaskController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/processing/targetInformationTask.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/task.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/utility/backgroung.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/utility/file icon.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/utility/fileIcon.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/utility/table.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/main.class" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/BARSELA.dot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DotGraph.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_12_2021__17_19__Default_Changelist_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_27_12_2021__17_19__Default_Changelist_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/main/mainAppController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/main/mainAppController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,12 +58,11 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoTaskController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/file/fileController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_301.jdk/Contents/Home/src.zip!/java/util/HashSet.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/error/errorMain.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoMain.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -297,6 +222,7 @@
       <workItem from="1640683676984" duration="2043000" />
       <workItem from="1640715868494" duration="17122000" />
       <workItem from="1640773056675" duration="2335000" />
+      <workItem from="1640775559008" duration="3439000" />
     </task>
     <task id="LOCAL‎00001" summary="zxc">
       <created>1636536346510</created>
@@ -707,39 +633,19 @@
           <option name="timeStamp" value="199" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java</url>
-          <line>117</line>
-          <option name="timeStamp" value="201" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/path/pathController.java</url>
           <line>62</line>
           <option name="timeStamp" value="203" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java</url>
-          <line>219</line>
-          <option name="timeStamp" value="211" />
+          <line>70</line>
+          <option name="timeStamp" value="242" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java</url>
-          <line>152</line>
-          <option name="timeStamp" value="219" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java</url>
-          <line>136</line>
-          <option name="timeStamp" value="224" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java</url>
-          <line>46</line>
-          <option name="timeStamp" value="229" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java</url>
-          <line>108</line>
-          <option name="timeStamp" value="233" />
+          <url>file://$PROJECT_DIR$/UI/src/graphViz/GraphViz.java</url>
+          <line>231</line>
+          <option name="timeStamp" value="244" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Engine/src/information/TargetInformation.java</url>
