@@ -246,18 +246,22 @@ public class taskController {
     @FXML void pauseTask(ActionEvent event) {
         isPauseSelected.setValue(true);
         isRunSelected.setValue(false);
+        mainController.getEngine().stopThreads();
     }
     @FXML void runTask(ActionEvent event) {
         try{
-            boolean fromScratch;
+            boolean fromScratch=scratchOrIncremental.getValue().equals("scratch");
             isRunSelected.setValue(true);
             isPauseSelected.setValue(false);
-            if (scratchOrIncremental.getValue().equals("scratch"))
-                fromScratch = true;
-            else
-                fromScratch = false;
+            List<Target> targetsToRun=new ArrayList<>();
+            for(targetTable t:tableView.getItems()){
+                if(t.getCheckBoxTask().isSelected()){
+                    targetsToRun.add(mainController.getEngine().getMap().get(t.getName()));
+                }
+
+            }
             if(simulationToggle.isSelected())
-                mainController.getEngine().taskSetUp(ProcessingTimeSpinner.getValue(),false,successSpinner.getValue(),successWithWarningSpinner.getValue(),false,null,2);
+                mainController.getEngine().taskSetUp(ProcessingTimeSpinner.getValue(),false,successSpinner.getValue(),successWithWarningSpinner.getValue(),fromScratch,null,numOfTreadsSpinner.getValue(),targetsToRun);
                 //mainController.getEngine().runTask(ProcessingTimeSpinner.getValue(),false,successSpinner.getValue(),successWithWarningSpinner.getValue(),fromScratch);
             if (compilerToggle.isSelected()){}
         }

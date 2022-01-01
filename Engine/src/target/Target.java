@@ -30,6 +30,7 @@ public class Target implements Serializable,Runnable
     private boolean isRunning;
     private long startWaitingTime;
     private String failReason;
+    private Boolean notSelected;
     /** ctor */
     public  Target(String name , String userData , Set<String> setDependsOn , Set<String>setRequiredFor) {
         this.name = name;
@@ -110,6 +111,12 @@ public class Target implements Serializable,Runnable
     }
     public void setRunTime(int i){
         runTime=i;
+    }
+    public synchronized boolean getNotSelected(){
+        return notSelected;
+    }
+    public synchronized void setNotSelected(boolean b){
+        notSelected =b;
     }
     public String getSimTimeString(){
         return simTimeString;
@@ -254,7 +261,7 @@ public class Target implements Serializable,Runnable
         try{
             if(!this.setDependsOn.isEmpty()){
                 for(String s:setDependsOn){
-                    if(targetMap.get(s).getStatus()==Status.Waiting||targetMap.get(s).getStatus()==Status.Frozen){//dont run if depends on is still waiting
+                    if((targetMap.get(s).getStatus()==Status.Waiting||targetMap.get(s).getStatus()==Status.Frozen)&&!targetMap.get(s).getNotSelected()){//dont run if depends on is still waiting
                         isRunning=false;
                         isInQueue=false;
                         engineImpl.decrementWorkingThreads();

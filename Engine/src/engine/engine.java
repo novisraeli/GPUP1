@@ -26,6 +26,7 @@ public interface engine{
     Map<String,Set<String>> getAllSerialSetsWithYou(String t);
     int getMaxThreads();
     String getWorkingDirectory();
-    void taskSetUp(int time, boolean random, float success, float warning,boolean keepLastRun,String taskType,int threadsNum) throws Exception;
-
+    void taskSetUp(int time, boolean random, float success, float warning,boolean keepLastRun,String taskType,int threadsNum,List<Target> targets) throws Exception;
+    void stopThreads();
+    void activateThreads();
     }
