@@ -104,7 +104,9 @@ public class GraphViz
     /**
      * Where is your dot program located? It will be called externally.
      */
-    private String DOT_ = "C:/Program Files (x86)/Graphviz/bin/dot.exe";
+    private String DOT;
+
+    private String NAMEFILE;
 
     /**
      * The image size in dpi. 96 dpi is normal size. Higher values are 10% higher each.
@@ -150,8 +152,10 @@ public class GraphViz
      * Constructor: creates a new com.company.GraphViz object that will contain
      * a graph.
      */
-    public GraphViz(String Path) {
+    public GraphViz(String Path , String name) {
         TEMP_DIR = Path;
+        DOT = ".dot";
+        NAMEFILE = name;
     }
 
     /**
@@ -257,7 +261,7 @@ public class GraphViz
             Runtime rt = Runtime.getRuntime();
 
             // patch by Mike Chenault
-            String[] args = {DOT_, "-T"+type, "-Gdpi="+dpiSizes[this.currentDpiPos], dot.getAbsolutePath(), "-o", img.getAbsolutePath()};
+            String[] args = {DOT, "-T"+type, "-Gdpi="+dpiSizes[this.currentDpiPos], dot.getAbsolutePath(), "-o", img.getAbsolutePath()};
             Process p = rt.exec(args);
 
             p.waitFor();
@@ -293,13 +297,14 @@ public class GraphViz
     {
         File temp;
         try {
-            temp = File.createTempFile("BARSELA",".dot", new File(TEMP_DIR));
+            temp = new File( TEMP_DIR +  NAMEFILE + ".viz" );
             FileWriter fout = new FileWriter(temp);
             fout.write(str);
-            BufferedWriter br=new BufferedWriter(new FileWriter("BARSELA.dot"));
-            br.write(str);
-            br.flush();
-            br.close();
+            //BufferedWriter br = new BufferedWriter(new FileWriter(NAMEFILE+".dot"));
+           // BufferedWriter br = new BufferedWriter(new FileWriter(TEMP_DIR +  NAMEFILE + ".viz"));
+           // br.write(str);
+            //br.flush();
+           // br.close();
             fout.close();
         }
         catch (Exception e) {

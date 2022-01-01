@@ -1,5 +1,6 @@
 package FXML.main;
 import FXML.file.fileController;
+import FXML.graph.graphController;
 import FXML.path.pathController;
 import FXML.setting.settingController;
 import FXML.table.tableController;
@@ -39,46 +40,29 @@ public class mainAppController {
     private String toggleColor = "-fx-background-color: linear-gradient(#2A5058, #61a2b1)";
     private final engine engine = new engineImpl();
     private final SimpleBooleanProperty isFileSelected;
-    private final SimpleBooleanProperty changeGraph;
+    private final SimpleBooleanProperty  changeFile;
     public ObservableList<targetTable> items = FXCollections.observableArrayList();
 
     public mainAppController() {
         isFileSelected = new SimpleBooleanProperty(false);
-
-        changeGraph = new SimpleBooleanProperty(false);
-        changeGraph.addListener((a,b,isSelected)->{
-            if (isSelected) {
-                changeBackgroundGraph();
-                treeViewComponentController.setTreeView();
-            }
-        });
-    }
-    public File createDotGraph(String fileName)
-    {
-            GraphViz gv = new GraphViz(engine.getWorkingDirectory());
-            String dotFormat = gv.makeDotFormat(engine.getMap() , engine.getSerialSets());
-            gv.addln(gv.start_graph());
-            gv.add(dotFormat);
-            gv.addln(gv.end_graph());
-            String type = "png";
-            // gv.increaseDpi();
-            gv.decreaseDpi();
-            gv.decreaseDpi();
-            String pathImage = "C:/Users/danse/IdeaProjects/GPUP3/UI/src/graphViz/temp/" +fileName+"."+ type;
-            File out = new File(pathImage);
-            gv.writeGraphToFile(gv.getGraph(gv.getDotSource(), type), out);
-            return out;
+        changeFile = new SimpleBooleanProperty(false);
     }
 
     @FXML public void initialize() {
         setMainForComponentController();
         setBinding();
+        changeFile.addListener((a,b,c)->{
+            if (changeFile.get()) {
+                treeViewComponentController.setTreeView();
+                changeFile.set(false);
+            }
+        });
     }
     public SimpleBooleanProperty isFileSelected(){
         return isFileSelected;
     }
     public SimpleBooleanProperty change(){
-        return changeGraph;
+        return changeFile;
     }
     public ObservableList observableList(){
         return items;
@@ -102,8 +86,9 @@ public class mainAppController {
     }
     public void setMainForComponentController(){
         if (fileComponentController != null && pathComponentController != null &&
-                settingComponentController != null && tableComponentController != null &&
-               taskComponentController != null && treeViewComponentController != null){
+               settingComponentController != null && tableComponentController != null &&
+               taskComponentController != null && treeViewComponentController != null
+                && graphComponentController != null){
 
             fileComponentController.setMainController(this);
             pathComponentController.setMainController(this);
@@ -111,6 +96,7 @@ public class mainAppController {
             tableComponentController.setMainController(this);
             taskComponentController.setMainController(this);
             treeViewComponentController.setMainController(this);
+            graphComponentController.setMainController(this);
         }
     }
     public engine getEngine(){return engine;}
@@ -164,6 +150,8 @@ public class mainAppController {
         tableComponentController.changeBackgroundColor(newColorString);
         taskComponentController.changeBackgroundColor(newColorString);
         treeViewComponentController.changeBackgroundColor(newColorString);
+        pathComponentController.changeBackgroundColor(newColorString);
+        graphComponentController.changeBackgroundColor(newColorString);
     }
     public void setTreadsSpinner() {
         taskComponentController.setTreadsSpinner();
@@ -260,19 +248,7 @@ public class mainAppController {
         });
         return rectPath;
     }
-    public void changeBackgroundGraph(){
-        File f = createDotGraph("image");
-        Image image = new Image(f.toURI().toString());
-        // image = new Image("/graphViz/temp/image.png", graphAnchorPane.getWidth(), graphAnchorPane.getHeight(), false, false);
-        BackgroundImage bImg = new BackgroundImage(image,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundRepeat.NO_REPEAT,
-                BackgroundPosition.DEFAULT,
-                new BackgroundSize(1300, 750, true, true, true, true));
-        Background bGround = new Background(bImg);
-        graphAnchorPane.setBackground(bGround);
-        changeGraph.set(false);
-    }
+
     /// tab fxml
     @FXML private AnchorPane settingAnchorPane;
     @FXML private AnchorPane graphAnchorPane;
@@ -294,10 +270,9 @@ public class mainAppController {
     @FXML private tableController tableComponentController;
     @FXML private BorderPane taskComponent;
     @FXML private taskController taskComponentController;
-    @FXML private BorderPane graphComponent;
-  //  @FXML private treeViewController treeViewComponentController;
     @FXML private BorderPane treeViewComponent;
     @FXML private treeViewController treeViewComponentController;
-
+    @FXML private BorderPane graphComponent;
+    @FXML private graphController graphComponentController;
 }
 

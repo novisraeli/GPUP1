@@ -21,13 +21,14 @@ public class treeViewController {
         TreeItem roots_to_leaves = new TreeItem("ROOTS TO LEAVES");
         TreeItem leaves_to_roots = new TreeItem("LEAVES TO ROOTS");
         Map<String, Target> targetMap = mainController.getEngine().getMap();
-
+        List <String> list = new ArrayList<>();
         for (String st : targetMap.keySet())
         {
+            list.clear();
             if(targetMap.get(st).getType() == Target.Type.ROOT) {
                 TreeItem root = new TreeItem(targetMap.get(st).getName());
                 roots_to_leaves.getChildren().add(root);
-                tree(targetMap.get(st), root, engine.Dependence.DEPENDS_ON);
+                tree(targetMap.get(st), root, engine.Dependence.DEPENDS_ON , list);
             }
             else if (targetMap.get(st).getType() == Target.Type.INDEPENDENTS){
                 roots_to_leaves.getChildren().add(new TreeItem(targetMap.get(st).getName()));
@@ -36,29 +37,40 @@ public class treeViewController {
             else if(targetMap.get(st).getType() == Target.Type.LEAF) {
                 TreeItem root = new TreeItem(targetMap.get(st).getName());
                 leaves_to_roots.getChildren().add(root);
-                tree(targetMap.get(st), root, engine.Dependence.REQUIRED_FOR);
+                tree(targetMap.get(st), root, engine.Dependence.REQUIRED_FOR , list);
             }
         }
         treeViewLeft.setRoot(roots_to_leaves);
         treeViewRight.setRoot(leaves_to_roots);
     }
-    public void tree(Target target , TreeItem javaItem , engine.Dependence dependence){
+    public void tree(Target target , TreeItem javaItem , engine.Dependence dependence , List <String> list){
         Set<String> tOneSet;
         if (dependence == engine.Dependence.DEPENDS_ON)
             tOneSet = target.getSetDependsOn();
         else
             tOneSet = target.getSetRequiredFor();
 
-        if (tOneSet.size() == 0)
+        if (list.contains(target.getName()))
+        {
+
+            list.remove(list.size()-1); // avoid cycle
             return;
+        }
+
+
+        if (tOneSet.size() == 0)
+        {
+            list.remove(list.size()-1); // avoid cycle
+            return;
+        }
 
         else {
             for (String st : tOneSet) {  /// search in all DEPENDS_ON or REQUIRED_FOR for each target
                 TreeItem Item = new TreeItem(mainController.getEngine().getMap().get(st).getName());
                 javaItem.getChildren().add(Item);
-                tree(mainController.getEngine().getMap().get(st) , Item, dependence);
+                list.add(target.getName());
+                tree(mainController.getEngine().getMap().get(st) , Item, dependence, list);
             }
-
         }
     }
     public void changeBackgroundColor(String newColorString){

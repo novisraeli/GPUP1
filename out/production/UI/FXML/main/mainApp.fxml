@@ -44,7 +44,10 @@
                       </Tab>
                         <Tab fx:id="graphTab" disable="true" onSelectionChanged="#graphTabSelected" styleClass="tab-label" text="Graph">
                           <content>
-                            <AnchorPane fx:id="graphAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                            <AnchorPane fx:id="graphAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                 <children>
+                                    <fx:include fx:id="graphComponent" source="../graph/graph.fxml" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                 </children></AnchorPane>
                           </content>
                         </Tab>
                         <Tab fx:id="treeViewTab" disable="true" onSelectionChanged="#treeTableSelected" text="Tree view">

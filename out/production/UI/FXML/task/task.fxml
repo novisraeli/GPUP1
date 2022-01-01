@@ -138,7 +138,7 @@
                                     <ComboBox fx:id="scratchOrIncremental" minHeight="30.0" prefHeight="30.0" prefWidth="200.0" />
                                  </children>
                               </VBox>
-                              <VBox alignment="TOP_CENTER" disable="true" prefHeight="133.0" prefWidth="241.0" GridPane.rowIndex="4">
+                              <VBox fx:id="progressTaskBox" alignment="TOP_CENTER" disable="true" prefHeight="133.0" prefWidth="241.0" GridPane.rowIndex="4">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>

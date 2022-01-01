@@ -250,16 +250,23 @@ public class taskController {
     }
     @FXML void runTask(ActionEvent event) {
         try{
-            boolean fromScratch;
+            boolean fromScratch = scratchOrIncremental.getValue().equals("scratch");;
+            progressTaskBox.setDisable(false);
             isRunSelected.setValue(true);
             isPauseSelected.setValue(false);
-            if (scratchOrIncremental.getValue().equals("scratch"))
-                fromScratch = true;
-            else
-                fromScratch = false;
+
+            List<Target> targetToRun = new ArrayList<>(); /// all the target that selected to run
+            for (targetTable t :tableView.getItems()) {
+                if (t.getCheckBoxTask().isSelected())
+                    targetToRun.add(mainController.getEngine().getMap().get(t.getName()));
+            }
+
+            ////////////////// change to the new task
             if(simulationToggle.isSelected())
                 mainController.getEngine().runTask(ProcessingTimeSpinner.getValue(),true,successSpinner.getValue(),successWithWarningSpinner.getValue(),fromScratch);
-            if (compilerToggle.isSelected()){}
+            if (compilerToggle.isSelected()){
+
+            }
         }
         catch (Exception e){new errorMain(e);}
 
@@ -311,4 +318,5 @@ public class taskController {
     @FXML private HBox hbox5;
     @FXML private VBox vbox3;
     @FXML private VBox vbox4;
+    @FXML private VBox progressTaskBox;
 }
