@@ -190,7 +190,6 @@ public class taskController {
             return row ;
         });
     }
-
     public void changeButtonColor(String newColorString){
         runButton.setStyle(newColorString);
         clearButton.setStyle(newColorString);
@@ -258,7 +257,8 @@ public class taskController {
             else
                 fromScratch = false;
             if(simulationToggle.isSelected())
-                mainController.getEngine().runTask(ProcessingTimeSpinner.getValue(),true,successSpinner.getValue(),successWithWarningSpinner.getValue(),fromScratch);
+                mainController.getEngine().taskSetUp(ProcessingTimeSpinner.getValue(),false,successSpinner.getValue(),successWithWarningSpinner.getValue(),false,null,2);
+                //mainController.getEngine().runTask(ProcessingTimeSpinner.getValue(),false,successSpinner.getValue(),successWithWarningSpinner.getValue(),fromScratch);
             if (compilerToggle.isSelected()){}
         }
         catch (Exception e){new errorMain(e);}
