@@ -13,11 +13,11 @@ import java.util.*;
 public class Target implements Serializable,Runnable
 {
     public enum Type {INDEPENDENTS, LEAF, MIDDLE, ROOT}
-    public enum Status {Waiting,Success,Warning ,Skipped ,Failure}
+    public enum Status {Waiting,Success,Warning ,Skipped ,Failure,Frozen}
     private String userData;
     private final String name;
     private Type type;
-    private Status status = Status.Waiting;
+    private Status status = Status.Frozen;
     private final Set<String> setDependsOn;
     private final Set<String> setRequiredFor;
     private int runTime=0;
@@ -31,7 +31,7 @@ public class Target implements Serializable,Runnable
     private long startWaitingTime;
     private String failReason;
     /** ctor */
-    public  Target(String name , String userData , Set<String> setDependsOn , Set<String> setRequiredFor) {
+    public  Target(String name , String userData , Set<String> setDependsOn , Set<String>setRequiredFor) {
         this.name = name;
         this.userData = userData;
         this.setDependsOn = setDependsOn;
@@ -254,7 +254,7 @@ public class Target implements Serializable,Runnable
         try{
             if(!this.setDependsOn.isEmpty()){
                 for(String s:setDependsOn){
-                    if(targetMap.get(s).getStatus()==Status.Waiting){//dont run if depends on is still waiting
+                    if(targetMap.get(s).getStatus()==Status.Waiting||targetMap.get(s).getStatus()==Status.Frozen){//dont run if depends on is still waiting
                         isRunning=false;
                         isInQueue=false;
                         engineImpl.decrementWorkingThreads();
@@ -296,8 +296,14 @@ public class Target implements Serializable,Runnable
                     this.status=Status.Success;
                 }
             }
-            else{
-                this.status=Status.Failure;
+            else {
+                this.status = Status.Failure;
+            }
+            if (!this.setRequiredFor.isEmpty()) {
+                for (String s : setRequiredFor) {
+                    if(targetMap.get(s).status==Status.Frozen)
+                        targetMap.get(s).status=Status.Waiting;
+                }
             }
             isRunning=false;
             isInQueue=false;

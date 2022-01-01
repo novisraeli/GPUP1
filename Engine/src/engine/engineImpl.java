@@ -254,20 +254,24 @@ public class engineImpl implements engine {
         */
         return null;//temp
     }
-    public void taskSetUp(int time, boolean random, float success, float warning,boolean keepLastRun,String taskType,int threadsNum) throws Exception {
+    public synchronized void taskSetUp(int time, boolean random, float success, float warning,boolean keepLastRun,String taskType,int threadsNum) throws Exception {
         int randomTime=0;
         if (!loadFile)
             throw new XmlNotLoad();
         String path=openDir(taskType);
         if(!keepLastRun){
             for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all targets to waiting
+                if(e.getValue().getType()==Target.Type.LEAF||e.getValue().getType()==Target.Type.INDEPENDENTS)
                 e.getValue().SetStatus(Target.Status.Waiting);
             }
         }
         else{
             for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all failed or skipped targets to waiting
-                if(e.getValue().getStatus()== Target.Status.Skipped||e.getValue().getStatus()== Target.Status.Failure){
+                if(e.getValue().getStatus()== Target.Status.Failure){
                     e.getValue().SetStatus(Target.Status.Waiting);
+                }
+                else if(e.getValue().getStatus()== Target.Status.Skipped){
+                    e.getValue().SetStatus(Target.Status.Frozen);
                 }
             }
         }
@@ -286,7 +290,8 @@ public class engineImpl implements engine {
             e.getValue().setWarningChance(warning);
             e.getValue().setPath(path);
             e.getValue().setStartWaitingTime(System.currentTimeMillis());
-            if(e.getValue().getType()==Target.Type.LEAF||e.getValue().getType()==Target.Type.LEAF){
+            e.getValue().setMap(targetMap);
+            if(e.getValue().getStatus()==Target.Status.Waiting){
                 l.add(e.getValue());
             }
         }
@@ -296,12 +301,14 @@ public class engineImpl implements engine {
         }
         //run on all targets
         while(!taskDoneCheck()) {
+            /*
             if(stopThreads){
                 threads.wait();
             }
             else{
                 threads.notifyAll();
             }
+            */
             for(Map.Entry<String, Target> e : targetMap.entrySet()){
                 if(e.getValue().getStatus()==Target.Status.Waiting&&!e.getValue().getIsInQueue()) {
                     if (checkSerialSets(e.getValue().getName())) {
@@ -331,7 +338,7 @@ public class engineImpl implements engine {
     }
     private boolean taskDoneCheck(){
         for(Map.Entry<String, Target> e : targetMap.entrySet()){
-            if(e.getValue().getStatus()== Target.Status.Waiting) {
+            if(e.getValue().getStatus()== Target.Status.Waiting||e.getValue().getStatus()== Target.Status.Frozen) {
                 return false;
             }
         }
