@@ -12,8 +12,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="bar">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/FXML/graph/graphController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/graph/graphController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -227,13 +227,7 @@
       <workItem from="1640968472907" duration="15000" />
       <workItem from="1640968570911" duration="6594000" />
       <workItem from="1641044746663" duration="1376000" />
-      <workItem from="1641190706498" duration="28006000" />
-    </task>
-    <task id="LOCAL‎00005" summary="Merge remote-tracking branch 'origin/master'">
-      <created>1636542968700</created>
-      <option name="number" value="LOCAL‎00005" />
-      <option name="presentableId" value="LOCAL‎00005" />
-      <updated>1636542968700</updated>
+      <workItem from="1641190706498" duration="28898000" />
     </task>
     <task id="LOCAL‎00006" summary="Merge remote-tracking branch 'origin/master'&#10;&#10;# Conflicts:&#10;#&#9;UI/src/UI.java">
       <created>1636543508863</created>
@@ -525,7 +519,13 @@
       <option name="presentableId" value="LOCAL‎00053" />
       <updated>1641227153762</updated>
     </task>
-    <option name="localTasksCounter" value="54" />
+    <task id="LOCAL‎00054" summary="bar">
+      <created>1641227939973</created>
+      <option name="number" value="LOCAL‎00054" />
+      <option name="presentableId" value="LOCAL‎00054" />
+      <updated>1641227939973</updated>
+    </task>
+    <option name="localTasksCounter" value="55" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -673,6 +673,11 @@
           <url>file://$PROJECT_DIR$/UI/src/graphViz/GraphViz.java</url>
           <line>269</line>
           <option name="timeStamp" value="364" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/graphViz/GraphViz.java</url>
+          <line>261</line>
+          <option name="timeStamp" value="365" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Engine/src/information/TargetInformation.java</url>

@@ -43,6 +43,7 @@ public class graphController {
         return out;
     }
     public void changeBackgroundGraph(String pathTemp){
+        //
         File f = createDotGraph(pathTemp);
         Image image = new Image(f.toURI().toString());
         // image = new Image("/graphViz/temp/image.png", graphAnchorPane.getWidth(), graphAnchorPane.getHeight(), false, false);
