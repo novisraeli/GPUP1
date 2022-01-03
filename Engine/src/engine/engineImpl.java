@@ -26,7 +26,8 @@ public class engineImpl implements engine {
     private List<Information> res;
     private int maxThreads;
     private Map<String,Set<String>> serialSets = new HashMap<>();
-    private boolean stopThreads;
+    private boolean stopThreads=false;
+    private boolean activateThreads=false;
     private static int workingThreads=0;
     @Override
     public String getWorkingDirectory(){return workingDirectory;}
@@ -254,34 +255,49 @@ public class engineImpl implements engine {
         */
         return null;//temp
     }
-    public synchronized void taskSetUp(int time, boolean random, float success, float warning,boolean keepLastRun,String taskType,int threadsNum) throws Exception {
+    public synchronized void taskSetUp(int time, boolean random, float success, float warning,boolean keepLastRun,String taskType,int threadsNum,List<Target> targets) throws Exception {
         int randomTime=0;
         if (!loadFile)
             throw new XmlNotLoad();
         String path=openDir(taskType);
         if(!keepLastRun){
-            for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all targets to waiting
-                if(e.getValue().getType()==Target.Type.LEAF||e.getValue().getType()==Target.Type.INDEPENDENTS)
-                e.getValue().SetStatus(Target.Status.Waiting);
+            for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all targets to waiting or frozen
+                if(targets.contains(e.getValue())) {
+                    if (e.getValue().getType() == Target.Type.LEAF || e.getValue().getType() == Target.Type.INDEPENDENTS)
+                        e.getValue().SetStatus(Target.Status.Waiting);
+                    else {
+                        e.getValue().SetStatus(Target.Status.Frozen);
+                    }
+                    e.getValue().setNotSelected(false);
+                }
+                else{
+                    e.getValue().SetStatus(Target.Status.Frozen);
+                    e.getValue().setNotSelected(true);
+                }
             }
         }
         else{
             for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all failed or skipped targets to waiting
-                if(e.getValue().getStatus()== Target.Status.Failure){
-                    e.getValue().SetStatus(Target.Status.Waiting);
+                if(targets.contains(e.getValue())) {
+                    if (e.getValue().getStatus() == Target.Status.Failure) {
+                        e.getValue().SetStatus(Target.Status.Waiting);
+                    } else if (e.getValue().getStatus() == Target.Status.Skipped) {
+                        e.getValue().SetStatus(Target.Status.Frozen);
+                    }
+                    e.getValue().setNotSelected(false);
                 }
-                else if(e.getValue().getStatus()== Target.Status.Skipped){
-                    e.getValue().SetStatus(Target.Status.Frozen);
+                else{
+                    e.getValue().setNotSelected(true);
                 }
             }
         }
         //set up thread pool
         ExecutorService threads= Executors.newFixedThreadPool(threadsNum);
-        List<Target> l=new ArrayList<>();
-        Set<String> req;
+
+
         Random r=new Random();
         //now set variables for run
-        for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all targets to waiting
+        for(Map.Entry<String, Target> e : targetMap.entrySet()){
             if(random){
                 randomTime=r.nextInt(time)+1;
             }
@@ -291,24 +307,20 @@ public class engineImpl implements engine {
             e.getValue().setPath(path);
             e.getValue().setStartWaitingTime(System.currentTimeMillis());
             e.getValue().setMap(targetMap);
-            if(e.getValue().getStatus()==Target.Status.Waiting){
-                l.add(e.getValue());
-            }
         }
-        for(Target tar:l){
-            tar.setIsInQueue(true);
-            threads.execute(tar);
-        }
+        setToWaiting();
         //run on all targets
         while(!taskDoneCheck()) {
-            /*
-            if(stopThreads){
+            //might not work didnt check yet
+            if(stopThreads&&!activateThreads){
                 threads.wait();
+                stopThreads=false;
             }
-            else{
+            else if(activateThreads&&!stopThreads){
                 threads.notifyAll();
+                activateThreads=false;
             }
-            */
+
             for(Map.Entry<String, Target> e : targetMap.entrySet()){
                 if(e.getValue().getStatus()==Target.Status.Waiting&&!e.getValue().getIsInQueue()) {
                     if (checkSerialSets(e.getValue().getName())) {
@@ -322,6 +334,18 @@ public class engineImpl implements engine {
         threads.shutdown();
 
     }
+
+    @Override
+    public synchronized void stopThreads() {
+        stopThreads=true;
+        activateThreads =false;
+    }
+    @Override
+    public synchronized void activateThreads(){
+        stopThreads=false;
+        activateThreads =true;
+    }
+
     //may need to split to 2 funcs because to task types
     private String openDir(String taskType) throws IOException {//doesnt have path yet,this func create directory for simulation task
         Path path=Paths.get(workingDirectory);
@@ -338,7 +362,7 @@ public class engineImpl implements engine {
     }
     private boolean taskDoneCheck(){
         for(Map.Entry<String, Target> e : targetMap.entrySet()){
-            if(e.getValue().getStatus()== Target.Status.Waiting||e.getValue().getStatus()== Target.Status.Frozen) {
+            if((e.getValue().getStatus()== Target.Status.Waiting||e.getValue().getStatus()== Target.Status.Frozen)&&!e.getValue().getNotSelected()) {
                 return false;
             }
         }
@@ -422,7 +446,7 @@ public class engineImpl implements engine {
         for (Set<String> set:serialSets.values()){
             if(set.contains(t)){
                 for(String s : set){
-                    if(targetMap.get(s).getIsInQueue()){
+                    if(targetMap.get(s).getIsInQueue()&&!s.equals(t)){
                         return false;
                     }
                 }
@@ -448,10 +472,14 @@ public class engineImpl implements engine {
         int count=0;
         int doneCount=0;
         for(Map.Entry<String, Target> e : targetMap.entrySet()){
-            if(e.getValue().getStatus()!=Target.Status.Waiting){
-                doneCount++;
+            if(!e.getValue().getNotSelected()){
+                count++;
+                if(e.getValue().getStatus()!=Target.Status.Waiting){
+                    doneCount++;
+                }
+
             }
-            count++;
+
         }
         return ((double)doneCount)/count;
     }
@@ -464,7 +492,26 @@ public class engineImpl implements engine {
     public static synchronized void decrementWorkingThreads(){
         workingThreads--;
     }
+    private synchronized void setToWaiting() {
+        boolean check=true;
 
-
+        for (Map.Entry<String, Target> e : targetMap.entrySet()) {
+            Set<String>asff=e.getValue().getSetRequiredFor();
+            if(!e.getValue().getNotSelected()) {
+                for (String s : e.getValue().getSetDependsOn()) {
+                    if (!targetMap.get(s).getNotSelected() && (targetMap.get(s).getStatus() == Target.Status.Waiting || targetMap.get(s).getStatus() == Target.Status.Frozen)) {
+                        check = false;
+                    }
+                }
+            }
+            else{
+                check=false;
+            }
+            if(check){
+                e.getValue().SetStatus(Target.Status.Waiting);
+            }
+            check=true;
+        }
+    }
 
 }
