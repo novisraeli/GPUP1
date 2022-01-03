@@ -13,14 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engine.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/target/Target.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/target/Target.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/target/Target.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/target/Target.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,11 +25,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="128">
-              <caret line="335" selection-start-line="335" selection-end-line="335" />
+            <state relative-caret-position="166">
+              <caret line="480" column="13" lean-forward="true" selection-start-line="480" selection-start-column="13" selection-end-line="480" selection-end-column="13" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2062#2063#0" expanded="true" />
@@ -48,12 +41,12 @@
                 <element signature="e#17223#17224#0" expanded="true" />
                 <element signature="e#17979#17980#0" expanded="true" />
                 <element signature="e#18012#18013#0" expanded="true" />
-                <element signature="e#18418#18419#0" expanded="true" />
-                <element signature="e#18455#18456#0" expanded="true" />
-                <element signature="e#18518#18519#0" expanded="true" />
-                <element signature="e#18550#18551#0" expanded="true" />
-                <element signature="e#18613#18614#0" expanded="true" />
-                <element signature="e#18645#18646#0" expanded="true" />
+                <element signature="e#18402#18403#0" expanded="true" />
+                <element signature="e#18439#18440#0" expanded="true" />
+                <element signature="e#18502#18503#0" expanded="true" />
+                <element signature="e#18534#18535#0" expanded="true" />
+                <element signature="e#18597#18598#0" expanded="true" />
+                <element signature="e#18629#18630#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -146,11 +139,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="104">
-              <caret line="1768" selection-start-line="1768" selection-end-line="1768" />
+            <state relative-caret-position="410">
+              <caret line="1774" column="56" lean-forward="true" selection-start-line="1774" selection-start-column="56" selection-end-line="1774" selection-end-column="56" />
             </state>
           </provider>
         </entry>
@@ -195,8 +188,8 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>wait()</find>
-      <find>set</find>
       <find>stop</find>
+      <find>set</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -693,13 +686,20 @@
       <option name="project" value="LOCAL" />
       <updated>1641045693293</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL-00049" summary="nov">
+      <created>1641058582023</created>
+      <option name="number" value="00049" />
+      <option name="presentableId" value="LOCAL-00049" />
+      <option name="project" value="LOCAL" />
+      <updated>1641058582023</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.28987855" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.28987855" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -710,7 +710,7 @@
       <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Find" order="2" />
       <window_info anchor="bottom" id="Run" order="3" sideWeight="0.49392712" weight="0.3285968" />
-      <window_info active="true" anchor="bottom" id="Debug" order="4" sideWeight="0.49068826" visible="true" weight="0.3587922" />
+      <window_info anchor="bottom" id="Debug" order="4" sideWeight="0.49068826" visible="true" weight="0.3587922" />
       <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="7" />
@@ -995,6 +995,40 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="270" selection-start-line="270" selection-end-line="270" />
+          <folding>
+            <element signature="e#1845#2485#0" />
+            <element signature="e#2490#2674#0" />
+            <element signature="e#2679#2898#0" />
+            <element signature="e#2903#3725#0" />
+            <element signature="e#3730#4170#0" />
+            <element signature="e#4175#4373#0" />
+            <element signature="e#4378#5287#0" />
+            <element signature="e#5292#5619#0" />
+            <element signature="e#5624#5983#0" />
+            <element signature="e#5988#6172#0" />
+            <element signature="e#6177#8716#0" />
+            <element signature="e#8722#8918#0" />
+            <element signature="e#8923#9095#0" />
+            <element signature="e#9221#9954#0" />
+            <element signature="e#9959#10538#0" />
+            <element signature="e#10549#10831#0" />
+            <element signature="e#12165#12166#0" expanded="true" />
+            <element signature="e#12263#12264#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="410">
+          <caret line="1774" column="56" lean-forward="true" selection-start-line="1774" selection-start-column="56" selection-end-line="1774" selection-end-column="56" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Engine/src/target/Target.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -1026,8 +1060,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="335" selection-start-line="335" selection-end-line="335" />
+        <state relative-caret-position="166">
+          <caret line="480" column="13" lean-forward="true" selection-start-line="480" selection-start-column="13" selection-end-line="480" selection-end-column="13" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2062#2063#0" expanded="true" />
@@ -1039,47 +1073,13 @@
             <element signature="e#17223#17224#0" expanded="true" />
             <element signature="e#17979#17980#0" expanded="true" />
             <element signature="e#18012#18013#0" expanded="true" />
-            <element signature="e#18418#18419#0" expanded="true" />
-            <element signature="e#18455#18456#0" expanded="true" />
-            <element signature="e#18518#18519#0" expanded="true" />
-            <element signature="e#18550#18551#0" expanded="true" />
-            <element signature="e#18613#18614#0" expanded="true" />
-            <element signature="e#18645#18646#0" expanded="true" />
+            <element signature="e#18402#18403#0" expanded="true" />
+            <element signature="e#18439#18440#0" expanded="true" />
+            <element signature="e#18502#18503#0" expanded="true" />
+            <element signature="e#18534#18535#0" expanded="true" />
+            <element signature="e#18597#18598#0" expanded="true" />
+            <element signature="e#18629#18630#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="270" selection-start-line="270" selection-end-line="270" />
-          <folding>
-            <element signature="e#1845#2485#0" />
-            <element signature="e#2490#2674#0" />
-            <element signature="e#2679#2898#0" />
-            <element signature="e#2903#3725#0" />
-            <element signature="e#3730#4170#0" />
-            <element signature="e#4175#4373#0" />
-            <element signature="e#4378#5287#0" />
-            <element signature="e#5292#5619#0" />
-            <element signature="e#5624#5983#0" />
-            <element signature="e#5988#6172#0" />
-            <element signature="e#6177#8716#0" />
-            <element signature="e#8722#8918#0" />
-            <element signature="e#8923#9095#0" />
-            <element signature="e#9221#9954#0" />
-            <element signature="e#9959#10538#0" />
-            <element signature="e#10549#10831#0" />
-            <element signature="e#12165#12166#0" expanded="true" />
-            <element signature="e#12263#12264#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Program Files/Java/jdk1.8.0_191/javafx-src.zip!/javafx/fxml/FXMLLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="104">
-          <caret line="1768" selection-start-line="1768" selection-end-line="1768" />
         </state>
       </provider>
     </entry>

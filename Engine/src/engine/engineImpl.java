@@ -472,10 +472,14 @@ public class engineImpl implements engine {
         int count=0;
         int doneCount=0;
         for(Map.Entry<String, Target> e : targetMap.entrySet()){
-            if(e.getValue().getStatus()!=Target.Status.Waiting){
-                doneCount++;
+            if(!e.getValue().getNotSelected()){
+                count++;
+                if(e.getValue().getStatus()!=Target.Status.Waiting){
+                    doneCount++;
+                }
+
             }
-            count++;
+
         }
         return ((double)doneCount)/count;
     }
