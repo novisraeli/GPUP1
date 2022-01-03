@@ -7,7 +7,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="319.0" prefWidth="529.0" styleClass="background" stylesheets="@../../utility/backgroung.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.task.processing.targetInfoTaskController">
    <children>
       <VBox layoutX="25.0" layoutY="67.0" prefHeight="200.0" prefWidth="100.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -17,7 +16,7 @@
                   <Insets left="10.0" top="20.0" />
                </VBox.margin>
                <children>
-                  <Label text="Name:" />
+                  <Label fx:id="nameLabel" text="Name:" />
                   <Text fx:id="nameTarget" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <HBox.margin>
                         <Insets left="10.0" />
@@ -27,7 +26,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Label text="Status:" />
+                  <Label fx:id="statusLabel" text="Status:" />
                   <Text fx:id="statusTarget" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <HBox.margin>
                         <Insets left="10.0" />
@@ -40,7 +39,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Label text="Serial Set:" />
+                  <Label fx:id="serialSetLabel" text="Serial Set:" />
                   <Text fx:id="serialSetInfo" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <HBox.margin>
                         <Insets left="10.0" />
@@ -53,7 +52,7 @@
             </HBox>
             <HBox>
                <children>
-                  <Label text="process status:" />
+                  <Label fx:id="processStatusLabel" text="process status:" />
                   <Text fx:id="processStatus" strokeType="OUTSIDE" strokeWidth="0.0" text="Text">
                      <HBox.margin>
                         <Insets left="10.0" />

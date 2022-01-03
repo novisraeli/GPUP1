@@ -56,21 +56,7 @@ public class taskController {
         setComboBox();
         clickOnRow();
         runButton.setDisable(true);
-        numCheckBoxesSelected.addListener((obs, oldSelectedCount, newSelectedCount) -> {
-            if (newSelectedCount.intValue() == 0)
-                runButton.setDisable(true);
-            else {
-                if (compilerToggle.isSelected()) {
-                    System.out.println(sourceFolderText);
-                    if  (sourceFolderText.getText().equals("") && targetFolderText.getText().equals(""))
-                        runButton.setDisable(true);
-                    else
-                        runButton.setDisable(false);
-                }
-                else
-                    runButton.setDisable(false);
-            }
-        });
+        numCheckBoxesSelected.addListener((obs, oldSelectedCount, newSelectedCount) -> displayRunButton());
 
         simulationBox.disableProperty().bind(isCompiler);
         compilerBox.disableProperty().bind(isCompiler.not());
@@ -239,6 +225,7 @@ public class taskController {
         pauseButton.setStyle(newColorString);
         sourceFolderChooser.setStyle(newColorString);
         targetFolderChooser.setStyle(newColorString);
+        resumeButton.setStyle(newColorString);
     }
     public void changeToggleColor(){
         compilerToggle.setStyle(mainController.getToggleColor());
@@ -355,7 +342,18 @@ public class taskController {
         progressBarTask.setProgress(0);
         typeOfRunningText.setText(scratchOrIncremental.getValue());
     }
-
+    public void displayRunButton(){
+        if (compilerToggle.isSelected()) {
+            if  (sourceFolderText.getText().equals("") && targetFolderText.getText().equals(""))
+                runButton.setDisable(false);
+            else
+                runButton.setDisable(true);
+        }
+        else if (selectedCheckBoxes.size() != 0)
+            runButton.setDisable(false);
+        else
+            runButton.setDisable(true);
+    }
     @FXML void pauseTask(ActionEvent event) {
         isPauseSelected.setValue(true);
         isRunSelected.setValue(false);
@@ -421,20 +419,24 @@ public class taskController {
     @FXML void sourceFolderChooserTask(ActionEvent event) {
         File selectedDirectory = new DirectoryChooser().showDialog(new Stage());
         sourceFolderText.setText(selectedDirectory.getPath());
+        displayRunButton();
     }
     @FXML void targetFolderChooserTask(ActionEvent event) {
         File selectedDirectory = new DirectoryChooser().showDialog(new Stage());
         targetFolderText.setText(selectedDirectory.getPath());
+        displayRunButton();
     }
     @FXML void compilerToggleSelected(ActionEvent event) {
         isCompiler.set(true);
         compilerToggle.setSelected(true);
         simulationToggle.setSelected(false);
+        displayRunButton();
     }
     @FXML void simulationToggleSelected(ActionEvent event) {
         isCompiler.set(false);
         simulationToggle.setSelected(true);
         compilerToggle.setSelected(false);
+        displayRunButton();
     }
     ///fxml member
     @FXML private TableView<targetTable> tableView;
