@@ -24,7 +24,7 @@ public class graphController {
     @FXML private TextField nameOfFile;
     @FXML private HBox hbox;
 
-    @FXML void loadFileButton(ActionEvent event) {
+    @FXML void loadFileButton(ActionEvent event) {//
            File selectedDirectory = new DirectoryChooser().showDialog(new Stage());
            changeBackgroundGraph(selectedDirectory.getAbsolutePath());
     }
