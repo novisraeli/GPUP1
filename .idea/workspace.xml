@@ -13,11 +13,7 @@
   <component name="ChangeListManager">
     <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="bar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/processing/targetInfoTaskController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/processing/targetInfoTaskController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/processing/targetInformationTask.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/processing/targetInformationTask.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -231,13 +227,7 @@
       <workItem from="1640968472907" duration="15000" />
       <workItem from="1640968570911" duration="6594000" />
       <workItem from="1641044746663" duration="1376000" />
-      <workItem from="1641190706498" duration="26110000" />
-    </task>
-    <task id="LOCAL‎00003" summary="bar sela">
-      <created>1636536377644</created>
-      <option name="number" value="LOCAL‎00003" />
-      <option name="presentableId" value="LOCAL‎00003" />
-      <updated>1636536377644</updated>
+      <workItem from="1641190706498" duration="27395000" />
     </task>
     <task id="LOCAL‎00004" summary="Merge remote-tracking branch 'origin/master'">
       <created>1636540270843</created>
@@ -529,7 +519,13 @@
       <option name="presentableId" value="LOCAL‎00051" />
       <updated>1641225026583</updated>
     </task>
-    <option name="localTasksCounter" value="52" />
+    <task id="LOCAL‎00052" summary="bar">
+      <created>1641226095236</created>
+      <option name="number" value="LOCAL‎00052" />
+      <option name="presentableId" value="LOCAL‎00052" />
+      <updated>1641226095236</updated>
+    </task>
+    <option name="localTasksCounter" value="53" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -665,13 +661,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
-          <line>426</line>
+          <line>429</line>
           <option name="timeStamp" value="322" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java</url>
           <line>305</line>
           <option name="timeStamp" value="359" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
+          <line>346</line>
+          <option name="timeStamp" value="363" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Engine/src/information/TargetInformation.java</url>
