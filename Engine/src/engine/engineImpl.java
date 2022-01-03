@@ -469,6 +469,7 @@ public class engineImpl implements engine {
         return serialSets;
     }
     public synchronized double getPrecentageDone(){
+        //
         int count=0;
         int doneCount=0;
         for(Map.Entry<String, Target> e : targetMap.entrySet()){
@@ -496,7 +497,6 @@ public class engineImpl implements engine {
         boolean check=true;
 
         for (Map.Entry<String, Target> e : targetMap.entrySet()) {
-            Set<String>asff=e.getValue().getSetRequiredFor();
             if(!e.getValue().getNotSelected()) {
                 for (String s : e.getValue().getSetDependsOn()) {
                     if (!targetMap.get(s).getNotSelected() && (targetMap.get(s).getStatus() == Target.Status.Waiting || targetMap.get(s).getStatus() == Target.Status.Frozen)) {
