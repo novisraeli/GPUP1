@@ -12,9 +12,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="bar">
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/test2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/test2.viz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/test3.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/test3.viz" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/graph/graph.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/graph/graph.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/FXML/graph/graphController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/graph/graphController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/big.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/big.viz" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -53,12 +59,11 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoTaskController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/file/fileController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_301.jdk/Contents/Home/src.zip!/java/util/HashSet.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/error/errorMain.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoMain.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -228,7 +233,7 @@
       <workItem from="1640968472907" duration="15000" />
       <workItem from="1640968570911" duration="6594000" />
       <workItem from="1641044746663" duration="1376000" />
-      <workItem from="1641190706498" duration="29629000" />
+      <workItem from="1641190706498" duration="28898000" />
     </task>
     <task id="LOCAL‎00008" summary="Merge remote-tracking branch 'origin/master'">
       <created>1636549521300</created>
@@ -652,7 +657,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/graph/graphController.java</url>
-          <line>42</line>
+          <line>39</line>
           <option name="timeStamp" value="262" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -672,13 +677,18 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/graphViz/GraphViz.java</url>
-          <line>269</line>
-          <option name="timeStamp" value="364" />
+          <line>79</line>
+          <option name="timeStamp" value="379" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/graphViz/GraphViz.java</url>
-          <line>261</line>
-          <option name="timeStamp" value="365" />
+          <line>52</line>
+          <option name="timeStamp" value="380" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/graphViz/GraphViz.java</url>
+          <line>82</line>
+          <option name="timeStamp" value="381" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Engine/src/information/TargetInformation.java</url>

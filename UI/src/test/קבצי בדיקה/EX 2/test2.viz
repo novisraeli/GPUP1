@@ -1,0 +1,10 @@
+digraph G {
+A;
+B;
+C;
+D -> A;
+D -> B;
+E -> B;
+E -> C;
+E -> D;
+A[color= "green:red;0.25:blue" ]B[color= "green:red;0.25:blue" ]}

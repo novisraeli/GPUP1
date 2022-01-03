@@ -1,204 +1,47 @@
 package graphViz;
-
-;// com.company.GraphViz.java - a simple API to call dot from Java programs
-
-/*$Id$*/
-/*
- ******************************************************************************
- *                                                                            *
- *                    (c) Copyright Laszlo Szathmary                          *
- *                                                                            *
- * This program is free software; you can redistribute it and/or modify it    *
- * under the terms of the GNU Lesser General Public License as published by   *
- * the Free Software Foundation; either version 2.1 of the License, or        *
- * (at your option) any later version.                                        *
- *                                                                            *
- * This program is distributed in the hope that it will be useful, but        *
- * WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY *
- * or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU Lesser General Public    *
- * License for more details.                                                  *
- *                                                                            *
- * You should have received a copy of the GNU Lesser General Public License   *
- * along with this program; if not, write to the Free Software Foundation,    *
- * Inc., 675 Mass Ave, Cambridge, MA 02139, USA.                              *
- *                                                                            *
- ******************************************************************************
- */
-
-import javafx.scene.paint.Color;
 import target.Target;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileWriter;
-import java.io.InputStreamReader;
 import java.util.Map;
-import java.util.Properties;
-import java.util.Random;
 import java.util.Set;
 
-/**
- * <dl>
- * <dt>Purpose: com.company.GraphViz Java API
- * <dd>
- *
- * <dt>Description:
- * <dd> With this Java class you can simply call dot
- *      from your Java programs.
- * <dt>Example usage:
- * <dd>
- * <pre>
- *    com.company.GraphViz gv = new com.company.GraphViz();
- *    gv.addln(gv.start_graph());
- *    gv.addln("A -> B;");
- *    gv.addln("A -> C;");
- *    gv.addln(gv.end_graph());
- *    System.out.println(gv.getDotSource());
- *
- *    String type = "gif";
- *    File out = new File("out." + type);   // out.gif in this example
- *    gv.writeGraphToFile( gv.getGraph( gv.getDotSource(), type ), out );
- * </pre>
- * </dd>
- *
- * </dl>
- *
- * @version v0.5.1, 2013/03/18 (March) -- Patch of Juan Hoyos (Mac support)
- * @version v0.5, 2012/04/24 (April) -- Patch of Abdur Rahman (OS detection + start subgraph +
- * read config file)
- * @version v0.4, 2011/02/05 (February) -- Patch of Keheliya Gallaba is added. Now you
- * can specify the type of the output file: gif, dot, fig, pdf, ps, svg, png, etc.
- * @version v0.3, 2010/11/29 (November) -- Windows support + ability to read the graph from a text file
- * @version v0.2, 2010/07/22 (July) -- bug fix
- * @version v0.1, 2003/12/04 (December) -- first release
- * @author  Laszlo Szathmary (<a href="jabba.laci@gmail.com">jabba.laci@gmail.com</a>)
- */
+
 public class GraphViz
 {
-    /**
-     * Detects the client's operating system.
-     */
-    private final static String osName = System.getProperty("os.name").replaceAll("\\s","");
 
-    /**
-     * Load the config.properties file.
-     */
-    //private final static String cfgProp = "/Users/seteropere/NetBeansProjects/TestApplication/src/config.properties";
-    //private final static Properties configFile = new Properties() {
-    //    private final static long serialVersionUID = 1L; {
-    //        try {
-     //           load(new FileInputStream(cfgProp));
-     //       } catch (Exception e) {}
-    //    }
-   // };
-
-    /**
-     * The dir. where temporary files will be created.
-     */
     private String TEMP_DIR ;
-
-    /**
-     * Where is your dot program located? It will be called externally.
-     */
     private String DOT;
-
     private String NAMEFILE;
 
-    /**
-     * The image size in dpi. 96 dpi is normal size. Higher values are 10% higher each.
-     * Lower values 10% lower each.
-     *
-     * dpi patch by Peter Mueller
-     */
+
     private int[] dpiSizes = {46, 51, 57, 63, 70, 78, 86, 96, 106, 116, 128, 141, 155, 170, 187, 206, 226, 249};
 
-    /**
-     * Define the index in the image size array.
-     */
     private int currentDpiPos = 7;
 
-    /**
-     * Increase the image size (dpi).
-     */
-    public void increaseDpi() {
-        if ( this.currentDpiPos < (this.dpiSizes.length - 1) ) {
-            ++this.currentDpiPos;
-        }
+    public GraphViz(String Path , String name) {
+        TEMP_DIR = Path;
+        DOT = "dot";
+        NAMEFILE = name;
     }
 
-    /**
-     * Decrease the image size (dpi).
-     */
     public void decreaseDpi() {
         if (this.currentDpiPos > 0) {
             --this.currentDpiPos;
         }
     }
-
-    public int getImageDpi() {
-        return this.dpiSizes[this.currentDpiPos];
-    }
-
-    /**
-     * The source of the graph written in dot language.
-     */
     private StringBuilder graph = new StringBuilder();
-
-    /**
-     * Constructor: creates a new com.company.GraphViz object that will contain
-     * a graph.
-     */
-    public GraphViz(String Path , String name) {
-        TEMP_DIR = Path;
-        DOT = ".dot";
-        NAMEFILE = name;
-    }
-
-    /**
-     * Returns the graph's source description in dot language.
-     * @return Source of the graph in dot language.
-     */
     public String getDotSource() {
         return this.graph.toString();
     }
-
-    /**
-     * Adds a string to the graph's source (without newline).
-     */
     public void add(String line) {
         this.graph.append(line);
     }
-
-    /**
-     * Adds a string to the graph's source (with newline).
-     */
     public void addln(String line) {
         this.graph.append(line + "\n");
     }
-
-    /**
-     * Adds a newline to the graph's source.
-     */
-    public void addln() {
-        this.graph.append('\n');
-    }
-
-    public void clearGraph(){
-        this.graph = new StringBuilder();
-    }
-
-    /**
-     * Returns the graph as an image in binary format.
-     * @param dot_source Source of the graph to be drawn.
-     * @param type Type of the output image to be produced, e.g.: gif, dot, fig, pdf, ps, svg, png.
-     * @return A byte array containing the image of the graph.
-     */
-    public byte[] getGraph(String dot_source, String type, String nameFile)
-    {
+    public byte[] getGraph(String dot_source, String type) {
         //   File dot;
         try {
             // File dot = new File("c:/Users/danse/Documents/demo/demo.dot");
@@ -207,7 +50,7 @@ public class GraphViz
             File dot = writeDotSourceToFile(dot_source);
             if (dot != null)
             {
-                img_stream = get_img_stream(dot, type, nameFile);
+                img_stream = get_img_stream(dot, type);
                 //if (dot.delete() == false)
                 //     System.err.println("Warning: " + dot.getAbsolutePath() + " could not be deleted!");
                 return img_stream;
@@ -215,27 +58,7 @@ public class GraphViz
             return null;
         } catch (Exception ioe) { return null; }
     }
-
-    /**
-     * Writes the graph's image in a file.
-     * @param img   A byte array containing the image of the graph.
-     * @param file  Name of the file to where we want to write.
-     * @return Success: 1, Failure: -1
-     */
-    public int writeGraphToFile(byte[] img, String file)
-    {
-        File to = new File(file);
-        return writeGraphToFile(img, to);
-    }
-
-    /**
-     * Writes the graph's image in a file.
-     * @param img   A byte array containing the image of the graph.
-     * @param to    A File object to where we want to write.
-     * @return Success: 1, Failure: -1
-     */
-    public int writeGraphToFile(byte[] img, File to)
-    {
+    public int writeGraphToFile(byte[] img, File to) {
         try {
             FileOutputStream fos = new FileOutputStream(to);
             fos.write(img);
@@ -243,31 +66,20 @@ public class GraphViz
         } catch (java.io.IOException ioe) { return -1; }
         return 1;
     }
-
-    /**
-     * It will call the external dot program, and return the image in
-     * binary format.
-     * @param dot Source of the graph (in dot language).
-     * @param type Type of the output image to be produced, e.g.: gif, dot, fig, pdf, ps, svg, png.
-     * @return The image of the graph in .gif format.
-     */
-    private byte[] get_img_stream(File dot, String type, String nameFile)
-    {
+    private byte[] get_img_stream(File dot, String type) {
         File img;
         byte[] img_stream = null;
 
         try {
-            //img = File.createTempFile("graph_", "."+type, new File(TEMP_DIR));
-
-            img = new File(TEMP_DIR + "/" + nameFile + type);
+         //   img = new File(TEMP_DIR+"/bar.png");
+            img = File.createTempFile("bar", type, new File(TEMP_DIR));
             Runtime rt = Runtime.getRuntime();
 
             // patch by Mike Chenault
-          //  String[] args = {DOT, "-T"+type, "-Gdpi="+dpiSizes[this.currentDpiPos], dot.getAbsolutePath(), "-o", img.getAbsolutePath()};
-            // dot -Tpng filename.dot -o filename.png
-
-            String[] args = {"dot " + "-Tpng " + dot.getAbsolutePath() +" -o "+ img.getAbsolutePath()};
+            //String[] args = {"dot -Tpng "+ dot.getAbsolutePath()+ " -o "+ img.getAbsolutePath()};
+            String[] args = {"dot", "-Tpng", "-Gdpi="+dpiSizes[this.currentDpiPos], dot.getAbsolutePath(), "-o", img.getAbsolutePath()};
             Process p = rt.exec(args);
+
             p.waitFor();
 
             FileInputStream in = new FileInputStream(img.getAbsolutePath());
@@ -290,25 +102,17 @@ public class GraphViz
         }
         return img_stream;
     }
-
-    /**
-     * Writes the source of the graph in a file, and returns the written file
-     * as a File object.
-     * @param str Source of the graph (in dot language).
-     * @return The file (as a File object) that contains the source of the graph.
-     */
-    private File writeDotSourceToFile(String str) throws java.io.IOException
-    {
+    private File writeDotSourceToFile(String str) throws java.io.IOException {
         File temp;
         try {
             temp = new File( TEMP_DIR +  NAMEFILE + ".viz" );
             FileWriter fout = new FileWriter(temp);
             fout.write(str);
             //BufferedWriter br = new BufferedWriter(new FileWriter(NAMEFILE+".dot"));
-           // BufferedWriter br = new BufferedWriter(new FileWriter(TEMP_DIR +  NAMEFILE + ".viz"));
-           // br.write(str);
+            // BufferedWriter br = new BufferedWriter(new FileWriter(TEMP_DIR +  NAMEFILE + ".viz"));
+            // br.write(str);
             //br.flush();
-           // br.close();
+            // br.close();
             fout.close();
         }
         catch (Exception e) {
@@ -317,101 +121,27 @@ public class GraphViz
         }
         return temp;
     }
-
-    /**
-     * Returns a string that is used to start a graph.
-     * @return A string to open a graph.
-     */
     public String start_graph() {
         return "digraph G {";
     }
-
-    /**
-     * Returns a string that is used to end a graph.
-     * @return A string to close a graph.
-     */
     public String end_graph() {
         return "}";
     }
-
-    /**
-     * Takes the cluster or subgraph id as input parameter and returns a string
-     * that is used to start a subgraph.
-     * @return A string to open a subgraph.
-     */
-    public String start_subgraph(int clusterid) {
-        return "subgraph cluster_" + clusterid + " {";
-    }
-
-    /**
-     * Returns a string that is used to end a graph.
-     * @return A string to close a graph.
-     */
-    public String end_subgraph() {
-        return "}";
-    }
-
-    /**
-     * Read a DOT graph from a text file.
-     *
-     * @param input Input text file containing the DOT graph
-     * source.
-     */
-    public void readSource(String input)
-    {
-        StringBuilder sb = new StringBuilder();
-
-        try
-        {
-            FileInputStream fis = new FileInputStream(input);
-            DataInputStream dis = new DataInputStream(fis);
-            BufferedReader br = new BufferedReader(new InputStreamReader(dis));
-            String line;
-            while ((line = br.readLine()) != null) {
-                sb.append(line);
-            }
-            dis.close();
-        }
-        catch (Exception e) {
-            System.err.println("Error: " + e.getMessage());
-        }
-
-        this.graph = sb;
-    }
     //////////////////////////////////////////////////////////////////////////////////////
-
-    public String makeDotFormat(Map<String, Target> targetMap , Map<String, Set<String>> serialSets){
-        String dotFormat ="";
-        for (String key : targetMap.keySet())
-        {
+    public String makeDotFormat(Map<String, Target> targetMap , Map<String, Set<String>> serialSets) {
+        String dotFormat = "";
+        for (String key : targetMap.keySet()) {
             if (targetMap.get(key).getSetDependsOn().size() == 0)
                 dotFormat += targetMap.get(key).getName() + ";\n";
             else {
-                for (String DependsOn :targetMap.get(key).getSetDependsOn())
+                for (String DependsOn : targetMap.get(key).getSetDependsOn())
                     dotFormat += targetMap.get(key).getName()
                             + " -> "
                             + DependsOn
-                            +";\n";
+                            + ";\n";
             }
         }
-
-        for (String key : serialSets.keySet())
-        {
-            Random random = new Random();
-            final float R = 1.0f;;
-            final float G = 1.0f;//1.0 for brilliant, 0.0 for dull
-            final float B = 1.0f; //1.0 for brighter, 0.0 for black
-            //Color color = new Color(0.5, 0.5, 0.5);
-            if (serialSets.size() != 0) {
-                for (String name : serialSets.get(key)) {
-                    dotFormat += name + "[color=" + " \"green:red;0.25:blue\" " + "]";
-                    //dotFormat += name + "[color=" + " \"green:red;0.25:blue\" " + "]";
-                }
-            }
-        }
-
         return dotFormat;
     }
 
-
-} // end of class com.company.GraphViz
+}
