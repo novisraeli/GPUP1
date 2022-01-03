@@ -121,6 +121,9 @@ public class Target implements Serializable,Runnable
     public String getSimTimeString(){
         return simTimeString;
     }
+    public synchronized void setSimTimeString(String s){
+        simTimeString=s;
+    }
     public void setPath(String s){
         path=s + "\\" + this.name + ".log";
     }
@@ -279,6 +282,14 @@ public class Target implements Serializable,Runnable
                         this.status=Status.Skipped;
                         simTimeString="00:00:00:00";
                         engineImpl.decrementWorkingThreads();
+                        File f = new File(path);
+                        f.createNewFile();
+                        FileWriter w = new FileWriter(path);
+                        w.write("Target name: " + this.name + "\n\r" +
+                                "Target result: " + this.status.name() + "\n\r" +
+                                "Target time : 00:00:00:00 \n\r");
+                        w.close();
+                        this.SetStatus(Status.Skipped);
                         return;
                     }
                 }
