@@ -1,0 +1,32 @@
+digraph G {
+A -> F;
+A -> L;
+B -> F;
+B -> H;
+C -> F;
+C -> G;
+C -> I;
+D -> G;
+D -> J;
+E -> I;
+E -> J;
+F -> H;
+G;
+H -> K;
+H -> L;
+H -> M;
+I -> L;
+I -> M;
+I -> N;
+J -> P;
+J -> N;
+J -> O;
+K;
+L;
+M;
+N;
+O;
+P;
+Q;
+R;
+Q[color= "green:red;0.25:blue" ]R[color= "green:red;0.25:blue" ]G[color= "green:red;0.25:blue" ]P[color= "green:red;0.25:blue" ]Q[color= "green:red;0.25:blue" ]N[color= "green:red;0.25:blue" ]O[color= "green:red;0.25:blue" ]R[color= "green:red;0.25:blue" ]K[color= "green:red;0.25:blue" ]L[color= "green:red;0.25:blue" ]M[color= "green:red;0.25:blue" ]}

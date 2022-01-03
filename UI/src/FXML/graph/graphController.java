@@ -39,7 +39,7 @@ public class graphController {
         gv.decreaseDpi();
         String pathImage = pathTemp + "/" + nameOfFile.getText() + ".png";
         File out = new File(pathImage);
-        gv.writeGraphToFile(gv.getGraph(gv.getDotSource(), ".png"), out);
+        gv.writeGraphToFile(gv.getGraph(gv.getDotSource(), ".png" ,nameOfFile.getText() ), out);
         return out;
     }
     public void changeBackgroundGraph(String pathTemp){

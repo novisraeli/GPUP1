@@ -197,7 +197,7 @@ public class GraphViz
      * @param type Type of the output image to be produced, e.g.: gif, dot, fig, pdf, ps, svg, png.
      * @return A byte array containing the image of the graph.
      */
-    public byte[] getGraph(String dot_source, String type)
+    public byte[] getGraph(String dot_source, String type, String nameFile)
     {
         //   File dot;
         try {
@@ -207,7 +207,7 @@ public class GraphViz
             File dot = writeDotSourceToFile(dot_source);
             if (dot != null)
             {
-                img_stream = get_img_stream(dot, type);
+                img_stream = get_img_stream(dot, type, nameFile);
                 //if (dot.delete() == false)
                 //     System.err.println("Warning: " + dot.getAbsolutePath() + " could not be deleted!");
                 return img_stream;
@@ -251,18 +251,21 @@ public class GraphViz
      * @param type Type of the output image to be produced, e.g.: gif, dot, fig, pdf, ps, svg, png.
      * @return The image of the graph in .gif format.
      */
-    private byte[] get_img_stream(File dot, String type)
+    private byte[] get_img_stream(File dot, String type, String nameFile)
     {
         File img;
         byte[] img_stream = null;
 
         try {
-            img = File.createTempFile("graph_", "."+type, new File(TEMP_DIR));
+            //img = File.createTempFile("graph_", "."+type, new File(TEMP_DIR));
+
+            img = new File(TEMP_DIR + "/" + nameFile + type);
             Runtime rt = Runtime.getRuntime();
 
             // patch by Mike Chenault
           //  String[] args = {DOT, "-T"+type, "-Gdpi="+dpiSizes[this.currentDpiPos], dot.getAbsolutePath(), "-o", img.getAbsolutePath()};
             // dot -Tpng filename.dot -o filename.png
+
             String[] args = {"dot " + "-Tpng " + dot.getAbsolutePath() +" -o "+ img.getAbsolutePath()};
             Process p = rt.exec(args);
             p.waitFor();

@@ -12,7 +12,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="bar">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/graph/graphController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/graph/graphController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -227,13 +227,7 @@
       <workItem from="1640968472907" duration="15000" />
       <workItem from="1640968570911" duration="6594000" />
       <workItem from="1641044746663" duration="1376000" />
-      <workItem from="1641190706498" duration="27395000" />
-    </task>
-    <task id="LOCAL‎00004" summary="Merge remote-tracking branch 'origin/master'">
-      <created>1636540270843</created>
-      <option name="number" value="LOCAL‎00004" />
-      <option name="presentableId" value="LOCAL‎00004" />
-      <updated>1636540270843</updated>
+      <workItem from="1641190706498" duration="28006000" />
     </task>
     <task id="LOCAL‎00005" summary="Merge remote-tracking branch 'origin/master'">
       <created>1636542968700</created>
@@ -525,7 +519,13 @@
       <option name="presentableId" value="LOCAL‎00052" />
       <updated>1641226095236</updated>
     </task>
-    <option name="localTasksCounter" value="53" />
+    <task id="LOCAL‎00053" summary="bar">
+      <created>1641227153762</created>
+      <option name="number" value="LOCAL‎00053" />
+      <option name="presentableId" value="LOCAL‎00053" />
+      <updated>1641227153762</updated>
+    </task>
+    <option name="localTasksCounter" value="54" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -655,11 +655,6 @@
           <option name="timeStamp" value="262" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/graphViz/GraphViz.java</url>
-          <line>263</line>
-          <option name="timeStamp" value="264" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
           <line>429</line>
           <option name="timeStamp" value="322" />
@@ -673,6 +668,11 @@
           <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
           <line>346</line>
           <option name="timeStamp" value="363" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/graphViz/GraphViz.java</url>
+          <line>269</line>
+          <option name="timeStamp" value="364" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Engine/src/information/TargetInformation.java</url>
