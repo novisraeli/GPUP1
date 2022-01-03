@@ -29,6 +29,7 @@ public class Target implements Serializable,Runnable
     private boolean isInQueue;
     private boolean isRunning;
     private long startWaitingTime;
+    private String waitingTime;
     private String failReason;
     private Boolean notSelected;
     /** ctor */
@@ -118,6 +119,7 @@ public class Target implements Serializable,Runnable
     public synchronized void setNotSelected(boolean b){
         notSelected =b;
     }
+
     public String getSimTimeString(){
         return simTimeString;
     }
@@ -139,13 +141,22 @@ public class Target implements Serializable,Runnable
     public synchronized boolean getIsRunning(){
         return isRunning;
     }
-    public String getWaitingTime(){
+    public synchronized void setIsRunning(boolean b){
+        isRunning=b;
+    }
+
+
+    public synchronized String getWaitingTime(){
         long temp= System.currentTimeMillis()-startWaitingTime;
         long millis = temp % 1000;
         long second = (temp / 1000) % 60;
         long minute = (temp / (1000 * 60)) % 60;
         long hour = (temp / (1000 * 60 * 60)) % 24;
-        return String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
+        waitingTime=String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
+        return waitingTime;
+    }
+    public synchronized void setWaitingTime(String s){
+        waitingTime=s;
     }
     public void setStartWaitingTime(long t){
         startWaitingTime=t;
@@ -158,6 +169,9 @@ public class Target implements Serializable,Runnable
     }
     public synchronized String getFailReason(){
         return failReason;
+    }
+    public synchronized void setFailReason(String s){
+        failReason=s;
     }
     public void run(int time, boolean random, float success, float warning, List<Information>res,Map<String,Target>targetMap,String path) throws Exception {
         if(!this.setDependsOn.isEmpty()){

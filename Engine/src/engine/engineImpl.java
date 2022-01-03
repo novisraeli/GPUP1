@@ -263,8 +263,11 @@ public class engineImpl implements engine {
         if(!keepLastRun){
             for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all targets to waiting or frozen
                 if(targets.contains(e.getValue())) {
-                    if (e.getValue().getType() == Target.Type.LEAF || e.getValue().getType() == Target.Type.INDEPENDENTS)
+                    if (e.getValue().getType() == Target.Type.LEAF || e.getValue().getType() == Target.Type.INDEPENDENTS) {
                         e.getValue().SetStatus(Target.Status.Waiting);
+                        e.getValue().setStartWaitingTime(System.currentTimeMillis());
+                    }
+
                     else {
                         e.getValue().SetStatus(Target.Status.Frozen);
                     }
@@ -281,6 +284,7 @@ public class engineImpl implements engine {
                 if(targets.contains(e.getValue())) {
                     if (e.getValue().getStatus() == Target.Status.Failure) {
                         e.getValue().SetStatus(Target.Status.Waiting);
+                        e.getValue().setStartWaitingTime(System.currentTimeMillis());
                     } else if (e.getValue().getStatus() == Target.Status.Skipped) {
                         e.getValue().SetStatus(Target.Status.Frozen);
                     }
@@ -305,7 +309,6 @@ public class engineImpl implements engine {
             e.getValue().setSuccessChance(success);
             e.getValue().setWarningChance(warning);
             e.getValue().setPath(path);
-            e.getValue().setStartWaitingTime(System.currentTimeMillis());
             e.getValue().setMap(targetMap);
         }
         setToWaiting();
@@ -508,6 +511,7 @@ public class engineImpl implements engine {
                 check=false;
             }
             if(check){
+                e.getValue().setStartWaitingTime(System.currentTimeMillis());
                 e.getValue().SetStatus(Target.Status.Waiting);
             }
             check=true;
