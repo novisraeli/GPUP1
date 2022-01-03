@@ -11,22 +11,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="bar">
-      <change afterPath="$PROJECT_DIR$/UI/src/FXML/graph/graph.fxml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UI/src/FXML/graph/graphController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/main/mainApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/main/mainApp.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/task.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/task.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/treeView/treeViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/treeView/treeViewController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/graphViz/temp/image.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/main/mainApp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/main/mainApp.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/main/mainAppController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/main/mainAppController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/task.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/task.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" afterDir="false" />
-    </list>
+    <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="bar" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -233,7 +218,7 @@
       <workItem from="1640966321411" duration="1969000" />
       <workItem from="1640968472907" duration="15000" />
       <workItem from="1640968570911" duration="6594000" />
-      <workItem from="1641044746663" duration="1013000" />
+      <workItem from="1641044746663" duration="1376000" />
     </task>
     <task id="LOCAL‎00001" summary="zxc">
       <created>1636536346510</created>
@@ -525,7 +510,13 @@
       <option name="presentableId" value="LOCAL‎00048" />
       <updated>1640811548411</updated>
     </task>
-    <option name="localTasksCounter" value="49" />
+    <task id="LOCAL‎00049" summary="bar">
+      <created>1641047397012</created>
+      <option name="number" value="LOCAL‎00049" />
+      <option name="presentableId" value="LOCAL‎00049" />
+      <updated>1641047397012</updated>
+    </task>
+    <option name="localTasksCounter" value="50" />
     <servers />
   </component>
   <component name="ToolWindowManager">
