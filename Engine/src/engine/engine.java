@@ -29,4 +29,6 @@ public interface engine{
     void taskSetUp(int time, boolean random, float success, float warning,boolean keepLastRun,String taskType,int threadsNum,List<Target> targets) throws Exception;
     void stopThreads();
     void activateThreads();
+    double getPrecentageDone();
+
     }
