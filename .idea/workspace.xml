@@ -11,7 +11,24 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="bar" />
+    <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="bar">
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/task/processing/finishSumUp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/target/Target.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/target/Target.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/css/task.css" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/css/task.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoTaskController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/processing/targetInformationTask.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/processing/targetInformationTask.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/task.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/task.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/target/Target.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/target/Target.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/css/task.css" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/css/task.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/task.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/task.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -139,10 +156,15 @@
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ChangesTree.GroupingKeys" value="directory" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="extract.method.default.visibility" value="private" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/UI/src/FXML/utility" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15" />
@@ -219,12 +241,7 @@
       <workItem from="1640968472907" duration="15000" />
       <workItem from="1640968570911" duration="6594000" />
       <workItem from="1641044746663" duration="1376000" />
-    </task>
-    <task id="LOCAL‎00001" summary="zxc">
-      <created>1636536346510</created>
-      <option name="number" value="LOCAL‎00001" />
-      <option name="presentableId" value="LOCAL‎00001" />
-      <updated>1636536346510</updated>
+      <workItem from="1641190706498" duration="25341000" />
     </task>
     <task id="LOCAL‎00002" summary="zxc">
       <created>1636536370594</created>
@@ -516,7 +533,13 @@
       <option name="presentableId" value="LOCAL‎00049" />
       <updated>1641047397012</updated>
     </task>
-    <option name="localTasksCounter" value="50" />
+    <task id="LOCAL‎00050" summary="bar">
+      <created>1641190910910</created>
+      <option name="number" value="LOCAL‎00050" />
+      <option name="presentableId" value="LOCAL‎00050" />
+      <updated>1641190910910</updated>
+    </task>
+    <option name="localTasksCounter" value="51" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -622,11 +645,6 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java</url>
-          <line>192</line>
-          <option name="timeStamp" value="96" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/table/tableController.java</url>
           <line>20</line>
           <option name="timeStamp" value="127" />
@@ -651,14 +669,24 @@
           <option name="timeStamp" value="262" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
-          <line>265</line>
-          <option name="timeStamp" value="263" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/graphViz/GraphViz.java</url>
           <line>263</line>
           <option name="timeStamp" value="264" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
+          <line>429</line>
+          <option name="timeStamp" value="322" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java</url>
+          <line>305</line>
+          <option name="timeStamp" value="359" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
+          <line>59</line>
+          <option name="timeStamp" value="361" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Engine/src/information/TargetInformation.java</url>

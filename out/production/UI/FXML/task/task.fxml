@@ -19,6 +19,8 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1300.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="FXML.task.taskController">
    <stylesheets>
@@ -77,9 +79,14 @@
                               <Insets left="10.0" right="20.0" top="6.0" />
                            </HBox.margin>
                         </Button>
-                        <CheckBox fx:id="withRequired" mnemonicParsing="false" styleClass="taskMangerLabel" text="With Required-For" HBox.hgrow="NEVER">
+                        <CheckBox fx:id="selectAll" mnemonicParsing="false" styleClass="taskMangerLabel" text="Select All">
                            <HBox.margin>
                               <Insets top="6.0" />
+                           </HBox.margin>
+                        </CheckBox>
+                        <CheckBox fx:id="withRequired" mnemonicParsing="false" styleClass="taskMangerLabel" text="With Required-For" HBox.hgrow="NEVER">
+                           <HBox.margin>
+                              <Insets left="20.0" top="6.0" />
                            </HBox.margin>
                         </CheckBox>
                         <CheckBox fx:id="withDepend" mnemonicParsing="false" styleClass="taskMangerLabel" text="With Dpends-On " HBox.hgrow="NEVER">
@@ -108,10 +115,11 @@
                               <ColumnConstraints hgrow="NEVER" minWidth="10.0" prefWidth="258.0" />
                            </columnConstraints>
                            <rowConstraints>
-                              <RowConstraints maxHeight="194.0" minHeight="10.0" prefHeight="85.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="389.0" minHeight="10.0" prefHeight="126.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="356.0" minHeight="10.0" prefHeight="57.0" vgrow="SOMETIMES" />
-                              <RowConstraints maxHeight="356.0" minHeight="10.0" prefHeight="56.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="194.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="389.0" minHeight="10.0" prefHeight="152.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="356.0" minHeight="10.0" prefHeight="179.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="356.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="356.0" minHeight="10.0" prefHeight="46.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="316.0" minHeight="10.0" prefHeight="149.0" vgrow="SOMETIMES" />
                               <RowConstraints maxHeight="316.0" minHeight="10.0" prefHeight="52.0" vgrow="SOMETIMES" />
                            </rowConstraints>
@@ -130,15 +138,15 @@
                                     </ToggleButton>
                                  </children>
                               </HBox>
-                              <VBox fx:id="hbox3" alignment="CENTER" prefHeight="86.0" prefWidth="254.0" GridPane.rowIndex="2">
+                              <VBox fx:id="hbox3" alignment="CENTER" prefHeight="41.0" prefWidth="252.0" GridPane.rowIndex="3">
                                  <GridPane.margin>
                                     <Insets />
                                  </GridPane.margin>
                                  <children>
-                                    <ComboBox fx:id="scratchOrIncremental" minHeight="30.0" prefHeight="30.0" prefWidth="200.0" />
+                                    <ComboBox fx:id="scratchOrIncremental" minHeight="21.0" prefHeight="26.0" prefWidth="200.0" />
                                  </children>
                               </VBox>
-                              <VBox fx:id="progressTaskBox" alignment="TOP_CENTER" disable="true" prefHeight="133.0" prefWidth="241.0" GridPane.rowIndex="4">
+                              <VBox fx:id="progressTaskBox" alignment="TOP_CENTER" disable="true" prefHeight="133.0" prefWidth="241.0" GridPane.rowIndex="5">
                                  <GridPane.margin>
                                     <Insets left="10.0" />
                                  </GridPane.margin>
@@ -164,7 +172,7 @@
                                     <HBox>
                                        <children>
                                           <Label text="Message:" />
-                                          <Label text="MessageText">
+                                          <Label fx:id="messageText" text="MessageText">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
@@ -177,7 +185,7 @@
                                     <HBox>
                                        <children>
                                           <Label text="Type of Running" />
-                                          <Label text="from scratch">
+                                          <Label fx:id="typeOfRunningText" text="from scratch">
                                              <HBox.margin>
                                                 <Insets left="10.0" />
                                              </HBox.margin>
@@ -189,16 +197,21 @@
                                     </HBox>
                                  </children>
                               </VBox>
-                              <BorderPane maxHeight="47.0" maxWidth="353.0" minHeight="46.0" minWidth="234.0" prefHeight="47.0" prefWidth="234.0" GridPane.hgrow="NEVER" GridPane.rowIndex="5" GridPane.vgrow="NEVER">
+                              <BorderPane maxHeight="47.0" maxWidth="353.0" minHeight="46.0" minWidth="234.0" prefHeight="47.0" prefWidth="234.0" GridPane.hgrow="NEVER" GridPane.rowIndex="6" GridPane.vgrow="NEVER">
                                  <right>
-                                    <HBox prefHeight="51.0" prefWidth="184.0" BorderPane.alignment="CENTER">
+                                    <HBox prefHeight="47.0" prefWidth="254.0" BorderPane.alignment="CENTER">
                                        <children>
-                                          <Button fx:id="pauseButton" minHeight="30.0" minWidth="83.0" mnemonicParsing="false" onAction="#pauseTask" prefHeight="30.0" prefWidth="83.0" styleClass="buttonButtonTaskManger" text="Pause">
+                                          <Button fx:id="pauseButton" minHeight="30.0" minWidth="62.0" mnemonicParsing="false" onAction="#pauseTask" prefHeight="31.0" prefWidth="62.0" styleClass="buttonButtonTaskManger" text="Pause">
                                              <HBox.margin>
-                                                <Insets right="10.0" top="10.0" />
+                                                <Insets left="10.0" right="10.0" top="10.0" />
                                              </HBox.margin>
                                           </Button>
-                                          <Button fx:id="runButton" minHeight="30.0" minWidth="83.0" mnemonicParsing="false" onAction="#runTask" prefHeight="30.0" prefWidth="83.0" styleClass="buttonButtonTaskManger" text="Run">
+                                          <Button fx:id="resumeButton" minHeight="30.0" minWidth="63.0" mnemonicParsing="false" onAction="#resumeTask" prefHeight="30.0" prefWidth="73.0" styleClass="buttonButtonTaskManger" text="Resume">
+                                             <HBox.margin>
+                                                <Insets left="5.0" right="5.0" top="10.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                          <Button fx:id="runButton" minHeight="30.0" minWidth="69.0" mnemonicParsing="false" onAction="#runTask" prefHeight="30.0" prefWidth="69.0" styleClass="buttonButtonTaskManger" text="Run">
                                              <HBox.margin>
                                                 <Insets left="10.0" right="10.0" top="10.0" />
                                              </HBox.margin>
@@ -226,6 +239,11 @@
                                                 <Insets left="10.0" top="23.0" />
                                              </VBox.margin>
                                           </Label>
+                                          <CheckBox fx:id="randomCheckBox" mnemonicParsing="false" text="Random">
+                                             <VBox.margin>
+                                                <Insets left="10.0" top="15.0" />
+                                             </VBox.margin>
+                                          </CheckBox>
                                        </children>
                                     </VBox>
                                     <VBox fx:id="vbox2" prefHeight="155.0" prefWidth="74.0">
@@ -252,7 +270,7 @@
                                     </VBox>
                                  </children>
                               </HBox>
-                              <HBox fx:id="hbox5" prefHeight="35.0" prefWidth="211.0" GridPane.rowIndex="3">
+                              <HBox fx:id="hbox5" prefHeight="35.0" prefWidth="211.0" GridPane.rowIndex="4">
                                  <children>
                                     <VBox fx:id="vbox3" prefHeight="121.0" prefWidth="173.0">
                                        <children>
@@ -277,6 +295,54 @@
                                     </VBox>
                                  </children>
                               </HBox>
+                              <VBox fx:id="compilerBox" prefHeight="108.0" prefWidth="252.0" GridPane.rowIndex="2">
+                                 <children>
+                                    <HBox>
+                                       <children>
+                                          <Button fx:id="sourceFolderChooser" minHeight="30.0" minWidth="69.0" mnemonicParsing="false" onAction="#sourceFolderChooserTask" prefHeight="30.0" prefWidth="118.0" styleClass="buttonButtonTaskManger" text="Source Folder">
+                                             <HBox.margin>
+                                                <Insets left="10.0" right="5.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                          <Button fx:id="targetFolderChooser" minHeight="30.0" minWidth="69.0" mnemonicParsing="false" onAction="#targetFolderChooserTask" prefHeight="30.0" prefWidth="113.0" styleClass="buttonButtonTaskManger" text="Target Folder" />
+                                       </children>
+                                    </HBox>
+                                    <HBox>
+                                       <children>
+                                          <Label text="Source Folder:">
+                                             <HBox.margin>
+                                                <Insets right="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextFlow prefHeight="17.0" prefWidth="163.0">
+                                             <children>
+                                                <Text fx:id="sourceFolderText" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="158.21630859375" />
+                                             </children>
+                                          </TextFlow>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                    <HBox>
+                                       <children>
+                                          <Label text="Target Folder">
+                                             <HBox.margin>
+                                                <Insets right="5.0" />
+                                             </HBox.margin>
+                                          </Label>
+                                          <TextFlow prefHeight="17.0" prefWidth="172.0">
+                                             <children>
+                                                <Text fx:id="targetFolderText" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="168.21630859375" />
+                                             </children>
+                                          </TextFlow>
+                                       </children>
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </HBox>
+                                 </children>
+                              </VBox>
                            </children>
                         </GridPane>
                      </children>

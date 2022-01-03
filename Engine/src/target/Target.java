@@ -38,6 +38,7 @@ public class Target implements Serializable,Runnable
         this.userData = userData;
         this.setDependsOn = setDependsOn;
         this.setRequiredFor = setRequiredFor;
+        this.notSelected = false;
     }
 
     /** Get name

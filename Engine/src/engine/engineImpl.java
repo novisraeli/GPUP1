@@ -29,6 +29,7 @@ public class engineImpl implements engine {
     private boolean stopThreads=false;
     private boolean activateThreads=false;
     private static int workingThreads=0;
+    private int size;
     @Override
     public String getWorkingDirectory(){return workingDirectory;}
     /** Load file
@@ -187,24 +188,6 @@ public class engineImpl implements engine {
         }
     }
 
-    private void whatIfDepends(Target t,Set<String>res){
-        if(t.getSetDependsOn().isEmpty()){
-            return;
-        }
-        for(String s:t.getSetDependsOn()){
-            res.add(s);
-            whatIfDepends(targetMap.get(s),res);
-        }
-    }
-    private void whatIfRequired(Target t,Set<String>res){
-        if(t.getSetRequiredFor().isEmpty()){
-            return;
-        }
-        for(String s:t.getSetRequiredFor()){
-            res.add(s);
-            whatIfRequired(targetMap.get(s),res);
-        }
-    }
     @Override
     public List<Information> runTask(int time, boolean random, float success, float warning,boolean keepLastRun) throws Exception {
         /*
@@ -256,6 +239,10 @@ public class engineImpl implements engine {
         return null;//temp
     }
     public synchronized void taskSetUp(int time, boolean random, float success, float warning,boolean keepLastRun,String taskType,int threadsNum,List<Target> targets) throws Exception {
+        size = targets.size();
+        activateThreads = false;
+        stopThreads = false;
+
         int randomTime=0;
         if (!loadFile)
             throw new XmlNotLoad();
@@ -267,7 +254,6 @@ public class engineImpl implements engine {
                         e.getValue().SetStatus(Target.Status.Waiting);
                         e.getValue().setStartWaitingTime(System.currentTimeMillis());
                     }
-
                     else {
                         e.getValue().SetStatus(Target.Status.Frozen);
                     }
@@ -296,15 +282,17 @@ public class engineImpl implements engine {
             }
         }
         //set up thread pool
-        ExecutorService threads= Executors.newFixedThreadPool(threadsNum);
+        ExecutorService threads = Executors.newFixedThreadPool(threadsNum);
 
 
-        Random r=new Random();
+        Random r = new Random();
         //now set variables for run
         for(Map.Entry<String, Target> e : targetMap.entrySet()){
-            if(random){
+            if(random)
                 randomTime=r.nextInt(time)+1;
-            }
+            else
+                randomTime = time;
+
             e.getValue().setRunTime(randomTime);
             e.getValue().setSuccessChance(success);
             e.getValue().setWarningChance(warning);
@@ -339,12 +327,12 @@ public class engineImpl implements engine {
     }
 
     @Override
-    public synchronized void stopThreads() {
+    public void stopThreads() {
         stopThreads=true;
         activateThreads =false;
     }
     @Override
-    public synchronized void activateThreads(){
+    public void activateThreads(){
         stopThreads=false;
         activateThreads =true;
     }
@@ -422,7 +410,7 @@ public class engineImpl implements engine {
         return res==null;
     }
 
-    public synchronized Map<String, Target> getMap(){return targetMap;}
+    public Map<String, Target> getMap(){return targetMap;}
 
     @Override
     public void whatIf(String target, List<String>  newList, Dependence dependence) {
@@ -471,21 +459,17 @@ public class engineImpl implements engine {
     public Map<String,Set<String>> getSerialSets(){
         return serialSets;
     }
-    public synchronized double getPrecentageDone(){
-        //
+    public double getPrecentageDone(){
         int count=0;
         int doneCount=0;
         for(Map.Entry<String, Target> e : targetMap.entrySet()){
             if(!e.getValue().getNotSelected()){
-                count++;
-                if(e.getValue().getStatus()!=Target.Status.Waiting){
+                if(e.getValue().getStatus() != Target.Status.Waiting && e.getValue().getStatus() != Target.Status.Frozen){
                     doneCount++;
                 }
-
             }
-
         }
-        return ((double)doneCount)/count;
+        return ((double)doneCount)/size;
     }
     public static synchronized int getWorkingThreads(){
         return workingThreads;
@@ -517,5 +501,10 @@ public class engineImpl implements engine {
             check=true;
         }
     }
+
+
+
+
+
 
 }
