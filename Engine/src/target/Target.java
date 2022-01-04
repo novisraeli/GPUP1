@@ -36,7 +36,6 @@ public class Target implements Serializable,Runnable
     private boolean compile=false;
     private String compileDest;
     private String source;
-    private Boolean notSelected;
     private infoThread infor;
     /** ctor */
     public  Target(String name , String userData , Set<String> setDependsOn , Set<String>setRequiredFor) {

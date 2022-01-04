@@ -302,8 +302,6 @@ public class engineImpl implements engine {
     }
     public boolean getIsTaskRunning(){return taskRunning;}
 
-    }
-
     @Override
     public void stopThreads() {
         stopThreads=true;
