@@ -1,7 +1,6 @@
 package engine;
 
 import information.*;
-import target.Size;
 import target.Target;
 import target.TargetIsExists;
 import target.Targets;
@@ -392,7 +391,6 @@ public class engineImpl implements engine {
     @Override public synchronized void taskSetUp(int time, boolean random, float success,
                                                  float warning,boolean keepLastRun,String taskType,
                                                  int threadsNum,List<Target> targets) throws Exception {
-        new Size().setSize(0);
         infoThreadList.clear();
         startTime = System.currentTimeMillis();
         taskRunning = true;
@@ -458,17 +456,27 @@ public class engineImpl implements engine {
     }
     private synchronized void run(int threadsNum)throws Exception{
         //set up thread pool
-        queueSize = 0;
+        List<Runnable>t=new ArrayList<>();
         ExecutorService threads = Executors.newFixedThreadPool(threadsNum);
         while(!taskDoneCheck()) {
             //might not work didnt check yet
             if(stopThreads&&!activateThreads){
-                threads.wait();
+                System.out.println("before wait");
+                threads.shutdown();
+                threads.awaitTermination(1, TimeUnit.NANOSECONDS);
+                t=threads.shutdownNow();
+
+                System.out.println("after wait");
                 stopThreads=false;
                 taskRunning = false;
             }
             else if(activateThreads&&!stopThreads){
-                threads.notifyAll();
+                System.out.println("here");
+                threads=Executors.newFixedThreadPool(threadsNum);
+                for(Runnable tar:t){
+
+                    threads.execute((Target)tar);
+                }
                 activateThreads=false;
                 taskRunning = true;
             }
