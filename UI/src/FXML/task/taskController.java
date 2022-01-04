@@ -377,10 +377,12 @@ public class taskController {
         }
         ///infoThreadList.add(new infoThread(infoThread.InOrOut.IN, startTime ,getTimeFromStart() ,threadsNum-workingThreads));
         for(String st : mainController.getEngine().getMap().keySet()) {
-            infoThread f = mainController.getEngine().getMap().get(st).getInfoThread();
-
-            infoThread newInfo = new infoThread(infoThread.InOrOut.OUT,time,makeTimeString(time,f.getCurrTime()),f.getFreeThread());
-            infoThreadListOUT.add(newInfo);
+            Target.Status status = mainController.getEngine().getMap().get(st).getStatus();
+            if(status == Target.Status.Failure || status == Target.Status.Skipped || status == Target.Status.Success || status == Target.Status.Warning){
+                infoThread f = mainController.getEngine().getMap().get(st).getInfoThread();
+                infoThread newInfo = new infoThread(infoThread.InOrOut.OUT, time, makeTimeString(time, f.getCurrTime()), f.getFreeThread(), f.getTargetInPool());
+                infoThreadListOUT.add(newInfo);
+            }
         }
 
         infoThreadListIN.addAll(infoThreadListOUT);

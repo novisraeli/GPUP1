@@ -1,6 +1,7 @@
 package engine;
 
 import information.*;
+import target.Size;
 import target.Target;
 import target.TargetIsExists;
 import target.Targets;
@@ -33,6 +34,7 @@ public class engineImpl implements engine {
     private boolean taskRunning = false;
     private ArrayList<infoThread> infoThreadList  = new ArrayList<>();
     private long startTime;
+    private int queueSize;
 
     /**
      * @return list of all the information on target that add to the thread pool
@@ -390,6 +392,7 @@ public class engineImpl implements engine {
     @Override public synchronized void taskSetUp(int time, boolean random, float success,
                                                  float warning,boolean keepLastRun,String taskType,
                                                  int threadsNum,List<Target> targets) throws Exception {
+        new Size().setSize(0);
         infoThreadList.clear();
         startTime = System.currentTimeMillis();
         taskRunning = true;
@@ -455,6 +458,7 @@ public class engineImpl implements engine {
     }
     private synchronized void run(int threadsNum)throws Exception{
         //set up thread pool
+        queueSize = 0;
         ExecutorService threads = Executors.newFixedThreadPool(threadsNum);
         while(!taskDoneCheck()) {
             //might not work didnt check yet
@@ -474,7 +478,9 @@ public class engineImpl implements engine {
                     if (checkSerialSets(e.getValue().getName())) {
                         e.getValue().setIsInQueue(true);
                         threads.execute(e.getValue());
-                        infoThreadList.add(new infoThread(infoThread.InOrOut.IN, startTime ,getTimeFromStart() ,threadsNum-workingThreads));
+                        Size s = new Size();
+                        s.addSize();
+                        infoThreadList.add(new infoThread(infoThread.InOrOut.IN, startTime ,getTimeFromStart() ,threadsNum-workingThreads,s.getSize() ));
                     }
                 }
             }

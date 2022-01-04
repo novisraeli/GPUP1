@@ -10,19 +10,22 @@ public class infoThread {
     private String timeFromStart;
     private int freeThread;
     private long currTime;
+    private int targetInPool;
 
 
-    public infoThread(InOrOut inOut,long timeAbsolut,String timeFromStart,int freeThread){
+    public infoThread(InOrOut inOut,long timeAbsolut,String timeFromStart,int freeThread , int targetInPool){
         this.inOut = inOut;
         this.timeAbsolut = timeAbsolut;
         timeAbsolutString = makeTimeString(timeAbsolut);
         this.timeFromStart = timeFromStart;
         this.freeThread = freeThread;
+        this.targetInPool = targetInPool;
     }
-    public infoThread(InOrOut inOut,long currTime ,int freeThread){
+    public infoThread(InOrOut inOut,long currTime ,int freeThread ,int targetInPool){
         this.inOut = inOut;
         this.freeThread = freeThread;
         this.currTime = currTime;
+        this.targetInPool = targetInPool;
     }
     public String makeTimeString(long time){
         long millis = time % 1000;
@@ -32,6 +35,7 @@ public class infoThread {
         String Time = String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
         return Time;
     }
+    public int getTargetInPool(){return targetInPool;}
     public String getTimeAbsolutString(){return timeAbsolutString;}
     public InOrOut getInOut(){return inOut;}
     public long getTimeAbsolut(){return timeAbsolut;}
@@ -44,5 +48,6 @@ public class infoThread {
     public void setFreeThread(int freeThread){this.freeThread = freeThread;}
     public void setCurrTime(long time){this.currTime = time;}
     public void setTimeAbsolutString(String time){this.timeAbsolutString = time;}
+    public void getTargetInPool(int targetInPool){this.targetInPool = targetInPool;}
 
 }

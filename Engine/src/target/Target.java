@@ -450,8 +450,9 @@ public class Target implements Serializable,Runnable
             isRunning = false;
             isInQueue = false;
             engineImpl.decrementWorkingThreads();
-
-            infor = new infoThread(infoThread.InOrOut.OUT, System.currentTimeMillis() , engineImpl.getWorkingThreads() );
+            Size s= new Size();
+            s.subSize();
+            infor = new infoThread(infoThread.InOrOut.OUT, System.currentTimeMillis() , engineImpl.getWorkingThreads(), s.getSize() );
 
         }
         catch (Exception e){

@@ -20,6 +20,7 @@ public class resourceUtilizationController {
         abTimeCol.setCellValueFactory(new PropertyValueFactory<>("timeAbsolutString"));
         timeCol.setCellValueFactory(new PropertyValueFactory<>("timeFromStart"));
         threadCol.setCellValueFactory(new PropertyValueFactory<>("freeThread"));
+        targetInPool.setCellValueFactory(new PropertyValueFactory<>("targetInPool"));
     }
 
     @FXML private TableView<infoThread> table;
@@ -27,9 +28,5 @@ public class resourceUtilizationController {
     @FXML private TableColumn<infoThread, String> abTimeCol;
     @FXML private TableColumn<infoThread, String> timeCol;
     @FXML private TableColumn<infoThread, String> threadCol;
-
-
-
-
-
+    @FXML private TableColumn<?, ?> targetInPool;
 }
