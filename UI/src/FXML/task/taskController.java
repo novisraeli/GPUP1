@@ -306,7 +306,7 @@ public class taskController {
                 public void run(){
                     try{
                         mainController.getEngine().taskSetUp(ProcessingTimeSpinner.getValue(),
-                                randomCheckBox.isSelected(), (float) successSpinner.getValue()/100, (float)successWithWarningSpinner.getValue()/100, fromScratch, null, numOfTreadsSpinner.getValue(), targetsToRun);
+                                randomCheckBox.isSelected(), (float) successSpinner.getValue()/100, (float)successWithWarningSpinner.getValue()/100, fromScratch, "simulation", numOfTreadsSpinner.getValue(), targetsToRun);
                     }
                     catch (Exception e){new errorMain(e);}
                 }
@@ -318,7 +318,7 @@ public class taskController {
             thread = new Thread("runCompiler"){
                 public void run(){
                     try{
-                        //   mainController.getEngine()
+                        mainController.getEngine().compile(fromScratch,"compilation",numOfTreadsSpinner.getValue(),targetsToRun,targetFolderText.getText(),sourceFolderText.getText());
                     }
                     catch (Exception e){new errorMain(e);}
                 }
