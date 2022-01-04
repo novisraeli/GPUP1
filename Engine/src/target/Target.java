@@ -3,6 +3,7 @@ package target;
 import engine.engineImpl;
 import information.Information;
 import information.SumUpTarget;
+import information.infoThread;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -32,6 +33,7 @@ public class Target implements Serializable,Runnable
     private String waitingTime;
     private String failReason;
     private Boolean notSelected;
+    private infoThread infor;
     /** ctor */
     public  Target(String name , String userData , Set<String> setDependsOn , Set<String>setRequiredFor) {
         this.name = name;
@@ -341,13 +343,15 @@ public class Target implements Serializable,Runnable
             isRunning=false;
             isInQueue=false;
             engineImpl.decrementWorkingThreads();
+
+            infor = new infoThread(infoThread.InOrOut.OUT, System.currentTimeMillis() , engineImpl.getWorkingThreads() );
+
         }
         catch (Exception e){
 
         }
     }
-
-
+    public infoThread getInfoThread(){return infor;}
 }
 
 

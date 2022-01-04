@@ -59,6 +59,7 @@ public class fileController {
 
                 mainController.observableList().add(t);
             }
+
         }
         catch (Exception e){new errorMain(e);}
     }

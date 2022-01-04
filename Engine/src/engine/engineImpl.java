@@ -30,6 +30,14 @@ public class engineImpl implements engine {
     private boolean activateThreads=false;
     private static int workingThreads=0;
     private int size;
+    private boolean taskRunning = false;
+    private ArrayList<infoThread> infoThreadList  = new ArrayList<>();
+    private long startTime;
+
+
+    @Override
+    public ArrayList<infoThread> getInfoThreadList(){return infoThreadList;}
+
     @Override
     public String getWorkingDirectory(){return workingDirectory;}
     /** Load file
@@ -188,57 +196,12 @@ public class engineImpl implements engine {
         }
     }
 
-    @Override
-    public List<Information> runTask(int time, boolean random, float success, float warning,boolean keepLastRun) throws Exception {
-        /*
-        if (!loadFile)
-            throw new XmlNotLoad();
-        boolean done = false;
-        res = new ArrayList<Information>();
-        //String path=openDir();
-        if(!keepLastRun){
-            for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all targets to waiting
-                e.getValue().SetStatus(Target.Status.Waiting);
-            }
-        }
-        else{
-            for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all failed or skipped targets to waiting
-                if(e.getValue().getStatus()== Target.Status.Skipped||e.getValue().getStatus()== Target.Status.Failure){
-                    e.getValue().SetStatus(Target.Status.Waiting);
-                }
-            }
-        }
-        Set<Target>indi=new HashSet<>();
-        Set<Target>leavies=new HashSet<>();
-
-
-        for(Map.Entry<String,Target>e:targetMap.entrySet()){
-            if(e.getValue().getType()== Target.Type.INDEPENDENTS){
-                indi.add(e.getValue());
-            }
-            else if(e.getValue().getType()== Target.Type.LEAF){
-                leavies.add(e.getValue());//run on all leavies
-            }
-        }
-        for(Target t:indi){
-            t.run(time,random,success,warning,res,targetMap,path);
-        }
-        for(Target t:leavies){
-            t.run(time,random,success,warning,res,targetMap,path);
-        }
-        /*
-        while(!done) {
-            for (Map.Entry<String, Target> e : targetMap.entrySet()) {
-                e.getValue().run(time,random,success,warning,res,targetMap,path);
-            }
-            done=taskDoneCheck();
-        }
-
-        return res;
-        */
-        return null;//temp
-    }
-    public synchronized void taskSetUp(int time, boolean random, float success, float warning,boolean keepLastRun,String taskType,int threadsNum,List<Target> targets) throws Exception {
+    public synchronized void taskSetUp(int time, boolean random, float success,
+                                       float warning,boolean keepLastRun,String taskType,
+                                       int threadsNum,List<Target> targets, Thread jxb) throws Exception {
+        infoThreadList.clear();
+        startTime = System.currentTimeMillis();
+        taskRunning = true;
         size = targets.size();
         activateThreads = false;
         stopThreads = false;
@@ -301,15 +264,17 @@ public class engineImpl implements engine {
         }
         setToWaiting();
         //run on all targets
-        while(!taskDoneCheck()) {
+        while(!taskDoneCheck() && jxb.isAlive()) {
             //might not work didnt check yet
             if(stopThreads&&!activateThreads){
                 threads.wait();
                 stopThreads=false;
+                taskRunning = false;
             }
             else if(activateThreads&&!stopThreads){
                 threads.notifyAll();
                 activateThreads=false;
+                taskRunning = true;
             }
 
             for(Map.Entry<String, Target> e : targetMap.entrySet()){
@@ -317,14 +282,26 @@ public class engineImpl implements engine {
                     if (checkSerialSets(e.getValue().getName())) {
                         e.getValue().setIsInQueue(true);
                         threads.execute(e.getValue());
+                        infoThreadList.add(new infoThread(infoThread.InOrOut.IN, startTime ,getTimeFromStart() ,threadsNum-workingThreads));
                     }
                 }
             }
         }
         //if we got here the there is not more waiting targets
+        taskRunning = false;
         threads.shutdown();
-
     }
+    public String getTimeFromStart(){
+        long temp= System.currentTimeMillis()-startTime;
+        long millis = temp % 1000;
+        long second = (temp / 1000) % 60;
+        long minute = (temp / (1000 * 60)) % 60;
+        long hour = (temp / (1000 * 60 * 60)) % 24;
+        String waitingTime = String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
+        return waitingTime;
+    }
+    public boolean getIsTaskRunning(){return taskRunning;}
+
 
     @Override
     public void stopThreads() {
@@ -335,6 +312,7 @@ public class engineImpl implements engine {
     public void activateThreads(){
         stopThreads=false;
         activateThreads =true;
+
     }
 
     //may need to split to 2 funcs because to task types
@@ -478,8 +456,7 @@ public class engineImpl implements engine {
         workingThreads++;
     }
     public static synchronized void decrementWorkingThreads(){
-        workingThreads--;
-    }
+        workingThreads--;}
     private synchronized void setToWaiting() {
         boolean check=true;
 

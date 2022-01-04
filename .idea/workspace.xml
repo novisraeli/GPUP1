@@ -12,15 +12,33 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="bar">
-      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/test2.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/test2.viz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/test3.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/test3.viz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Engine/src/information/infoThread.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/resourceutilization/resource utilization.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/resourceutilization/resourceUtilizationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UI/src/FXML/resourceutilization/resourceUtilizationMain.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/hs_err_pid6757.log" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/target/Target.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/target/Target.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/file/fileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/file/fileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/FXML/graph/graphController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/graph/graphController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/graphViz/GraphViz.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/big.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/big.viz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/path/pathController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/path/pathController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/table/tableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/table/tableController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engine$Dependence.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engine$Dependence.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/target/Target$Status.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/target/Target$Status.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/target/Target$Type.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/target/Target$Type.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/target/Target.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/target/Target.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/file/fileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/file/fileController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/main/mainAppController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/main/mainAppController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/path/pathController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/path/pathController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/table/tableController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/table/tableController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,11 +77,12 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoTaskController.java" root0="FORCE_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/file/fileController.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_301.jdk/Contents/Home/src.zip!/java/util/HashSet.java" root0="SKIP_INSPECTION" />
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/error/errorMain.java" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoMain.java" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
@@ -233,7 +252,7 @@
       <workItem from="1640968472907" duration="15000" />
       <workItem from="1640968570911" duration="6594000" />
       <workItem from="1641044746663" duration="1376000" />
-      <workItem from="1641190706498" duration="28898000" />
+      <workItem from="1641190706498" duration="29629000" />
     </task>
     <task id="LOCAL‎00008" summary="Merge remote-tracking branch 'origin/master'">
       <created>1636549521300</created>
@@ -662,33 +681,43 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
-          <line>429</line>
+          <line>463</line>
           <option name="timeStamp" value="322" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java</url>
-          <line>305</line>
-          <option name="timeStamp" value="359" />
+          <url>file://$PROJECT_DIR$/UI/src/graphViz/GraphViz.java</url>
+          <line>80</line>
+          <option name="timeStamp" value="364" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/graphViz/GraphViz.java</url>
+          <line>75</line>
+          <option name="timeStamp" value="365" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
-          <line>346</line>
-          <option name="timeStamp" value="363" />
+          <line>278</line>
+          <option name="timeStamp" value="366" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/graphViz/GraphViz.java</url>
-          <line>79</line>
-          <option name="timeStamp" value="379" />
+          <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
+          <line>304</line>
+          <option name="timeStamp" value="369" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/graphViz/GraphViz.java</url>
-          <line>52</line>
-          <option name="timeStamp" value="380" />
+          <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
+          <line>284</line>
+          <option name="timeStamp" value="376" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/graphViz/GraphViz.java</url>
-          <line>82</line>
-          <option name="timeStamp" value="381" />
+          <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
+          <line>300</line>
+          <option name="timeStamp" value="377" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/FXML/resourceutilization/resourceUtilizationMain.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="378" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Engine/src/information/TargetInformation.java</url>

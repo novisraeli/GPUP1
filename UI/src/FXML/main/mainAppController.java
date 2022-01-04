@@ -41,7 +41,8 @@ public class mainAppController {
     private final engine engine = new engineImpl();
     private final SimpleBooleanProperty isFileSelected;
     private final SimpleBooleanProperty  changeFile;
-    public ObservableList<targetTable> items = FXCollections.observableArrayList();
+    private ObservableList<targetTable> items = FXCollections.observableArrayList();
+    private ObservableList<targetTable> taskItem = FXCollections.observableArrayList();
 
     public mainAppController() {
         isFileSelected = new SimpleBooleanProperty(false);
@@ -64,8 +65,11 @@ public class mainAppController {
     public SimpleBooleanProperty change(){
         return changeFile;
     }
-    public ObservableList observableList(){
+    public ObservableList<targetTable> observableList(){
         return items;
+    }
+    public ObservableList<targetTable> observableListTask(){
+        return taskItem;
     }
     public static void setGeneralTableCol(TableColumn<targetTable,String> nameTableCol,
                                           TableColumn<targetTable, Target.Type> typeTableCol,
@@ -101,6 +105,7 @@ public class mainAppController {
     }
     public engine getEngine(){return engine;}
     public void showTable() {
+        taskItem.addAll(items);
         pathComponentController.show();
         tableComponentController.show();
         taskComponentController.show();
@@ -274,5 +279,9 @@ public class mainAppController {
     @FXML private treeViewController treeViewComponentController;
     @FXML private BorderPane graphComponent;
     @FXML private graphController graphComponentController;
+
+    public void setObservableListTask( ObservableList<targetTable> taskItem) {
+        this.taskItem = taskItem;
+    }
 }
 

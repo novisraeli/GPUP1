@@ -1,7 +1,6 @@
 package FXML.graph;
 import FXML.main.mainAppController;
 import graphViz.GraphViz;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;

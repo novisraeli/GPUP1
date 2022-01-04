@@ -1,9 +1,11 @@
 package FXML.task;
 import FXML.error.errorMain;
 import FXML.main.mainAppController;
+import FXML.resourceutilization.resourceUtilizationMain;
 import FXML.task.processing.finishSumUp;
 import FXML.task.processing.targetInfoMain;
 import engine.engine;
+import information.infoThread;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerBinding;
@@ -22,6 +24,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import sun.awt.windows.ThemeReader;
 import target.Target;
 import target.targetTable;
 
@@ -40,9 +43,9 @@ public class taskController {
     private SimpleBooleanProperty isCompiler;
     private ObservableSet<CheckBox> selectedCheckBoxes = FXCollections.observableSet();
     private IntegerBinding numCheckBoxesSelected = Bindings.size(selectedCheckBoxes);
-    private boolean bar = false;
     private Thread update;
     private Thread thread;
+    private boolean showFinish;
 
     public taskController(){
         isRunSelected = new SimpleBooleanProperty(false);
@@ -105,19 +108,19 @@ public class taskController {
         setSpinner();
     }
     public void show() {
-        tableView.setItems(mainController.items);
-        for (int i = 0 ; i< mainController.items.size();++i)
-            configureCheckBoxTask(mainController.items.get(i).getCheckBoxTask());
+        tableView.setItems(mainController.observableListTask());
+        for (int i = 0 ; i< mainController.observableListTask().size();++i)
+            configureCheckBoxTask(mainController.observableListTask().get(i).getCheckBoxTask());
     }
     public void getAllTargetWith(engine.Dependence d ){
         List<String> newList = new ArrayList();
             try{
-                for (int i = 0 ; i < mainController.items.size();++i) {
-                    if (mainController.items.get(i).getCheckBoxTask().isSelected()) {
-                        mainController.getEngine().whatIf(mainController.items.get(i).getName(), newList, d);
-                        for (int k = 0; k < mainController.items.size(); ++k)
-                            if (newList.contains(mainController.items.get(k).getName())) {
-                                mainController.items.get(k).getCheckBoxTask().setSelected(true);
+                for (int i = 0 ; i < mainController.observableListTask().size();++i) {
+                    if (mainController.observableListTask().get(i).getCheckBoxTask().isSelected()) {
+                        mainController.getEngine().whatIf(mainController.observableListTask().get(i).getName(), newList, d);
+                        for (int k = 0; k < mainController.observableListTask().size(); ++k)
+                            if (newList.contains(mainController.observableListTask().get(k).getName())) {
+                                mainController.observableListTask().get(k).getCheckBoxTask().setSelected(true);
                             }
                     }
                 }
@@ -276,13 +279,32 @@ public class taskController {
         isPauseSelected.setValue(false);
         isRunSelected.setValue(true);
         mainController.getEngine().activateThreads();
-        messageText.setText("Resume Task");
+        threadForUpdateInformation();
     }
-    public void updateInformationThread(){
+    public void updateInformationThreadSumUp(){
+        long time = 0;
+        ObservableList<infoThread> infoThreadListIN = FXCollections.observableArrayList();
+        ObservableList<infoThread> infoThreadListOUT = FXCollections.observableArrayList();
+        for(infoThread t:mainController.getEngine().getInfoThreadList()) {
+            infoThreadListIN.add(t);
+            time = t.getTimeAbsolut();
+        }
+        ///infoThreadList.add(new infoThread(infoThread.InOrOut.IN, startTime ,getTimeFromStart() ,threadsNum-workingThreads));
+        for(String st : mainController.getEngine().getMap().keySet()) {
+            infoThread f = mainController.getEngine().getMap().get(st).getInfoThread();
+
+            infoThread newInfo = new infoThread(infoThread.InOrOut.OUT,time,makeTimeString(time,f.getCurrTime()),f.getFreeThread());
+            infoThreadListOUT.add(newInfo);
+        }
+
+        infoThreadListIN.addAll(infoThreadListOUT);
+        new resourceUtilizationMain(infoThreadListIN);
     }
     //////////////////////////////////////////////////////////////////////////////////
     @FXML void runTask(ActionEvent event) {
         try{
+            Thread jxb = Thread.currentThread();
+            showFinish =false;
             boolean fromScratch = scratchOrIncremental.getValue().equals("scratch");;
             List<Target> targetsToRun=new ArrayList<>();
             for(targetTable t:tableView.getItems()){
@@ -295,7 +317,7 @@ public class taskController {
                     public void run(){
                         try{
                             mainController.getEngine().taskSetUp(ProcessingTimeSpinner.getValue(),
-                            randomCheckBox.isSelected(), (float) successSpinner.getValue()/100, (float)successWithWarningSpinner.getValue()/100, fromScratch, null, numOfTreadsSpinner.getValue(), targetsToRun);
+                            randomCheckBox.isSelected(), (float) successSpinner.getValue()/100, (float)successWithWarningSpinner.getValue()/100, fromScratch, null, numOfTreadsSpinner.getValue(), targetsToRun, jxb);
                         }
                         catch (Exception e){new errorMain(e);}
                 }
@@ -319,12 +341,22 @@ public class taskController {
          }
         catch (Exception e){new errorMain(e);}
     }
+
+    public String makeTimeString(long timeFromStart,long curr ){
+        long temp= curr-timeFromStart;
+        long millis = temp % 1000;
+        long second = (temp / 1000) % 60;
+        long minute = (temp / (1000 * 60)) % 60;
+        long hour = (temp / (1000 * 60 * 60)) % 24;
+        String Time = String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
+        return Time;
+    }
     public void threadForUpdateInformation(){
         update = new Thread("update"){
             public void run(){
                 sleepForSomeTime();
                 Platform.runLater(()->updateStartTask());
-                while (mainController.getEngine().getPrecentageDone() != 1 && thread.isAlive()) {
+                while (mainController.getEngine().getPrecentageDone() != 1 && mainController.getEngine().getIsTaskRunning()) {
                     sleepForSomeTime();
                     Platform.runLater(()->updateInformation(mainController.getEngine().getPrecentageDone()));
                 }
@@ -363,10 +395,12 @@ public class taskController {
     public void updateInformation(Double x){
         refreshTable();
         progressBarTask.setProgress(x);
-        if (x == 1)
+        if (x == 1 && !showFinish)
             finish();
     }
     public void finish(){
+        showFinish = true;
+        updateInformationThreadSumUp();
         runTask.set(false);
         messageText.setText("Done");
         ///////////
@@ -396,7 +430,7 @@ public class taskController {
         updateInformationTable(newItems);
         tableView.getItems().clear();
         tableView.setItems(newItems);
-        mainController.items = newItems;
+        mainController.setObservableListTask(newItems);
     }
     public void updateInformationTable(ObservableList<targetTable> newItems){
         for(targetTable t : newItems){

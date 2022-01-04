@@ -120,9 +120,9 @@ public class pathController {
         groupToggle();
     }
     public void show() {
-        tableView.setItems(mainController.items);
-        for (int i = 0 ; i< mainController.items.size();++i)
-            configureCheckBox(mainController.items.get(i).getCheckBoxPath());
+        tableView.setItems(mainController.observableList());
+        for (int i = 0 ; i< mainController.observableList().size();++i)
+            configureCheckBox(mainController.observableList().get(i).getCheckBoxPath());
     }
     private void configureCheckBox(CheckBox checkBox) {
 
