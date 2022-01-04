@@ -40,7 +40,7 @@ public class taskController {
     private final ObservableSet<CheckBox> selectedCheckBoxes = FXCollections.observableSet();
     private final IntegerBinding numCheckBoxesSelected = Bindings.size(selectedCheckBoxes);
     private boolean showFinish;
-
+    private Thread thread;
     public taskController(){
         isRunSelected = new SimpleBooleanProperty(false);
         isPauseSelected = new SimpleBooleanProperty(false);
@@ -297,7 +297,7 @@ public class taskController {
                 targetsToRun.add(mainController.getEngine().getMap().get(t.getName()));
             }
         }
-        Thread thread;
+
         if(simulationToggle.isSelected()) {
             thread = new Thread("runSimulation"){
                 public void run(){
@@ -328,15 +328,30 @@ public class taskController {
     catch (Exception e){new errorMain(e);}
 }
     @FXML void pauseTask(ActionEvent event) {
-        isPauseSelected.setValue(true);
-        isRunSelected.setValue(false);
-        mainController.getEngine().stopThreads();
-        messageText.setText("Pause Task");
+
+        try {
+
+            isPauseSelected.setValue(true);
+            isRunSelected.setValue(false);
+            mainController.getEngine().stopThreads();
+            messageText.setText("Pause Task");
+            System.out.println(thread.getName()+thread.isAlive());
+        }
+        catch (Exception e){
+
+        }
     }
     @FXML void resumeTask(ActionEvent event) {
-        isPauseSelected.setValue(false);
-        isRunSelected.setValue(true);
-        mainController.getEngine().activateThreads();
+
+        try {
+            isPauseSelected.setValue(false);
+            isRunSelected.setValue(true);
+            mainController.getEngine().activateThreads();
+            System.out.println(thread.getName()+thread.isAlive());
+        }
+        catch (Exception e){
+
+        }
         threadForUpdateInformation();
     }
 //// update information during the running of task

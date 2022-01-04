@@ -14,10 +14,7 @@ import java.time.LocalDateTime;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.concurrent.Executor;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.*;
 
 public class engineImpl implements engine {
     private boolean loadFile = false;
@@ -455,16 +452,28 @@ public class engineImpl implements engine {
     }
     private synchronized void run(int threadsNum)throws Exception{
         //set up thread pool
+        List<Runnable>t=new ArrayList<>();
         ExecutorService threads = Executors.newFixedThreadPool(threadsNum);
         while(!taskDoneCheck()) {
             //might not work didnt check yet
             if(stopThreads&&!activateThreads){
-                threads.wait();
+                System.out.println("before wait");
+                threads.shutdown();
+                threads.awaitTermination(1, TimeUnit.NANOSECONDS);
+                t=threads.shutdownNow();
+
+                System.out.println("after wait");
                 stopThreads=false;
                 taskRunning = false;
+                System.out.println(threads.isShutdown());
             }
             else if(activateThreads&&!stopThreads){
-                threads.notifyAll();
+                System.out.println("here");
+                threads=Executors.newFixedThreadPool(threadsNum);
+                for(Runnable tar:t){
+
+                    threads.execute((Target)tar);
+                }
                 activateThreads=false;
                 taskRunning = true;
             }
