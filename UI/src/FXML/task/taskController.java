@@ -537,6 +537,7 @@ public void changeButtonColor(String newColorString){
     @FXML private VBox vbox3;
     @FXML private VBox vbox4;
     @FXML private VBox progressTaskBox;
+    ////
     @FXML private CheckBox selectAll;
     @FXML private Button sourceFolderChooser;
     @FXML private Button targetFolderChooser;

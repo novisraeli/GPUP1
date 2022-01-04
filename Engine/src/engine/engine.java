@@ -34,5 +34,8 @@ public interface engine{
     double getPrecentageDone();
     boolean getIsTaskRunning();
     ArrayList<infoThread> getInfoThreadList();
+    void compile(boolean keepLastRun,String taskType,
+                                     int threadsNum,List<Target> targets
+            ,String dest,String src) throws Exception;
 
     }
