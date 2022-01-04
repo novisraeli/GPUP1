@@ -114,12 +114,13 @@ public class Target implements Serializable,Runnable
     public void setCompileDest(String compileDest) {
         this.compileDest = compileDest;
     }
+
     public String getSource() {
         return source;
     }
 
     public void setSource(String source) {
-        this.compileDest = source;
+        this.source = source;
     }
     public void setMap(Map<String, Target> t){
         targetMap=t;
@@ -301,6 +302,16 @@ public class Target implements Serializable,Runnable
         isRunning=true;
         try {
             if (compile) {//compile task
+                String temp="";
+                char c ='\\';
+                for(int i=0;i<userData.length();i++){
+                    if(userData.charAt(i)=='.'){
+                        temp+=c;
+                    }
+                    else{
+                        temp+=userData.charAt(i);
+                    }
+                }
                 if (!this.setDependsOn.isEmpty()) {
                     for (String s : setDependsOn) {
                         if ((targetMap.get(s).getStatus() == Status.Waiting || targetMap.get(s).getStatus() == Status.Frozen) && !targetMap.get(s).getNotSelected()) {//dont run if depends on is still waiting
@@ -327,16 +338,21 @@ public class Target implements Serializable,Runnable
                                     "Target time : 00:00:00:00 \n\r");
                             w.close();
                             this.SetStatus(Status.Skipped);
+                            if (!this.setRequiredFor.isEmpty()) {
+                                for (String st : setRequiredFor) {
+                                    if (targetMap.get(st).status == Status.Frozen)
+                                        targetMap.get(st).status = Status.Waiting;
+                                }
+                            }
                             return;
                         }
                     }
                 }
                 long startTime = System.currentTimeMillis();//sim target and keep time of sim
                 Runtime rt = Runtime.getRuntime();
-                String[] strings = {"javac", "-d", compileDest, "-cp", compileDest, source+this.userData+".java"};
+                String[] strings = {"javac", "-d", compileDest, "-cp", compileDest, source+temp+".java"};
                 Process p = rt.exec(strings);
                 p.waitFor();
-                System.out.println("done");
                 int res=p.exitValue();
                 long simTime = System.currentTimeMillis() - startTime;
                 //turn simTime to string
@@ -386,6 +402,12 @@ public class Target implements Serializable,Runnable
                                     "Target time : 00:00:00:00 \n\r");
                             w.close();
                             this.SetStatus(Status.Skipped);
+                            if (!this.setRequiredFor.isEmpty()) {
+                                for (String st : setRequiredFor) {
+                                    if (targetMap.get(st).status == Status.Frozen)
+                                        targetMap.get(st).status = Status.Waiting;
+                                }
+                            }
                             return;
                         }
                     }
