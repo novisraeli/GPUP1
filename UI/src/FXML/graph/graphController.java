@@ -8,6 +8,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.DirectoryChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import java.io.File;
 import javafx.scene.control.Button;
@@ -22,6 +23,7 @@ public class graphController {
     @FXML private ImageView imageView;
     @FXML private TextField nameOfFile;
     @FXML private HBox hbox;
+    @FXML private BorderPane borderPaneGraph;
     @FXML public void initialize() {
     }
     /**
@@ -60,6 +62,7 @@ public class graphController {
     }
     public void changeBackgroundColor(String newColorString){
         hbox.setStyle(newColorString);
+        borderPaneGraph.setStyle(newColorString);
     }
 
 }
