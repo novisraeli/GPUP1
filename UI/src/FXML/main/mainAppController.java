@@ -35,14 +35,14 @@ import java.util.List;
 
 
 public class mainAppController {
-    private final List<Rectangle> recList = new ArrayList<>();  /// shape for
-    private int time = 350;
+    private final List<Rectangle> recList = new ArrayList<>();                                  /// shape for
+    private int time = 350;                                                                     /// time for animation
     private String toggleColor = "-fx-background-color: linear-gradient(#2A5058, #61a2b1)";
     private final engine engine = new engineImpl();
     private final SimpleBooleanProperty isFileSelected;
     private final SimpleBooleanProperty  changeFile;
-    private ObservableList<targetTable> items = FXCollections.observableArrayList(); // list for table and path
-    private ObservableList<targetTable> taskItem = FXCollections.observableArrayList();// list for task
+    private ObservableList<targetTable> items = FXCollections.observableArrayList();            /// list for table and path
+    private ObservableList<targetTable> taskItem = FXCollections.observableArrayList();         /// list for task
 
     public mainAppController() {
         isFileSelected = new SimpleBooleanProperty(false);
@@ -65,7 +65,14 @@ public class mainAppController {
     public SimpleBooleanProperty change(){
         return changeFile;
     }
-
+    public engine getEngine(){return engine;}
+    public void showTable() {
+        taskItem.addAll(items);
+        pathComponentController.show();
+        tableComponentController.show();
+        taskComponentController.show();
+    }
+    //////////// table list
     public ObservableList<targetTable> getObservableList(){
         return items;
     }
@@ -75,7 +82,7 @@ public class mainAppController {
     public void setObservableListTask( ObservableList<targetTable> taskItem) {
         this.taskItem = taskItem;
     }
-
+    //////////// set function for start the app
     public static void setGeneralTableCol(TableColumn<targetTable,String> nameTableCol,
                                           TableColumn<targetTable, Target.Type> typeTableCol,
                                           TableColumn<targetTable, String> dataTableCol,
@@ -107,13 +114,6 @@ public class mainAppController {
             treeViewComponentController.setMainController(this);
             graphComponentController.setMainController(this);
         }
-    }
-    public engine getEngine(){return engine;}
-    public void showTable() {
-        taskItem.addAll(items);
-        pathComponentController.show();
-        tableComponentController.show();
-        taskComponentController.show();
     }
     public void setBinding(){
         tableTab.disableProperty().bind(isFileSelected.not());

@@ -12,6 +12,9 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
+/**
+ * show table view with the resource utilizationMain
+ */
 public class resourceUtilizationMain {
     public final static String FXML = "/FXML/resourceutilization/resource utilization.fxml";
         public resourceUtilizationMain(ObservableList<infoThread> list){

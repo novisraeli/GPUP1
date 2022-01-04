@@ -38,13 +38,16 @@ public class pathController {
         isSourceSelected = new SimpleBooleanProperty(false);
         isDestinationSelected = new SimpleBooleanProperty(false);
     }
-    @FXML
-    public void initialize() {
+    @FXML public void initialize() {
         setDefault();
         setBinding();
+        /// Default is path toggle selected
         toggleButtonWhatIf.setOpacity(0.3);
         toggleButtonCycle.setOpacity(0.3);
     }
+    /**
+     * manage the toggle, only one select
+     */
     public void groupToggle(){
         toggleButtonWhatIf.selectedProperty().addListener( (observable, oldValue, newValue) -> {
             if (newValue) {
@@ -56,8 +59,6 @@ public class pathController {
                 toggleButtonWhatIf.setOpacity(0.3);
             }
         }) ;
-
-
         toggleButtonCycle.selectedProperty().addListener( (observable, oldValue, newValue) -> {
             if (newValue) {
                 toggleButtonCycle.setOpacity(1);
@@ -68,8 +69,6 @@ public class pathController {
                 toggleButtonCycle.setOpacity(0.3);
             }
         }) ;
-
-
         toggleButtonPath.selectedProperty().addListener( (observable, oldValue, newValue) -> {
             if (newValue) {
                 toggleButtonPath.setOpacity(1);
@@ -91,10 +90,15 @@ public class pathController {
         toggleButtonPath.setSelected(true);
         toggleButtonWhatIf.setSelected(false);
         toggleButtonCycle.setSelected(false);
+        // add all the option for the depends-on comboBox
         depenceComboBox.getItems().add(engine.Dependence.REQUIRED_FOR);
         depenceComboBox.getItems().add(engine.Dependence.DEPENDS_ON);
         depenceComboBox.setValue(engine.Dependence.DEPENDS_ON);
     }
+
+    /**
+     * manage the display run button
+     */
     public void setBinding(){
         ////// show destinationText only if toggleButtonPath is selected
         destinationText.opacityProperty().bind(
@@ -124,6 +128,10 @@ public class pathController {
         for (int i = 0 ; i< mainController.getObservableList().size();++i)
             configureCheckBox(mainController.getObservableList().get(i).getCheckBoxPath());
     }
+    /**
+     * configure checkBox - when it selects add to list, unselect remove from list
+     * @param checkBox
+     */
     private void configureCheckBox(CheckBox checkBox) {
 
         if (checkBox.isSelected()) {
@@ -144,6 +152,7 @@ public class pathController {
         });
     }
 
+///// manage the color
     public void changeButtonColor(String newColorString){
         setButton.setStyle(newColorString);
         runButton.setStyle(newColorString);
@@ -180,7 +189,6 @@ public class pathController {
         hbox1.setStyle(newColorString);
         hbox2.setStyle(newColorString);
     }
-
 ////// set on action button
     @FXML void setForRun(ActionEvent event) {
         int x = 0;
@@ -205,9 +213,12 @@ public class pathController {
             destinationText.setText(sourceText.getText());
             isDestinationSelected.set(true);
         }
-
-
     }
+
+    /**
+     * clear all checkBox
+     * @param event
+     */
     @FXML void clearAction(ActionEvent event) {
         ObservableList<targetTable> data = tableView.getItems();
         for (targetTable p : data)

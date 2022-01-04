@@ -7,6 +7,9 @@ import javafx.stage.Stage;
 
 import java.net.URL;
 
+/**
+ * show sum up information - how much target finish with success ...
+ */
 public class finishSumUp {
     public final static String TARGETINFO_FXML = "/FXML/task/processing/targetInformationTask.fxml";
     public finishSumUp(int skipped , int finishedSuccessfully , int finishedWarning ,  int finishedWithFailure) {

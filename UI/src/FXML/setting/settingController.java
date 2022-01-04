@@ -18,7 +18,6 @@ public class settingController {
             durationSpinner.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 1500, 350));
             ofOffButton.setSelected(true);
         }
-
     public void setMainController(mainAppController mainController) {
             this.mainController = mainController;
 
@@ -66,7 +65,12 @@ public class settingController {
                 }
             });
         }
+    /**
+     * @return true if the animation on-Off button was selected
+     */
     public boolean animation(){return ofOffButton.isSelected();}
+
+    // fxml member
     @FXML private HBox hbox;
     @FXML private VBox vbox;
     @FXML private ColorPicker backgroundColor;

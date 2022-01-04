@@ -26,6 +26,10 @@ public class tableController {
                                             directRequiredForTableCol, directDependsOnTableCol,
                                             totalRequiredForTableCol, totalDependsOnTableCol);
     }
+
+    /**
+     * show the table view
+     */
     public void show() {
         try {
             tableView.setItems(mainController.getObservableList());
@@ -46,6 +50,8 @@ public class tableController {
         }
         catch (Exception e){new errorMain(e);}
     }
+
+/// manage color
     public void changeTableColor(String newColorString){
         tableView.setStyle(newColorString);
         nameTableCol.setStyle(newColorString);
@@ -65,6 +71,7 @@ public class tableController {
         borderPaneTable.setStyle(newColorString);
         gridPaneTable.setStyle(newColorString);
     }
+
     ////// fxml member
     @FXML private TableView<targetTable> tableView;
     @FXML private TableColumn<targetTable, String> nameTableCol;
