@@ -196,6 +196,64 @@ public class engineImpl implements engine {
         }
     }
 
+    public synchronized void compile(boolean keepLastRun,String taskType,
+                                       int threadsNum,List<Target> targets
+                                        ,String dest,String src) throws Exception {
+        infoThreadList.clear();
+        startTime = System.currentTimeMillis();
+        taskRunning = true;
+        size = targets.size();
+        activateThreads = false;
+        stopThreads = false;
+        if (!loadFile)
+            throw new XmlNotLoad();
+        String path=openDir(taskType);
+        if(!keepLastRun){
+            for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all targets to waiting or frozen
+                if(targets.contains(e.getValue())) {
+                    if (e.getValue().getType() == Target.Type.LEAF || e.getValue().getType() == Target.Type.INDEPENDENTS) {
+                        e.getValue().SetStatus(Target.Status.Waiting);
+                        e.getValue().setStartWaitingTime(System.currentTimeMillis());
+                    }
+                    else {
+                        e.getValue().SetStatus(Target.Status.Frozen);
+                    }
+                    e.getValue().setNotSelected(false);
+                }
+                else{
+                    e.getValue().SetStatus(Target.Status.Frozen);
+                    e.getValue().setNotSelected(true);
+                }
+            }
+        }
+        else{
+            for(Map.Entry<String, Target> e : targetMap.entrySet()){//set all failed or skipped targets to waiting
+                if(targets.contains(e.getValue())) {
+                    if (e.getValue().getStatus() == Target.Status.Failure) {
+                        e.getValue().SetStatus(Target.Status.Waiting);
+                        e.getValue().setStartWaitingTime(System.currentTimeMillis());
+                    } else if (e.getValue().getStatus() == Target.Status.Skipped) {
+                        e.getValue().SetStatus(Target.Status.Frozen);
+                    }
+                    e.getValue().setNotSelected(false);
+                }
+                else{
+                    e.getValue().setNotSelected(true);
+                }
+            }
+        }
+        //now set variables for run
+        for(Map.Entry<String, Target> e : targetMap.entrySet()){
+            e.getValue().setPath(path);
+            e.getValue().setMap(targetMap);
+            e.getValue().setCompile(true);
+            e.getValue().setCompileDest(dest);
+            e.getValue().setSource(src);
+        }
+        setToWaiting();
+        run(threadsNum);
+
+    }
     public synchronized void taskSetUp(int time, boolean random, float success,
                                        float warning,boolean keepLastRun,String taskType,
                                        int threadsNum,List<Target> targets) throws Exception {
@@ -244,10 +302,6 @@ public class engineImpl implements engine {
                 }
             }
         }
-        //set up thread pool
-        ExecutorService threads = Executors.newFixedThreadPool(threadsNum);
-
-
         Random r = new Random();
         //now set variables for run
         for(Map.Entry<String, Target> e : targetMap.entrySet()){
@@ -263,7 +317,12 @@ public class engineImpl implements engine {
             e.getValue().setMap(targetMap);
         }
         setToWaiting();
-        //run on all targets
+        run(threadsNum);
+
+    }
+    private synchronized void run(int threadsNum)throws Exception{
+        //set up thread pool
+        ExecutorService threads = Executors.newFixedThreadPool(threadsNum);
         while(!taskDoneCheck()) {
             //might not work didnt check yet
             if(stopThreads&&!activateThreads){
@@ -313,7 +372,7 @@ public class engineImpl implements engine {
         activateThreads =true;
     }
 
-    //may need to split to 2 funcs because to task types
+
     private String openDir(String taskType) throws IOException {//doesnt have path yet,this func create directory for simulation task
         Path path=Paths.get(workingDirectory);
         Files.createDirectories(path);
