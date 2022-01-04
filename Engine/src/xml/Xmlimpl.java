@@ -43,18 +43,18 @@ public class Xmlimpl implements Xml {
                 Set<String> newSetRequiredFor = new HashSet<>();
 
                 if (p.getGPUPTargetDependencies() == null)
-                    newTarget = new Target(p.getName(), p.getGPUPUserData(), newSetDependency, newSetRequiredFor);
+                    newTarget = new Target(p.getName().toUpperCase(), p.getGPUPUserData(), newSetDependency, newSetRequiredFor);
 
                 else {
                     for (GPUPTargetDependencies.GPUGDependency p2 : p.getGPUPTargetDependencies().getGPUGDependency()) {
                         if (p2.getType().equals("dependsOn"))
-                            newSetDependency.add(p2.getValue());
+                            newSetDependency.add(p2.getValue().toUpperCase());
                         else if (p2.getType().equals("requiredFor"))
-                            newSetRequiredFor.add(p2.getValue());
+                            newSetRequiredFor.add(p2.getValue().toUpperCase());
                     }
-                    newTarget = new Target(p.getName(), p.getGPUPUserData(), newSetDependency, newSetRequiredFor);
+                    newTarget = new Target(p.getName().toUpperCase(), p.getGPUPUserData(), newSetDependency, newSetRequiredFor);
                 }
-                targetsMap.put(newTarget.getName(), newTarget);
+                targetsMap.put(newTarget.getName().toUpperCase(), newTarget);
             }
         }
  /* /// test :
@@ -90,20 +90,20 @@ public class Xmlimpl implements Xml {
         for (String targetKey: setOfKey) // organize all the map
         {
             // organize the RequiredFor of all target
-            for (String st2 : targetMap.get(targetKey).getSetDependsOn()) {
-                if (setOfKey.contains(st2)) { // check if the target is exists in the xml file
-                    if (!targetMap.get(st2).getSetDependsOn().contains(targetKey)) // check if there is a conflict
-                        targetMap.get(st2).addToSetRequiredFor(targetKey);
+            for (String st2 : targetMap.get(targetKey.toUpperCase()).getSetDependsOn()) {
+                if (setOfKey.contains(st2.toUpperCase())) { // check if the target is exists in the xml file
+                    if (!targetMap.get(st2.toUpperCase()).getSetDependsOn().contains(targetKey.toUpperCase())) // check if there is a conflict
+                        targetMap.get(st2.toUpperCase()).addToSetRequiredFor(targetKey.toUpperCase());
                     else throw new DependsOnConflict(targetKey,st2);
                 }
                 else
                     throw new TargetIsExists(st2);
             }
             // organize the DependsOn of all target
-            for (String st2 : targetMap.get(targetKey).getSetRequiredFor()) {
-                if (setOfKey.contains(st2)) { // check if the target is exists in the xml file
-                    if (!targetMap.get(st2).getSetRequiredFor().contains(targetKey)) // check if there is a conflict
-                        targetMap.get(st2).addToSetDependsOn(targetKey);
+            for (String st2 : targetMap.get(targetKey.toUpperCase()).getSetRequiredFor()) {
+                if (setOfKey.contains(st2.toUpperCase())) { // check if the target is exists in the xml file
+                    if (!targetMap.get(st2.toUpperCase()).getSetRequiredFor().contains(targetKey.toUpperCase())) // check if there is a conflict
+                        targetMap.get(st2.toUpperCase()).addToSetDependsOn(targetKey.toUpperCase());
                     else throw new RequiredForConflict(targetKey,st2);
                 }
                 else
@@ -143,11 +143,11 @@ public class Xmlimpl implements Xml {
                 for (int i = 0; i < targets.length(); i++) {
                     if (targets.charAt(i) != ',') {
                         t += targets.charAt(i);
-                        set.add(t);
+                        set.add(t.toUpperCase());
                         t = "";
                     }
                 }
-                serialSets.put(s.getName(), set);
+                serialSets.put(s.getName().toUpperCase(), set);
             }
         }
         return serialSets;

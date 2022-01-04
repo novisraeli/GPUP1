@@ -1,0 +1,37 @@
+<GPUP-Descriptor xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="G.P.U.P-V2.xsd">
+	<GPUP-Configuration>
+		<GPUP-Graph-Name>Test</GPUP-Graph-Name>
+		<GPUP-Working-Directory>c:\temp</GPUP-Working-Directory>
+		<GPUP-Max-Parallelism>4</GPUP-Max-Parallelism>
+	</GPUP-Configuration>
+	<GPUP-Serial-Sets>
+		<GPUP-Serial-set name="all" targets="a,b,c,d,e"/>
+	</GPUP-Serial-Sets>
+	<GPUP-Targets>
+		<GPUP-Target name="a">
+			<GPUP-User-Data>freeText</GPUP-User-Data>
+			<GPUP-Target-Dependencies>
+				<GPUG-Dependency type="requiredFor">d</GPUG-Dependency>
+			</GPUP-Target-Dependencies>			
+		</GPUP-Target>
+		<GPUP-Target name="b">
+			<GPUP-Target-Dependencies>
+				<GPUG-Dependency type="requiredFor">d</GPUG-Dependency>
+				<GPUG-Dependency type="requiredFor">e</GPUG-Dependency>
+			</GPUP-Target-Dependencies>
+		</GPUP-Target>
+		<GPUP-Target name="c">
+			<GPUP-User-Data>freeText</GPUP-User-Data>
+		</GPUP-Target>
+		<GPUP-Target name="d">
+			<GPUP-User-Data>freeText</GPUP-User-Data>
+		</GPUP-Target>
+		<GPUP-Target name="e">
+			<GPUP-User-Data>freeText</GPUP-User-Data>
+			<GPUP-Target-Dependencies>
+				<GPUG-Dependency type="dependsOn">d</GPUG-Dependency>
+				<GPUG-Dependency type="dependsOn">c</GPUG-Dependency>
+			</GPUP-Target-Dependencies>
+		</GPUP-Target>
+	</GPUP-Targets>
+</GPUP-Descriptor>

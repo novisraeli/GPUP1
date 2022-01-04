@@ -11,19 +11,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="commotion and fix when the compiler choose and folder but no target was chosen - undisplayed run button">
-      <change afterPath="$PROJECT_DIR$/Engine/src/target/Size.java" afterDir="false" />
+    <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="fix">
+      <change afterPath="$PROJECT_DIR$/UI/src/test/קבצי בדיקה/EX 2/עותק של ex2-full-serial-set.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/information/infoThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/information/infoThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/target/Target.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/target/Target.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/resourceutilization/resource utilization.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/resourceutilization/resource utilization.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/resourceutilization/resourceUtilizationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/resourceutilization/resourceUtilizationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/hs_err_pid6757.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/graph/graphController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/graph/graphController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoMain.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/Engine/target/Target.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/target/Target.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/xml/Xmlimpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/xml/Xmlimpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/main/mainAppController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/main/mainAppController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/processing/targetInfoMain.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/processing/targetInfoMain.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -239,19 +239,7 @@
       <workItem from="1640968570911" duration="6594000" />
       <workItem from="1641044746663" duration="1376000" />
       <workItem from="1641190706498" duration="29629000" />
-      <workItem from="1641296136050" duration="856000" />
-    </task>
-    <task id="LOCAL‎00014" summary="Merge remote-tracking branch 'origin/master'">
-      <created>1636553052358</created>
-      <option name="number" value="LOCAL‎00014" />
-      <option name="presentableId" value="LOCAL‎00014" />
-      <updated>1636553052358</updated>
-    </task>
-    <task id="LOCAL‎00015" summary="bar tsukerberg">
-      <created>1636558070597</created>
-      <option name="number" value="LOCAL‎00015" />
-      <option name="presentableId" value="LOCAL‎00015" />
-      <updated>1636558070597</updated>
+      <workItem from="1641296136050" duration="3915000" />
     </task>
     <task id="LOCAL‎00016" summary="bar tsukerberg">
       <created>1636558504677</created>
@@ -537,7 +525,19 @@
       <option name="presentableId" value="LOCAL‎00062" />
       <updated>1641293054935</updated>
     </task>
-    <option name="localTasksCounter" value="63" />
+    <task id="LOCAL‎00063" summary="fix">
+      <created>1641299494390</created>
+      <option name="number" value="LOCAL‎00063" />
+      <option name="presentableId" value="LOCAL‎00063" />
+      <updated>1641299494390</updated>
+    </task>
+    <task id="LOCAL‎00064" summary="fix">
+      <created>1641299628874</created>
+      <option name="number" value="LOCAL‎00064" />
+      <option name="presentableId" value="LOCAL‎00064" />
+      <updated>1641299628874</updated>
+    </task>
+    <option name="localTasksCounter" value="65" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -640,7 +640,8 @@
     <MESSAGE value="fix display run button" />
     <MESSAGE value="commotion" />
     <MESSAGE value="commotion and fix when the compiler choose and folder but no target was chosen - undisplayed run button" />
-    <option name="LAST_COMMIT_MESSAGE" value="commotion and fix when the compiler choose and folder but no target was chosen - undisplayed run button" />
+    <MESSAGE value="fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -666,7 +667,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/graph/graphController.java</url>
-          <line>49</line>
+          <line>52</line>
           <option name="timeStamp" value="262" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -686,13 +687,58 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
-          <line>406</line>
+          <line>421</line>
           <option name="timeStamp" value="382" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
-          <line>382</line>
+          <line>397</line>
           <option name="timeStamp" value="383" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/FXML/error/errorMain.java</url>
+          <line>18</line>
+          <option name="timeStamp" value="384" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/FXML/error/errorMain.java</url>
+          <line>19</line>
+          <option name="timeStamp" value="385" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/FXML/error/errorMain.java</url>
+          <line>20</line>
+          <option name="timeStamp" value="386" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/UI/src/FXML/error/errorMain.java</url>
+          <line>21</line>
+          <option name="timeStamp" value="387" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java</url>
+          <line>222</line>
+          <option name="timeStamp" value="389" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java</url>
+          <line>223</line>
+          <option name="timeStamp" value="390" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java</url>
+          <line>34</line>
+          <option name="timeStamp" value="392" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java</url>
+          <line>87</line>
+          <option name="timeStamp" value="398" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java</url>
+          <line>92</line>
+          <option name="timeStamp" value="399" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Engine/src/information/TargetInformation.java</url>

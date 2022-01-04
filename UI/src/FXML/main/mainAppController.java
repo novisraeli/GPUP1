@@ -33,7 +33,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-
 public class mainAppController {
     private final List<Rectangle> recList = new ArrayList<>();                                  /// shape for
     private int time = 350;                                                                     /// time for animation

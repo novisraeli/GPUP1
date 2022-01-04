@@ -21,7 +21,7 @@ public class targetInfoMain {
             URL url = getClass().getResource(TARGETINFO_FXML);
             fxmlLoader.setLocation(url);
             Parent root = fxmlLoader.load(url.openStream());
-            Scene scene = new Scene(root, 400, 200);
+            Scene scene = new Scene(root, 400, 300);
             primaryStage.setScene(scene);
             primaryStage.show();
             targetInfoTaskController controller = fxmlLoader.getController();

@@ -220,12 +220,12 @@ public class engineImpl implements engine {
     @Override public Map<String, Target> getMap(){return targetMap;}
     @Override public void whatIf(String target, List<String>  newList, Dependence dependence) {
         Set<String> tOneSet;
-        if (!newList.contains(target)) {
-            newList.add(target);
+        if (!newList.contains(target.toUpperCase())) {
+            newList.add(target.toUpperCase());
             if (Dependence.DEPENDS_ON == dependence)
-                tOneSet = targetMap.get(target).getSetDependsOn();
+                tOneSet = targetMap.get(target.toUpperCase()).getSetDependsOn();
             else
-                tOneSet = targetMap.get(target).getSetRequiredFor();
+                tOneSet = targetMap.get(target.toUpperCase()).getSetRequiredFor();
 
             if (tOneSet.size() != 0) {
                 for (String st2 : tOneSet) {
@@ -236,9 +236,9 @@ public class engineImpl implements engine {
     }
     private boolean checkSerialSets(String t){
         for (Set<String> set:serialSets.values()){
-            if(set.contains(t)){
+            if(set.contains(t.toUpperCase())){
                 for(String s : set){
-                    if(targetMap.get(s).getIsInQueue()&&!s.equals(t)){
+                    if(targetMap.get(s).getIsInQueue()&&!s.equals(t.toUpperCase())){
                         return false;
                     }
                 }

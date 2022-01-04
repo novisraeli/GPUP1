@@ -22,14 +22,17 @@ public class graphController {
     @FXML private ImageView imageView;
     @FXML private TextField nameOfFile;
     @FXML private HBox hbox;
-
+    @FXML public void initialize() {
+    }
     /**
      * choose directory from DirectoryChooser for the image and the viz doc and run graphviz
      * @param event
      */
     @FXML void loadFileButton(ActionEvent event) {
-        File selectedDirectory = new DirectoryChooser().showDialog(new Stage());
-        changeBackgroundGraph(selectedDirectory.getAbsolutePath());
+        if (!nameOfFile.getText().equals("")) {
+            File selectedDirectory = new DirectoryChooser().showDialog(new Stage());
+            changeBackgroundGraph(selectedDirectory.getAbsolutePath());
+        }
     }
 
     /**
