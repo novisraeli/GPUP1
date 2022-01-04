@@ -31,7 +31,7 @@ public class engineImpl implements engine {
     private boolean taskRunning = false;
     private ArrayList<infoThread> infoThreadList  = new ArrayList<>();
     private long startTime;
-    private int queueSize;
+    ExecutorService threads;
 
     /**
      * @return list of all the information on target that add to the thread pool
@@ -455,7 +455,7 @@ public class engineImpl implements engine {
     private synchronized void run(int threadsNum)throws Exception{
         //set up thread pool
         List<Runnable>t=new ArrayList<>();
-        ExecutorService threads = Executors.newFixedThreadPool(threadsNum);
+        threads = Executors.newFixedThreadPool(threadsNum);
         while(!taskDoneCheck()) {
             if(stopThreads&&!activateThreads){
                 threads.shutdown();
@@ -465,7 +465,7 @@ public class engineImpl implements engine {
                 taskRunning = false;
             }
             else if(activateThreads&&!stopThreads){
-                threads=Executors.newFixedThreadPool(threadsNum);
+                threads = Executors.newFixedThreadPool(threadsNum);
                 for(Map.Entry<String, Target> e : targetMap.entrySet()){
                    if(e.getValue().getIsInQueue()){
                        e.getValue().setIsInQueue(false);
@@ -489,7 +489,12 @@ public class engineImpl implements engine {
         }
         //if we got here the there is not more waiting targets
         taskRunning = false;
-        threads.shutdown();
+        //threads.shutdown();
+        threadSthutdown();
+    }
+    public void threadSthutdown(){
+        if (threads != null)
+            threads.shutdown();
     }
     public String getTimeFromStart(){
         long temp= System.currentTimeMillis()-startTime;

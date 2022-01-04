@@ -37,5 +37,5 @@ public interface engine{
     void compile(boolean keepLastRun,String taskType,
                                      int threadsNum,List<Target> targets
             ,String dest,String src) throws Exception;
-
+    void threadSthutdown();
     }

@@ -54,7 +54,6 @@ public class taskController {
         clickOnRow();
         runButton.setDisable(true);
         numCheckBoxesSelected.addListener((obs, oldSelectedCount, newSelectedCount) -> displayRunButton());
-
         simulationBox.disableProperty().bind(isCompiler);
         compilerBox.disableProperty().bind(isCompiler.not());
         isCompiler.addListener((obs, oldSelectedCount, newSelectedCount) -> {
@@ -77,7 +76,7 @@ public class taskController {
             }
         });
         pauseButton.disableProperty().bind(runTask.not());
-        resumeButton.disableProperty().bind(runTask.not());
+        resumeButton.setDisable(true);
     }
 /// set all the details to run this task pane
     private void configureCheckBoxTask(CheckBox checkBox) {
@@ -331,11 +330,11 @@ public class taskController {
     @FXML void pauseTask(ActionEvent event) {
 
         try {
-
+            resumeButton.setDisable(false);
             isPauseSelected.setValue(true);
             isRunSelected.setValue(false);
             mainController.getEngine().stopThreads();
-            System.out.println(thread.getName()+thread.isAlive());
+            messageText.setText("Pause Task");
         }
         catch (Exception e){
 
@@ -347,7 +346,7 @@ public class taskController {
             isPauseSelected.setValue(false);
             isRunSelected.setValue(true);
             mainController.getEngine().activateThreads();
-            System.out.println(thread.getName()+thread.isAlive());
+            messageText.setText("In Progress");
         }
         catch (Exception e){
 
@@ -378,7 +377,7 @@ public class taskController {
         isRunSelected.setValue(true);
         isPauseSelected.setValue(false);
         runTask.set(true);
-        messageText.setText("in Progress");
+        messageText.setText("In Progress");
         progressBarTask.setProgress(0);
         typeOfRunningText.setText(scratchOrIncremental.getValue());
     }
