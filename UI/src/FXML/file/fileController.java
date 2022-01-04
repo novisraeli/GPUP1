@@ -12,6 +12,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import target.Target;
 import target.targetTable;
+import xml.XmlException;
+import xml.XmlNotLoad;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -62,13 +65,16 @@ public class fileController {
     @FXML void loadFileButton(ActionEvent event) {
         try{
             File file = new FileChooser().showOpenDialog(new Stage());
-            mainController.getEngine().loadFile(file.getPath());
-            addDataToTable();
-            mainController.showTable();
-            mainController.setTreadsSpinner();
-            mainController.fileAnimation();
-            mainController.isFileSelected().set(true);
-            mainController.change().set(true);
+            if (file != null) {
+                mainController.getEngine().loadFile(file.getPath());
+                addDataToTable();
+                mainController.showTable();
+                mainController.setTreadsSpinner();
+                mainController.fileAnimation();
+                mainController.isFileSelected().set(true);
+                mainController.change().set(true);
+            }
+            else {new errorMain(new XmlException("You have not selected any file"));}
         }
         catch (Exception e) {
             new errorMain(e);
