@@ -462,8 +462,7 @@ public class engineImpl implements engine {
                 System.out.println("before wait");
                 threads.shutdown();
                 threads.awaitTermination(1, TimeUnit.NANOSECONDS);
-                t=threads.shutdownNow();
-
+                threads.shutdownNow();
                 System.out.println("after wait");
                 stopThreads=false;
                 taskRunning = false;
@@ -471,9 +470,10 @@ public class engineImpl implements engine {
             else if(activateThreads&&!stopThreads){
                 System.out.println("here");
                 threads=Executors.newFixedThreadPool(threadsNum);
-                for(Runnable tar:t){
-
-                    threads.execute((Target)tar);
+                for(Map.Entry<String, Target> e : targetMap.entrySet()){
+                   if(e.getValue().getIsInQueue()){
+                       e.getValue().setIsInQueue(false);
+                   }
                 }
                 activateThreads=false;
                 taskRunning = true;
