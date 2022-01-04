@@ -375,10 +375,10 @@ public class taskController {
     }
     public void displayRunButton(){
         if (compilerToggle.isSelected()) {
-            if  (sourceFolderText.getText().equals("") && targetFolderText.getText().equals(""))
-                runButton.setDisable(false);
-            else
+            if  (sourceFolderText.getText().equals("") || targetFolderText.getText().equals(""))
                 runButton.setDisable(true);
+            else
+                runButton.setDisable(false);
         }
         else if (selectedCheckBoxes.size() != 0)
             runButton.setDisable(false);
