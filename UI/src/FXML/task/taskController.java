@@ -1,9 +1,11 @@
 package FXML.task;
 import FXML.error.errorMain;
 import FXML.main.mainAppController;
+import FXML.resourceutilization.resourceUtilizationMain;
 import FXML.task.processing.finishSumUp;
 import FXML.task.processing.targetInfoMain;
 import engine.engine;
+import information.infoThread;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.IntegerBinding;
@@ -22,6 +24,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.Stage;
+import sun.awt.windows.ThemeReader;
 import target.Target;
 import target.targetTable;
 
@@ -30,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-///
+
 public class taskController {
     private SimpleBooleanProperty runTask;
     private mainAppController mainController;
@@ -40,9 +43,9 @@ public class taskController {
     private SimpleBooleanProperty isCompiler;
     private ObservableSet<CheckBox> selectedCheckBoxes = FXCollections.observableSet();
     private IntegerBinding numCheckBoxesSelected = Bindings.size(selectedCheckBoxes);
-    private boolean bar = false;
     private Thread update;
     private Thread thread;
+    private boolean showFinish;
 
     public taskController(){
         isRunSelected = new SimpleBooleanProperty(false);
@@ -76,7 +79,7 @@ public class taskController {
             if (newSelectedCount){
                 ObservableList<targetTable> data = tableView.getItems();
                 for (targetTable p : data)
-                        p.getCheckBoxTask().setSelected(true);
+                    p.getCheckBoxTask().setSelected(true);
             }
         });
         pauseButton.disableProperty().bind(runTask.not());
@@ -94,7 +97,7 @@ public class taskController {
                 if (withRequired.isSelected())
                     getAllTargetWith(engine.Dependence.REQUIRED_FOR);
             }
-             else
+            else
                 selectedCheckBoxes.remove(checkBox);
         });
     }
@@ -105,27 +108,27 @@ public class taskController {
         setSpinner();
     }
     public void show() {
-        tableView.setItems(mainController.observableListTask());
-        for (int i = 0 ; i< mainController.observableListTask().size();++i)
-            configureCheckBoxTask(mainController.observableListTask().get(i).getCheckBoxTask());
+        tableView.setItems(mainController.getObservableListTask());
+        for (int i = 0 ; i< mainController.getObservableListTask().size();++i)
+            configureCheckBoxTask(mainController.getObservableListTask().get(i).getCheckBoxTask());
     }
     public void getAllTargetWith(engine.Dependence d ){
         List<String> newList = new ArrayList();
-            try{
-                for (int i = 0 ; i < mainController.observableListTask().size();++i) {
-                    if (mainController.observableListTask().get(i).getCheckBoxTask().isSelected()) {
-                        mainController.getEngine().whatIf(mainController.observableListTask().get(i).getName(), newList, d);
-                        for (int k = 0; k < mainController.observableListTask().size(); ++k)
-                            if (newList.contains(mainController.observableListTask().get(k).getName())) {
-                                mainController.observableListTask().get(k).getCheckBoxTask().setSelected(true);
-                            }
-                    }
+        try{
+            for (int i = 0 ; i < mainController.getObservableListTask().size();++i) {
+                if (mainController.getObservableListTask().get(i).getCheckBoxTask().isSelected()) {
+                    mainController.getEngine().whatIf(mainController.getObservableListTask().get(i).getName(), newList, d);
+                    for (int k = 0; k < mainController.getObservableListTask().size(); ++k)
+                        if (newList.contains(mainController.getObservableListTask().get(k).getName())) {
+                            mainController.getObservableListTask().get(k).getCheckBoxTask().setSelected(true);
+                        }
                 }
             }
+        }
 
-            catch (Exception e){
-                new errorMain(e);
-            }
+        catch (Exception e){
+            new errorMain(e);
+        }
     }
     public void setTableCol(){
         mainController.setGeneralTableCol(nameTableCol, typeTableCol, dataTableCol, serialSetTableCol,
@@ -271,19 +274,37 @@ public class taskController {
                 p.getCheckBoxTask().setSelected(false);
         }
     }
-   //////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////
     @FXML void resumeTask(ActionEvent event) {
         isPauseSelected.setValue(false);
         isRunSelected.setValue(true);
         mainController.getEngine().activateThreads();
-        messageText.setText("Resume Task");
+        threadForUpdateInformation();
     }
-    public void updateInformationThread(){
+    public void updateInformationThreadSumUp(){
+        long time = 0;
+        ObservableList<infoThread> infoThreadListIN = FXCollections.observableArrayList();
+        ObservableList<infoThread> infoThreadListOUT = FXCollections.observableArrayList();
+        for(infoThread t:mainController.getEngine().getInfoThreadList()) {
+            infoThreadListIN.add(t);
+            time = t.getTimeAbsolut();
+        }
+        ///infoThreadList.add(new infoThread(infoThread.InOrOut.IN, startTime ,getTimeFromStart() ,threadsNum-workingThreads));
+        for(String st : mainController.getEngine().getMap().keySet()) {
+            infoThread f = mainController.getEngine().getMap().get(st).getInfoThread();
+
+            infoThread newInfo = new infoThread(infoThread.InOrOut.OUT,time,makeTimeString(time,f.getCurrTime()),f.getFreeThread());
+            infoThreadListOUT.add(newInfo);
+        }
+
+        infoThreadListIN.addAll(infoThreadListOUT);
+        new resourceUtilizationMain(infoThreadListIN);
     }
     //////////////////////////////////////////////////////////////////////////////////
     @FXML void runTask(ActionEvent event) {
         try{
-            boolean fromScratch = scratchOrIncremental.getValue().equals("scratch");
+            showFinish =false;
+            boolean fromScratch = scratchOrIncremental.getValue().equals("scratch");;
             List<Target> targetsToRun=new ArrayList<>();
             for(targetTable t:tableView.getItems()){
                 if(t.getCheckBoxTask().isSelected()){
@@ -291,14 +312,14 @@ public class taskController {
                 }
             }
             if(simulationToggle.isSelected()) {
-                 thread = new Thread("runSimulation"){
+                thread = new Thread("runSimulation"){
                     public void run(){
                         try{
                             mainController.getEngine().taskSetUp(ProcessingTimeSpinner.getValue(),
-                            randomCheckBox.isSelected(), (float) successSpinner.getValue()/100, (float)successWithWarningSpinner.getValue()/100, fromScratch, "Simulation", numOfTreadsSpinner.getValue(), targetsToRun);
+                                    randomCheckBox.isSelected(), (float) successSpinner.getValue()/100, (float)successWithWarningSpinner.getValue()/100, fromScratch, null, numOfTreadsSpinner.getValue(), targetsToRun);
                         }
                         catch (Exception e){new errorMain(e);}
-                }
+                    }
                 };
                 thread.start();
                 threadForUpdateInformation();
@@ -307,7 +328,7 @@ public class taskController {
                 thread = new Thread("runCompiler"){
                     public void run(){
                         try{
-                            //here should be
+                            //   mainController.getEngine()
                         }
                         catch (Exception e){new errorMain(e);}
                     }
@@ -316,15 +337,25 @@ public class taskController {
                 threadForUpdateInformation();
             }
 
-         }
+        }
         catch (Exception e){new errorMain(e);}
+    }
+
+    public String makeTimeString(long timeFromStart,long curr ){
+        long temp= curr-timeFromStart;
+        long millis = temp % 1000;
+        long second = (temp / 1000) % 60;
+        long minute = (temp / (1000 * 60)) % 60;
+        long hour = (temp / (1000 * 60 * 60)) % 24;
+        String Time = String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
+        return Time;
     }
     public void threadForUpdateInformation(){
         update = new Thread("update"){
             public void run(){
                 sleepForSomeTime();
                 Platform.runLater(()->updateStartTask());
-                while (mainController.getEngine().getPrecentageDone() != 1 && thread.isAlive()) {
+                while (mainController.getEngine().getPrecentageDone() != 1 && mainController.getEngine().getIsTaskRunning()) {
                     sleepForSomeTime();
                     Platform.runLater(()->updateInformation(mainController.getEngine().getPrecentageDone()));
                 }
@@ -363,10 +394,12 @@ public class taskController {
     public void updateInformation(Double x){
         refreshTable();
         progressBarTask.setProgress(x);
-        if (x == 1)
+        if (x == 1 && !showFinish)
             finish();
     }
     public void finish(){
+        showFinish = true;
+        updateInformationThreadSumUp();
         runTask.set(false);
         messageText.setText("Done");
         ///////////
@@ -376,14 +409,14 @@ public class taskController {
         int finishedWithFailure = 0;
         for(String st : mainController.getEngine().getMap().keySet()){
             Target t = mainController.getEngine().getMap().get(st);
-           if (t.getStatus() == Target.Status.Success)
-               finishedSuccessfully ++;
-           else if (t.getStatus() == Target.Status.Failure)
-               finishedWithFailure ++;
-           else if (t.getStatus() == Target.Status.Warning)
-               finishedWarning ++;
-           else if (t.getStatus() == Target.Status.Skipped)
-               skipped ++;
+            if (t.getStatus() == Target.Status.Success)
+                finishedSuccessfully ++;
+            else if (t.getStatus() == Target.Status.Failure)
+                finishedWithFailure ++;
+            else if (t.getStatus() == Target.Status.Warning)
+                finishedWarning ++;
+            else if (t.getStatus() == Target.Status.Skipped)
+                skipped ++;
         }
 
         new finishSumUp(skipped, finishedSuccessfully, finishedWarning, finishedWithFailure);
@@ -478,7 +511,7 @@ public class taskController {
     @FXML private VBox vbox3;
     @FXML private VBox vbox4;
     @FXML private VBox progressTaskBox;
-////
+    ////
     @FXML private CheckBox selectAll;
     @FXML private Button sourceFolderChooser;
     @FXML private Button targetFolderChooser;

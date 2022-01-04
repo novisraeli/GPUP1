@@ -27,7 +27,7 @@ public class fileController {
      */
     public void addDataToTable() {
         try {
-            mainController.observableList().clear();
+            mainController.getObservableList().clear();
             Map<String, Target> map = mainController.getEngine().getMap();
             for (String keys : map.keySet()) {
                 targetTable t = new targetTable(map.get(keys));
@@ -41,7 +41,7 @@ public class fileController {
 
                 t.setSerialSetTableCol(mainController.getEngine().getAllSerialSetsWithYou(t.getName()).size());
 
-                mainController.observableList().add(t);
+                mainController.getObservableList().add(t);
             }
 
         }

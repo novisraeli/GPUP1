@@ -28,7 +28,7 @@ public class tableController {
     }
     public void show() {
         try {
-            tableView.setItems(mainController.observableList());
+            tableView.setItems(mainController.getObservableList());
             GraphInformation info =  mainController.getEngine().targetsInFormation();
             targetNumberText.setText(info.getAmountOfTargets());
             middleNumberText.setText(info.getMiddle());

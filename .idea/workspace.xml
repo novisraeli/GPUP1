@@ -13,15 +13,16 @@
   <component name="ChangeListManager">
     <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="bar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/FXML/file/fileController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/file/fileController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/FXML/graph/graphController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/graph/graphController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/path/pathController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/path/pathController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UI/src/FXML/table/tableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/table/tableController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/target/Target.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/target/Target.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/file/fileController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/file/fileController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/main/mainAppController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/main/mainAppController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/path/pathController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/path/pathController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/table/tableController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/table/tableController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" afterDir="false" />
     </list>
@@ -238,12 +239,6 @@
       <workItem from="1640968570911" duration="6594000" />
       <workItem from="1641044746663" duration="1376000" />
       <workItem from="1641190706498" duration="29629000" />
-    </task>
-    <task id="LOCAL‎00008" summary="Merge remote-tracking branch 'origin/master'">
-      <created>1636549521300</created>
-      <option name="number" value="LOCAL‎00008" />
-      <option name="presentableId" value="LOCAL‎00008" />
-      <updated>1636549521300</updated>
     </task>
     <task id="LOCAL‎00009" summary="Merge remote-tracking branch 'origin/master'">
       <created>1636550827160</created>
@@ -535,7 +530,13 @@
       <option name="presentableId" value="LOCAL‎00056" />
       <updated>1641232150432</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL‎00057" summary="bar">
+      <created>1641287951748</created>
+      <option name="number" value="LOCAL‎00057" />
+      <option name="presentableId" value="LOCAL‎00057" />
+      <updated>1641287951748</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -661,12 +662,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/graph/graphController.java</url>
-          <line>43</line>
+          <line>49</line>
           <option name="timeStamp" value="262" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
-          <line>429</line>
+          <line>462</line>
           <option name="timeStamp" value="322" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
@@ -681,17 +682,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
-          <line>275</line>
+          <line>278</line>
           <option name="timeStamp" value="366" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
-          <line>284</line>
+          <line>304</line>
           <option name="timeStamp" value="369" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
-          <line>281</line>
+          <line>301</line>
           <option name="timeStamp" value="376" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">

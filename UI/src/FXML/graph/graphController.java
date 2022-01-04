@@ -24,13 +24,19 @@ public class graphController {
     @FXML private HBox hbox;
 
     /**
-     * choose directory from
+     * choose directory from DirectoryChooser for the image and the viz doc and run graphviz
      * @param event
      */
     @FXML void loadFileButton(ActionEvent event) {
         File selectedDirectory = new DirectoryChooser().showDialog(new Stage());
         changeBackgroundGraph(selectedDirectory.getAbsolutePath());
     }
+
+    /**
+     *
+     * @param pathTemp
+     * @return viz file that contain
+     */
     public File createDotGraph(String pathTemp) {
         GraphViz gv = new GraphViz(pathTemp + "/", nameOfFile.getText());
         String dotFormat = gv.makeDotFormat(mainController.getEngine().getMap() , mainController.getEngine().getSerialSets());

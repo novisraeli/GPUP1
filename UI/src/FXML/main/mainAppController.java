@@ -35,14 +35,14 @@ import java.util.List;
 
 
 public class mainAppController {
-    private final List<Rectangle> recList = new ArrayList<>();
+    private final List<Rectangle> recList = new ArrayList<>();  /// shape for
     private int time = 350;
     private String toggleColor = "-fx-background-color: linear-gradient(#2A5058, #61a2b1)";
     private final engine engine = new engineImpl();
     private final SimpleBooleanProperty isFileSelected;
     private final SimpleBooleanProperty  changeFile;
-    private ObservableList<targetTable> items = FXCollections.observableArrayList();
-    private ObservableList<targetTable> taskItem = FXCollections.observableArrayList();
+    private ObservableList<targetTable> items = FXCollections.observableArrayList(); // list for table and path
+    private ObservableList<targetTable> taskItem = FXCollections.observableArrayList();// list for task
 
     public mainAppController() {
         isFileSelected = new SimpleBooleanProperty(false);
@@ -65,12 +65,17 @@ public class mainAppController {
     public SimpleBooleanProperty change(){
         return changeFile;
     }
-    public ObservableList<targetTable> observableList(){
+
+    public ObservableList<targetTable> getObservableList(){
         return items;
     }
-    public ObservableList<targetTable> observableListTask(){
+    public ObservableList<targetTable> getObservableListTask(){
         return taskItem;
     }
+    public void setObservableListTask( ObservableList<targetTable> taskItem) {
+        this.taskItem = taskItem;
+    }
+
     public static void setGeneralTableCol(TableColumn<targetTable,String> nameTableCol,
                                           TableColumn<targetTable, Target.Type> typeTableCol,
                                           TableColumn<targetTable, String> dataTableCol,
@@ -117,54 +122,12 @@ public class mainAppController {
         taskTab.disableProperty().bind(isFileSelected.not());
         treeViewTab.disableProperty().bind(isFileSelected.not());
     }
-    public void changeTabColor(Color newColor){
-        String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
-       // -fx-background-color: rgba(170, 170, 170, 204);
-        tableTab.setStyle(newColorString);
-        graphTab.setStyle(newColorString);
-        pathTab.setStyle(newColorString);
-        taskTab.setStyle(newColorString);
-        fileTab.setStyle(newColorString);
-        settingTab.setStyle(newColorString);
-        treeViewTab.setStyle(newColorString);
-    }
-    public void changeButtonColor(Color newColor){
-        String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
-        fileComponentController.changeButtonColor(newColorString);
-        pathComponentController.changeButtonColor(newColorString);
-        taskComponentController.changeButtonColor(newColorString);
-    }
-    public void changeToggleColor(){
-        pathComponentController.changeToggleColor();
-        taskComponentController.changeToggleColor();
-    }
-    public void changeComboBoxColor(Color newColor){
-        String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
-        pathComponentController.changeComboBoxColor(newColorString);
-        taskComponentController.changeComboBoxColor(newColorString);
-    }
-    public void changeTableColor(Color newColor) {
-        String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
-        pathComponentController.changeTableColor(newColorString);
-        tableComponentController.changeTableColor(newColorString);
-        taskComponentController.changeTableColor(newColorString);
-    }
-    public void changeBackgroundColor(Color newColor) {
-        String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
-        pathComponentController.changeBackgroundColor(newColorString);
-        tableComponentController.changeBackgroundColor(newColorString);
-        taskComponentController.changeBackgroundColor(newColorString);
-        treeViewComponentController.changeBackgroundColor(newColorString);
-        pathComponentController.changeBackgroundColor(newColorString);
-        graphComponentController.changeBackgroundColor(newColorString);
-    }
     public void setTreadsSpinner() {
         taskComponentController.setTreadsSpinner();
     }
     public void setToggleColor(String toggleColor){this.toggleColor = toggleColor;}
-    public String getToggleColor(){return toggleColor;}
     public void setTime(int time){this.time = time;}
-
+    //////////// Animation
     @FXML public void fileTabSelected(){
         TranslateTransition openNav;
         openNav = new TranslateTransition(new Duration(time), fileComponent);
@@ -253,7 +216,49 @@ public class mainAppController {
         });
         return rectPath;
     }
-
+    //////////// change color
+    public void changeTabColor(Color newColor){
+        String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
+        // -fx-background-color: rgba(170, 170, 170, 204);
+        tableTab.setStyle(newColorString);
+        graphTab.setStyle(newColorString);
+        pathTab.setStyle(newColorString);
+        taskTab.setStyle(newColorString);
+        fileTab.setStyle(newColorString);
+        settingTab.setStyle(newColorString);
+        treeViewTab.setStyle(newColorString);
+    }
+    public void changeButtonColor(Color newColor){
+        String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
+        fileComponentController.changeButtonColor(newColorString);
+        pathComponentController.changeButtonColor(newColorString);
+        taskComponentController.changeButtonColor(newColorString);
+    }
+    public void changeToggleColor(){
+        pathComponentController.changeToggleColor();
+        taskComponentController.changeToggleColor();
+    }
+    public void changeComboBoxColor(Color newColor){
+        String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
+        pathComponentController.changeComboBoxColor(newColorString);
+        taskComponentController.changeComboBoxColor(newColorString);
+    }
+    public void changeTableColor(Color newColor) {
+        String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
+        pathComponentController.changeTableColor(newColorString);
+        tableComponentController.changeTableColor(newColorString);
+        taskComponentController.changeTableColor(newColorString);
+    }
+    public void changeBackgroundColor(Color newColor) {
+        String newColorString = "-fx-background-color: rgb(" + newColor.getRed()*255 + "," +  newColor.getGreen()*255 +"," +  newColor.getBlue()*255 +")";
+        pathComponentController.changeBackgroundColor(newColorString);
+        tableComponentController.changeBackgroundColor(newColorString);
+        taskComponentController.changeBackgroundColor(newColorString);
+        treeViewComponentController.changeBackgroundColor(newColorString);
+        pathComponentController.changeBackgroundColor(newColorString);
+        graphComponentController.changeBackgroundColor(newColorString);
+    }
+    public String getToggleColor(){return toggleColor;}
     /// tab fxml
     @FXML private AnchorPane settingAnchorPane;
     @FXML private AnchorPane graphAnchorPane;
@@ -279,9 +284,5 @@ public class mainAppController {
     @FXML private treeViewController treeViewComponentController;
     @FXML private BorderPane graphComponent;
     @FXML private graphController graphComponentController;
-
-    public void setObservableListTask( ObservableList<targetTable> taskItem) {
-        this.taskItem = taskItem;
-    }
 }
 
