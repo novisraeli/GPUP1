@@ -264,7 +264,7 @@ public class engineImpl implements engine {
         }
         setToWaiting();
         //run on all targets
-        while(!taskDoneCheck() && jxb.isAlive()) {
+        while(!taskDoneCheck()) {
             //might not work didnt check yet
             if(stopThreads&&!activateThreads){
                 threads.wait();
@@ -302,6 +302,7 @@ public class engineImpl implements engine {
     }
     public boolean getIsTaskRunning(){return taskRunning;}
 
+    }
 
     @Override
     public void stopThreads() {
@@ -312,7 +313,6 @@ public class engineImpl implements engine {
     public void activateThreads(){
         stopThreads=false;
         activateThreads =true;
-
     }
 
     //may need to split to 2 funcs because to task types
@@ -456,7 +456,8 @@ public class engineImpl implements engine {
         workingThreads++;
     }
     public static synchronized void decrementWorkingThreads(){
-        workingThreads--;}
+        workingThreads--;
+    }
     private synchronized void setToWaiting() {
         boolean check=true;
 

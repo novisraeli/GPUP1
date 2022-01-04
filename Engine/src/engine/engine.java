@@ -17,6 +17,7 @@ public interface engine{
     GraphInformation targetsInFormation() throws Exception ;
     Information specificTargetInformation(String name) throws Exception;
     Information findAPathBetweenTwoTargets(String t1,String t2 , Dependence d) throws Exception;
+    List<Information> runTask(int time, boolean random, float success, float warning,boolean keepLastRun) throws Exception;
     Information circuitDetection(String name)throws Exception;
     void writeTargetsAndInformationToTextFile(String path)throws Exception;
     void readTargetsAndInformationToTextFile(String path) throws Exception;
@@ -26,7 +27,7 @@ public interface engine{
     Map<String,Set<String>> getAllSerialSetsWithYou(String t);
     int getMaxThreads();
     String getWorkingDirectory();
-    void taskSetUp(int time, boolean random, float success, float warning,boolean keepLastRun,String taskType,int threadsNum,List<Target> targets,Thread jxb) throws Exception;
+    void taskSetUp(int time, boolean random, float success, float warning,boolean keepLastRun,String taskType,int threadsNum,List<Target> targets) throws Exception;
     void stopThreads();
     void activateThreads();
     double getPrecentageDone();

@@ -32,6 +32,10 @@ public class Target implements Serializable,Runnable
     private long startWaitingTime;
     private String waitingTime;
     private String failReason;
+    private boolean notSelected;
+    private boolean compile=false;
+    private String compileDest;
+    private String source;
     private Boolean notSelected;
     private infoThread infor;
     /** ctor */
@@ -104,6 +108,20 @@ public class Target implements Serializable,Runnable
 
     public void SetUserData(String s){this.userData = s;}
 
+    public String getCompileDest() {
+        return compileDest;
+    }
+
+    public void setCompileDest(String compileDest) {
+        this.compileDest = compileDest;
+    }
+    public String getSource() {
+        return source;
+    }
+
+    public void setSource(String source) {
+        this.compileDest = source;
+    }
     public void setMap(Map<String, Target> t){
         targetMap=t;
     }
@@ -147,8 +165,12 @@ public class Target implements Serializable,Runnable
     public synchronized void setIsRunning(boolean b){
         isRunning=b;
     }
-
-
+    public void setCompile(boolean b){
+        compile=b;
+    }
+    public boolean getCompile(){
+        return compile;
+    }
     public synchronized String getWaitingTime(){
         long temp= System.currentTimeMillis()-startWaitingTime;
         long millis = temp % 1000;
@@ -278,70 +300,134 @@ public class Target implements Serializable,Runnable
     public void run(){
         engineImpl.incrementWorkingThreads();
         isRunning=true;
-        try{
-            if(!this.setDependsOn.isEmpty()){
-                for(String s:setDependsOn){
-                    if((targetMap.get(s).getStatus()==Status.Waiting||targetMap.get(s).getStatus()==Status.Frozen)&&!targetMap.get(s).getNotSelected()){//dont run if depends on is still waiting
-                        isRunning=false;
-                        isInQueue=false;
-                        engineImpl.decrementWorkingThreads();
-                        return;
-                    }
-                    else if(targetMap.get(s).getStatus()==Status.Failure||targetMap.get(s).getStatus()==Status.Skipped){
-                        if(targetMap.get(s).getStatus()==Status.Failure){
-                            failReason=s;
+        try {
+            if (compile) {//compile task
+                if (!this.setDependsOn.isEmpty()) {
+                    for (String s : setDependsOn) {
+                        if ((targetMap.get(s).getStatus() == Status.Waiting || targetMap.get(s).getStatus() == Status.Frozen) && !targetMap.get(s).getNotSelected()) {//dont run if depends on is still waiting
+                            isRunning = false;
+                            isInQueue = false;
+                            engineImpl.decrementWorkingThreads();
+                            return;
+                        } else if (targetMap.get(s).getStatus() == Status.Failure || targetMap.get(s).getStatus() == Status.Skipped) {
+                            if (targetMap.get(s).getStatus() == Status.Failure) {
+                                failReason = s;
+                            } else {
+                                failReason = targetMap.get(s).failReason;
+                            }
+                            isInQueue = false;
+                            isRunning = false;
+                            this.status = Status.Skipped;
+                            simTimeString = "00:00:00:00";
+                            engineImpl.decrementWorkingThreads();
+                            File f = new File(path);
+                            f.createNewFile();
+                            FileWriter w = new FileWriter(path);
+                            w.write("Target name: " + this.name + "\n\r" +
+                                    "Target result: " + this.status.name() + "\n\r" +
+                                    "Target time : 00:00:00:00 \n\r");
+                            w.close();
+                            this.SetStatus(Status.Skipped);
+                            return;
                         }
-                        else{
-                            failReason=targetMap.get(s).failReason;
-                        }
-                        isInQueue=false;
-                        isRunning=false;
-                        this.status=Status.Skipped;
-                        simTimeString="00:00:00:00";
-                        engineImpl.decrementWorkingThreads();
-                        File f = new File(path);
-                        f.createNewFile();
-                        FileWriter w = new FileWriter(path);
-                        w.write("Target name: " + this.name + "\n\r" +
-                                "Target result: " + this.status.name() + "\n\r" +
-                                "Target time : 00:00:00:00 \n\r");
-                        w.close();
-                        this.SetStatus(Status.Skipped);
-                        return;
+                    }
+                }
+                long startTime = System.currentTimeMillis();//sim target and keep time of sim
+                Runtime rt = Runtime.getRuntime();
+                String[] strings = {"javac", "-d", compileDest, "-cp", compileDest, source+"/"+this.name};
+                Process p = rt.exec(strings);
+                p.waitFor();
+                System.out.println("done");
+                int res=p.exitValue();
+                long simTime = System.currentTimeMillis() - startTime;
+                //turn simTime to string
+                long millis = simTime % 1000;
+                long second = (simTime / 1000) % 60;
+                long minute = (simTime / (1000 * 60)) % 60;
+                long hour = (simTime / (1000 * 60 * 60)) % 24;
+                simTimeString = String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
+                if(res!=0){//compilation failed
+                    this.status=Status.Failure;
+                }
+                else{//success
+                       this.status=Status.Success;
+                }
+                if (!this.setRequiredFor.isEmpty()) {
+                    for (String s : setRequiredFor) {
+                        if (targetMap.get(s).status == Status.Frozen)
+                            targetMap.get(s).status = Status.Waiting;
                     }
                 }
             }
-            long startTime = System.currentTimeMillis();//sim target and keep time of sim
-            Thread.sleep((long)runTime);
-            long simTime=System.currentTimeMillis()-startTime;
-            //turn simTime to string
-            long millis = simTime % 1000;
-            long second = (simTime / 1000) % 60;
-            long minute = (simTime / (1000 * 60)) % 60;
-            long hour = (simTime / (1000 * 60 * 60)) % 24;
-            String simTimeString = String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
-            Random r=new Random();
-            float successRand=r.nextFloat();
-            float warningRand=r.nextFloat();
-            if(successChance>=successRand){
-                if(warningChance>=warningRand){
-                    this.status=Status.Warning;
+
+            else {//simulation task
+                if (!this.setDependsOn.isEmpty()) {
+                    for (String s : setDependsOn) {
+                        if ((targetMap.get(s).getStatus() == Status.Waiting || targetMap.get(s).getStatus() == Status.Frozen) && !targetMap.get(s).getNotSelected()) {//dont run if depends on is still waiting
+                            isRunning = false;
+                            isInQueue = false;
+                            engineImpl.decrementWorkingThreads();
+                            return;
+                        } else if (targetMap.get(s).getStatus() == Status.Failure || targetMap.get(s).getStatus() == Status.Skipped) {
+                            if (targetMap.get(s).getStatus() == Status.Failure) {
+                                failReason = s;
+                            } else {
+                                failReason = targetMap.get(s).failReason;
+                            }
+                            isInQueue = false;
+                            isRunning = false;
+                            this.status = Status.Skipped;
+                            simTimeString = "00:00:00:00";
+                            engineImpl.decrementWorkingThreads();
+                            File f = new File(path);
+                            f.createNewFile();
+                            FileWriter w = new FileWriter(path);
+                            w.write("Target name: " + this.name + "\n\r" +
+                                    "Target result: " + this.status.name() + "\n\r" +
+                                    "Target time : 00:00:00:00 \n\r");
+                            w.close();
+                            this.SetStatus(Status.Skipped);
+                            return;
+                        }
+                    }
                 }
-                else{
-                    this.status=Status.Success;
+                long startTime = System.currentTimeMillis();//sim target and keep time of sim
+                Thread.sleep((long) runTime);
+                long simTime = System.currentTimeMillis() - startTime;
+                //turn simTime to string
+                long millis = simTime % 1000;
+                long second = (simTime / 1000) % 60;
+                long minute = (simTime / (1000 * 60)) % 60;
+                long hour = (simTime / (1000 * 60 * 60)) % 24;
+                simTimeString = String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
+                Random r = new Random();
+                float successRand = r.nextFloat();
+                float warningRand = r.nextFloat();
+                if (successChance >= successRand) {
+                    if (warningChance >= warningRand) {
+                        this.status = Status.Warning;
+                    } else {
+                        this.status = Status.Success;
+                    }
+                } else {
+                    this.status = Status.Failure;
+                }
+                if (!this.setRequiredFor.isEmpty()) {
+                    for (String s : setRequiredFor) {
+                        if (targetMap.get(s).status == Status.Frozen)
+                            targetMap.get(s).status = Status.Waiting;
+                    }
                 }
             }
-            else {
-                this.status = Status.Failure;
-            }
-            if (!this.setRequiredFor.isEmpty()) {
-                for (String s : setRequiredFor) {
-                    if(targetMap.get(s).status==Status.Frozen)
-                        targetMap.get(s).status=Status.Waiting;
-                }
-            }
-            isRunning=false;
-            isInQueue=false;
+            File f = new File(path);
+            f.createNewFile();
+            FileWriter w = new FileWriter(path);
+            w.write("Target name: " + this.name + "\n\r" +
+                    "Target result: " + this.status.name() + "\n\r" +
+                    "Target time :  \n\r");
+            w.close();
+            isRunning = false;
+            isInQueue = false;
             engineImpl.decrementWorkingThreads();
 
             infor = new infoThread(infoThread.InOrOut.OUT, System.currentTimeMillis() , engineImpl.getWorkingThreads() );
