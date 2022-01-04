@@ -34,12 +34,15 @@ public class engineImpl implements engine {
     private ArrayList<infoThread> infoThreadList  = new ArrayList<>();
     private long startTime;
 
+    /**
+     * @return list of all the information on target that add to the thread pool
+     */
+    @Override public ArrayList<infoThread> getInfoThreadList(){return infoThreadList;}
 
-    @Override
-    public ArrayList<infoThread> getInfoThreadList(){return infoThreadList;}
-
-    @Override
-    public String getWorkingDirectory(){return workingDirectory;}
+    /**
+     * @return working directory path
+     */
+    @Override public String getWorkingDirectory(){return workingDirectory;}
     /** Load file
      *  Open XML file
      *  if the XML is corrupt stay with the last detail you have
@@ -49,8 +52,7 @@ public class engineImpl implements engine {
      *  @throws target.RequiredForConflict on there is conflict between targets
      *  @throws xml.XmlIsExists on the XML not exists
      */
-    @Override
-    public void loadFile(String path) throws Exception {/// option 2 in the menu
+    @Override public void loadFile(String path) throws Exception {/// option 2 in the menu
         Map<String, Target> targetMapTemp;
         //// member
         Xmlimpl file = new Xmlimpl(path);                       // load XML file
@@ -63,10 +65,6 @@ public class engineImpl implements engine {
         targetMap = targetMapTemp;
         stopThreads=false;
     }
-    public synchronized void setStopThreads(boolean b){
-        stopThreads=b;
-    }
-
     /** Targets in formation
      *  @return all the information about the graph:
      *  amount of roots
@@ -74,8 +72,7 @@ public class engineImpl implements engine {
      *  amount of middles
      *  amount of independents
      */
-    @Override
-    public GraphInformation targetsInFormation() throws Exception{ /// option 2 in the menu
+    @Override public GraphInformation targetsInFormation() throws Exception{ /// option 2 in the menu
         if (!loadFile)
             throw new XmlNotLoad();
         int amountOfTargets = targetMap.entrySet().size();          // count all the targets in the map
@@ -102,7 +99,6 @@ public class engineImpl implements engine {
 
         return new GraphInformation(amountOfTargets, levies, middles, roots, independents);
     }
-
     /** Specific target information
      *  @return all the information about the targets:
      *  target name
@@ -112,8 +108,7 @@ public class engineImpl implements engine {
      *  user data
      * @throws TargetIsExists on if target isn't exists
      */
-    @Override
-    public Information specificTargetInformation(String name) throws Exception {
+    @Override public Information specificTargetInformation(String name) throws Exception {
         if (!loadFile)
             throw new XmlNotLoad();
         Target target = targetMap.get(name);
@@ -128,15 +123,13 @@ public class engineImpl implements engine {
             return new TargetInformation(name, type, dependsOn, requiredFor, data);
         }
     }
-
     /** Specific target information
      *  @return all the information between the targets:
      *  target names
      *  all the path between the targets with a specific dependence
      * @throws TargetIsExists on if target isn't exists
      */
-    @Override
-    public PathBetweenTwoTargetsInfo findAPathBetweenTwoTargets(String t1, String t2, Dependence dependence) throws Exception {
+    @Override public PathBetweenTwoTargetsInfo findAPathBetweenTwoTargets(String t1, String t2, Dependence dependence) throws Exception {
         if (!loadFile)
             throw new XmlNotLoad();
         Target target1 = targetMap.get(t1);
@@ -195,10 +188,150 @@ public class engineImpl implements engine {
                 listSt.get(index.x).getTargetsList().remove(listSt.get(index.x).getTargetsList().size()-1);
         }
     }
+    private String openDir(String taskType) throws IOException {//doesnt have path yet,this func create directory for simulation task
+        Path path=Paths.get(workingDirectory);
+        Files.createDirectories(path);
+        //File dir = new File(workingDirectory);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.mm.yyyy HH.MM.SS");
+        LocalDateTime now = LocalDateTime.now();
+        String s =taskType+" "+dtf.format(now);
+        s= workingDirectory+"\\"+s;
+        Path innerPath=Paths.get(s);
+        Files.createDirectories(innerPath);
+        //File dir2 = new File(s);
+        return s;
+    }
+    /** Exit
+     */
+    @Override public void exit() {
+        System.exit(0);
+    }
+    /** Circuit detection info
+     *  @return all the information between the targets:
+     *  target names
+     *  all the cycle paths
+     * @throws TargetIsExists on if target isn't exists
+     */
+    @Override public CircuitDetectionInfo circuitDetection(String name)throws Exception {
+        if (!loadFile)
+            throw new XmlNotLoad();
+        PathBetweenTwoTargetsInfo info = findAPathBetweenTwoTargets(name,name,Dependence.DEPENDS_ON);
+        return new CircuitDetectionInfo(name , info.getPaths());
+    }
+    @Override public Map<String, Target> getMap(){return targetMap;}
+    @Override public void whatIf(String target, List<String>  newList, Dependence dependence) {
+        Set<String> tOneSet;
+        if (!newList.contains(target)) {
+            newList.add(target);
+            if (Dependence.DEPENDS_ON == dependence)
+                tOneSet = targetMap.get(target).getSetDependsOn();
+            else
+                tOneSet = targetMap.get(target).getSetRequiredFor();
 
-    public synchronized void compile(boolean keepLastRun,String taskType,
-                                       int threadsNum,List<Target> targets
-                                        ,String dest,String src) throws Exception {
+            if (tOneSet.size() != 0) {
+                for (String st2 : tOneSet) {
+                    whatIf(targetMap.get(st2).getName(), newList, dependence);
+                }
+            }
+        }
+    }
+    private boolean checkSerialSets(String t){
+        for (Set<String> set:serialSets.values()){
+            if(set.contains(t)){
+                for(String s : set){
+                    if(targetMap.get(s).getIsInQueue()&&!s.equals(t)){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+    @Override public Map<String,Set<String>> getAllSerialSetsWithYou(String t){
+        Map<String,Set<String>> newSet = new HashMap<>();
+        for (String key : serialSets.keySet())
+            if(serialSets.get(key).contains(t)) {
+                newSet.put(key,serialSets.get(key));
+            }
+        return newSet;
+    }
+    @Override public Map<String,Set<String>> getSerialSets(){
+        return serialSets;
+    }
+
+/// file - write and read
+    @Override public void writeTargetsAndInformationToTextFile(String path)throws Exception{
+        try{
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path));
+            out.writeObject(targetMap);
+            out.writeObject(workingDirectory);
+            out.writeObject(res);
+            out.flush();
+        }
+        catch (FileNotFoundException e){throw e;}
+        catch (Exception e){throw e;}
+    }
+    @Override public void readTargetsAndInformationToTextFile(String path) throws Exception {
+        // Read the array list  from the file
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(path))) {
+            // we know that we read array list of Persons
+            loadFile = true;
+            targetMap = (Map<String, Target>) in.readObject();
+            workingDirectory = (String)  in.readObject();
+            res = (ArrayList<Information>) in.readObject();
+        }
+        catch (FileNotFoundException e){throw e;}
+        catch (Exception e){throw e;}
+    }
+
+/// task
+    public synchronized void setStopThreads(boolean b){
+        stopThreads=b;
+    }
+    @Override public double getPrecentageDone(){
+        int count=0;
+        int doneCount=0;
+        for(Map.Entry<String, Target> e : targetMap.entrySet()){
+            if(!e.getValue().getNotSelected()){
+                if(e.getValue().getStatus() != Target.Status.Waiting && e.getValue().getStatus() != Target.Status.Frozen){
+                    doneCount++;
+                }
+            }
+        }
+        return ((double)doneCount)/size;
+    }
+    public static synchronized int getWorkingThreads(){
+        return workingThreads;
+    }
+    public static synchronized void incrementWorkingThreads(){
+        workingThreads++;
+    }
+    public static synchronized void decrementWorkingThreads(){
+        workingThreads--;
+    }
+    private synchronized void setToWaiting() {
+        boolean check=true;
+        for (Map.Entry<String, Target> e : targetMap.entrySet()) {
+            if(!e.getValue().getNotSelected()) {
+                for (String s : e.getValue().getSetDependsOn()) {
+                    if (!targetMap.get(s).getNotSelected() && (targetMap.get(s).getStatus() == Target.Status.Waiting || targetMap.get(s).getStatus() == Target.Status.Frozen)) {
+                        check = false;
+                    }
+                }
+            }
+            else{
+                check=false;
+            }
+            if(check){
+                e.getValue().setStartWaitingTime(System.currentTimeMillis());
+                e.getValue().SetStatus(Target.Status.Waiting);
+            }
+            check=true;
+        }
+    }
+    @Override public synchronized void compile(boolean keepLastRun,String taskType,
+                                               int threadsNum,List<Target> targets
+                                                ,String dest,String src) throws Exception {
         infoThreadList.clear();
         startTime = System.currentTimeMillis();
         taskRunning = true;
@@ -254,9 +387,9 @@ public class engineImpl implements engine {
         run(threadsNum);
 
     }
-    public synchronized void taskSetUp(int time, boolean random, float success,
-                                       float warning,boolean keepLastRun,String taskType,
-                                       int threadsNum,List<Target> targets) throws Exception {
+    @Override public synchronized void taskSetUp(int time, boolean random, float success,
+                                                 float warning,boolean keepLastRun,String taskType,
+                                                 int threadsNum,List<Target> targets) throws Exception {
         infoThreadList.clear();
         startTime = System.currentTimeMillis();
         taskRunning = true;
@@ -359,32 +492,21 @@ public class engineImpl implements engine {
         String waitingTime = String.format("%02d:%02d:%02d.%d", hour, minute, second, millis);
         return waitingTime;
     }
-    public boolean getIsTaskRunning(){return taskRunning;}
+    @Override public boolean getIsTaskRunning(){return taskRunning;}
 
-    @Override
-    public void stopThreads() {
+    @Override public void stopThreads() {
         stopThreads=true;
         activateThreads =false;
     }
-    @Override
-    public void activateThreads(){
+    @Override public void activateThreads(){
         stopThreads=false;
         activateThreads =true;
     }
-
-
-    private String openDir(String taskType) throws IOException {//doesnt have path yet,this func create directory for simulation task
-        Path path=Paths.get(workingDirectory);
-        Files.createDirectories(path);
-        //File dir = new File(workingDirectory);
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd.mm.yyyy HH.MM.SS");
-        LocalDateTime now = LocalDateTime.now();
-        String s =taskType+" "+dtf.format(now);
-        s= workingDirectory+"\\"+s;
-        Path innerPath=Paths.get(s);
-        Files.createDirectories(innerPath);
-        //File dir2 = new File(s);
-        return s;
+    @Override public boolean ifRunTask(){
+        return res==null;
+    }
+    @Override public int getMaxThreads(){
+        return maxThreads;
     }
     private boolean taskDoneCheck(){
         for(Map.Entry<String, Target> e : targetMap.entrySet()){
@@ -394,152 +516,4 @@ public class engineImpl implements engine {
         }
         return true;
     }
-
-    @Override
-    public void writeTargetsAndInformationToTextFile(String path)throws Exception{
-        try{
-        ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(path));
-            out.writeObject(targetMap);
-            out.writeObject(workingDirectory);
-            out.writeObject(res);
-            out.flush();
-        }
-        catch (FileNotFoundException e){throw e;}
-        catch (Exception e){throw e;}
-    }
-    @Override
-    public void readTargetsAndInformationToTextFile(String path) throws Exception {
-        // Read the array list  from the file
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(path))) {
-            // we know that we read array list of Persons
-            loadFile = true;
-            targetMap = (Map<String, Target>) in.readObject();
-            workingDirectory = (String)  in.readObject();
-            res = (ArrayList<Information>) in.readObject();
-        }
-        catch (FileNotFoundException e){throw e;}
-        catch (Exception e){throw e;}
-    }
-
-    /** Exit
-     */
-    @Override
-    public void exit() {
-        System.exit(0);
-    }
-
-    /** Circuit detection info
-     *  @return all the information between the targets:
-     *  target names
-     *  all the cycle paths
-     * @throws TargetIsExists on if target isn't exists
-     */
-    @Override
-    public CircuitDetectionInfo circuitDetection(String name)throws Exception {
-        if (!loadFile)
-            throw new XmlNotLoad();
-        PathBetweenTwoTargetsInfo info = findAPathBetweenTwoTargets(name,name,Dependence.DEPENDS_ON);
-        return new CircuitDetectionInfo(name , info.getPaths());
-    }
-    public boolean ifRunTask(){
-        return res==null;
-    }
-
-    public Map<String, Target> getMap(){return targetMap;}
-
-    @Override
-    public void whatIf(String target, List<String>  newList, Dependence dependence) {
-        Set<String> tOneSet;
-        if (!newList.contains(target)) {
-            newList.add(target);
-            if (Dependence.DEPENDS_ON == dependence)
-                tOneSet = targetMap.get(target).getSetDependsOn();
-            else
-                tOneSet = targetMap.get(target).getSetRequiredFor();
-
-            if (tOneSet.size() != 0) {
-                for (String st2 : tOneSet) {
-                    whatIf(targetMap.get(st2).getName(), newList, dependence);
-                }
-            }
-        }
-    }
-    @Override
-    public int getMaxThreads(){
-        return maxThreads;
-    }
-    private boolean checkSerialSets(String t){
-        for (Set<String> set:serialSets.values()){
-            if(set.contains(t)){
-                for(String s : set){
-                    if(targetMap.get(s).getIsInQueue()&&!s.equals(t)){
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
-    }
-    @Override
-    public Map<String,Set<String>> getAllSerialSetsWithYou(String t){
-        Map<String,Set<String>> newSet = new HashMap<>();
-        for (String key : serialSets.keySet())
-            if(serialSets.get(key).contains(t)) {
-                newSet.put(key,serialSets.get(key));
-            }
-        return newSet;
-    }
-
-    @Override
-    public Map<String,Set<String>> getSerialSets(){
-        return serialSets;
-    }
-    public double getPrecentageDone(){
-        int count=0;
-        int doneCount=0;
-        for(Map.Entry<String, Target> e : targetMap.entrySet()){
-            if(!e.getValue().getNotSelected()){
-                if(e.getValue().getStatus() != Target.Status.Waiting && e.getValue().getStatus() != Target.Status.Frozen){
-                    doneCount++;
-                }
-            }
-        }
-        return ((double)doneCount)/size;
-    }
-    public static synchronized int getWorkingThreads(){
-        return workingThreads;
-    }
-    public static synchronized void incrementWorkingThreads(){
-        workingThreads++;
-    }
-    public static synchronized void decrementWorkingThreads(){
-        workingThreads--;
-    }
-    private synchronized void setToWaiting() {
-        boolean check=true;
-
-        for (Map.Entry<String, Target> e : targetMap.entrySet()) {
-            if(!e.getValue().getNotSelected()) {
-                for (String s : e.getValue().getSetDependsOn()) {
-                    if (!targetMap.get(s).getNotSelected() && (targetMap.get(s).getStatus() == Target.Status.Waiting || targetMap.get(s).getStatus() == Target.Status.Frozen)) {
-                        check = false;
-                    }
-                }
-            }
-            else{
-                check=false;
-            }
-            if(check){
-                e.getValue().setStartWaitingTime(System.currentTimeMillis());
-                e.getValue().SetStatus(Target.Status.Waiting);
-            }
-            check=true;
-        }
-    }
-
-
-
-
-
-
 }

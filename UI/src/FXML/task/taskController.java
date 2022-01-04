@@ -244,15 +244,12 @@ public class taskController {
      */
     public void displayRunButton(){
         if (compilerToggle.isSelected()) {
-            if  (sourceFolderText.getText().equals("") || targetFolderText.getText().equals(""))
+            if  (sourceFolderText.getText().equals("") || targetFolderText.getText().equals("") || selectedCheckBoxes.size() == 0)
                 runButton.setDisable(true);
             else
                 runButton.setDisable(false);
         }
-        else if (selectedCheckBoxes.size() != 0)
-            runButton.setDisable(false);
-        else
-            runButton.setDisable(true);
+        else runButton.setDisable(selectedCheckBoxes.size() == 0);
     }
 
     /**

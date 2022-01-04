@@ -11,17 +11,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="fix display run button">
+    <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="commotion">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/main/mainAppController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/path/pathController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/path/pathController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/resourceutilization/resourceUtilizationMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/resourceutilization/resourceUtilizationMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/setting/settingController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/setting/settingController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/table/tableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/table/tableController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/processing/finishSumUp.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/processing/finishSumUp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoMain.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoMain.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoTaskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/processing/targetInfoTaskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/processing/targetInformationTask.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/processing/targetInformationTask.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -237,12 +229,6 @@
       <workItem from="1640968570911" duration="6594000" />
       <workItem from="1641044746663" duration="1376000" />
       <workItem from="1641190706498" duration="29629000" />
-    </task>
-    <task id="LOCAL‎00011" summary="Merge remote-tracking branch 'origin/master'">
-      <created>1636550840509</created>
-      <option name="number" value="LOCAL‎00011" />
-      <option name="presentableId" value="LOCAL‎00011" />
-      <updated>1636550840509</updated>
     </task>
     <task id="LOCAL‎00012" summary="Merge remote-tracking branch 'origin/master'">
       <created>1636550845954</created>
@@ -534,7 +520,13 @@
       <option name="presentableId" value="LOCAL‎00059" />
       <updated>1641289471522</updated>
     </task>
-    <option name="localTasksCounter" value="60" />
+    <task id="LOCAL‎00060" summary="commotion">
+      <created>1641292089864</created>
+      <option name="number" value="LOCAL‎00060" />
+      <option name="presentableId" value="LOCAL‎00060" />
+      <updated>1641292089864</updated>
+    </task>
+    <option name="localTasksCounter" value="61" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -635,7 +627,8 @@
     <MESSAGE value="rochilda" />
     <MESSAGE value="bar" />
     <MESSAGE value="fix display run button" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix display run button" />
+    <MESSAGE value="commotion" />
+    <option name="LAST_COMMIT_MESSAGE" value="commotion" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -673,11 +666,6 @@
           <url>file://$PROJECT_DIR$/UI/src/graphViz/GraphViz.java</url>
           <line>75</line>
           <option name="timeStamp" value="365" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
-          <line>339</line>
-          <option name="timeStamp" value="366" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/resourceutilization/resourceUtilizationMain.java</url>
