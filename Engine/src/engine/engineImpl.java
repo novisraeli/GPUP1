@@ -457,18 +457,14 @@ public class engineImpl implements engine {
         List<Runnable>t=new ArrayList<>();
         ExecutorService threads = Executors.newFixedThreadPool(threadsNum);
         while(!taskDoneCheck()) {
-            //might not work didnt check yet
             if(stopThreads&&!activateThreads){
-                System.out.println("before wait");
                 threads.shutdown();
                 threads.awaitTermination(1, TimeUnit.NANOSECONDS);
                 threads.shutdownNow();
-                System.out.println("after wait");
                 stopThreads=false;
                 taskRunning = false;
             }
             else if(activateThreads&&!stopThreads){
-                System.out.println("here");
                 threads=Executors.newFixedThreadPool(threadsNum);
                 for(Map.Entry<String, Target> e : targetMap.entrySet()){
                    if(e.getValue().getIsInQueue()){
