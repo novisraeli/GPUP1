@@ -350,7 +350,8 @@ public class Target implements Serializable,Runnable
                 }
                 long startTime = System.currentTimeMillis();//sim target and keep time of sim
                 Runtime rt = Runtime.getRuntime();
-                String[] strings = {"javac", "-d", compileDest, "-cp", compileDest, source+temp+".java"};
+                String src=source+c+temp+".java";
+                String[] strings = {"javac", "-d", compileDest, "-cp", compileDest, src};
                 Process p = rt.exec(strings);
                 p.waitFor();
                 int res=p.exitValue();
