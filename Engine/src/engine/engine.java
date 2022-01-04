@@ -28,7 +28,7 @@ public interface engine{
     String getWorkingDirectory();
     void taskSetUp(int time, boolean random, float success,
                    float warning,boolean keepLastRun,String taskType,
-                   int threadsNum,List<Target> targets, Thread jxb) throws Exception;
+                   int threadsNum,List<Target> targets) throws Exception;
     void stopThreads();
     void activateThreads();
     double getPrecentageDone();

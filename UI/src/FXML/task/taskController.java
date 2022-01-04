@@ -30,7 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
+///
 public class taskController {
     private SimpleBooleanProperty runTask;
     private mainAppController mainController;
@@ -105,19 +105,19 @@ public class taskController {
         setSpinner();
     }
     public void show() {
-        tableView.setItems(mainController.items);
-        for (int i = 0 ; i< mainController.items.size();++i)
-            configureCheckBoxTask(mainController.items.get(i).getCheckBoxTask());
+        tableView.setItems(mainController.observableListTask());
+        for (int i = 0 ; i< mainController.observableListTask().size();++i)
+            configureCheckBoxTask(mainController.observableListTask().get(i).getCheckBoxTask());
     }
     public void getAllTargetWith(engine.Dependence d ){
         List<String> newList = new ArrayList();
             try{
-                for (int i = 0 ; i < mainController.items.size();++i) {
-                    if (mainController.items.get(i).getCheckBoxTask().isSelected()) {
-                        mainController.getEngine().whatIf(mainController.items.get(i).getName(), newList, d);
-                        for (int k = 0; k < mainController.items.size(); ++k)
-                            if (newList.contains(mainController.items.get(k).getName())) {
-                                mainController.items.get(k).getCheckBoxTask().setSelected(true);
+                for (int i = 0 ; i < mainController.observableListTask().size();++i) {
+                    if (mainController.observableListTask().get(i).getCheckBoxTask().isSelected()) {
+                        mainController.getEngine().whatIf(mainController.observableListTask().get(i).getName(), newList, d);
+                        for (int k = 0; k < mainController.observableListTask().size(); ++k)
+                            if (newList.contains(mainController.observableListTask().get(k).getName())) {
+                                mainController.observableListTask().get(k).getCheckBoxTask().setSelected(true);
                             }
                     }
                 }
@@ -396,7 +396,7 @@ public class taskController {
         updateInformationTable(newItems);
         tableView.getItems().clear();
         tableView.setItems(newItems);
-        mainController.items = newItems;
+        mainController.setObservableListTask(newItems);
     }
     public void updateInformationTable(ObservableList<targetTable> newItems){
         for(targetTable t : newItems){

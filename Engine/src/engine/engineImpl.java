@@ -198,7 +198,7 @@ public class engineImpl implements engine {
 
     public synchronized void taskSetUp(int time, boolean random, float success,
                                        float warning,boolean keepLastRun,String taskType,
-                                       int threadsNum,List<Target> targets, Thread jxb) throws Exception {
+                                       int threadsNum,List<Target> targets) throws Exception {
         infoThreadList.clear();
         startTime = System.currentTimeMillis();
         taskRunning = true;

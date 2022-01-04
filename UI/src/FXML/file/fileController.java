@@ -2,17 +2,13 @@ package FXML.file;
 import FXML.error.errorMain;
 import FXML.main.mainAppController;
 import engine.engine;
-import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import target.Target;
 import target.targetTable;
 import java.io.File;
@@ -22,25 +18,13 @@ import java.util.Map;
 
 public class fileController {
     private mainAppController mainController;
-    private String fileName;
-    @FXML public void initialize() {
-        /**
-         *
-         */
-        image.widthProperty().addListener((a,c,d)->{
-            Image img = new Image("/FXML/file/css/programming.jpg");
-            BackgroundImage bImg = new BackgroundImage(img,
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundRepeat.NO_REPEAT,
-                    BackgroundPosition.DEFAULT,
-                    new BackgroundSize(image.getWidth(),image.getHeight(),true, true, true, true));
-            Background bGround = new Background(bImg);
-            image.setBackground(bGround);
-        });
-    }
     public void setMainController(mainAppController mainController) {
         this.mainController = mainController;
     }
+
+    /**
+     * add the data from the xml file (engine) to all the tabel in the app
+     */
     public void addDataToTable() {
         try {
             mainController.observableList().clear();
@@ -63,10 +47,17 @@ public class fileController {
         }
         catch (Exception e){new errorMain(e);}
     }
+    /**
+     * change the button color in file pane
+     */
     public void changeButtonColor(String newColorString){
         loadFileButton.setStyle(newColorString);
     }
-    ////// set on action button
+
+    /**
+     * load xml file from FileChooser and call to function that update the information in the app
+     * @param event
+     */
     @FXML void loadFileButton(ActionEvent event) {
         try{
             File file = new FileChooser().showOpenDialog(new Stage());
