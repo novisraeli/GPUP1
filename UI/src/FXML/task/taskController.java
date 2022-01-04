@@ -334,7 +334,6 @@ public class taskController {
             isPauseSelected.setValue(true);
             isRunSelected.setValue(false);
             mainController.getEngine().stopThreads();
-            messageText.setText("Pause Task");
             System.out.println(thread.getName()+thread.isAlive());
         }
         catch (Exception e){
