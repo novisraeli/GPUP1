@@ -63,6 +63,36 @@
                   <Insets left="10.0" top="20.0" />
                </VBox.margin>
             </HBox>
+            <HBox>
+               <children>
+                  <Label fx:id="dependsOnLabel">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Label>
+                  <Text fx:id="dependsOnlListText" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" top="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox>
+               <children>
+                  <Label fx:id="requiredForLabel" />
+                  <Text fx:id="requiredForListText" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <HBox.margin>
+                        <Insets left="10.0" />
+                     </HBox.margin>
+                  </Text>
+               </children>
+               <VBox.margin>
+                  <Insets left="10.0" top="20.0" />
+               </VBox.margin>
+            </HBox>
          </children>
       </VBox>
    </children>
