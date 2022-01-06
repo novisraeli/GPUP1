@@ -43,6 +43,7 @@ public class taskController {
     private final IntegerBinding numCheckBoxesSelected = Bindings.size(selectedCheckBoxes);
     private boolean showFinish;
     private Thread thread;
+    private static final Object Lock = new Object();
     public taskController(){
         isRunSelected = new SimpleBooleanProperty(false);
         isPauseSelected = new SimpleBooleanProperty(false);
@@ -173,74 +174,79 @@ public class taskController {
      * double-click on row - show all the information about the target
      */
     public void clickOnRow() {
-        tableView.setRowFactory( tv -> {
-            TableRow<targetTable> row = new TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
-                    List<String> list = new ArrayList<>();
-                    Target t = mainController.getEngine().getMap().get(tableView.getSelectionModel().getSelectedItem().getName());
-                    String process = "";
-                    String name = t.getName();
-                    String type = t.getType().toString();
+            tableView.setRowFactory(tv -> {
+                TableRow<targetTable> row = new TableRow<>();
+                row.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                        List<String> list = new ArrayList<>();
+                        synchronized (Lock) {
+                            if (tableView.getSelectionModel().getSelectedItem() == null)
+                                return;
+                            String nameTarget = tableView.getSelectionModel().getSelectedItem().getName();
+                            Target t = mainController.getEngine().getMap().get(nameTarget);
+                            String process = "";
+                            String name = t.getName();
+                            String type = t.getType().toString();
 
-                    String serialSets;
-                    Map<String, Set<String>> serialSetsMap = mainController.getEngine().getAllSerialSetsWithYou(t.getName());
-                    if (serialSetsMap.size() == 0)
-                        serialSets = "doesn't belong to any serial set";
-                    else
-                        serialSets = serialSetsMap + "\n";
+                            String serialSets;
+                            Map<String, Set<String>> serialSetsMap = mainController.getEngine().getAllSerialSetsWithYou(t.getName());
+                            if (serialSetsMap.size() == 0)
+                                serialSets = "doesn't belong to any serial set";
+                            else
+                                serialSets = serialSetsMap + "\n";
 
-                    if (t.getIsRunning())
-                        process = t.getWaitingTime();
-                    else{
-                        switch (t.getStatus())
-                        {
-                            // skipped waiting skipped in-process finished
-                            case Waiting:
-                                process = "is waiting: " + t.getWaitingTime() + " ms\n";
-                                mainController.getEngine().whatIf(name,list , engine.Dependence.DEPENDS_ON);
-                                process += "is waiting for " + list + " targets";
-                                break;
+                            if (t.getIsRunning())
+                                process = t.getWaitingTime();
+                            else {
+                                switch (t.getStatus()) {
+                                    // skipped waiting skipped in-process finished
+                                    case Waiting:
+                                        process = "is waiting: " + t.getWaitingTime() + " ms\n";
+                                        mainController.getEngine().whatIf(name, list, engine.Dependence.DEPENDS_ON);
+                                        process += "is waiting for " + list + " targets";
+                                        break;
 
-                            case Skipped:
-                                mainController.getEngine().whatIf(name,list , engine.Dependence.DEPENDS_ON);
-                                process += list.stream()
-                                        .filter(e -> mainController.getEngine().getMap().get(e).getStatus().equals(Target.Status.Failure))
-                                        .toString();
-                                break;
+                                    case Skipped:
+                                        mainController.getEngine().whatIf(name, list, engine.Dependence.DEPENDS_ON);
+                                        process += list.stream()
+                                                .filter(e -> mainController.getEngine().getMap().get(e).getStatus().equals(Target.Status.Failure))
+                                                .toString();
+                                        break;
 
-                            case Failure:
-                                process = Target.Status.Failure.toString();
-                                break;
+                                    case Failure:
+                                        process = Target.Status.Failure.toString();
+                                        break;
 
-                            case Success:
-                                process = Target.Status.Success.toString();
-                                break;
+                                    case Success:
+                                        process = Target.Status.Success.toString();
+                                        break;
 
-                            case Warning:
-                                process = Target.Status.Warning.toString();
-                                break;
+                                    case Warning:
+                                        process = Target.Status.Warning.toString();
+                                        break;
 
-                            case Frozen:
-                                ArrayList<String> whatIf = new ArrayList<>();
-                                ArrayList<String> waitFor = new ArrayList<>();
-                                mainController.getEngine().whatIf(name, whatIf, engine.Dependence.DEPENDS_ON);
-                                whatIf.remove(0);
-                                for(String st: whatIf) {
-                                    if (mainController.getEngine().getMap().get(st).getStatus() == Target.Status.Warning ||
-                                        mainController.getEngine().getMap().get(st).getStatus() == Target.Status.Frozen  )
-                                        waitFor.add(st);
+                                    case Frozen:
+                                        ArrayList<String> whatIf = new ArrayList<>();
+                                        ArrayList<String> waitFor = new ArrayList<>();
+                                        mainController.getEngine().whatIf(name, whatIf, engine.Dependence.DEPENDS_ON);
+                                        whatIf.remove(0);
+                                        for (String st : whatIf) {
+                                            if (mainController.getEngine().getMap().get(st).getStatus() == Target.Status.Warning ||
+                                                    mainController.getEngine().getMap().get(st).getStatus() == Target.Status.Frozen)
+                                                waitFor.add(st);
+                                        }
+                                        process = "Frozen - Watit for: " + waitFor;
+                                        break;
                                 }
-                                process = "Frozen - Watit for: " + waitFor;
-                                break;
+                            }
+
+                            new targetInfoMain(name, type, serialSets, process, t.getSetDependsOn(), t.getSetRequiredFor());
                         }
                     }
-
-                    new targetInfoMain(name, type, serialSets, process,t.getSetDependsOn() ,t.getSetRequiredFor() );
-                }
+                });
+                return row;
             });
-            return row ;
-        });
+
     }
     /**
      * clear all the selected checkBox
@@ -373,10 +379,12 @@ public class taskController {
     }
 //// update information during the running of task
     public void updateInformation(Double x){
-        refreshTable();
-        progressBarTask.setProgress(x);
-        if (x == 1 && !showFinish)
-            finish();
+        synchronized (Lock) {
+            refreshTable();
+            progressBarTask.setProgress(x);
+            if (x == 1 && !showFinish)
+                finish();
+        }
     }
     public void updateInformationTable(ObservableList<targetTable> newItems){
         for(targetTable t : newItems){
@@ -479,7 +487,7 @@ public class taskController {
     }
     private void sleepForSomeTime() {
         try {
-            Thread.sleep(100);
+            Thread.sleep(250);
         } catch (InterruptedException ignored) {}
     }
 /// manage color
