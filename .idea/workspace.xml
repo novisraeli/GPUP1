@@ -13,11 +13,12 @@
   <component name="ChangeListManager">
     <list default="true" id="339a630a-84de-40d5-9cbb-25c18723ff73" name="Default Changelist" comment="fix">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engine.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engine.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/Engine/src/engine/engineImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/FXML/task/taskController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UI/src/main.java" beforeDir="false" afterPath="$PROJECT_DIR$/UI/src/main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engine.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Engine.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Engine.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/Exception.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/Exception.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/artifacts/UI.jar" beforeDir="false" afterPath="$PROJECT_DIR$/out/artifacts/UI.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Engine/engine/engineImpl.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController$1.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/FXML/task/taskController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/UI/main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/UI/main.class" afterDir="false" />
     </list>
@@ -236,13 +237,9 @@
       <workItem from="1641190706498" duration="29629000" />
       <workItem from="1641296136050" duration="5351000" />
       <workItem from="1641311282398" duration="452000" />
-      <workItem from="1641313692956" duration="1923000" />
-    </task>
-    <task id="LOCAL‎00019" summary="Bar Sela">
-      <created>1636641029440</created>
-      <option name="number" value="LOCAL‎00019" />
-      <option name="presentableId" value="LOCAL‎00019" />
-      <updated>1636641029440</updated>
+      <workItem from="1641313692956" duration="2031000" />
+      <workItem from="1641392036524" duration="1018000" />
+      <workItem from="1641399028640" duration="86000" />
     </task>
     <task id="LOCAL‎00020" summary="Bar Sela">
       <created>1636642226800</created>
@@ -534,7 +531,13 @@
       <option name="presentableId" value="LOCAL‎00067" />
       <updated>1641312394801</updated>
     </task>
-    <option name="localTasksCounter" value="68" />
+    <task id="LOCAL‎00068" summary="fix">
+      <created>1641315677805</created>
+      <option name="number" value="LOCAL‎00068" />
+      <option name="presentableId" value="LOCAL‎00068" />
+      <updated>1641315677806</updated>
+    </task>
+    <option name="localTasksCounter" value="69" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -684,23 +687,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
-          <line>420</line>
+          <line>438</line>
           <option name="timeStamp" value="382" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
-          <line>396</line>
+          <line>414</line>
           <option name="timeStamp" value="383" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java</url>
-          <line>222</line>
-          <option name="timeStamp" value="389" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/engine/engineImpl.java</url>
-          <line>223</line>
-          <option name="timeStamp" value="390" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java</url>
@@ -708,24 +701,14 @@
           <option name="timeStamp" value="392" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java</url>
-          <line>87</line>
-          <option name="timeStamp" value="398" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/Engine/src/xml/Xmlimpl.java</url>
-          <line>92</line>
-          <option name="timeStamp" value="399" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/UI/src/FXML/error/errorMain.java</url>
           <line>19</line>
           <option name="timeStamp" value="400" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/UI/src/FXML/file/fileController.java</url>
-          <line>66</line>
-          <option name="timeStamp" value="401" />
+          <url>file://$PROJECT_DIR$/UI/src/FXML/task/taskController.java</url>
+          <line>224</line>
+          <option name="timeStamp" value="402" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
           <url>file://$PROJECT_DIR$/Engine/src/information/TargetInformation.java</url>

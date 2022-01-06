@@ -31,6 +31,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.stream.Stream;
 
 public class taskController {
     private final SimpleBooleanProperty runTask;
@@ -214,6 +215,23 @@ public class taskController {
 
                             case Success:
                                 process = Target.Status.Success.toString();
+                                break;
+
+                            case Warning:
+                                process = Target.Status.Warning.toString();
+                                break;
+
+                            case Frozen:
+                                ArrayList<String> whatIf = new ArrayList<>();
+                                ArrayList<String> waitFor = new ArrayList<>();
+                                mainController.getEngine().whatIf(name, whatIf, engine.Dependence.DEPENDS_ON);
+                                whatIf.remove(0);
+                                for(String st: whatIf) {
+                                    if (mainController.getEngine().getMap().get(st).getStatus() == Target.Status.Warning ||
+                                        mainController.getEngine().getMap().get(st).getStatus() == Target.Status.Frozen  )
+                                        waitFor.add(st);
+                                }
+                                process = "Frozen - Watit for: " + waitFor;
                                 break;
                         }
                     }
